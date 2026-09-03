@@ -107,6 +107,38 @@
       box-shadow: 0 6px 12px rgba(186, 85, 211, 0.8), 0 0 20px rgba(186, 85, 211, 0.4);
     }
 
+    /* Page Header with Logo and Title */
+    .page-header {
+      background: linear-gradient(135deg, rgba(186, 85, 211, 0.1), rgba(212, 175, 55, 0.08));
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid #ba55d3;
+      box-shadow: 0 4px 15px rgba(186, 85, 211, 0.2);
+    }
+
+    .header-logo-container {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header-logo-container img {
+      height: 80px;
+      width: auto;
+      filter: drop-shadow(0 0 15px rgba(186, 85, 211, 0.6));
+    }
+
+    .page-header h2 {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #d4af37, #ba55d3, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.9));
+    }
+
     /* Hero Section */
     .hero {
       display: flex;
@@ -115,7 +147,7 @@
       align-items: center;
       text-align: center;
       padding: 4rem 2rem;
-      min-height: 70vh;
+      min-height: 50vh;
       position: relative;
       overflow: hidden;
     }
@@ -366,6 +398,14 @@
         font-size: 0.9rem;
       }
 
+      .page-header h2 {
+        font-size: 2rem;
+      }
+
+      .header-logo-container img {
+        height: 60px;
+      }
+
       .hero h2 {
         font-size: 2.5rem;
       }
@@ -386,7 +426,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header Navigation -->
   <header>
     <h1>⛏️ MAGISCHE HEUVEL</h1>
     <nav>
@@ -397,12 +437,16 @@
     <button class="login-btn">Inloggen</button>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="logo-container">
-      <img src="https://github.com/pardoes1/MagischeWebsite/raw/main/magische-heuvel-logo.png" alt="Magische Heuvel Logo">
+  <!-- Page Header with Logo -->
+  <div class="page-header">
+    <div class="header-logo-container">
+      <img src="magische-heuvel-logo.png" alt="Magische Heuvel Logo">
     </div>
     <h2>MAGISCHE HEUVEL</h2>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
     <p>Het ultieme Minecraft themapark vol magie, avontuur en oneindige plezier!</p>
     <a href="https://discord.com/channels/1418964223546884351/" target="_blank" class="cta-btn">🎮 Speel Nu</a>
   </section>
