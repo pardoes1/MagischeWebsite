@@ -1,308 +1,412 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>MagischeHeuvel – Minecraft Themepark</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magische Heuvel - Minecraft Themapark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
   <style>
-    /* ---------- Reset ---------- */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Baloo 2', sans-serif;
-      background: #1a1a2e;
-      color: #fff;
-      line-height: 1.6;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    a { text-decoration: none; color: inherit; }
 
-    /* ---------- Header/Navigation ---------- */
+    body {
+      font-family: 'Righteous', cursive;
+      background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 50%, #90ee90 100%);
+      background-attachment: fixed;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header */
     header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 2rem;
-      background: rgba(0, 0, 0, 0.8);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 3px solid #ffd700;
-    }
-    header h1 {
-      font-size: 2rem;
-      color: #ffd700;
-      letter-spacing: 2px;
-    }
-    header nav a {
-      margin-left: 2rem;
-      color: #fff;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    header nav a:hover {
-      color: #ffd700;
-    }
-    .login-btn {
-      background: #ffd700;
-      color: #1a1a2e;
-      padding: 0.6rem 1.5rem;
-      border-radius: 5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .login-btn:hover {
-      background: #ffed4e;
+      backdrop-filter: blur(10px);
+      border-bottom: 4px solid #d4af37;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* ---------- Hero Section ---------- */
+    header h1 {
+      font-size: 2.5rem;
+      color: #d4af37;
+      text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+      letter-spacing: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    nav a:hover {
+      color: #d4af37;
+      transform: scale(1.1);
+    }
+
+    .login-btn {
+      background: #d4af37;
+      color: #000;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-family: 'Righteous', cursive;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-btn:hover {
+      background: #ffed4e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Hero Section */
     .hero {
-      position: relative;
-      height: 600px;
-      /* removed sea image — using themepark gold/dark gradient background */
-      background: linear-gradient(135deg, #3a2b1f 0%, #1a1322 60%);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      color: #fff;
-    }
-    .hero-content h2 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      color: #ffd700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-      letter-spacing: 2px;
-    }
-    .hero-content p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      opacity: 0.95;
-    }
-    .cta-btn {
-      background: #ffd700;
-      color: #1a1a2e;
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .cta-btn:hover {
-      background: #ffed4e;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      padding: 4rem 2rem;
+      min-height: 70vh;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* ---------- Main Content ---------- */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .logo-container {
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .logo-container img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .hero h2 {
+      font-size: 4.5rem;
+      color: #d4af37;
+      text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.7), 2px 2px 0px rgba(212, 175, 55, 0.3);
+      letter-spacing: 4px;
+      margin-bottom: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, #d4af37, #ffed4e);
+      color: #000;
+      border: 3px solid #8b7500;
+      padding: 1.2rem 3rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-family: 'Righteous', cursive;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+      position: relative;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(212, 175, 55, 0.6);
+      background: linear-gradient(135deg, #ffed4e, #d4af37);
+    }
+
+    /* Content Section */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 3rem 2rem;
     }
 
-    /* ---------- Attractions Section ---------- */
-    .attractions {
-      margin-bottom: 4rem;
-    }
-    .attractions h2 {
+    /* Attractions Grid */
+    .section-title {
       font-size: 3rem;
-      color: #ffd700;
-      margin-bottom: 2rem;
+      color: #d4af37;
+      text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      margin-bottom: 3rem;
       letter-spacing: 2px;
     }
+
     .attractions-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
+      margin-bottom: 4rem;
     }
+
     .attraction-card {
-      background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
-      border: 2px solid #ffd700;
-      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 237, 74, 0.1));
+      border: 3px solid #d4af37;
+      border-radius: 15px;
       padding: 2rem;
       text-align: center;
       transition: all 0.3s;
       cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
+
     .attraction-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 16px 32px rgba(212, 175, 55, 0.4);
       border-color: #ffed4e;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(255, 237, 74, 0.2));
     }
+
     .attraction-card h3 {
       font-size: 1.8rem;
+      color: #d4af37;
       margin-bottom: 1rem;
-      color: #ffd700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
+
     .attraction-card p {
-      color: #ccc;
+      color: #333;
+      font-size: 1rem;
       line-height: 1.8;
     }
 
-    /* ---------- Features Section ---------- */
+    /* Features Section */
     .features {
-      background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 237, 74, 0.1));
+      border: 3px solid #d4af37;
+      border-radius: 15px;
       padding: 3rem 2rem;
-      border-radius: 10px;
       margin-bottom: 3rem;
-      border-left: 5px solid #ffd700;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-    .features h2 {
-      font-size: 2.5rem;
-      color: #ffd700;
-      margin-bottom: 2rem;
-      letter-spacing: 2px;
-    }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
+
     .feature-item {
       text-align: center;
     }
+
     .feature-item h3 {
       font-size: 1.5rem;
-      color: #ffd700;
-      margin-bottom: 0.5rem;
-    }
-    .feature-item p {
-      color: #ccc;
+      color: #d4af37;
+      margin-bottom: 0.8rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    /* ---------- Footer ---------- */
+    .feature-item p {
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
     footer {
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.4);
       text-align: center;
-      padding: 2rem;
-      border-top: 3px solid #ffd700;
-      color: #999;
+      padding: 2.5rem;
+      border-top: 4px solid #d4af37;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       margin-top: 4rem;
     }
-    footer p {
-      margin-bottom: 1rem;
+
+    footer a {
+      color: #ffed4e;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
     }
 
-    /* ---------- Responsive ---------- */
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         gap: 1rem;
       }
-      header nav a {
-        margin-left: 1rem;
+
+      header h1 {
+        font-size: 1.8rem;
       }
-      .hero-content h2 {
+
+      nav {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+      }
+
+      .hero h2 {
         font-size: 2.5rem;
       }
-      .hero-content p {
-        font-size: 1.1rem;
+
+      .hero p {
+        font-size: 1rem;
       }
-      .attractions h2, .features h2 {
+
+      .logo-container img {
+        max-width: 200px;
+      }
+
+      .section-title {
         font-size: 2rem;
       }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ======= Header/Navigation ======= -->
+  <!-- Header -->
   <header>
-    <h1>🏰 MAGISCHE HEUVEL</h1>
+    <h1>⛏️ MAGISCHE HEUVEL</h1>
     <nav>
       <a href="#attractions">Attracties</a>
       <a href="#features">Features</a>
-      <a href="#discord">Discord</a>
-      <a href="myMagischeHeuvel.html">My MagischeHeuvel</a>
+      <a href="#contact">Contact</a>
     </nav>
     <button class="login-btn">Inloggen</button>
   </header>
 
-  <!-- ======= Hero Section ======= -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-content">
-      <h2>MAGISCHE HEUVEL</h2>
-      <p>Het Minecraft themapark waar elk blokje telt. Achtbanen, kastelen, magie en elke maand een nieuw evenement.</p>
-      <a href="https://discord.com/channels/1418964223546884351/" target="_blank" class="cta-btn">Word bezoeker</a>
+    <div class="logo-container">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Defs%3E%3ClinearGradient id='gold' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FFA500;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50%25' y='40%25' font-size='80' font-weight='bold' text-anchor='middle' fill='url(%23gold)' font-family='Arial, sans-serif' letter-spacing='5'%3EMAGISCHE%3C/text%3E%3Ctext x='50%25' y='75%25' font-size='80' font-weight='bold' text-anchor='middle' fill='url(%23gold)' font-family='Arial, sans-serif' letter-spacing='5'%3EHEUVEL%3C/text%3E%3Ccircle cx='200' cy='120' r='60' fill='none' stroke='%23FFD700' stroke-width='3' opacity='0.6'/%3E%3Cpolygon points='200,60 240,140 160,140' fill='%23FFD700' opacity='0.3'/%3E%3C/svg%3E" alt="Magische Heuvel Logo">
     </div>
+    <h2>MAGISCHE HEUVEL</h2>
+    <p>Het ultieme Minecraft themapark vol magie, avontuur en oneindige plezier!</p>
+    <a href="https://discord.com/channels/1418964223546884351/" target="_blank" class="cta-btn">🎮 Speel Nu</a>
   </section>
 
-  <!-- ======= Main Content ======= -->
+  <!-- Main Content -->
   <div class="container">
 
-    <!-- ======= Attractions Section ======= -->
-    <section class="attractions" id="attractions">
-      <h2>ATTRACTIES</h2>
+    <!-- Attractions Section -->
+    <section id="attractions">
+      <h2 class="section-title">✨ ATTRACTIES</h2>
       <div class="attractions-grid">
         <div class="attraction-card">
           <h3>🎢 Achtbanen</h3>
-          <p>Beleef adrenaline-kickende achtbanen door fantastische landschappen. Snelheid, hoogte en pure sensatie!</p>
+          <p>Adrenaline-kickende achtbanen door fantastische landschappen!</p>
         </div>
         <div class="attraction-card">
           <h3>🏰 Kastelen</h3>
-          <p>Verken majestueuze kastelen vol geheimen, schattenjachten en magische verrassingen. Kom binnen als je durft!</p>
+          <p>Majestueuze kastelen vol geheimen en magische verrassingen!</p>
         </div>
         <div class="attraction-card">
           <h3>✨ Magie</h3>
-          <p>Ontdek mystieke biomen vol enchantments, magische wezens en verborgen krachten. Pure betovering!</p>
+          <p>Mystieke biomen vol enchantments en magische wezens!</p>
         </div>
         <div class="attraction-card">
           <h3>🎉 Evenementen</h3>
-          <p>Elke maand een nieuw thema! Festivals, parades, coëperatieve quest en exclusive rewards wachten op je.</p>
+          <p>Elke maand een nieuw thema met exclusive rewards!</p>
         </div>
         <div class="attraction-card">
           <h3>🎮 Mini-Games</h3>
-          <p>Parkour, PvP-arena's, schatzoeken en spelletjes vol plezier. Verdien punten en unieke achievements!</p>
+          <p>Parkour, PvP-arena's en spelletjes vol plezier!</p>
         </div>
         <div class="attraction-card">
-          <h3>🌍 Custom Biomen</h3>
-          <p>Hand-gemaakte werelden met prachtige landschappen. Van neonstad tot magisch woud – alles is hier!</p>
+          <h3>🌍 Custom Werelden</h3>
+          <p>Hand-gemaakte biomen met prachtige landschappen!</p>
         </div>
       </div>
     </section>
 
-    <!-- ======= Features Section ======= -->
+    <!-- Features Section -->
     <section class="features" id="features">
-      <h2>✨ WAAROM MAGISCHE HEUVEL?</h2>
+      <h2 class="section-title">🏆 WAAROM MAGISCHE HEUVEL?</h2>
       <div class="features-grid">
         <div class="feature-item">
           <h3>🕐 24/7 Online</h3>
-          <p>Speel wanneer je wilt! De server staat altijd klaar voor je avontuur.</p>
+          <p>De server staat altijd klaar voor je avontuur!</p>
         </div>
         <div class="feature-item">
-          <h3>👥 Vriendelijke Community</h3>
-          <p>Maak vrienden in de themapark! Discord-events en team-activiteiten dagelijks.</p>
+          <h3>👥 Community</h3>
+          <p>Maak vrienden en deel je ervaringen!</p>
         </div>
         <div class="feature-item">
-          <h3>🏆 Beloningen</h3>
-          <p>Verzamel munten, badges en exclusieve items door attracties af te ronden.</p>
+          <h3>🏅 Beloningen</h3>
+          <p>Verdien munten en exclusieve items!</p>
         </div>
         <div class="feature-item">
-          <h3>🎨 Creatieve Mode</h3>
-          <p>Build je eigen creaties in onze creative zones. Deelname aan grote projecten!</p>
+          <h3>🎨 Creatief</h3>
+          <p>Build je eigen creaties in creative zones!</p>
         </div>
       </div>
     </section>
 
   </div>
 
-  <!-- ======= Footer ======= -->
-  <footer id="discord">
-    <p>&copy; 2026 Magische Heuvel • Een Minecraft Themapark vol Magie</p>
-    <p>
-      <a href="https://discord.com/channels/1418964223546884351/" target="_blank" style="color: #ffd700; font-weight: 700;">
-        📱 Join onze Discord Community →
-      </a>
+  <!-- Footer -->
+  <footer id="contact">
+    <p>&copy; 2026 Magische Heuvel - Een Minecraft Themapark vol Magie</p>
+    <p style="margin-top: 1rem;">
+      <a href="https://discord.com/channels/1418964223546884351/" target="_blank">📱 Join Discord Community →</a>
     </p>
   </footer>
 
