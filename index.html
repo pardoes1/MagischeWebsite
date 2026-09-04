@@ -6,18 +6,15 @@
 
   <title>Magische Heuvel - Minecraft Themapark</title>
 
-  <!-- MAGISCHE HEUVEL LOGO / FAVICON -->
   <link rel="icon" type="image/png" href="./logo.png">
   <link rel="shortcut icon" type="image/png" href="./logo.png">
 
-  <!-- Google Font -->
   <link
     href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
     rel="stylesheet"
   >
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
@@ -26,7 +23,6 @@
 
     body {
       font-family: 'Righteous', cursive;
-
       background:
         linear-gradient(
           180deg,
@@ -34,24 +30,14 @@
           #16213e 50%,
           #0f3460 100%
         );
-
       background-attachment: fixed;
-
       color: #e0e0e0;
-
       line-height: 1.6;
-
       min-height: 100vh;
-
       position: relative;
     }
 
-    /* =====================================
-       MAGICAL GLOW
-    ===================================== */
-
     @keyframes magicGlow {
-
       0%, 100% {
         box-shadow:
           0 0 20px rgba(186, 85, 211, 0.3),
@@ -63,35 +49,16 @@
           0 0 40px rgba(186, 85, 211, 0.6),
           inset 0 0 30px rgba(186, 85, 211, 0.2);
       }
-
     }
 
-    /* =====================================
-       HEADER
-    ===================================== */
-
     header {
-
-      background:
-        rgba(0, 0, 0, 0.6);
-
-      padding:
-        1rem 2rem;
-
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
       display: flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      backdrop-filter:
-        blur(10px);
-
-      border-bottom:
-        4px solid;
-
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      border-bottom: 4px solid;
       border-image:
         linear-gradient(
           90deg,
@@ -99,37 +66,23 @@
           #ba55d3,
           #d4af37
         ) 1;
-
       box-shadow:
         0 4px 15px rgba(186, 85, 211, 0.3),
         0 0 20px rgba(186, 85, 211, 0.2);
     }
 
-    /* =====================================
-       HEADER LOGO
-    ===================================== */
-
     .site-logo {
-
       display: flex;
-
       align-items: center;
-
       text-decoration: none;
-
       flex-shrink: 0;
     }
 
     .site-logo img {
-
       width: 130px;
-
       height: 90px;
-
       object-fit: contain;
-
       display: block;
-
       filter:
         drop-shadow(
           0 0 12px rgba(186, 85, 211, 0.6)
@@ -137,17 +90,13 @@
         drop-shadow(
           2px 2px 3px rgba(0, 0, 0, 0.8)
         );
-
       transition:
         transform 0.3s,
         filter 0.3s;
     }
 
     .site-logo img:hover {
-
-      transform:
-        scale(1.05);
-
+      transform: scale(1.05);
       filter:
         drop-shadow(
           0 0 20px rgba(186, 85, 211, 0.9)
@@ -157,189 +106,108 @@
         );
     }
 
-    /* =====================================
-       NAVIGATION
-    ===================================== */
-
     nav {
-
       display: flex;
-
       gap: 2rem;
-
       align-items: center;
     }
 
     nav a {
-
       color: #fff;
-
       text-decoration: none;
-
       font-size: 1.1rem;
-
       transition: all 0.3s;
-
       text-shadow:
         2px 2px 4px rgba(0, 0, 0, 0.7);
-
       position: relative;
     }
 
     nav a::after {
-
       content: '';
-
       position: absolute;
-
       bottom: -5px;
-
       left: 0;
-
       width: 0;
-
       height: 2px;
-
       background:
         linear-gradient(
           90deg,
           #ba55d3,
           #d4af37
         );
-
-      transition:
-        width 0.3s;
+      transition: width 0.3s;
     }
 
     nav a:hover {
-
       color: #ba55d3;
-
-      transform:
-        scale(1.1);
+      transform: scale(1.1);
     }
 
     nav a:hover::after {
-
       width: 100%;
     }
 
-    /* =====================================
-       LOGIN
-    ===================================== */
-
     .login-btn {
-
       background:
         linear-gradient(
           135deg,
           #d4af37,
           #ba55d3
         );
-
       color: #fff;
-
-      border:
-        2px solid #ba55d3;
-
-      padding:
-        0.8rem 1.5rem;
-
-      font-size:
-        1rem;
-
-      font-weight:
-        bold;
-
-      cursor:
-        pointer;
-
-      border-radius:
-        8px;
-
-      transition:
-        all 0.3s;
-
+      border: 2px solid #ba55d3;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s;
       font-family:
         'Righteous',
         cursive;
-
       box-shadow:
         0 4px 8px rgba(186, 85, 211, 0.5);
     }
 
     .login-btn:hover {
-
       background:
         linear-gradient(
           135deg,
           #ba55d3,
           #d4af37
         );
-
-      transform:
-        translateY(-2px);
-
+      transform: translateY(-2px);
       box-shadow:
         0 6px 12px rgba(186, 85, 211, 0.8),
         0 0 20px rgba(186, 85, 211, 0.4);
     }
 
-    /* =====================================
-       PAGE HEADER
-    ===================================== */
-
     .page-header {
-
       background:
         linear-gradient(
           135deg,
           rgba(186, 85, 211, 0.1),
           rgba(212, 175, 55, 0.08)
         );
-
-      padding:
-        3rem 2rem;
-
-      text-align:
-        center;
-
-      border-bottom:
-        2px solid #ba55d3;
-
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid #ba55d3;
       box-shadow:
         0 4px 15px rgba(186, 85, 211, 0.2);
     }
 
     .header-logo-container {
-
-      display:
-        flex;
-
-      justify-content:
-        center;
-
-      align-items:
-        center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .header-logo-container img {
-
-      width:
-        380px;
-
-      max-width:
-        90vw;
-
-      height:
-        auto;
-
-      display:
-        block;
-
-      object-fit:
-        contain;
-
+      width: 380px;
+      max-width: 90vw;
+      height: auto;
+      display: block;
+      object-fit: contain;
       filter:
         drop-shadow(
           0 10px 25px rgba(0, 0, 0, 0.8)
@@ -347,20 +215,14 @@
         drop-shadow(
           0 0 20px rgba(186, 85, 211, 0.7)
         );
-
-      border-radius:
-        15px;
-
+      border-radius: 15px;
       transition:
         transform 0.3s,
         filter 0.3s;
     }
 
     .header-logo-container img:hover {
-
-      transform:
-        scale(1.03);
-
+      transform: scale(1.03);
       filter:
         drop-shadow(
           0 12px 30px rgba(0, 0, 0, 0.9)
@@ -370,156 +232,75 @@
         );
     }
 
-    /* =====================================
-       HERO
-    ===================================== */
-
     .hero {
-
-      display:
-        flex;
-
-      flex-direction:
-        column;
-
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      text-align:
-        center;
-
-      padding:
-        4rem 2rem;
-
-      min-height:
-        50vh;
-
-      position:
-        relative;
-
-      overflow:
-        hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      min-height: 50vh;
+      position: relative;
+      overflow: hidden;
     }
 
     .hero::before {
-
       content: '';
-
-      position:
-        absolute;
-
-      top:
-        -50%;
-
-      right:
-        -10%;
-
-      width:
-        500px;
-
-      height:
-        500px;
-
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
       background:
         radial-gradient(
           circle,
           rgba(186, 85, 211, 0.15),
           transparent
         );
-
-      border-radius:
-        50%;
-
-      animation:
-        float 6s ease-in-out infinite;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
     }
 
     .hero::after {
-
       content: '';
-
-      position:
-        absolute;
-
-      bottom:
-        -50%;
-
-      left:
-        -10%;
-
-      width:
-        400px;
-
-      height:
-        400px;
-
+      position: absolute;
+      bottom: -50%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
       background:
         radial-gradient(
           circle,
           rgba(186, 85, 211, 0.1),
           transparent
         );
-
-      border-radius:
-        50%;
-
-      animation:
-        float 8s ease-in-out infinite reverse;
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
     }
 
     @keyframes float {
-
       0%, 100% {
-        transform:
-          translateY(0);
+        transform: translateY(0);
       }
 
       50% {
-        transform:
-          translateY(-20px);
+        transform: translateY(-20px);
       }
-
     }
 
-    /* =====================================
-       HERO LOGO
-    ===================================== */
-
     .logo-container {
-
-      margin-bottom:
-        2rem;
-
-      position:
-        relative;
-
-      z-index:
-        1;
-
-      animation:
-        pulse 2s ease-in-out infinite;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+      animation: pulse 2s ease-in-out infinite;
     }
 
     .logo-container img {
-
-      width:
-        500px;
-
-      max-width:
-        90vw;
-
-      height:
-        auto;
-
-      display:
-        block;
-
-      object-fit:
-        contain;
-
+      width: 500px;
+      max-width: 90vw;
+      height: auto;
+      display: block;
+      object-fit: contain;
       filter:
         drop-shadow(
           0 10px 30px rgba(0, 0, 0, 0.8)
@@ -527,114 +308,60 @@
         drop-shadow(
           0 0 20px rgba(186, 85, 211, 0.5)
         );
-
-      border-radius:
-        15px;
+      border-radius: 15px;
     }
 
     @keyframes pulse {
-
       0%, 100% {
-        transform:
-          scale(1);
+        transform: scale(1);
       }
 
       50% {
-        transform:
-          scale(1.03);
+        transform: scale(1.03);
       }
-
     }
 
-    /* =====================================
-       HERO TEXT
-    ===================================== */
-
     .hero p {
-
-      font-size:
-        1.4rem;
-
-      color:
-        #fff;
-
+      font-size: 1.4rem;
+      color: #fff;
       text-shadow:
         2px 2px 4px rgba(186, 85, 211, 0.5),
         2px 2px 8px rgba(0, 0, 0, 0.8);
-
-      margin-bottom:
-        2rem;
-
-      max-width:
-        600px;
-
-      z-index:
-        1;
-
-      position:
-        relative;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      z-index: 1;
+      position: relative;
     }
 
-    /* =====================================
-       PLAY BUTTON
-    ===================================== */
-
     .cta-btn {
-
       background:
         linear-gradient(
           135deg,
           #d4af37,
           #ba55d3
         );
-
-      color:
-        #fff;
-
-      border:
-        3px solid #ba55d3;
-
-      padding:
-        1.2rem 3rem;
-
-      font-size:
-        1.3rem;
-
-      font-weight:
-        bold;
-
-      cursor:
-        pointer;
-
-      border-radius:
-        12px;
-
-      transition:
-        all 0.3s;
-
+      color: #fff;
+      border: 3px solid #ba55d3;
+      padding: 1.2rem 3rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.3s;
       font-family:
         'Righteous',
         cursive;
-
       box-shadow:
         0 8px 16px rgba(186, 85, 211, 0.6);
-
-      z-index:
-        1;
-
-      position:
-        relative;
+      z-index: 1;
+      position: relative;
     }
 
     .cta-btn:hover {
-
-      transform:
-        translateY(-4px);
-
+      transform: translateY(-4px);
       box-shadow:
         0 12px 24px rgba(186, 85, 211, 1),
         0 0 30px rgba(186, 85, 211, 0.8);
-
       background:
         linear-gradient(
           135deg,
@@ -643,71 +370,34 @@
         );
     }
 
-    /* =====================================
-       CONTENT
-    ===================================== */
-
     .container {
-
-      max-width:
-        1200px;
-
-      margin:
-        0 auto;
-
-      padding:
-        3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
     }
 
-    /* =====================================
-       SECTION TITLES
-    ===================================== */
-
     .section-title {
-
-      font-size:
-        3rem;
-
+      font-size: 3rem;
       background:
         linear-gradient(
           135deg,
           #d4af37,
           #ba55d3
         );
-
-      -webkit-background-clip:
-        text;
-
-      -webkit-text-fill-color:
-        transparent;
-
-      background-clip:
-        text;
-
-      text-align:
-        center;
-
-      margin-bottom:
-        3rem;
-
-      letter-spacing:
-        2px;
-
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: 2px;
       filter:
         drop-shadow(
           3px 3px 0px rgba(0, 0, 0, 0.7)
         );
     }
 
-    /* =====================================
-       ATTRACTIONS
-    ===================================== */
-
     .attractions-grid {
-
-      display:
-        grid;
-
+      display: grid;
       grid-template-columns:
         repeat(
           auto-fit,
@@ -716,126 +406,70 @@
             1fr
           )
         );
-
-      gap:
-        2rem;
-
-      margin-bottom:
-        4rem;
+      gap: 2rem;
+      margin-bottom: 4rem;
     }
 
     .attraction-card {
-
       background:
         linear-gradient(
           135deg,
           rgba(212, 175, 55, 0.1),
           rgba(186, 85, 211, 0.08)
         );
-
-      border:
-        3px solid #ba55d3;
-
-      border-radius:
-        15px;
-
-      padding:
-        2rem;
-
-      text-align:
-        center;
-
-      transition:
-        all 0.3s;
-
-      cursor:
-        pointer;
-
-      backdrop-filter:
-        blur(10px);
-
+      border: 3px solid #ba55d3;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
       box-shadow:
         0 8px 16px rgba(186, 85, 211, 0.3);
     }
 
     .attraction-card:hover {
-
       transform:
         translateY(-10px)
         scale(1.05);
-
       box-shadow:
         0 16px 32px rgba(186, 85, 211, 0.6),
         0 0 30px rgba(186, 85, 211, 0.4);
-
-      border-color:
-        #d4af37;
-
+      border-color: #d4af37;
       animation:
         magicGlow 2s ease-in-out infinite;
     }
 
     .attraction-card h3 {
-
-      font-size:
-        1.8rem;
-
-      color:
-        #ba55d3;
-
-      margin-bottom:
-        1rem;
+      font-size: 1.8rem;
+      color: #ba55d3;
+      margin-bottom: 1rem;
     }
 
     .attraction-card p {
-
-      color:
-        #c0c0c0;
-
-      font-size:
-        1rem;
-
-      line-height:
-        1.8;
+      color: #c0c0c0;
+      font-size: 1rem;
+      line-height: 1.8;
     }
 
-    /* =====================================
-       FEATURES
-    ===================================== */
-
     .features {
-
       background:
         linear-gradient(
           135deg,
           rgba(186, 85, 211, 0.08),
           rgba(212, 175, 55, 0.06)
         );
-
-      border:
-        3px solid #ba55d3;
-
-      border-radius:
-        15px;
-
-      padding:
-        3rem 2rem;
-
-      margin-bottom:
-        3rem;
-
-      backdrop-filter:
-        blur(10px);
-
+      border: 3px solid #ba55d3;
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
       box-shadow:
         0 8px 16px rgba(186, 85, 211, 0.3);
     }
 
     .features-grid {
-
-      display:
-        grid;
-
+      display: grid;
       grid-template-columns:
         repeat(
           auto-fit,
@@ -844,83 +478,41 @@
             1fr
           )
         );
-
-      gap:
-        2rem;
+      gap: 2rem;
     }
 
     .feature-item {
-
-      text-align:
-        center;
-
-      padding:
-        1.5rem;
-
-      border-radius:
-        10px;
-
-      background:
-        rgba(186, 85, 211, 0.05);
-
-      transition:
-        all 0.3s;
-
-      border:
-        2px solid transparent;
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 10px;
+      background: rgba(186, 85, 211, 0.05);
+      transition: all 0.3s;
+      border: 2px solid transparent;
     }
 
     .feature-item:hover {
-
-      border-color:
-        #ba55d3;
-
-      background:
-        rgba(186, 85, 211, 0.1);
-
+      border-color: #ba55d3;
+      background: rgba(186, 85, 211, 0.1);
       box-shadow:
         0 0 15px rgba(186, 85, 211, 0.4);
     }
 
     .feature-item h3 {
-
-      font-size:
-        1.5rem;
-
-      color:
-        #ba55d3;
-
-      margin-bottom:
-        0.8rem;
+      font-size: 1.5rem;
+      color: #ba55d3;
+      margin-bottom: 0.8rem;
     }
 
     .feature-item p {
-
-      color:
-        #c0c0c0;
-
-      font-size:
-        0.95rem;
+      color: #c0c0c0;
+      font-size: 0.95rem;
     }
 
-    /* =====================================
-       FOOTER
-    ===================================== */
-
     footer {
-
-      background:
-        rgba(0, 0, 0, 0.7);
-
-      text-align:
-        center;
-
-      padding:
-        2.5rem;
-
-      border-top:
-        4px solid;
-
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 4px solid;
       border-image:
         linear-gradient(
           90deg,
@@ -928,231 +520,116 @@
           #ba55d3,
           #d4af37
         ) 1;
-
-      color:
-        #fff;
-
-      margin-top:
-        4rem;
+      color: #fff;
+      margin-top: 4rem;
     }
 
     footer a {
-
-      color:
-        #ba55d3;
-
-      text-decoration:
-        none;
-
-      font-weight:
-        bold;
-
-      transition:
-        all 0.3s;
+      color: #ba55d3;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
     }
 
     footer a:hover {
-
-      color:
-        #d4af37;
-
-      text-decoration:
-        underline;
+      color: #d4af37;
+      text-decoration: underline;
     }
 
-    /* =====================================
-       SERVER POPUP
-    ===================================== */
+    /* SERVER POPUP */
 
     .server-modal {
-
-      display:
-        none;
-
-      position:
-        fixed;
-
-      z-index:
-        99999;
-
-      inset:
-        0;
-
-      background:
-        rgba(0, 0, 0, 0.78);
-
-      backdrop-filter:
-        blur(7px);
-
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      padding:
-        20px;
+      display: none;
+      position: fixed;
+      z-index: 99999;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(7px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     .server-modal.show {
-
-      display:
-        flex;
+      display: flex;
     }
 
     .server-modal-content {
-
       background:
         linear-gradient(
           135deg,
           #1a0a2e,
           #16213e
         );
-
-      border:
-        3px solid #ba55d3;
-
-      border-radius:
-        18px;
-
-      width:
-        100%;
-
-      max-width:
-        520px;
-
-      padding:
-        35px 30px;
-
-      text-align:
-        center;
-
+      border: 3px solid #ba55d3;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 520px;
+      padding: 35px 30px;
+      text-align: center;
       box-shadow:
         0 0 40px rgba(186, 85, 211, 0.7),
         0 20px 60px rgba(0, 0, 0, 0.8);
-
       animation:
         popupIn 0.25s ease-out;
     }
 
     @keyframes popupIn {
-
       from {
-
-        opacity:
-          0;
-
-        transform:
-          scale(0.85);
+        opacity: 0;
+        transform: scale(0.85);
       }
 
       to {
-
-        opacity:
-          1;
-
-        transform:
-          scale(1);
+        opacity: 1;
+        transform: scale(1);
       }
-
     }
 
     .server-modal-content h2 {
-
-      color:
-        #d4af37;
-
-      font-size:
-        2rem;
-
-      margin-bottom:
-        10px;
+      color: #d4af37;
+      font-size: 2rem;
+      margin-bottom: 10px;
     }
 
     .server-modal-content p {
-
-      color:
-        #ddd;
-
-      margin-bottom:
-        20px;
+      color: #ddd;
+      margin-bottom: 20px;
     }
 
     .server-ip {
-
-      background:
-        rgba(0, 0, 0, 0.5);
-
-      border:
-        2px solid #ba55d3;
-
-      border-radius:
-        10px;
-
-      padding:
-        15px;
-
-      margin:
-        20px 0;
-
-      font-family:
-        monospace;
-
-      font-size:
-        1.25rem;
-
-      color:
-        #fff;
-
-      word-break:
-        break-all;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #ba55d3;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 1.25rem;
+      color: #fff;
+      word-break: break-all;
     }
 
     .modal-buttons {
-
-      display:
-        flex;
-
-      justify-content:
-        center;
-
-      gap:
-        12px;
-
-      flex-wrap:
-        wrap;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .modal-btn {
-
-      border:
-        none;
-
-      border-radius:
-        10px;
-
-      padding:
-        12px 20px;
-
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
       font-family:
         'Righteous',
         cursive;
-
-      font-size:
-        1rem;
-
-      cursor:
-        pointer;
-
-      color:
-        #fff;
-
-      transition:
-        all 0.2s;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.2s;
     }
 
     .copy-btn {
-
       background:
         linear-gradient(
           135deg,
@@ -1162,111 +639,65 @@
     }
 
     .close-btn {
-
-      background:
-        rgba(255, 255, 255, 0.12);
-
-      border:
-        2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
 
     .modal-btn:hover {
-
-      transform:
-        translateY(-2px);
-
+      transform: translateY(-2px);
       box-shadow:
         0 5px 15px rgba(186, 85, 211, 0.5);
     }
 
-    /* =====================================
-       MOBILE
-    ===================================== */
-
     @media (max-width: 768px) {
-
       header {
-
-        flex-direction:
-          column;
-
-        gap:
-          1rem;
+        flex-direction: column;
+        gap: 1rem;
       }
 
       .site-logo img {
-
-        width:
-          140px;
-
-        height:
-          90px;
+        width: 140px;
+        height: 90px;
       }
 
       nav {
-
-        gap:
-          1rem;
-
-        flex-wrap:
-          wrap;
-
-        justify-content:
-          center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       nav a {
-
-        font-size:
-          0.9rem;
+        font-size: 0.9rem;
       }
 
       .header-logo-container img {
-
-        width:
-          280px;
+        width: 280px;
       }
 
       .logo-container img {
-
-        width:
-          350px;
+        width: 350px;
       }
 
       .hero p {
-
-        font-size:
-          1rem;
+        font-size: 1rem;
       }
 
       .section-title {
-
-        font-size:
-          2rem;
+        font-size: 2rem;
       }
 
       .server-modal-content h2 {
-
-        font-size:
-          1.6rem;
+        font-size: 1.6rem;
       }
 
       .server-ip {
-
-        font-size:
-          1rem;
+        font-size: 1rem;
       }
-
     }
-
   </style>
 </head>
 
 <body>
-
-  <!-- =====================================
-       HEADER
-  ===================================== -->
 
   <header>
 
@@ -1278,19 +709,9 @@
     </a>
 
     <nav>
-
-      <a href="#attractions">
-        Attracties
-      </a>
-
-      <a href="#features">
-        Features
-      </a>
-
-      <a href="#contact">
-        Contact
-      </a>
-
+      <a href="#attractions">Attracties</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
     </nav>
 
     <button
@@ -1302,11 +723,6 @@
     </button>
 
   </header>
-
-
-  <!-- =====================================
-       PAGE LOGO
-  ===================================== -->
 
   <div class="page-header">
 
@@ -1320,11 +736,6 @@
     </div>
 
   </div>
-
-
-  <!-- =====================================
-       HERO
-  ===================================== -->
 
   <section class="hero">
 
@@ -1352,14 +763,7 @@
 
   </section>
 
-
-  <!-- =====================================
-       MAIN CONTENT
-  ===================================== -->
-
   <div class="container">
-
-    <!-- ATTRACTIONS -->
 
     <section id="attractions">
 
@@ -1370,89 +774,56 @@
       <div class="attractions-grid">
 
         <div class="attraction-card">
-
-          <h3>
-            🎢 Achtbanen
-          </h3>
-
+          <h3>🎢 Achtbanen</h3>
           <p>
             Adrenaline-kickende achtbanen
             door fantastische landschappen!
           </p>
-
         </div>
 
         <div class="attraction-card">
-
-          <h3>
-            🏰 Kastelen
-          </h3>
-
+          <h3>🏰 Kastelen</h3>
           <p>
             Majestueuze kastelen vol geheimen
             en magische verrassingen!
           </p>
-
         </div>
 
         <div class="attraction-card">
-
-          <h3>
-            ✨ Magie
-          </h3>
-
+          <h3>✨ Magie</h3>
           <p>
             Mystieke biomen vol enchantments
             en magische wezens!
           </p>
-
         </div>
 
         <div class="attraction-card">
-
-          <h3>
-            🎉 Evenementen
-          </h3>
-
+          <h3>🎉 Evenementen</h3>
           <p>
             Elke maand een nieuw thema
             met exclusive rewards!
           </p>
-
         </div>
 
         <div class="attraction-card">
-
-          <h3>
-            🎮 Mini-Games
-          </h3>
-
+          <h3>🎮 Mini-Games</h3>
           <p>
             Parkour, PvP-arena's en spelletjes
             vol plezier!
           </p>
-
         </div>
 
         <div class="attraction-card">
-
-          <h3>
-            🌍 Custom Werelden
-          </h3>
-
+          <h3>🌍 Custom Werelden</h3>
           <p>
             Hand-gemaakte biomen met
             prachtige landschappen!
           </p>
-
         </div>
 
       </div>
 
     </section>
-
-
-    <!-- FEATURES -->
 
     <section
       class="features"
@@ -1466,54 +837,34 @@
       <div class="features-grid">
 
         <div class="feature-item">
-
-          <h3>
-            🕐 24/7 Online
-          </h3>
-
+          <h3>🕐 24/7 Online</h3>
           <p>
             De server staat altijd klaar
             voor je avontuur!
           </p>
-
         </div>
 
         <div class="feature-item">
-
-          <h3>
-            👥 Community
-          </h3>
-
+          <h3>👥 Community</h3>
           <p>
             Maak vrienden en deel
             je ervaringen!
           </p>
-
         </div>
 
         <div class="feature-item">
-
-          <h3>
-            🏅 Beloningen
-          </h3>
-
+          <h3>🏅 Beloningen</h3>
           <p>
             Verdien munten en exclusieve items!
           </p>
-
         </div>
 
         <div class="feature-item">
-
-          <h3>
-            🎨 Creatief
-          </h3>
-
+          <h3>🎨 Creatief</h3>
           <p>
             Build je eigen creaties
             in creative zones!
           </p>
-
         </div>
 
       </div>
@@ -1521,11 +872,6 @@
     </section>
 
   </div>
-
-
-  <!-- =====================================
-       FOOTER
-  ===================================== -->
 
   <footer id="contact">
 
@@ -1546,11 +892,6 @@
     </p>
 
   </footer>
-
-
-  <!-- =====================================
-       SERVER IP POPUP
-  ===================================== -->
 
   <div
     id="serverModal"
@@ -1597,23 +938,13 @@
 
   </div>
 
-
-  <!-- =====================================
-       JAVASCRIPT
-  ===================================== -->
-
   <script>
-
     const serverIP =
       "gp-node-01.future-node.com:35003";
 
-
     function openServerPopup() {
-
       const modal =
-        document.getElementById(
-          "serverModal"
-        );
+        document.getElementById("serverModal");
 
       modal.classList.add("show");
 
@@ -1621,16 +952,11 @@
         "aria-hidden",
         "false"
       );
-
     }
 
-
     function closeServerPopup() {
-
       const modal =
-        document.getElementById(
-          "serverModal"
-        );
+        document.getElementById("serverModal");
 
       modal.classList.remove("show");
 
@@ -1638,33 +964,22 @@
         "aria-hidden",
         "true"
       );
-
     }
 
-
     function copyServerIP() {
-
       navigator.clipboard
         .writeText(serverIP)
-
         .then(() => {
-
           alert(
             "Minecraft server IP gekopieerd! 🎉"
           );
-
         })
-
         .catch(() => {
-
           alert(
             "IP: " + serverIP
           );
-
         });
-
     }
-
 
     document
       .getElementById("serverModal")
@@ -1672,33 +987,23 @@
         "click",
         function(event) {
 
-          if (
-            event.target === this
-          ) {
-
+          if (event.target === this) {
             closeServerPopup();
-
           }
 
         }
       );
 
-
     document.addEventListener(
       "keydown",
       function(event) {
 
-        if (
-          event.key === "Escape"
-        ) {
-
+        if (event.key === "Escape") {
           closeServerPopup();
-
         }
 
       }
     );
-
   </script>
 
 </body>
