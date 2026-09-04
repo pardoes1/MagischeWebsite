@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Magische Heuvel - Minecraft Themapark</title>
 
+  <!-- Magische Heuvel logo as website icon -->
+  <link rel="icon" type="image/png" href="magische-heuvel-logo.png">
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -16,7 +22,12 @@
 
     body {
       font-family: 'Righteous', cursive;
-      background: linear-gradient(180deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+      background: linear-gradient(
+        180deg,
+        #1a0a2e 0%,
+        #16213e 50%,
+        #0f3460 100%
+      );
       background-attachment: fixed;
       color: #e0e0e0;
       line-height: 1.6;
@@ -24,7 +35,10 @@
       position: relative;
     }
 
-    /* Magical purple glow animation */
+    /* =========================================
+       MAGICAL PURPLE GLOW ANIMATION
+    ========================================= */
+
     @keyframes magicGlow {
       0%, 100% {
         box-shadow:
@@ -39,31 +53,69 @@
       }
     }
 
-    /* Header */
+    /* =========================================
+       HEADER
+    ========================================= */
+
     header {
       background: rgba(0, 0, 0, 0.6);
       padding: 1rem 2rem;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       backdrop-filter: blur(10px);
+
       border-bottom: 4px solid;
-      border-image: linear-gradient(90deg, #d4af37, #ba55d3, #d4af37) 1;
+
+      border-image:
+        linear-gradient(
+          90deg,
+          #d4af37,
+          #ba55d3,
+          #d4af37
+        ) 1;
+
       box-shadow:
         0 4px 15px rgba(186, 85, 211, 0.3),
         0 0 20px rgba(186, 85, 211, 0.2);
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, #d4af37, #ba55d3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      letter-spacing: 3px;
-      filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.8));
+    /* =========================================
+       HEADER LOGO
+    ========================================= */
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
     }
+
+    .site-logo img {
+      width: 110px;
+      height: 80px;
+
+      object-fit: contain;
+
+      filter:
+        drop-shadow(0 0 12px rgba(186, 85, 211, 0.6))
+        drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.8));
+
+      transition: all 0.3s;
+    }
+
+    .site-logo img:hover {
+      transform: scale(1.05);
+
+      filter:
+        drop-shadow(0 0 20px rgba(186, 85, 211, 0.9))
+        drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.8));
+    }
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
 
     nav {
       display: flex;
@@ -74,20 +126,35 @@
     nav a {
       color: #fff;
       text-decoration: none;
+
       font-size: 1.1rem;
+
       transition: all 0.3s;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+      text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.7);
+
       position: relative;
     }
 
     nav a::after {
       content: '';
+
       position: absolute;
+
       bottom: -5px;
       left: 0;
+
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #ba55d3, #d4af37);
+
+      background:
+        linear-gradient(
+          90deg,
+          #ba55d3,
+          #d4af37
+        );
+
       transition: width 0.3s;
     }
 
@@ -100,110 +167,195 @@
       width: 100%;
     }
 
+    /* =========================================
+       LOGIN BUTTON
+    ========================================= */
+
     .login-btn {
-      background: linear-gradient(135deg, #d4af37, #ba55d3);
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+
       color: #fff;
+
       border: 2px solid #ba55d3;
+
       padding: 0.8rem 1.5rem;
+
       font-size: 1rem;
       font-weight: bold;
+
       cursor: pointer;
+
       border-radius: 8px;
+
       transition: all 0.3s;
-      font-family: 'Righteous', cursive;
-      box-shadow: 0 4px 8px rgba(186, 85, 211, 0.5);
+
+      font-family:
+        'Righteous',
+        cursive;
+
+      box-shadow:
+        0 4px 8px rgba(186, 85, 211, 0.5);
     }
 
     .login-btn:hover {
-      background: linear-gradient(135deg, #ba55d3, #d4af37);
-      transform: translateY(-2px);
+      background:
+        linear-gradient(
+          135deg,
+          #ba55d3,
+          #d4af37
+        );
+
+      transform:
+        translateY(-2px);
+
       box-shadow:
         0 6px 12px rgba(186, 85, 211, 0.8),
         0 0 20px rgba(186, 85, 211, 0.4);
     }
 
-    /* Page Header with Logo */
+    /* =========================================
+       PAGE HEADER WITH LOGO
+    ========================================= */
+
     .page-header {
-      background: linear-gradient(
-        135deg,
-        rgba(186, 85, 211, 0.1),
-        rgba(212, 175, 55, 0.08)
-      );
+      background:
+        linear-gradient(
+          135deg,
+          rgba(186, 85, 211, 0.1),
+          rgba(212, 175, 55, 0.08)
+        );
+
       padding: 3rem 2rem;
+
       text-align: center;
-      border-bottom: 2px solid #ba55d3;
-      box-shadow: 0 4px 15px rgba(186, 85, 211, 0.2);
+
+      border-bottom:
+        2px solid #ba55d3;
+
+      box-shadow:
+        0 4px 15px rgba(186, 85, 211, 0.2);
     }
 
     .header-logo-container {
       margin-bottom: 1.5rem;
+
       display: flex;
+
       justify-content: center;
     }
 
     .header-logo-container img {
-      height: 80px;
-      width: auto;
-      filter: drop-shadow(0 0 15px rgba(186, 85, 211, 0.6));
+      width: 350px;
+      max-width: 90vw;
+
+      height: auto;
+
+      object-fit: contain;
+
+      filter:
+        drop-shadow(
+          0 10px 25px rgba(0, 0, 0, 0.8)
+        )
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.7)
+        );
+
+      border-radius: 15px;
+
+      transition: all 0.3s;
     }
 
-    .page-header h2 {
-      font-size: 3rem;
-      background: linear-gradient(135deg, #d4af37, #ba55d3, #d4af37);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 3px;
-      margin-bottom: 0.5rem;
-      filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.9));
+    .header-logo-container img:hover {
+      transform: scale(1.03);
+
+      filter:
+        drop-shadow(
+          0 12px 30px rgba(0, 0, 0, 0.9)
+        )
+        drop-shadow(
+          0 0 30px rgba(186, 85, 211, 0.9)
+        );
     }
 
-    /* Hero Section */
+    /* =========================================
+       HERO SECTION
+    ========================================= */
+
     .hero {
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
       align-items: center;
+
       text-align: center;
+
       padding: 4rem 2rem;
+
       min-height: 50vh;
+
       position: relative;
+
       overflow: hidden;
     }
 
     .hero::before {
       content: '';
+
       position: absolute;
+
       top: -50%;
       right: -10%;
+
       width: 500px;
       height: 500px;
-      background: radial-gradient(
-        circle,
-        rgba(186, 85, 211, 0.15),
-        transparent
-      );
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(186, 85, 211, 0.15),
+          transparent
+        );
+
       border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
+
+      animation:
+        float 6s ease-in-out infinite;
     }
 
     .hero::after {
       content: '';
+
       position: absolute;
+
       bottom: -50%;
       left: -10%;
+
       width: 400px;
       height: 400px;
-      background: radial-gradient(
-        circle,
-        rgba(186, 85, 211, 0.1),
-        transparent
-      );
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(186, 85, 211, 0.1),
+          transparent
+        );
+
       border-radius: 50%;
-      animation: float 8s ease-in-out infinite reverse;
+
+      animation:
+        float 8s ease-in-out infinite reverse;
     }
 
     @keyframes float {
+
       0%, 100% {
         transform: translateY(0px);
       }
@@ -211,167 +363,299 @@
       50% {
         transform: translateY(-20px);
       }
+
     }
+
+    /* =========================================
+       HERO LOGO
+    ========================================= */
 
     .logo-container {
       margin-bottom: 2rem;
-      animation: pulse 2s ease-in-out infinite;
-      filter: drop-shadow(0 0 20px rgba(186, 85, 211, 0.4));
+
+      animation:
+        pulse 2s ease-in-out infinite;
+
+      filter:
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.4)
+        );
+
+      position: relative;
+
+      z-index: 1;
     }
 
     .logo-container img {
-      max-width: 400px;
+      max-width: 500px;
+
       width: 100%;
+
       height: auto;
+
+      object-fit: contain;
+
       filter:
-        drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8))
-        drop-shadow(0 0 20px rgba(186, 85, 211, 0.4));
+        drop-shadow(
+          0 10px 30px rgba(0, 0, 0, 0.8)
+        )
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.4)
+        );
+
       border-radius: 15px;
     }
 
     @keyframes pulse {
+
       0%, 100% {
         transform: scale(1);
       }
 
       50% {
-        transform: scale(1.05);
+        transform: scale(1.03);
       }
+
     }
 
-    .hero h2 {
-      font-size: 4.5rem;
-      background: linear-gradient(135deg, #d4af37, #ba55d3, #d4af37);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 4px;
-      margin-bottom: 1rem;
-      z-index: 1;
-      position: relative;
-      filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.9));
-    }
+    /* =========================================
+       HERO TEXT
+    ========================================= */
 
     .hero p {
       font-size: 1.4rem;
+
       color: #fff;
+
       text-shadow:
         2px 2px 4px rgba(186, 85, 211, 0.5),
         2px 2px 8px rgba(0, 0, 0, 0.8);
+
       margin-bottom: 2rem;
+
       max-width: 600px;
+
       z-index: 1;
+
       position: relative;
     }
 
+    /* =========================================
+       PLAY BUTTON
+    ========================================= */
+
     .cta-btn {
-      background: linear-gradient(135deg, #d4af37, #ba55d3);
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+
       color: #fff;
-      border: 3px solid #ba55d3;
-      padding: 1.2rem 3rem;
+
+      border:
+        3px solid #ba55d3;
+
+      padding:
+        1.2rem 3rem;
+
       font-size: 1.3rem;
+
       font-weight: bold;
+
       cursor: pointer;
+
       border-radius: 12px;
+
       text-decoration: none;
+
       transition: all 0.3s;
-      font-family: 'Righteous', cursive;
-      box-shadow: 0 8px 16px rgba(186, 85, 211, 0.6);
+
+      font-family:
+        'Righteous',
+        cursive;
+
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.6);
+
       z-index: 1;
+
       position: relative;
+
       display: inline-block;
     }
 
     .cta-btn:hover {
-      transform: translateY(-4px);
+      transform:
+        translateY(-4px);
+
       box-shadow:
         0 12px 24px rgba(186, 85, 211, 1),
         0 0 30px rgba(186, 85, 211, 0.8);
-      background: linear-gradient(135deg, #ba55d3, #d4af37);
+
+      background:
+        linear-gradient(
+          135deg,
+          #ba55d3,
+          #d4af37
+        );
     }
 
-    /* Content Section */
+    /* =========================================
+       CONTENT SECTION
+    ========================================= */
+
     .container {
       max-width: 1200px;
+
       margin: 0 auto;
+
       padding: 3rem 2rem;
     }
 
-    /* Attractions Grid */
+    /* =========================================
+       SECTION TITLE
+    ========================================= */
+
     .section-title {
       font-size: 3rem;
-      background: linear-gradient(135deg, #d4af37, #ba55d3);
+
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+
       -webkit-background-clip: text;
+
       -webkit-text-fill-color: transparent;
+
       background-clip: text;
+
       text-align: center;
+
       margin-bottom: 3rem;
+
       letter-spacing: 2px;
-      filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.7));
+
+      filter:
+        drop-shadow(
+          3px 3px 0px rgba(0, 0, 0, 0.7)
+        );
     }
+
+    /* =========================================
+       ATTRACTIONS GRID
+    ========================================= */
 
     .attractions-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(280px, 1fr)
+        );
+
       gap: 2rem;
+
       margin-bottom: 4rem;
     }
 
     .attraction-card {
-      background: linear-gradient(
-        135deg,
-        rgba(212, 175, 55, 0.1),
-        rgba(186, 85, 211, 0.08)
-      );
-      border: 3px solid #ba55d3;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.1),
+          rgba(186, 85, 211, 0.08)
+        );
+
+      border:
+        3px solid #ba55d3;
+
       border-radius: 15px;
+
       padding: 2rem;
+
       text-align: center;
+
       transition: all 0.3s;
+
       cursor: pointer;
+
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 16px rgba(186, 85, 211, 0.3);
+
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.3);
     }
 
     .attraction-card:hover {
-      transform: translateY(-10px) scale(1.05);
+      transform:
+        translateY(-10px)
+        scale(1.05);
+
       box-shadow:
         0 16px 32px rgba(186, 85, 211, 0.6),
         0 0 30px rgba(186, 85, 211, 0.4);
-      border-color: #d4af37;
-      background: linear-gradient(
-        135deg,
-        rgba(212, 175, 55, 0.15),
-        rgba(186, 85, 211, 0.12)
-      );
-      animation: magicGlow 2s ease-in-out infinite;
+
+      border-color:
+        #d4af37;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.15),
+          rgba(186, 85, 211, 0.12)
+        );
+
+      animation:
+        magicGlow 2s ease-in-out infinite;
     }
 
     .attraction-card h3 {
       font-size: 1.8rem;
+
       color: #ba55d3;
+
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(186, 85, 211, 0.4);
+
+      text-shadow:
+        2px 2px 4px rgba(186, 85, 211, 0.4);
     }
 
     .attraction-card p {
       color: #c0c0c0;
+
       font-size: 1rem;
+
       line-height: 1.8;
     }
 
-    /* Features Section */
+    /* =========================================
+       FEATURES SECTION
+    ========================================= */
+
     .features {
-      background: linear-gradient(
-        135deg,
-        rgba(186, 85, 211, 0.08),
-        rgba(212, 175, 55, 0.06)
-      );
-      border: 3px solid #ba55d3;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(186, 85, 211, 0.08),
+          rgba(212, 175, 55, 0.06)
+        );
+
+      border:
+        3px solid #ba55d3;
+
       border-radius: 15px;
+
       padding: 3rem 2rem;
+
       margin-bottom: 3rem;
+
       backdrop-filter: blur(10px);
+
       box-shadow:
         0 8px 16px rgba(186, 85, 211, 0.3),
         0 0 20px rgba(186, 85, 211, 0.2);
@@ -379,77 +663,141 @@
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(250px, 1fr)
+        );
+
       gap: 2rem;
     }
 
     .feature-item {
       text-align: center;
+
       padding: 1.5rem;
+
       border-radius: 10px;
-      background: rgba(186, 85, 211, 0.05);
+
+      background:
+        rgba(186, 85, 211, 0.05);
+
       transition: all 0.3s;
-      border: 2px solid transparent;
+
+      border:
+        2px solid transparent;
     }
 
     .feature-item:hover {
-      border-color: #ba55d3;
-      background: rgba(186, 85, 211, 0.1);
-      box-shadow: 0 0 15px rgba(186, 85, 211, 0.4);
+      border-color:
+        #ba55d3;
+
+      background:
+        rgba(186, 85, 211, 0.1);
+
+      box-shadow:
+        0 0 15px rgba(186, 85, 211, 0.4);
     }
 
     .feature-item h3 {
       font-size: 1.5rem;
+
       color: #ba55d3;
+
       margin-bottom: 0.8rem;
-      text-shadow: 2px 2px 4px rgba(186, 85, 211, 0.4);
+
+      text-shadow:
+        2px 2px 4px rgba(186, 85, 211, 0.4);
     }
 
     .feature-item p {
       color: #c0c0c0;
+
       font-size: 0.95rem;
     }
 
-    /* Footer */
+    /* =========================================
+       FOOTER
+    ========================================= */
+
     footer {
-      background: rgba(0, 0, 0, 0.7);
+      background:
+        rgba(0, 0, 0, 0.7);
+
       text-align: center;
+
       padding: 2.5rem;
+
       border-top: 4px solid;
-      border-image: linear-gradient(90deg, #d4af37, #ba55d3, #d4af37) 1;
+
+      border-image:
+        linear-gradient(
+          90deg,
+          #d4af37,
+          #ba55d3,
+          #d4af37
+        ) 1;
+
       color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+      text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.7);
+
       margin-top: 4rem;
-      box-shadow: 0 -4px 15px rgba(186, 85, 211, 0.3);
+
+      box-shadow:
+        0 -4px 15px rgba(186, 85, 211, 0.3);
     }
 
     footer a {
       color: #ba55d3;
+
       text-decoration: none;
+
       font-weight: bold;
+
       transition: all 0.3s;
-      text-shadow: 0 0 10px rgba(186, 85, 211, 0.5);
+
+      text-shadow:
+        0 0 10px rgba(186, 85, 211, 0.5);
     }
 
     footer a:hover {
       color: #d4af37;
+
       text-decoration: underline;
-      text-shadow: 0 0 15px rgba(186, 85, 211, 0.8);
+
+      text-shadow:
+        0 0 15px rgba(186, 85, 211, 0.8);
     }
 
-    /* ============================= */
-    /* SERVER IP POPUP */
-    /* ============================= */
+    /* =========================================
+       SERVER IP POPUP
+    ========================================= */
 
     .server-modal {
       display: none;
+
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(6px);
-      align-items: center;
-      justify-content: center;
+
       z-index: 9999;
+
+      left: 0;
+      top: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background:
+        rgba(0, 0, 0, 0.75);
+
+      backdrop-filter: blur(6px);
+
+      justify-content: center;
+
+      align-items: center;
+
       padding: 20px;
     }
 
@@ -458,119 +806,185 @@
     }
 
     .server-modal-content {
+      background:
+        linear-gradient(
+          135deg,
+          #1a0a2e,
+          #16213e
+        );
+
+      border:
+        3px solid #ba55d3;
+
+      border-radius: 18px;
+
       width: 100%;
+
       max-width: 500px;
-      background: linear-gradient(
-        135deg,
-        #1a0a2e,
-        #16213e
-      );
-      border: 3px solid #ba55d3;
-      border-radius: 15px;
-      padding: 2.5rem;
+
+      padding:
+        35px 30px;
+
       text-align: center;
+
       box-shadow:
         0 0 40px rgba(186, 85, 211, 0.7),
-        0 0 80px rgba(186, 85, 211, 0.2);
-      animation: popupAnimation 0.25s ease-out;
+        0 20px 60px rgba(0, 0, 0, 0.8);
+
+      animation:
+        popupIn 0.25s ease-out;
     }
 
-    @keyframes popupAnimation {
+    @keyframes popupIn {
+
       from {
         opacity: 0;
-        transform: scale(0.8);
+
+        transform:
+          scale(0.85);
       }
 
       to {
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+          scale(1);
       }
+
     }
 
     .server-modal-content h2 {
-      font-size: 2rem;
       color: #d4af37;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+      font-size: 2rem;
+
+      margin-bottom: 10px;
+
+      text-shadow:
+        2px 2px 5px rgba(0, 0, 0, 0.8);
     }
 
     .server-modal-content p {
-      color: #fff;
-      margin-bottom: 1rem;
+      color: #ddd;
+
+      margin-bottom: 20px;
     }
 
     .server-ip {
-      display: block;
-      background: rgba(0, 0, 0, 0.5);
-      border: 2px solid #ba55d3;
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0 1.5rem;
+      background:
+        rgba(0, 0, 0, 0.5);
+
+      border:
+        2px solid #ba55d3;
+
+      border-radius: 10px;
+
+      padding: 15px;
+
+      margin: 20px 0;
+
+      font-family:
+        monospace;
+
+      font-size: 1.25rem;
+
       color: #fff;
-      font-family: monospace;
-      font-size: 1.1rem;
-      user-select: all;
+
       word-break: break-all;
+
+      box-shadow:
+        inset 0 0 15px rgba(186, 85, 211, 0.2);
     }
 
     .modal-buttons {
       display: flex;
+
       justify-content: center;
-      gap: 10px;
+
+      gap: 12px;
+
       flex-wrap: wrap;
     }
 
     .modal-btn {
-      background: linear-gradient(135deg, #d4af37, #ba55d3);
-      color: #fff;
-      border: 2px solid #ba55d3;
-      border-radius: 8px;
-      padding: 0.8rem 1.5rem;
+      border: none;
+
+      border-radius: 10px;
+
+      padding:
+        12px 20px;
+
+      font-family:
+        'Righteous',
+        cursive;
+
+      font-size: 1rem;
+
       cursor: pointer;
-      font-family: 'Righteous', cursive;
-      font-weight: bold;
+
+      color: #fff;
+
       transition: all 0.2s;
     }
 
+    .copy-btn {
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+    }
+
+    .close-btn {
+      background:
+        rgba(255, 255, 255, 0.12);
+
+      border:
+        2px solid
+        rgba(255, 255, 255, 0.2);
+    }
+
     .modal-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 15px rgba(186, 85, 211, 0.7);
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 5px 15px rgba(186, 85, 211, 0.5);
     }
 
-    .modal-close {
-      background: rgba(255, 255, 255, 0.1);
-    }
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
 
-    /* Responsive */
     @media (max-width: 768px) {
+
       header {
         flex-direction: column;
+
         gap: 1rem;
       }
 
-      header h1 {
-        font-size: 1.8rem;
+      .site-logo img {
+        width: 130px;
+
+        height: 80px;
       }
 
       nav {
         gap: 1rem;
+
         flex-wrap: wrap;
+
+        justify-content: center;
       }
 
       nav a {
         font-size: 0.9rem;
       }
 
-      .page-header h2 {
-        font-size: 2rem;
-      }
-
       .header-logo-container img {
-        height: 60px;
-      }
-
-      .hero h2 {
-        font-size: 2.5rem;
+        width: 280px;
       }
 
       .hero p {
@@ -578,66 +992,109 @@
       }
 
       .logo-container img {
-        max-width: 250px;
+        max-width: 350px;
       }
 
       .section-title {
         font-size: 2rem;
       }
 
-      .server-modal-content {
-        padding: 2rem 1.2rem;
-      }
-
       .server-modal-content h2 {
         font-size: 1.6rem;
       }
+
+      .server-ip {
+        font-size: 1rem;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- Header Navigation -->
+  <!-- =========================================
+       HEADER NAVIGATION
+  ========================================= -->
+
   <header>
-    <h1>⛏️ MAGISCHE HEUVEL</h1>
+
+    <!-- Magische Heuvel logo -->
+    <a href="#" class="site-logo">
+      <img
+        src="magische-heuvel-logo.png"
+        alt="Magische Heuvel"
+      >
+    </a>
 
     <nav>
-      <a href="#attractions">Attracties</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
+
+      <a href="#attractions">
+        Attracties
+      </a>
+
+      <a href="#features">
+        Features
+      </a>
+
+      <a href="#contact">
+        Contact
+      </a>
+
     </nav>
 
-    <button class="login-btn">
+    <button
+      class="login-btn"
+      type="button"
+      onclick="alert('Inloggen komt binnenkort!')"
+    >
       Inloggen
     </button>
+
   </header>
 
 
-  <!-- Page Header with Logo -->
+  <!-- =========================================
+       PAGE HEADER WITH LOGO
+  ========================================= -->
+
   <div class="page-header">
 
     <div class="header-logo-container">
+
       <img
         src="magische-heuvel-logo.png"
         alt="Magische Heuvel Logo"
       >
-    </div>
 
-    <h2>MAGISCHE HEUVEL</h2>
+    </div>
 
   </div>
 
 
-  <!-- Hero Section -->
+  <!-- =========================================
+       HERO SECTION
+  ========================================= -->
+
   <section class="hero">
+
+    <!-- Magische Heuvel logo -->
+    <div class="logo-container">
+
+      <img
+        src="magische-heuvel-logo.png"
+        alt="Magische Heuvel"
+      >
+
+    </div>
 
     <p>
       Het ultieme Minecraft themapark vol magie,
       avontuur en oneindige plezier!
     </p>
 
-    <!-- PLAY BUTTON -->
+    <!-- Play button opens server popup -->
     <button
       type="button"
       class="cta-btn"
@@ -649,10 +1106,17 @@
   </section>
 
 
-  <!-- Main Content -->
+  <!-- =========================================
+       MAIN CONTENT
+  ========================================= -->
+
   <div class="container">
 
-    <!-- Attractions Section -->
+
+    <!-- =========================================
+         ATTRACTIONS SECTION
+    ========================================= -->
+
     <section id="attractions">
 
       <h2 class="section-title">
@@ -661,60 +1125,100 @@
 
       <div class="attractions-grid">
 
-        <div class="attraction-card">
-          <h3>🎢 Achtbanen</h3>
-          <p>
-            Adrenaline-kickende achtbanen door
-            fantastische landschappen!
-          </p>
-        </div>
 
         <div class="attraction-card">
-          <h3>🏰 Kastelen</h3>
+
+          <h3>
+            🎢 Achtbanen
+          </h3>
+
+          <p>
+            Adrenaline-kickende achtbanen
+            door fantastische landschappen!
+          </p>
+
+        </div>
+
+
+        <div class="attraction-card">
+
+          <h3>
+            🏰 Kastelen
+          </h3>
+
           <p>
             Majestueuze kastelen vol geheimen
             en magische verrassingen!
           </p>
+
         </div>
 
+
         <div class="attraction-card">
-          <h3>✨ Magie</h3>
+
+          <h3>
+            ✨ Magie
+          </h3>
+
           <p>
             Mystieke biomen vol enchantments
             en magische wezens!
           </p>
+
         </div>
 
+
         <div class="attraction-card">
-          <h3>🎉 Evenementen</h3>
+
+          <h3>
+            🎉 Evenementen
+          </h3>
+
           <p>
-            Elke maand een nieuw thema met
-            exclusive rewards!
+            Elke maand een nieuw thema
+            met exclusive rewards!
           </p>
+
         </div>
 
+
         <div class="attraction-card">
-          <h3>🎮 Mini-Games</h3>
+
+          <h3>
+            🎮 Mini-Games
+          </h3>
+
           <p>
             Parkour, PvP-arena's en spelletjes
             vol plezier!
           </p>
+
         </div>
 
+
         <div class="attraction-card">
-          <h3>🌍 Custom Werelden</h3>
+
+          <h3>
+            🌍 Custom Werelden
+          </h3>
+
           <p>
-            Hand-gemaakte biomen met prachtige
-            landschappen!
+            Hand-gemaakte biomen met
+            prachtige landschappen!
           </p>
+
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- Features Section -->
+    <!-- =========================================
+         FEATURES SECTION
+    ========================================= -->
+
     <section
       class="features"
       id="features"
@@ -726,44 +1230,74 @@
 
       <div class="features-grid">
 
-        <div class="feature-item">
-          <h3>🕐 24/7 Online</h3>
-          <p>
-            De server staat altijd klaar voor
-            je avontuur!
-          </p>
-        </div>
 
         <div class="feature-item">
-          <h3>👥 Community</h3>
+
+          <h3>
+            🕐 24/7 Online
+          </h3>
+
           <p>
-            Maak vrienden en deel je ervaringen!
+            De server staat altijd klaar
+            voor je avontuur!
           </p>
+
         </div>
 
+
         <div class="feature-item">
-          <h3>🏅 Beloningen</h3>
+
+          <h3>
+            👥 Community
+          </h3>
+
+          <p>
+            Maak vrienden en deel
+            je ervaringen!
+          </p>
+
+        </div>
+
+
+        <div class="feature-item">
+
+          <h3>
+            🏅 Beloningen
+          </h3>
+
           <p>
             Verdien munten en exclusieve items!
           </p>
+
         </div>
 
+
         <div class="feature-item">
-          <h3>🎨 Creatief</h3>
+
+          <h3>
+            🎨 Creatief
+          </h3>
+
           <p>
-            Build je eigen creaties in
-            creative zones!
+            Build je eigen creaties
+            in creative zones!
           </p>
+
         </div>
+
 
       </div>
 
     </section>
 
+
   </div>
 
 
-  <!-- Footer -->
+  <!-- =========================================
+       FOOTER
+  ========================================= -->
+
   <footer id="contact">
 
     <p>
@@ -772,64 +1306,68 @@
     </p>
 
     <p style="margin-top: 1rem;">
+
       <a
         href="https://discord.com/channels/1418964223546884351/"
         target="_blank"
       >
         📱 Join Discord Community →
       </a>
+
     </p>
 
   </footer>
 
 
-  <!-- ============================= -->
-  <!-- SERVER IP POPUP -->
-  <!-- ============================= -->
+  <!-- =========================================
+       SERVER IP POPUP
+  ========================================= -->
 
   <div
-    class="server-modal"
     id="serverModal"
-    onclick="closeServerPopupOutside(event)"
+    class="server-modal"
+    aria-hidden="true"
   >
 
-    <div
-      class="server-modal-content"
-      onclick="event.stopPropagation()"
-    >
+    <div class="server-modal-content">
 
       <h2>
-        🎮 Join de server!
+        🎮 Speel Magische Heuvel
       </h2>
 
       <p>
-        Gebruik dit adres in Minecraft:
+        Gebruik dit adres om verbinding te maken
+        met de Minecraft-server:
       </p>
 
-      <span
-        class="server-ip"
-        id="serverIp"
-      >
+      <div class="server-ip">
         gp-node-01.future-node.com:35003
-      </span>
+      </div>
 
       <div class="modal-buttons">
 
+
+        <!-- COPY IP -->
+
         <button
-          class="modal-btn"
           type="button"
+          class="modal-btn copy-btn"
           onclick="copyServerIP()"
         >
           📋 Kopieer IP
         </button>
 
+
+        <!-- CLOSE -->
+
         <button
-          class="modal-btn modal-close"
           type="button"
+          class="modal-btn close-btn"
           onclick="closeServerPopup()"
         >
           ✕ Sluiten
         </button>
+
 
       </div>
 
@@ -838,58 +1376,83 @@
   </div>
 
 
-  <!-- ============================= -->
-  <!-- JAVASCRIPT -->
-  <!-- ============================= -->
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================= -->
 
   <script>
 
+    /*
+      Minecraft server IP
+    */
+
+    const serverIP =
+      "gp-node-01.future-node.com:35003";
+
+
+    /*
+      Open server popup
+    */
+
     function openServerPopup() {
-      document
-        .getElementById("serverModal")
-        .classList.add("show");
+
+      const modal =
+        document.getElementById(
+          "serverModal"
+        );
+
+      modal.classList.add("show");
+
+      modal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
     }
 
+
+    /*
+      Close server popup
+    */
 
     function closeServerPopup() {
-      document
-        .getElementById("serverModal")
-        .classList.remove("show");
-    }
 
+      const modal =
+        document.getElementById(
+          "serverModal"
+        );
 
-    function closeServerPopupOutside(event) {
+      modal.classList.remove("show");
 
-      if (
-        event.target ===
-        document.getElementById("serverModal")
-      ) {
-        closeServerPopup();
-      }
+      modal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
     }
 
+
+    /*
+      Copy Minecraft server IP
+    */
 
     function copyServerIP() {
 
-      const ip =
-        "gp-node-01.future-node.com:35003";
-
       navigator.clipboard
-        .writeText(ip)
-        .then(function() {
+        .writeText(serverIP)
+
+        .then(() => {
 
           alert(
-            "✅ Server IP gekopieerd!\n\n" +
-            ip
+            "Minecraft server IP gekopieerd! 🎉"
           );
 
         })
-        .catch(function() {
+
+        .catch(() => {
 
           alert(
-            "Server IP:\n\n" +
-            ip
+            "IP: " + serverIP
           );
 
         });
@@ -897,14 +1460,43 @@
     }
 
 
-    /* ESC closes the popup */
+    /*
+      Close popup when clicking
+      outside the popup
+    */
+
+    document
+      .getElementById("serverModal")
+      .addEventListener(
+        "click",
+        function(event) {
+
+          if (
+            event.target === this
+          ) {
+
+            closeServerPopup();
+
+          }
+
+        }
+      );
+
+
+    /*
+      Close popup with Escape
+    */
 
     document.addEventListener(
       "keydown",
       function(event) {
 
-        if (event.key === "Escape") {
+        if (
+          event.key === "Escape"
+        ) {
+
           closeServerPopup();
+
         }
 
       }
