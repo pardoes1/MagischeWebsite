@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magische Heuvel - Minecraft Themapark</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -24,8 +26,17 @@
 
     /* Magical purple glow animation */
     @keyframes magicGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(186, 85, 211, 0.3), inset 0 0 20px rgba(186, 85, 211, 0.1); }
-      50% { box-shadow: 0 0 40px rgba(186, 85, 211, 0.6), inset 0 0 30px rgba(186, 85, 211, 0.2); }
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(186, 85, 211, 0.3),
+          inset 0 0 20px rgba(186, 85, 211, 0.1);
+      }
+
+      50% {
+        box-shadow:
+          0 0 40px rgba(186, 85, 211, 0.6),
+          inset 0 0 30px rgba(186, 85, 211, 0.2);
+      }
     }
 
     /* Header */
@@ -38,7 +49,9 @@
       backdrop-filter: blur(10px);
       border-bottom: 4px solid;
       border-image: linear-gradient(90deg, #d4af37, #ba55d3, #d4af37) 1;
-      box-shadow: 0 4px 15px rgba(186, 85, 211, 0.3), 0 0 20px rgba(186, 85, 211, 0.2);
+      box-shadow:
+        0 4px 15px rgba(186, 85, 211, 0.3),
+        0 0 20px rgba(186, 85, 211, 0.2);
     }
 
     header h1 {
@@ -104,12 +117,18 @@
     .login-btn:hover {
       background: linear-gradient(135deg, #ba55d3, #d4af37);
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(186, 85, 211, 0.8), 0 0 20px rgba(186, 85, 211, 0.4);
+      box-shadow:
+        0 6px 12px rgba(186, 85, 211, 0.8),
+        0 0 20px rgba(186, 85, 211, 0.4);
     }
 
-    /* Page Header with Logo and Title */
+    /* Page Header with Logo */
     .page-header {
-      background: linear-gradient(135deg, rgba(186, 85, 211, 0.1), rgba(212, 175, 55, 0.08));
+      background: linear-gradient(
+        135deg,
+        rgba(186, 85, 211, 0.1),
+        rgba(212, 175, 55, 0.08)
+      );
       padding: 3rem 2rem;
       text-align: center;
       border-bottom: 2px solid #ba55d3;
@@ -159,7 +178,11 @@
       right: -10%;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(186, 85, 211, 0.15), transparent);
+      background: radial-gradient(
+        circle,
+        rgba(186, 85, 211, 0.15),
+        transparent
+      );
       border-radius: 50%;
       animation: float 6s ease-in-out infinite;
     }
@@ -171,14 +194,23 @@
       left: -10%;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(186, 85, 211, 0.1), transparent);
+      background: radial-gradient(
+        circle,
+        rgba(186, 85, 211, 0.1),
+        transparent
+      );
       border-radius: 50%;
       animation: float 8s ease-in-out infinite reverse;
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+      0%, 100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
     }
 
     .logo-container {
@@ -191,13 +223,20 @@
       max-width: 400px;
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(186, 85, 211, 0.4));
+      filter:
+        drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8))
+        drop-shadow(0 0 20px rgba(186, 85, 211, 0.4));
       border-radius: 15px;
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
     }
 
     .hero h2 {
@@ -216,7 +255,9 @@
     .hero p {
       font-size: 1.4rem;
       color: #fff;
-      text-shadow: 2px 2px 4px rgba(186, 85, 211, 0.5), 2px 2px 8px rgba(0, 0, 0, 0.8);
+      text-shadow:
+        2px 2px 4px rgba(186, 85, 211, 0.5),
+        2px 2px 8px rgba(0, 0, 0, 0.8);
       margin-bottom: 2rem;
       max-width: 600px;
       z-index: 1;
@@ -243,7 +284,9 @@
 
     .cta-btn:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(186, 85, 211, 1), 0 0 30px rgba(186, 85, 211, 0.8);
+      box-shadow:
+        0 12px 24px rgba(186, 85, 211, 1),
+        0 0 30px rgba(186, 85, 211, 0.8);
       background: linear-gradient(135deg, #ba55d3, #d4af37);
     }
 
@@ -275,7 +318,11 @@
     }
 
     .attraction-card {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(186, 85, 211, 0.08));
+      background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.1),
+        rgba(186, 85, 211, 0.08)
+      );
       border: 3px solid #ba55d3;
       border-radius: 15px;
       padding: 2rem;
@@ -288,9 +335,15 @@
 
     .attraction-card:hover {
       transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 16px 32px rgba(186, 85, 211, 0.6), 0 0 30px rgba(186, 85, 211, 0.4);
+      box-shadow:
+        0 16px 32px rgba(186, 85, 211, 0.6),
+        0 0 30px rgba(186, 85, 211, 0.4);
       border-color: #d4af37;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(186, 85, 211, 0.12));
+      background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.15),
+        rgba(186, 85, 211, 0.12)
+      );
       animation: magicGlow 2s ease-in-out infinite;
     }
 
@@ -309,13 +362,19 @@
 
     /* Features Section */
     .features {
-      background: linear-gradient(135deg, rgba(186, 85, 211, 0.08), rgba(212, 175, 55, 0.06));
+      background: linear-gradient(
+        135deg,
+        rgba(186, 85, 211, 0.08),
+        rgba(212, 175, 55, 0.06)
+      );
       border: 3px solid #ba55d3;
       border-radius: 15px;
       padding: 3rem 2rem;
       margin-bottom: 3rem;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 16px rgba(186, 85, 211, 0.3), 0 0 20px rgba(186, 85, 211, 0.2);
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.3),
+        0 0 20px rgba(186, 85, 211, 0.2);
     }
 
     .features-grid {
@@ -378,6 +437,110 @@
       text-shadow: 0 0 15px rgba(186, 85, 211, 0.8);
     }
 
+    /* ============================= */
+    /* SERVER IP POPUP */
+    /* ============================= */
+
+    .server-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .server-modal.show {
+      display: flex;
+    }
+
+    .server-modal-content {
+      width: 100%;
+      max-width: 500px;
+      background: linear-gradient(
+        135deg,
+        #1a0a2e,
+        #16213e
+      );
+      border: 3px solid #ba55d3;
+      border-radius: 15px;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow:
+        0 0 40px rgba(186, 85, 211, 0.7),
+        0 0 80px rgba(186, 85, 211, 0.2);
+      animation: popupAnimation 0.25s ease-out;
+    }
+
+    @keyframes popupAnimation {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .server-modal-content h2 {
+      font-size: 2rem;
+      color: #d4af37;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .server-modal-content p {
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .server-ip {
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #ba55d3;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0 1.5rem;
+      color: #fff;
+      font-family: monospace;
+      font-size: 1.1rem;
+      user-select: all;
+      word-break: break-all;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .modal-btn {
+      background: linear-gradient(135deg, #d4af37, #ba55d3);
+      color: #fff;
+      border: 2px solid #ba55d3;
+      border-radius: 8px;
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      font-family: 'Righteous', cursive;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(186, 85, 211, 0.7);
+    }
+
+    .modal-close {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       header {
@@ -421,102 +584,333 @@
       .section-title {
         font-size: 2rem;
       }
+
+      .server-modal-content {
+        padding: 2rem 1.2rem;
+      }
+
+      .server-modal-content h2 {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header Navigation -->
   <header>
     <h1>⛏️ MAGISCHE HEUVEL</h1>
+
     <nav>
       <a href="#attractions">Attracties</a>
       <a href="#features">Features</a>
       <a href="#contact">Contact</a>
     </nav>
-    <button class="login-btn">Inloggen</button>
+
+    <button class="login-btn">
+      Inloggen
+    </button>
   </header>
+
 
   <!-- Page Header with Logo -->
   <div class="page-header">
+
     <div class="header-logo-container">
-      <img src="magische-heuvel-logo.png" alt="Magische Heuvel Logo">
+      <img
+        src="magische-heuvel-logo.png"
+        alt="Magische Heuvel Logo"
+      >
     </div>
+
     <h2>MAGISCHE HEUVEL</h2>
+
   </div>
+
 
   <!-- Hero Section -->
   <section class="hero">
-    <p>Het ultieme Minecraft themapark vol magie, avontuur en oneindige plezier!</p>
-    <a href="https://discord.com/channels/1418964223546884351/" target="_blank" class="cta-btn">🎮 Speel Nu</a>
+
+    <p>
+      Het ultieme Minecraft themapark vol magie,
+      avontuur en oneindige plezier!
+    </p>
+
+    <!-- PLAY BUTTON -->
+    <button
+      type="button"
+      class="cta-btn"
+      onclick="openServerPopup()"
+    >
+      🎮 Speel Nu
+    </button>
+
   </section>
+
 
   <!-- Main Content -->
   <div class="container">
 
     <!-- Attractions Section -->
     <section id="attractions">
-      <h2 class="section-title">✨ ATTRACTIES</h2>
+
+      <h2 class="section-title">
+        ✨ ATTRACTIES
+      </h2>
+
       <div class="attractions-grid">
+
         <div class="attraction-card">
           <h3>🎢 Achtbanen</h3>
-          <p>Adrenaline-kickende achtbanen door fantastische landschappen!</p>
+          <p>
+            Adrenaline-kickende achtbanen door
+            fantastische landschappen!
+          </p>
         </div>
+
         <div class="attraction-card">
           <h3>🏰 Kastelen</h3>
-          <p>Majestueuze kastelen vol geheimen en magische verrassingen!</p>
+          <p>
+            Majestueuze kastelen vol geheimen
+            en magische verrassingen!
+          </p>
         </div>
+
         <div class="attraction-card">
           <h3>✨ Magie</h3>
-          <p>Mystieke biomen vol enchantments en magische wezens!</p>
+          <p>
+            Mystieke biomen vol enchantments
+            en magische wezens!
+          </p>
         </div>
+
         <div class="attraction-card">
           <h3>🎉 Evenementen</h3>
-          <p>Elke maand een nieuw thema met exclusive rewards!</p>
+          <p>
+            Elke maand een nieuw thema met
+            exclusive rewards!
+          </p>
         </div>
+
         <div class="attraction-card">
           <h3>🎮 Mini-Games</h3>
-          <p>Parkour, PvP-arena's en spelletjes vol plezier!</p>
+          <p>
+            Parkour, PvP-arena's en spelletjes
+            vol plezier!
+          </p>
         </div>
+
         <div class="attraction-card">
           <h3>🌍 Custom Werelden</h3>
-          <p>Hand-gemaakte biomen met prachtige landschappen!</p>
+          <p>
+            Hand-gemaakte biomen met prachtige
+            landschappen!
+          </p>
         </div>
+
       </div>
+
     </section>
 
+
     <!-- Features Section -->
-    <section class="features" id="features">
-      <h2 class="section-title">🏆 WAAROM MAGISCHE HEUVEL?</h2>
+    <section
+      class="features"
+      id="features"
+    >
+
+      <h2 class="section-title">
+        🏆 WAAROM MAGISCHE HEUVEL?
+      </h2>
+
       <div class="features-grid">
+
         <div class="feature-item">
           <h3>🕐 24/7 Online</h3>
-          <p>De server staat altijd klaar voor je avontuur!</p>
+          <p>
+            De server staat altijd klaar voor
+            je avontuur!
+          </p>
         </div>
+
         <div class="feature-item">
           <h3>👥 Community</h3>
-          <p>Maak vrienden en deel je ervaringen!</p>
+          <p>
+            Maak vrienden en deel je ervaringen!
+          </p>
         </div>
+
         <div class="feature-item">
           <h3>🏅 Beloningen</h3>
-          <p>Verdien munten en exclusieve items!</p>
+          <p>
+            Verdien munten en exclusieve items!
+          </p>
         </div>
+
         <div class="feature-item">
           <h3>🎨 Creatief</h3>
-          <p>Build je eigen creaties in creative zones!</p>
+          <p>
+            Build je eigen creaties in
+            creative zones!
+          </p>
         </div>
+
       </div>
+
     </section>
 
   </div>
 
+
   <!-- Footer -->
   <footer id="contact">
-    <p>&copy; 2026 Magische Heuvel - Een Minecraft Themapark vol Magie</p>
-    <p style="margin-top: 1rem;">
-      <a href="https://discord.com/channels/1418964223546884351/" target="_blank">📱 Join Discord Community →</a>
+
+    <p>
+      &copy; 2026 Magische Heuvel -
+      Een Minecraft Themapark vol Magie
     </p>
+
+    <p style="margin-top: 1rem;">
+      <a
+        href="https://discord.com/channels/1418964223546884351/"
+        target="_blank"
+      >
+        📱 Join Discord Community →
+      </a>
+    </p>
+
   </footer>
+
+
+  <!-- ============================= -->
+  <!-- SERVER IP POPUP -->
+  <!-- ============================= -->
+
+  <div
+    class="server-modal"
+    id="serverModal"
+    onclick="closeServerPopupOutside(event)"
+  >
+
+    <div
+      class="server-modal-content"
+      onclick="event.stopPropagation()"
+    >
+
+      <h2>
+        🎮 Join de server!
+      </h2>
+
+      <p>
+        Gebruik dit adres in Minecraft:
+      </p>
+
+      <span
+        class="server-ip"
+        id="serverIp"
+      >
+        gp-node-01.future-node.com:35003
+      </span>
+
+      <div class="modal-buttons">
+
+        <button
+          class="modal-btn"
+          type="button"
+          onclick="copyServerIP()"
+        >
+          📋 Kopieer IP
+        </button>
+
+        <button
+          class="modal-btn modal-close"
+          type="button"
+          onclick="closeServerPopup()"
+        >
+          ✕ Sluiten
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ============================= -->
+
+  <script>
+
+    function openServerPopup() {
+      document
+        .getElementById("serverModal")
+        .classList.add("show");
+    }
+
+
+    function closeServerPopup() {
+      document
+        .getElementById("serverModal")
+        .classList.remove("show");
+    }
+
+
+    function closeServerPopupOutside(event) {
+
+      if (
+        event.target ===
+        document.getElementById("serverModal")
+      ) {
+        closeServerPopup();
+      }
+
+    }
+
+
+    function copyServerIP() {
+
+      const ip =
+        "gp-node-01.future-node.com:35003";
+
+      navigator.clipboard
+        .writeText(ip)
+        .then(function() {
+
+          alert(
+            "✅ Server IP gekopieerd!\n\n" +
+            ip
+          );
+
+        })
+        .catch(function() {
+
+          alert(
+            "Server IP:\n\n" +
+            ip
+          );
+
+        });
+
+    }
+
+
+    /* ESC closes the popup */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+          closeServerPopup();
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
