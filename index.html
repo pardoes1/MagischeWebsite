@@ -6,11 +6,15 @@
 
   <title>Magische Heuvel - Minecraft Themapark</title>
 
-  <!-- Magische Heuvel logo as website icon -->
-  <link rel="icon" type="image/png" href="magische-heuvel-logo.png">
+  <!-- MAGISCHE HEUVEL LOGO / FAVICON -->
+  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="shortcut icon" type="image/png" href="./logo.png">
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
 
@@ -22,24 +26,32 @@
 
     body {
       font-family: 'Righteous', cursive;
-      background: linear-gradient(
-        180deg,
-        #1a0a2e 0%,
-        #16213e 50%,
-        #0f3460 100%
-      );
+
+      background:
+        linear-gradient(
+          180deg,
+          #1a0a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+
       background-attachment: fixed;
+
       color: #e0e0e0;
+
       line-height: 1.6;
+
       min-height: 100vh;
+
       position: relative;
     }
 
-    /* =========================================
-       MAGICAL PURPLE GLOW ANIMATION
-    ========================================= */
+    /* =====================================
+       MAGICAL GLOW
+    ===================================== */
 
     @keyframes magicGlow {
+
       0%, 100% {
         box-shadow:
           0 0 20px rgba(186, 85, 211, 0.3),
@@ -51,23 +63,34 @@
           0 0 40px rgba(186, 85, 211, 0.6),
           inset 0 0 30px rgba(186, 85, 211, 0.2);
       }
+
     }
 
-    /* =========================================
+    /* =====================================
        HEADER
-    ========================================= */
+    ===================================== */
 
     header {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
+
+      background:
+        rgba(0, 0, 0, 0.6);
+
+      padding:
+        1rem 2rem;
 
       display: flex;
-      justify-content: space-between;
-      align-items: center;
 
-      backdrop-filter: blur(10px);
+      justify-content:
+        space-between;
 
-      border-bottom: 4px solid;
+      align-items:
+        center;
+
+      backdrop-filter:
+        blur(10px);
+
+      border-bottom:
+        4px solid;
 
       border-image:
         linear-gradient(
@@ -82,49 +105,75 @@
         0 0 20px rgba(186, 85, 211, 0.2);
     }
 
-    /* =========================================
+    /* =====================================
        HEADER LOGO
-    ========================================= */
+    ===================================== */
 
     .site-logo {
+
       display: flex;
+
       align-items: center;
+
       text-decoration: none;
+
+      flex-shrink: 0;
     }
 
     .site-logo img {
-      width: 110px;
-      height: 80px;
+
+      width: 130px;
+
+      height: 90px;
 
       object-fit: contain;
 
-      filter:
-        drop-shadow(0 0 12px rgba(186, 85, 211, 0.6))
-        drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.8));
+      display: block;
 
-      transition: all 0.3s;
+      filter:
+        drop-shadow(
+          0 0 12px rgba(186, 85, 211, 0.6)
+        )
+        drop-shadow(
+          2px 2px 3px rgba(0, 0, 0, 0.8)
+        );
+
+      transition:
+        transform 0.3s,
+        filter 0.3s;
     }
 
     .site-logo img:hover {
-      transform: scale(1.05);
+
+      transform:
+        scale(1.05);
 
       filter:
-        drop-shadow(0 0 20px rgba(186, 85, 211, 0.9))
-        drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.8));
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.9)
+        )
+        drop-shadow(
+          2px 2px 3px rgba(0, 0, 0, 0.8)
+        );
     }
 
-    /* =========================================
+    /* =====================================
        NAVIGATION
-    ========================================= */
+    ===================================== */
 
     nav {
+
       display: flex;
+
       gap: 2rem;
+
       align-items: center;
     }
 
     nav a {
+
       color: #fff;
+
       text-decoration: none;
 
       font-size: 1.1rem;
@@ -138,14 +187,17 @@
     }
 
     nav a::after {
+
       content: '';
 
       position: absolute;
 
       bottom: -5px;
+
       left: 0;
 
       width: 0;
+
       height: 2px;
 
       background:
@@ -155,23 +207,29 @@
           #d4af37
         );
 
-      transition: width 0.3s;
+      transition:
+        width 0.3s;
     }
 
     nav a:hover {
+
       color: #ba55d3;
-      transform: scale(1.1);
+
+      transform:
+        scale(1.1);
     }
 
     nav a:hover::after {
+
       width: 100%;
     }
 
-    /* =========================================
-       LOGIN BUTTON
-    ========================================= */
+    /* =====================================
+       LOGIN
+    ===================================== */
 
     .login-btn {
+
       background:
         linear-gradient(
           135deg,
@@ -181,18 +239,26 @@
 
       color: #fff;
 
-      border: 2px solid #ba55d3;
+      border:
+        2px solid #ba55d3;
 
-      padding: 0.8rem 1.5rem;
+      padding:
+        0.8rem 1.5rem;
 
-      font-size: 1rem;
-      font-weight: bold;
+      font-size:
+        1rem;
 
-      cursor: pointer;
+      font-weight:
+        bold;
 
-      border-radius: 8px;
+      cursor:
+        pointer;
 
-      transition: all 0.3s;
+      border-radius:
+        8px;
+
+      transition:
+        all 0.3s;
 
       font-family:
         'Righteous',
@@ -203,6 +269,7 @@
     }
 
     .login-btn:hover {
+
       background:
         linear-gradient(
           135deg,
@@ -218,11 +285,12 @@
         0 0 20px rgba(186, 85, 211, 0.4);
     }
 
-    /* =========================================
-       PAGE HEADER WITH LOGO
-    ========================================= */
+    /* =====================================
+       PAGE HEADER
+    ===================================== */
 
     .page-header {
+
       background:
         linear-gradient(
           135deg,
@@ -230,9 +298,11 @@
           rgba(212, 175, 55, 0.08)
         );
 
-      padding: 3rem 2rem;
+      padding:
+        3rem 2rem;
 
-      text-align: center;
+      text-align:
+        center;
 
       border-bottom:
         2px solid #ba55d3;
@@ -242,20 +312,33 @@
     }
 
     .header-logo-container {
-      margin-bottom: 1.5rem;
 
-      display: flex;
+      display:
+        flex;
 
-      justify-content: center;
+      justify-content:
+        center;
+
+      align-items:
+        center;
     }
 
     .header-logo-container img {
-      width: 350px;
-      max-width: 90vw;
 
-      height: auto;
+      width:
+        380px;
 
-      object-fit: contain;
+      max-width:
+        90vw;
+
+      height:
+        auto;
+
+      display:
+        block;
+
+      object-fit:
+        contain;
 
       filter:
         drop-shadow(
@@ -265,13 +348,18 @@
           0 0 20px rgba(186, 85, 211, 0.7)
         );
 
-      border-radius: 15px;
+      border-radius:
+        15px;
 
-      transition: all 0.3s;
+      transition:
+        transform 0.3s,
+        filter 0.3s;
     }
 
     .header-logo-container img:hover {
-      transform: scale(1.03);
+
+      transform:
+        scale(1.03);
 
       filter:
         drop-shadow(
@@ -282,40 +370,58 @@
         );
     }
 
-    /* =========================================
-       HERO SECTION
-    ========================================= */
+    /* =====================================
+       HERO
+    ===================================== */
 
     .hero {
-      display: flex;
 
-      flex-direction: column;
+      display:
+        flex;
 
-      justify-content: center;
+      flex-direction:
+        column;
 
-      align-items: center;
+      justify-content:
+        center;
 
-      text-align: center;
+      align-items:
+        center;
 
-      padding: 4rem 2rem;
+      text-align:
+        center;
 
-      min-height: 50vh;
+      padding:
+        4rem 2rem;
 
-      position: relative;
+      min-height:
+        50vh;
 
-      overflow: hidden;
+      position:
+        relative;
+
+      overflow:
+        hidden;
     }
 
     .hero::before {
+
       content: '';
 
-      position: absolute;
+      position:
+        absolute;
 
-      top: -50%;
-      right: -10%;
+      top:
+        -50%;
 
-      width: 500px;
-      height: 500px;
+      right:
+        -10%;
+
+      width:
+        500px;
+
+      height:
+        500px;
 
       background:
         radial-gradient(
@@ -324,22 +430,31 @@
           transparent
         );
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
       animation:
         float 6s ease-in-out infinite;
     }
 
     .hero::after {
+
       content: '';
 
-      position: absolute;
+      position:
+        absolute;
 
-      bottom: -50%;
-      left: -10%;
+      bottom:
+        -50%;
 
-      width: 400px;
-      height: 400px;
+      left:
+        -10%;
+
+      width:
+        400px;
+
+      height:
+        400px;
 
       background:
         radial-gradient(
@@ -348,7 +463,8 @@
           transparent
         );
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
       animation:
         float 8s ease-in-out infinite reverse;
@@ -357,94 +473,114 @@
     @keyframes float {
 
       0%, 100% {
-        transform: translateY(0px);
+        transform:
+          translateY(0);
       }
 
       50% {
-        transform: translateY(-20px);
+        transform:
+          translateY(-20px);
       }
 
     }
 
-    /* =========================================
+    /* =====================================
        HERO LOGO
-    ========================================= */
+    ===================================== */
 
     .logo-container {
-      margin-bottom: 2rem;
+
+      margin-bottom:
+        2rem;
+
+      position:
+        relative;
+
+      z-index:
+        1;
 
       animation:
         pulse 2s ease-in-out infinite;
-
-      filter:
-        drop-shadow(
-          0 0 20px rgba(186, 85, 211, 0.4)
-        );
-
-      position: relative;
-
-      z-index: 1;
     }
 
     .logo-container img {
-      max-width: 500px;
 
-      width: 100%;
+      width:
+        500px;
 
-      height: auto;
+      max-width:
+        90vw;
 
-      object-fit: contain;
+      height:
+        auto;
+
+      display:
+        block;
+
+      object-fit:
+        contain;
 
       filter:
         drop-shadow(
           0 10px 30px rgba(0, 0, 0, 0.8)
         )
         drop-shadow(
-          0 0 20px rgba(186, 85, 211, 0.4)
+          0 0 20px rgba(186, 85, 211, 0.5)
         );
 
-      border-radius: 15px;
+      border-radius:
+        15px;
     }
 
     @keyframes pulse {
 
       0%, 100% {
-        transform: scale(1);
+        transform:
+          scale(1);
       }
 
       50% {
-        transform: scale(1.03);
+        transform:
+          scale(1.03);
       }
 
     }
 
-    /* =========================================
+    /* =====================================
        HERO TEXT
-    ========================================= */
+    ===================================== */
 
     .hero p {
-      font-size: 1.4rem;
 
-      color: #fff;
+      font-size:
+        1.4rem;
+
+      color:
+        #fff;
 
       text-shadow:
         2px 2px 4px rgba(186, 85, 211, 0.5),
         2px 2px 8px rgba(0, 0, 0, 0.8);
 
-      margin-bottom: 2rem;
+      margin-bottom:
+        2rem;
 
-      max-width: 600px;
+      max-width:
+        600px;
 
-      z-index: 1;
+      z-index:
+        1;
 
-      position: relative;
+      position:
+        relative;
     }
 
-    /* =========================================
+    /* =====================================
        PLAY BUTTON
-    ========================================= */
+    ===================================== */
 
     .cta-btn {
+
       background:
         linear-gradient(
           135deg,
@@ -452,7 +588,8 @@
           #ba55d3
         );
 
-      color: #fff;
+      color:
+        #fff;
 
       border:
         3px solid #ba55d3;
@@ -460,17 +597,20 @@
       padding:
         1.2rem 3rem;
 
-      font-size: 1.3rem;
+      font-size:
+        1.3rem;
 
-      font-weight: bold;
+      font-weight:
+        bold;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      border-radius: 12px;
+      border-radius:
+        12px;
 
-      text-decoration: none;
-
-      transition: all 0.3s;
+      transition:
+        all 0.3s;
 
       font-family:
         'Righteous',
@@ -479,14 +619,15 @@
       box-shadow:
         0 8px 16px rgba(186, 85, 211, 0.6);
 
-      z-index: 1;
+      z-index:
+        1;
 
-      position: relative;
-
-      display: inline-block;
+      position:
+        relative;
     }
 
     .cta-btn:hover {
+
       transform:
         translateY(-4px);
 
@@ -502,24 +643,30 @@
         );
     }
 
-    /* =========================================
-       CONTENT SECTION
-    ========================================= */
+    /* =====================================
+       CONTENT
+    ===================================== */
 
     .container {
-      max-width: 1200px;
 
-      margin: 0 auto;
+      max-width:
+        1200px;
 
-      padding: 3rem 2rem;
+      margin:
+        0 auto;
+
+      padding:
+        3rem 2rem;
     }
 
-    /* =========================================
-       SECTION TITLE
-    ========================================= */
+    /* =====================================
+       SECTION TITLES
+    ===================================== */
 
     .section-title {
-      font-size: 3rem;
+
+      font-size:
+        3rem;
 
       background:
         linear-gradient(
@@ -528,17 +675,23 @@
           #ba55d3
         );
 
-      -webkit-background-clip: text;
+      -webkit-background-clip:
+        text;
 
-      -webkit-text-fill-color: transparent;
+      -webkit-text-fill-color:
+        transparent;
 
-      background-clip: text;
+      background-clip:
+        text;
 
-      text-align: center;
+      text-align:
+        center;
 
-      margin-bottom: 3rem;
+      margin-bottom:
+        3rem;
 
-      letter-spacing: 2px;
+      letter-spacing:
+        2px;
 
       filter:
         drop-shadow(
@@ -546,25 +699,33 @@
         );
     }
 
-    /* =========================================
-       ATTRACTIONS GRID
-    ========================================= */
+    /* =====================================
+       ATTRACTIONS
+    ===================================== */
 
     .attractions-grid {
-      display: grid;
+
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(280px, 1fr)
+          minmax(
+            280px,
+            1fr
+          )
         );
 
-      gap: 2rem;
+      gap:
+        2rem;
 
-      margin-bottom: 4rem;
+      margin-bottom:
+        4rem;
     }
 
     .attraction-card {
+
       background:
         linear-gradient(
           135deg,
@@ -575,23 +736,30 @@
       border:
         3px solid #ba55d3;
 
-      border-radius: 15px;
+      border-radius:
+        15px;
 
-      padding: 2rem;
+      padding:
+        2rem;
 
-      text-align: center;
+      text-align:
+        center;
 
-      transition: all 0.3s;
+      transition:
+        all 0.3s;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      backdrop-filter: blur(10px);
+      backdrop-filter:
+        blur(10px);
 
       box-shadow:
         0 8px 16px rgba(186, 85, 211, 0.3);
     }
 
     .attraction-card:hover {
+
       transform:
         translateY(-10px)
         scale(1.05);
@@ -603,41 +771,40 @@
       border-color:
         #d4af37;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(212, 175, 55, 0.15),
-          rgba(186, 85, 211, 0.12)
-        );
-
       animation:
         magicGlow 2s ease-in-out infinite;
     }
 
     .attraction-card h3 {
-      font-size: 1.8rem;
 
-      color: #ba55d3;
+      font-size:
+        1.8rem;
 
-      margin-bottom: 1rem;
+      color:
+        #ba55d3;
 
-      text-shadow:
-        2px 2px 4px rgba(186, 85, 211, 0.4);
+      margin-bottom:
+        1rem;
     }
 
     .attraction-card p {
-      color: #c0c0c0;
 
-      font-size: 1rem;
+      color:
+        #c0c0c0;
 
-      line-height: 1.8;
+      font-size:
+        1rem;
+
+      line-height:
+        1.8;
     }
 
-    /* =========================================
-       FEATURES SECTION
-    ========================================= */
+    /* =====================================
+       FEATURES
+    ===================================== */
 
     .features {
+
       background:
         linear-gradient(
           135deg,
@@ -648,48 +815,63 @@
       border:
         3px solid #ba55d3;
 
-      border-radius: 15px;
+      border-radius:
+        15px;
 
-      padding: 3rem 2rem;
+      padding:
+        3rem 2rem;
 
-      margin-bottom: 3rem;
+      margin-bottom:
+        3rem;
 
-      backdrop-filter: blur(10px);
+      backdrop-filter:
+        blur(10px);
 
       box-shadow:
-        0 8px 16px rgba(186, 85, 211, 0.3),
-        0 0 20px rgba(186, 85, 211, 0.2);
+        0 8px 16px rgba(186, 85, 211, 0.3);
     }
 
     .features-grid {
-      display: grid;
+
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(250px, 1fr)
+          minmax(
+            250px,
+            1fr
+          )
         );
 
-      gap: 2rem;
+      gap:
+        2rem;
     }
 
     .feature-item {
-      text-align: center;
 
-      padding: 1.5rem;
+      text-align:
+        center;
 
-      border-radius: 10px;
+      padding:
+        1.5rem;
+
+      border-radius:
+        10px;
 
       background:
         rgba(186, 85, 211, 0.05);
 
-      transition: all 0.3s;
+      transition:
+        all 0.3s;
 
       border:
         2px solid transparent;
     }
 
     .feature-item:hover {
+
       border-color:
         #ba55d3;
 
@@ -701,35 +883,43 @@
     }
 
     .feature-item h3 {
-      font-size: 1.5rem;
 
-      color: #ba55d3;
+      font-size:
+        1.5rem;
 
-      margin-bottom: 0.8rem;
+      color:
+        #ba55d3;
 
-      text-shadow:
-        2px 2px 4px rgba(186, 85, 211, 0.4);
+      margin-bottom:
+        0.8rem;
     }
 
     .feature-item p {
-      color: #c0c0c0;
 
-      font-size: 0.95rem;
+      color:
+        #c0c0c0;
+
+      font-size:
+        0.95rem;
     }
 
-    /* =========================================
+    /* =====================================
        FOOTER
-    ========================================= */
+    ===================================== */
 
     footer {
+
       background:
         rgba(0, 0, 0, 0.7);
 
-      text-align: center;
+      text-align:
+        center;
 
-      padding: 2.5rem;
+      padding:
+        2.5rem;
 
-      border-top: 4px solid;
+      border-top:
+        4px solid;
 
       border-image:
         linear-gradient(
@@ -739,73 +929,79 @@
           #d4af37
         ) 1;
 
-      color: #fff;
+      color:
+        #fff;
 
-      text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.7);
-
-      margin-top: 4rem;
-
-      box-shadow:
-        0 -4px 15px rgba(186, 85, 211, 0.3);
+      margin-top:
+        4rem;
     }
 
     footer a {
-      color: #ba55d3;
 
-      text-decoration: none;
+      color:
+        #ba55d3;
 
-      font-weight: bold;
+      text-decoration:
+        none;
 
-      transition: all 0.3s;
+      font-weight:
+        bold;
 
-      text-shadow:
-        0 0 10px rgba(186, 85, 211, 0.5);
+      transition:
+        all 0.3s;
     }
 
     footer a:hover {
-      color: #d4af37;
 
-      text-decoration: underline;
+      color:
+        #d4af37;
 
-      text-shadow:
-        0 0 15px rgba(186, 85, 211, 0.8);
+      text-decoration:
+        underline;
     }
 
-    /* =========================================
-       SERVER IP POPUP
-    ========================================= */
+    /* =====================================
+       SERVER POPUP
+    ===================================== */
 
     .server-modal {
-      display: none;
 
-      position: fixed;
+      display:
+        none;
 
-      z-index: 9999;
+      position:
+        fixed;
 
-      left: 0;
-      top: 0;
+      z-index:
+        99999;
 
-      width: 100%;
-      height: 100%;
+      inset:
+        0;
 
       background:
-        rgba(0, 0, 0, 0.75);
+        rgba(0, 0, 0, 0.78);
 
-      backdrop-filter: blur(6px);
+      backdrop-filter:
+        blur(7px);
 
-      justify-content: center;
+      justify-content:
+        center;
 
-      align-items: center;
+      align-items:
+        center;
 
-      padding: 20px;
+      padding:
+        20px;
     }
 
     .server-modal.show {
-      display: flex;
+
+      display:
+        flex;
     }
 
     .server-modal-content {
+
       background:
         linear-gradient(
           135deg,
@@ -816,16 +1012,20 @@
       border:
         3px solid #ba55d3;
 
-      border-radius: 18px;
+      border-radius:
+        18px;
 
-      width: 100%;
+      width:
+        100%;
 
-      max-width: 500px;
+      max-width:
+        520px;
 
       padding:
         35px 30px;
 
-      text-align: center;
+      text-align:
+        center;
 
       box-shadow:
         0 0 40px rgba(186, 85, 211, 0.7),
@@ -838,14 +1038,18 @@
     @keyframes popupIn {
 
       from {
-        opacity: 0;
+
+        opacity:
+          0;
 
         transform:
           scale(0.85);
       }
 
       to {
-        opacity: 1;
+
+        opacity:
+          1;
 
         transform:
           scale(1);
@@ -854,62 +1058,78 @@
     }
 
     .server-modal-content h2 {
-      color: #d4af37;
 
-      font-size: 2rem;
+      color:
+        #d4af37;
 
-      margin-bottom: 10px;
+      font-size:
+        2rem;
 
-      text-shadow:
-        2px 2px 5px rgba(0, 0, 0, 0.8);
+      margin-bottom:
+        10px;
     }
 
     .server-modal-content p {
-      color: #ddd;
 
-      margin-bottom: 20px;
+      color:
+        #ddd;
+
+      margin-bottom:
+        20px;
     }
 
     .server-ip {
+
       background:
         rgba(0, 0, 0, 0.5);
 
       border:
         2px solid #ba55d3;
 
-      border-radius: 10px;
+      border-radius:
+        10px;
 
-      padding: 15px;
+      padding:
+        15px;
 
-      margin: 20px 0;
+      margin:
+        20px 0;
 
       font-family:
         monospace;
 
-      font-size: 1.25rem;
+      font-size:
+        1.25rem;
 
-      color: #fff;
+      color:
+        #fff;
 
-      word-break: break-all;
-
-      box-shadow:
-        inset 0 0 15px rgba(186, 85, 211, 0.2);
+      word-break:
+        break-all;
     }
 
     .modal-buttons {
-      display: flex;
 
-      justify-content: center;
+      display:
+        flex;
 
-      gap: 12px;
+      justify-content:
+        center;
 
-      flex-wrap: wrap;
+      gap:
+        12px;
+
+      flex-wrap:
+        wrap;
     }
 
     .modal-btn {
-      border: none;
 
-      border-radius: 10px;
+      border:
+        none;
+
+      border-radius:
+        10px;
 
       padding:
         12px 20px;
@@ -918,16 +1138,21 @@
         'Righteous',
         cursive;
 
-      font-size: 1rem;
+      font-size:
+        1rem;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      color: #fff;
+      color:
+        #fff;
 
-      transition: all 0.2s;
+      transition:
+        all 0.2s;
     }
 
     .copy-btn {
+
       background:
         linear-gradient(
           135deg,
@@ -937,15 +1162,16 @@
     }
 
     .close-btn {
+
       background:
         rgba(255, 255, 255, 0.12);
 
       border:
-        2px solid
-        rgba(255, 255, 255, 0.2);
+        2px solid rgba(255, 255, 255, 0.2);
     }
 
     .modal-btn:hover {
+
       transform:
         translateY(-2px);
 
@@ -953,58 +1179,82 @@
         0 5px 15px rgba(186, 85, 211, 0.5);
     }
 
-    /* =========================================
-       RESPONSIVE
-    ========================================= */
+    /* =====================================
+       MOBILE
+    ===================================== */
 
     @media (max-width: 768px) {
 
       header {
-        flex-direction: column;
 
-        gap: 1rem;
+        flex-direction:
+          column;
+
+        gap:
+          1rem;
       }
 
       .site-logo img {
-        width: 130px;
 
-        height: 80px;
+        width:
+          140px;
+
+        height:
+          90px;
       }
 
       nav {
-        gap: 1rem;
 
-        flex-wrap: wrap;
+        gap:
+          1rem;
 
-        justify-content: center;
+        flex-wrap:
+          wrap;
+
+        justify-content:
+          center;
       }
 
       nav a {
-        font-size: 0.9rem;
+
+        font-size:
+          0.9rem;
       }
 
       .header-logo-container img {
-        width: 280px;
-      }
 
-      .hero p {
-        font-size: 1rem;
+        width:
+          280px;
       }
 
       .logo-container img {
-        max-width: 350px;
+
+        width:
+          350px;
+      }
+
+      .hero p {
+
+        font-size:
+          1rem;
       }
 
       .section-title {
-        font-size: 2rem;
+
+        font-size:
+          2rem;
       }
 
       .server-modal-content h2 {
-        font-size: 1.6rem;
+
+        font-size:
+          1.6rem;
       }
 
       .server-ip {
-        font-size: 1rem;
+
+        font-size:
+          1rem;
       }
 
     }
@@ -1014,16 +1264,15 @@
 
 <body>
 
-  <!-- =========================================
-       HEADER NAVIGATION
-  ========================================= -->
+  <!-- =====================================
+       HEADER
+  ===================================== -->
 
   <header>
 
-    <!-- Magische Heuvel logo -->
     <a href="#" class="site-logo">
       <img
-        src="magische-heuvel-logo.png"
+        src="./logo.png"
         alt="Magische Heuvel"
       >
     </a>
@@ -1055,17 +1304,17 @@
   </header>
 
 
-  <!-- =========================================
-       PAGE HEADER WITH LOGO
-  ========================================= -->
+  <!-- =====================================
+       PAGE LOGO
+  ===================================== -->
 
   <div class="page-header">
 
     <div class="header-logo-container">
 
       <img
-        src="magische-heuvel-logo.png"
-        alt="Magische Heuvel Logo"
+        src="./logo.png"
+        alt="Magische Heuvel"
       >
 
     </div>
@@ -1073,17 +1322,16 @@
   </div>
 
 
-  <!-- =========================================
-       HERO SECTION
-  ========================================= -->
+  <!-- =====================================
+       HERO
+  ===================================== -->
 
   <section class="hero">
 
-    <!-- Magische Heuvel logo -->
     <div class="logo-container">
 
       <img
-        src="magische-heuvel-logo.png"
+        src="./logo.png"
         alt="Magische Heuvel"
       >
 
@@ -1094,7 +1342,6 @@
       avontuur en oneindige plezier!
     </p>
 
-    <!-- Play button opens server popup -->
     <button
       type="button"
       class="cta-btn"
@@ -1106,16 +1353,13 @@
   </section>
 
 
-  <!-- =========================================
+  <!-- =====================================
        MAIN CONTENT
-  ========================================= -->
+  ===================================== -->
 
   <div class="container">
 
-
-    <!-- =========================================
-         ATTRACTIONS SECTION
-    ========================================= -->
+    <!-- ATTRACTIONS -->
 
     <section id="attractions">
 
@@ -1124,7 +1368,6 @@
       </h2>
 
       <div class="attractions-grid">
-
 
         <div class="attraction-card">
 
@@ -1139,7 +1382,6 @@
 
         </div>
 
-
         <div class="attraction-card">
 
           <h3>
@@ -1152,7 +1394,6 @@
           </p>
 
         </div>
-
 
         <div class="attraction-card">
 
@@ -1167,7 +1408,6 @@
 
         </div>
 
-
         <div class="attraction-card">
 
           <h3>
@@ -1180,7 +1420,6 @@
           </p>
 
         </div>
-
 
         <div class="attraction-card">
 
@@ -1195,7 +1434,6 @@
 
         </div>
 
-
         <div class="attraction-card">
 
           <h3>
@@ -1209,15 +1447,12 @@
 
         </div>
 
-
       </div>
 
     </section>
 
 
-    <!-- =========================================
-         FEATURES SECTION
-    ========================================= -->
+    <!-- FEATURES -->
 
     <section
       class="features"
@@ -1229,7 +1464,6 @@
       </h2>
 
       <div class="features-grid">
-
 
         <div class="feature-item">
 
@@ -1244,7 +1478,6 @@
 
         </div>
 
-
         <div class="feature-item">
 
           <h3>
@@ -1258,7 +1491,6 @@
 
         </div>
 
-
         <div class="feature-item">
 
           <h3>
@@ -1270,7 +1502,6 @@
           </p>
 
         </div>
-
 
         <div class="feature-item">
 
@@ -1285,18 +1516,16 @@
 
         </div>
 
-
       </div>
 
     </section>
 
-
   </div>
 
 
-  <!-- =========================================
+  <!-- =====================================
        FOOTER
-  ========================================= -->
+  ===================================== -->
 
   <footer id="contact">
 
@@ -1319,9 +1548,9 @@
   </footer>
 
 
-  <!-- =========================================
+  <!-- =====================================
        SERVER IP POPUP
-  ========================================= -->
+  ===================================== -->
 
   <div
     id="serverModal"
@@ -1346,9 +1575,6 @@
 
       <div class="modal-buttons">
 
-
-        <!-- COPY IP -->
-
         <button
           type="button"
           class="modal-btn copy-btn"
@@ -1356,9 +1582,6 @@
         >
           📋 Kopieer IP
         </button>
-
-
-        <!-- CLOSE -->
 
         <button
           type="button"
@@ -1368,7 +1591,6 @@
           ✕ Sluiten
         </button>
 
-
       </div>
 
     </div>
@@ -1376,23 +1598,15 @@
   </div>
 
 
-  <!-- =========================================
+  <!-- =====================================
        JAVASCRIPT
-  ========================================= -->
+  ===================================== -->
 
   <script>
-
-    /*
-      Minecraft server IP
-    */
 
     const serverIP =
       "gp-node-01.future-node.com:35003";
 
-
-    /*
-      Open server popup
-    */
 
     function openServerPopup() {
 
@@ -1411,10 +1625,6 @@
     }
 
 
-    /*
-      Close server popup
-    */
-
     function closeServerPopup() {
 
       const modal =
@@ -1431,10 +1641,6 @@
 
     }
 
-
-    /*
-      Copy Minecraft server IP
-    */
 
     function copyServerIP() {
 
@@ -1460,11 +1666,6 @@
     }
 
 
-    /*
-      Close popup when clicking
-      outside the popup
-    */
-
     document
       .getElementById("serverModal")
       .addEventListener(
@@ -1482,10 +1683,6 @@
         }
       );
 
-
-    /*
-      Close popup with Escape
-    */
 
     document.addEventListener(
       "keydown",
