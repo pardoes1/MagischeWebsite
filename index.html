@@ -1990,13 +1990,33 @@
     }
 
 
-    function consumeGrant(email) {
+    function consumeGrant(email, name) {
       const g = getGrants();
-      const role = g[email.toLowerCase()];
+      const keys = [];
+
+
+      if (email) {
+        keys.push(email.toLowerCase());
+      }
+
+
+      if (name) {
+        keys.push(name.toLowerCase());
+      }
+
+
+      let role = null;
+
+
+      keys.forEach(function(k) {
+        if (g[k] && !role) {
+          role = g[k];
+          delete g[k];
+        }
+      });
 
 
       if (role) {
-        delete g[email.toLowerCase()];
         localStorage.setItem(
           "mh_grants",
           JSON.stringify(g)
@@ -2004,7 +2024,7 @@
       }
 
 
-      return role || null;
+      return role;
     }
 
 
@@ -2228,7 +2248,8 @@
       if (act.mode === "register") {
 
 
-        const granted = consumeGrant(act.email);
+        const granted =
+          consumeGrant(act.email, act.name);
 
 
         const newUser = {
@@ -2274,6 +2295,22 @@
           found.email === OWNER_EMAIL.toLowerCase()
         ) {
           found.directie = true;
+          found.team = true;
+        }
+
+
+        /* rechten die intussen zijn klaargezet */
+        const g2 = consumeGrant(
+          found.email,
+          found.name
+        );
+
+
+        if (g2 === "directie") {
+          found.directie = true;
+          found.team = true;
+        } else if (g2 === "team") {
+          found.team = true;
         }
 
 
@@ -2456,6 +2493,53 @@
         submitAuth();
       }
     });
+
+
+    /* klaargezette rechten toepassen op het
+       al ingelogde account */
+    (function applyGrantsOnLoad() {
+      const cur = getCurrentUser();
+
+
+      if (!cur) {
+        return;
+      }
+
+
+      const role = consumeGrant(cur.email, cur.name);
+
+
+      if (!role) {
+        return;
+      }
+
+
+      const users = getUsers();
+
+
+      const u = users.find(function(x) {
+        return x.email === cur.email;
+      });
+
+
+      if (u) {
+        if (role === "directie") {
+          u.directie = true;
+          u.team = true;
+        } else {
+          u.team = true;
+        }
+
+
+        saveUsers(users);
+
+
+        localStorage.setItem(
+          "mh_current",
+          JSON.stringify(u)
+        );
+      }
+    })();
 
 
     syncOwner();
