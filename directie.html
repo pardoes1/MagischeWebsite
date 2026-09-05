@@ -1399,6 +1399,47 @@
     }
 
 
+    .grant-msg {
+      min-height: 1.3rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: #7CFC98;
+    }
+
+
+    .grant-msg.err {
+      color: #ff8080;
+    }
+
+
+    .todo-form {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+
+    .todo-form input,
+    .todo-form select {
+      flex: 1;
+      min-width: 160px;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 2px solid rgba(186, 85, 211, 0.6);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-family: 'Righteous', cursive;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+
+    .todo-form option {
+      background: #1a0a2e;
+    }
+
+
     .tag-team {
       background: rgba(80, 200, 255, 0.18);
       color: #7ecbff;
@@ -1513,6 +1554,64 @@
     <h2 class="section-title">
       🏛️ DIRECTIE
     </h2>
+
+
+    <div class="dir-card">
+
+
+      <h3>✉️ Rechten geven via e-mail</h3>
+
+
+      <p style="color: #bbb;
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;">
+        Typ het e-mailadres van iemand en kies
+        welke rechten hij krijgt. Het adres hoeft
+        nog geen account te hebben &mdash; zodra
+        diegene zich registreert met dit adres,
+        heeft hij de rechten meteen.
+      </p>
+
+
+      <div class="todo-form">
+
+
+        <input
+          type="email"
+          id="grantEmail"
+          placeholder="naam@voorbeeld.nl"
+        >
+
+
+        <select id="grantRole">
+          <option value="team">
+            👷 Team
+          </option>
+          <option value="directie">
+            🏛️ Directie
+          </option>
+        </select>
+
+
+        <button
+          class="mini-btn"
+          type="button"
+          onclick="grantByEmail()"
+        >
+          Rechten geven
+        </button>
+
+
+      </div>
+
+
+      <div id="grantMsg" class="grant-msg"></div>
+
+
+      <div id="pendingList"></div>
+
+
+    </div>
 
 
     <div class="dir-card">
@@ -1795,6 +1894,165 @@
     }
 
 
+    /* --- rechten die klaarstaan voor een
+           e-mailadres (ook zonder account) --- */
+    function getGrants() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_grants") || "{}"
+        );
+      } catch (e) {
+        return {};
+      }
+    }
+
+
+    function saveGrants(obj) {
+      localStorage.setItem(
+        "mh_grants",
+        JSON.stringify(obj)
+      );
+    }
+
+
+    function grantMsg(text, err) {
+      const el = document.getElementById("grantMsg");
+      el.textContent = text;
+      el.className = err ? "grant-msg err" : "grant-msg";
+    }
+
+
+    function grantByEmail() {
+      const email = document
+        .getElementById("grantEmail")
+        .value.trim().toLowerCase();
+
+
+      const role = document
+        .getElementById("grantRole").value;
+
+
+      if (!email || email.indexOf("@") === -1) {
+        grantMsg("Vul een geldig e-mailadres in.", true);
+        return;
+      }
+
+
+      const users = getUsers();
+
+
+      const existing = users.find(function(u) {
+        return u.email === email;
+      });
+
+
+      /* account bestaat al -> meteen toepassen */
+      if (existing) {
+
+
+        if (role === "directie") {
+          existing.directie = true;
+          existing.team = true;
+        } else {
+          existing.team = true;
+          existing.directie = false;
+        }
+
+
+        saveUsers(users);
+        renderUsers();
+
+
+        grantMsg(
+          existing.name + " heeft nu " +
+          (role === "directie"
+            ? "directie" : "team") +
+          "-rechten."
+        );
+
+
+      } else {
+
+
+        /* nog geen account -> klaarzetten */
+        const g = getGrants();
+        g[email] = role;
+        saveGrants(g);
+
+
+        grantMsg(
+          "Klaargezet: zodra " + email +
+          " zich registreert, krijgt hij " +
+          (role === "directie"
+            ? "directie" : "team") +
+          "-rechten."
+        );
+      }
+
+
+      document.getElementById("grantEmail").value = "";
+      renderPending();
+    }
+
+
+    function cancelGrant(email) {
+      const g = getGrants();
+      delete g[email];
+      saveGrants(g);
+      renderPending();
+      grantMsg("Klaargezette rechten ingetrokken.");
+    }
+
+
+    function renderPending() {
+      const box =
+        document.getElementById("pendingList");
+
+
+      if (!box) {
+        return;
+      }
+
+
+      const g = getGrants();
+      const keys = Object.keys(g);
+
+
+      if (!keys.length) {
+        box.innerHTML = "";
+        return;
+      }
+
+
+      box.innerHTML =
+        '<p style="color:#d4af37;' +
+        'font-size:0.9rem;margin-bottom:0.6rem;">' +
+        "\u23f3 Wacht op registratie:</p>" +
+        keys
+          .map(function(em) {
+            return (
+              '<div class="user-row">' +
+                '<div class="user-info">' +
+                  "<span>" + em + "</span>" +
+                "</div>" +
+                '<span class="tag ' +
+                (g[em] === "directie"
+                  ? "tag-dir" : "tag-team") +
+                '">' +
+                (g[em] === "directie"
+                  ? "\ud83c\udfdb\ufe0f DIRECTIE"
+                  : "\ud83d\udc77 TEAM") +
+                "</span>" +
+                '<button class="mini-btn remove" ' +
+                "onclick=\"cancelGrant('" + em +
+                "')\">Annuleren</button>" +
+              "</div>"
+            );
+          })
+          .join("");
+    }
+
+
     /* --- geblokkeerde e-mailadressen --- */
     function getUsedEmails() {
       try {
@@ -1912,6 +2170,7 @@
 
 
         renderUsers();
+        renderPending();
         renderUsed();
       } else {
         document.getElementById("userChip")
