@@ -1559,17 +1559,19 @@
     <div class="dir-card">
 
 
-      <h3>✉️ Rechten geven via e-mail</h3>
+      <h3>✉️ Rechten geven</h3>
 
 
       <p style="color: #bbb;
                 font-size: 0.9rem;
                 margin-bottom: 1.2rem;">
-        Typ het e-mailadres van iemand en kies
-        welke rechten hij krijgt. Het adres hoeft
-        nog geen account te hebben &mdash; zodra
-        diegene zich registreert met dit adres,
-        heeft hij de rechten meteen.
+        Typ een <strong>gebruikersnaam</strong> of
+        <strong>e-mailadres</strong> en kies de
+        rechten. Bestaat het account al, dan is het
+        meteen geregeld. Bestaat het nog niet, dan
+        worden de rechten klaargezet en krijgt
+        diegene ze zodra hij inlogt of zich
+        registreert.
       </p>
 
 
@@ -1579,7 +1581,7 @@
         <input
           type="email"
           id="grantEmail"
-          placeholder="naam@voorbeeld.nl"
+          placeholder="Gebruikersnaam of e-mail"
         >
 
 
@@ -1697,6 +1699,85 @@
       } catch (e) {
         return null;
       }
+    }
+
+
+    function getGrants() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_grants") || "{}"
+        );
+      } catch (e) {
+        return {};
+      }
+    }
+
+
+    /* past klaargezette rechten toe op het
+       ingelogde account, zonder opnieuw inloggen */
+    function applyGrants(user) {
+      if (!user) {
+        return user;
+      }
+
+
+      const g = getGrants();
+
+
+      const role =
+        g[user.email.toLowerCase()] ||
+        g[(user.name || "").toLowerCase()];
+
+
+      if (!role) {
+        return user;
+      }
+
+
+      delete g[user.email.toLowerCase()];
+      delete g[(user.name || "").toLowerCase()];
+
+
+      localStorage.setItem(
+        "mh_grants",
+        JSON.stringify(g)
+      );
+
+
+      const users = getUsers();
+
+
+      const u = users.find(function(x) {
+        return x.email === user.email;
+      });
+
+
+      if (u) {
+        if (role === "directie") {
+          u.directie = true;
+          u.team = true;
+        } else {
+          u.team = true;
+        }
+
+
+        localStorage.setItem(
+          "mh_users",
+          JSON.stringify(users)
+        );
+
+
+        localStorage.setItem(
+          "mh_current",
+          JSON.stringify(u)
+        );
+
+
+        return u;
+      }
+
+
+      return user;
     }
 
 
@@ -1923,17 +2004,23 @@
 
 
     function grantByEmail() {
-      const email = document
+      const raw = document
         .getElementById("grantEmail")
-        .value.trim().toLowerCase();
+        .value.trim();
+
+
+      const key = raw.toLowerCase();
 
 
       const role = document
         .getElementById("grantRole").value;
 
 
-      if (!email || email.indexOf("@") === -1) {
-        grantMsg("Vul een geldig e-mailadres in.", true);
+      if (!raw) {
+        grantMsg(
+          "Vul een gebruikersnaam of e-mail in.",
+          true
+        );
         return;
       }
 
@@ -1941,12 +2028,15 @@
       const users = getUsers();
 
 
+      /* zoek op e-mail OF gebruikersnaam */
       const existing = users.find(function(u) {
-        return u.email === email;
+        return (
+          u.email.toLowerCase() === key ||
+          u.name.toLowerCase() === key
+        );
       });
 
 
-      /* account bestaat al -> meteen toepassen */
       if (existing) {
 
 
@@ -1964,7 +2054,8 @@
 
 
         grantMsg(
-          existing.name + " heeft nu " +
+          "\u2705 " + existing.name +
+          " heeft nu " +
           (role === "directie"
             ? "directie" : "team") +
           "-rechten."
@@ -1974,15 +2065,15 @@
       } else {
 
 
-        /* nog geen account -> klaarzetten */
         const g = getGrants();
-        g[email] = role;
+        g[key] = role;
         saveGrants(g);
 
 
         grantMsg(
-          "Klaargezet: zodra " + email +
-          " zich registreert, krijgt hij " +
+          "\u23f3 Klaargezet voor \"" + raw +
+          "\". Zodra dit account inlogt of zich " +
+          "registreert, krijgt het " +
           (role === "directie"
             ? "directie" : "team") +
           "-rechten."
@@ -2153,7 +2244,7 @@
 
 
     (function init() {
-      const user = getCurrentUser();
+      const user = applyGrants(getCurrentUser());
 
 
       if (hasAccess(user)) {
