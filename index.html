@@ -1979,6 +1979,35 @@
     }
 
 
+    function getGrants() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_grants") || "{}"
+        );
+      } catch (e) {
+        return {};
+      }
+    }
+
+
+    function consumeGrant(email) {
+      const g = getGrants();
+      const role = g[email.toLowerCase()];
+
+
+      if (role) {
+        delete g[email.toLowerCase()];
+        localStorage.setItem(
+          "mh_grants",
+          JSON.stringify(g)
+        );
+      }
+
+
+      return role || null;
+    }
+
+
     function isTeamlid(user) {
       if (!user) {
         return false;
@@ -2199,13 +2228,20 @@
       if (act.mode === "register") {
 
 
+        const granted = consumeGrant(act.email);
+
+
         const newUser = {
           name: act.name,
           email: act.email,
           pass: act.pass,
           verified: true,
           directie:
-            act.email === OWNER_EMAIL.toLowerCase()
+            act.email === OWNER_EMAIL.toLowerCase() ||
+            granted === "directie",
+          team:
+            granted === "team" ||
+            granted === "directie"
         };
 
 
