@@ -1052,7 +1052,11 @@
     <nav>
       <a href="#attractions">Attracties</a>
       <a href="#features">Features</a>
-      <a href="#shop">Shop</a>
+      <a
+        href="https://magischeheuvel.tebex.io"
+        target="_blank"
+        rel="noopener"
+      >Shop</a>
 
 
       <!-- TEAM dropdown: hover erover = menu eronder -->
@@ -1305,34 +1309,6 @@
     </section>
 
 
-    <!-- ============================================================
-         SHOP  —  de items zelf pas je aan in het <script> onderaan
-                  (zoek op:  const SHOP_ITEMS)
-         ============================================================ -->
-    <section id="shop">
-
-
-      <h2 class="section-title">
-        🛒 SHOP
-      </h2>
-
-
-      <div
-        class="shop-grid"
-        id="shopGrid"
-      ></div>
-
-
-      <p class="shop-note">
-        🔒 Alle aankopen lopen veilig via Tebex.
-        Na betaling wordt je rank automatisch
-        in-game toegekend.
-      </p>
-
-
-    </section>
-
-
   </div>
 
 
@@ -1420,24 +1396,6 @@
 
   <script>
     /* ==================================================================
-       ▼▼▼  SHOP ITEMS  —  HIER PAS JE ALLES AAN  ▼▼▼
-
-       Per item kun je invullen:
-         icon   : een emoji of teken
-         name   : naam van het item / de rank
-         desc   : korte beschrijving
-         price  : de prijs (gewoon tekst, bv. "€ 9,99")
-         link   : JOUW TEBEX LINK van dit pakket
-         badge  : lintje rechtsboven ("" = geen lintje)
-         button : tekst op de knop
-
-       NIEUW ITEM TOEVOEGEN?
-       Kopieer een heel blok van  {  tot en met  },
-       plak het eronder en pas de tekst aan.
-
-       ITEM WEGHALEN? Verwijder het hele blok van { tot }.
-       ================================================================== */
-    /* ==================================================================
        ▼▼▼  TEAM  —  rangen en namen aanpassen  ▼▼▼
        Bovenste groep staat bovenaan de piramide.
        Zet namen tussen "" met komma's ertussen.
@@ -1508,74 +1466,6 @@
 
 
     renderTeam();
-
-
-    const SHOP_ITEMS = [
-      {
-        icon: "👷",
-        name: "Medewerker",
-        desc:
-          "Word onderdeel van het team! " +
-          "Krijg de Medewerker-rank met " +
-          "eigen chat-kleur, extra commands " +
-          "en toegang tot het personeelsgebied.",
-        price: "€ 6,00",
-        link: "https://magischeheuvel.tebex.io/package/7655948",
-        badge: "POPULAIR",
-        button: "🛒 Koop nu"
-      }
-    ];
-    /* ▲▲▲  EINDE SHOP ITEMS  ▲▲▲ */
-
-
-    /* Bouwt de shop automatisch op — niets aanpassen hieronder */
-    function renderShop() {
-      const grid =
-        document.getElementById("shopGrid");
-
-
-      if (!grid) {
-        return;
-      }
-
-
-      grid.innerHTML = SHOP_ITEMS
-        .map(function(item) {
-
-
-          const badge = item.badge
-            ? '<div class="shop-badge">' +
-              item.badge +
-              "</div>"
-            : "";
-
-
-          return (
-            '<div class="shop-card">' +
-              badge +
-              '<div class="shop-icon">' +
-                item.icon +
-              "</div>" +
-              "<h3>" + item.name + "</h3>" +
-              "<p>" + item.desc + "</p>" +
-              '<div class="shop-price">' +
-                item.price +
-              "</div>" +
-              '<a class="shop-btn" href="' +
-                item.link +
-                '" target="_blank" rel="noopener">' +
-                (item.button || "Koop nu") +
-              "</a>" +
-            "</div>"
-          );
-
-
-        })
-        .join("");
-    }
-
-
-    renderShop();
 
 
     const serverIP =
