@@ -1664,6 +1664,85 @@
     }
 
 
+    function getGrants() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_grants") || "{}"
+        );
+      } catch (e) {
+        return {};
+      }
+    }
+
+
+    /* past klaargezette rechten toe op het
+       ingelogde account, zonder opnieuw inloggen */
+    function applyGrants(user) {
+      if (!user) {
+        return user;
+      }
+
+
+      const g = getGrants();
+
+
+      const role =
+        g[user.email.toLowerCase()] ||
+        g[(user.name || "").toLowerCase()];
+
+
+      if (!role) {
+        return user;
+      }
+
+
+      delete g[user.email.toLowerCase()];
+      delete g[(user.name || "").toLowerCase()];
+
+
+      localStorage.setItem(
+        "mh_grants",
+        JSON.stringify(g)
+      );
+
+
+      const users = getUsers();
+
+
+      const u = users.find(function(x) {
+        return x.email === user.email;
+      });
+
+
+      if (u) {
+        if (role === "directie") {
+          u.directie = true;
+          u.team = true;
+        } else {
+          u.team = true;
+        }
+
+
+        localStorage.setItem(
+          "mh_users",
+          JSON.stringify(users)
+        );
+
+
+        localStorage.setItem(
+          "mh_current",
+          JSON.stringify(u)
+        );
+
+
+        return u;
+      }
+
+
+      return user;
+    }
+
+
     function freshUser(user) {
       if (!user) {
         return null;
@@ -1974,7 +2053,7 @@
 
 
     (function init() {
-      me = freshUser(getCurrentUser());
+      me = applyGrants(freshUser(getCurrentUser()));
 
 
       if (!hasAccess(me)) {
