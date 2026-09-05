@@ -528,6 +528,37 @@
 
 
     /* ===== OPENING / COUNTDOWN ===== */
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      position: relative;
+    }
+
+
+    .solli-btn {
+      text-decoration: none;
+      display: inline-block;
+      background:
+        linear-gradient(135deg, #2b8cd6, #7ecbff);
+      border-color: #7ecbff;
+      box-shadow:
+        0 8px 16px rgba(43, 140, 214, 0.6);
+    }
+
+
+    .solli-btn:hover {
+      background:
+        linear-gradient(135deg, #7ecbff, #2b8cd6);
+      box-shadow:
+        0 12px 24px rgba(126, 203, 255, 0.9),
+        0 0 30px rgba(126, 203, 255, 0.5);
+    }
+
+
     .opening-banner {
       max-width: 800px;
       margin: 2.5rem auto 0;
@@ -1474,13 +1505,29 @@
     </p>
 
 
-    <button
-      type="button"
-      class="cta-btn"
-      onclick="openServerPopup()"
-    >
-      🎮 Speel Nu
-    </button>
+    <div class="hero-btns">
+
+
+      <button
+        type="button"
+        class="cta-btn"
+        onclick="openServerPopup()"
+      >
+        🎮 Speel Nu
+      </button>
+
+
+      <a
+        href="https://magischeheuvelsolicitatie.base44.app/"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn solli-btn"
+      >
+        📝 Solliciteren
+      </a>
+
+
+    </div>
 
 
     <!-- ========================================================
