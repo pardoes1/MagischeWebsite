@@ -527,6 +527,115 @@
     }
 
 
+    /* ===== OPENING / COUNTDOWN ===== */
+    .opening-banner {
+      max-width: 800px;
+      margin: 2.5rem auto 0;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.15),
+          rgba(186, 85, 211, 0.12)
+        );
+      border: 3px solid #d4af37;
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      animation: magicGlow 3s ease-in-out infinite;
+    }
+
+
+    .opening-label {
+      font-size: 1.05rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+
+    .opening-date {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin: 0.3rem 0 1.2rem;
+      background:
+        linear-gradient(135deg, #d4af37, #ba55d3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter:
+        drop-shadow(
+          2px 2px 0 rgba(0, 0, 0, 0.6)
+        );
+    }
+
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+
+    .countdown-box {
+      min-width: 88px;
+      padding: 0.8rem 0.5rem;
+      background: rgba(0, 0, 0, 0.45);
+      border: 2px solid #ba55d3;
+      border-radius: 12px;
+      box-shadow:
+        0 4px 12px rgba(186, 85, 211, 0.4);
+    }
+
+
+    .countdown-num {
+      display: block;
+      font-size: 2.2rem;
+      color: #fff;
+      line-height: 1;
+      text-shadow:
+        0 0 12px rgba(186, 85, 211, 0.9);
+    }
+
+
+    .countdown-lbl {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: #d4af37;
+      margin-top: 0.35rem;
+    }
+
+
+    .opening-open {
+      font-size: 1.6rem;
+      color: #fff;
+      text-shadow:
+        0 0 15px rgba(186, 85, 211, 0.9);
+    }
+
+
+    @media (max-width: 768px) {
+      .opening-date {
+        font-size: 1.8rem;
+      }
+
+
+      .countdown-box {
+        min-width: 70px;
+      }
+
+
+      .countdown-num {
+        font-size: 1.6rem;
+      }
+    }
+
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -1156,6 +1265,35 @@
     </button>
 
 
+    <!-- ========================================================
+         OPENING  —  datum aanpassen in het <script> onderaan
+                     (zoek op:  const OPENING_DATE)
+         ======================================================== -->
+    <div class="opening-banner">
+
+
+      <div class="opening-label">
+        🎉 GROTE OPENING
+      </div>
+
+
+      <div
+        class="opening-date"
+        id="openingDate"
+      >
+        18 oktober
+      </div>
+
+
+      <div
+        class="countdown"
+        id="countdown"
+      ></div>
+
+
+    </div>
+
+
   </section>
 
 
@@ -1466,6 +1604,87 @@
 
 
     renderTeam();
+
+
+    /* ==================================================================
+       ▼▼▼  OPENINGSDATUM  —  HIER AANPASSEN  ▼▼▼
+       Volgorde: jaar, maand, dag, uur, minuut
+       LET OP: maand telt vanaf 0 → 0=jan, 9=okt, 11=dec
+       Hieronder: 18 oktober 2026 om 15:00 uur
+       ================================================================== */
+    const OPENING_DATE =
+      new Date(2026, 9, 18, 15, 0);
+
+
+    const OPENING_TEXT = "18 oktober";
+    /* ▲▲▲  EINDE OPENINGSDATUM  ▲▲▲ */
+
+
+    function updateCountdown() {
+      const box =
+        document.getElementById("countdown");
+
+
+      const label =
+        document.getElementById("openingDate");
+
+
+      if (!box) {
+        return;
+      }
+
+
+      if (label) {
+        label.textContent = OPENING_TEXT;
+      }
+
+
+      const diff = OPENING_DATE - new Date();
+
+
+      if (diff <= 0) {
+        box.innerHTML =
+          '<div class="opening-open">' +
+          "🎊 We zijn OPEN! Kom langs!" +
+          "</div>";
+        return;
+      }
+
+
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+
+
+      const parts = [
+        [days, "DAGEN"],
+        [hours, "UREN"],
+        [mins, "MIN"],
+        [secs, "SEC"]
+      ];
+
+
+      box.innerHTML = parts
+        .map(function(p) {
+          return (
+            '<div class="countdown-box">' +
+              '<span class="countdown-num">' +
+                p[0] +
+              "</span>" +
+              '<span class="countdown-lbl">' +
+                p[1] +
+              "</span>" +
+            "</div>"
+          );
+        })
+        .join("");
+    }
+
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
 
     const serverIP =
