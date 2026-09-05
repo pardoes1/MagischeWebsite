@@ -951,6 +951,41 @@
     }
 
 
+    .verify-box {
+      background: rgba(0, 0, 0, 0.45);
+      border: 2px dashed #d4af37;
+      border-radius: 12px;
+      padding: 1.2rem 1rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+
+    .verify-label {
+      color: #d4af37;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+
+    .verify-code {
+      font-size: 2.3rem;
+      letter-spacing: 10px;
+      color: #fff;
+      padding-left: 10px;
+      text-shadow:
+        0 0 15px rgba(186, 85, 211, 0.9);
+      user-select: all;
+    }
+
+
+    .verify-hint {
+      color: #aaa;
+      font-size: 0.82rem;
+      margin: 0.4rem 0 0.9rem;
+    }
+
+
     .server-modal {
       display: none;
       position: fixed;
@@ -1745,6 +1780,46 @@
       <div class="auth-msg" id="authMsg"></div>
 
 
+      <!-- VERIFICATIE -->
+      <div
+        id="verifyBox"
+        class="verify-box"
+        style="display: none;"
+      >
+
+
+        <div class="verify-label">
+          🔐 Verificatiecode
+        </div>
+
+
+        <div
+          class="verify-code"
+          id="verifyCode"
+        ></div>
+
+
+        <div class="verify-hint">
+          Typ bovenstaande code over
+          om te bevestigen
+        </div>
+
+
+        <input
+          type="text"
+          id="verifyInput"
+          placeholder="Code invullen"
+          maxlength="6"
+          inputmode="numeric"
+          style="text-align: center;
+                 letter-spacing: 5px;
+                 font-size: 1.3rem;"
+        >
+
+
+      </div>
+
+
       <button
         type="button"
         class="modal-btn copy-btn"
@@ -1812,6 +1887,49 @@
       } catch (e) {
         return null;
       }
+    }
+
+
+    /* --- lijst van e-mails die ooit gebruikt zijn.
+           Een adres hierin kan NIET opnieuw worden
+           geregistreerd, ook niet na verwijderen. --- */
+    function getUsedEmails() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_used") || "[]"
+        );
+      } catch (e) {
+        return [];
+      }
+    }
+
+
+    function saveUsedEmails(list) {
+      localStorage.setItem(
+        "mh_used",
+        JSON.stringify(list)
+      );
+    }
+
+
+    function markEmailUsed(email) {
+      const used = getUsedEmails();
+      const low = email.toLowerCase();
+
+
+      if (used.indexOf(low) === -1) {
+        used.push(low);
+        saveUsedEmails(used);
+      }
+    }
+
+
+    function isEmailUsed(email) {
+      return (
+        getUsedEmails().indexOf(
+          email.toLowerCase()
+        ) !== -1
+      );
     }
 
 
@@ -1905,10 +2023,92 @@
 
 
       setMsg("");
+      hideVerify();
 
 
       document.getElementById("authModal")
         .classList.add("show");
+    }
+
+
+    /* --- verificatiecode --- */
+    let pendingCode = null;
+    let pendingAction = null;
+
+
+    function makeCode() {
+      return String(
+        Math.floor(100000 + Math.random() * 900000)
+      );
+    }
+
+
+    function showVerify(action) {
+      pendingAction = action;
+      pendingCode = makeCode();
+
+
+      document.getElementById("verifyCode")
+        .textContent = pendingCode;
+
+
+      document.getElementById("verifyInput")
+        .value = "";
+
+
+      document.getElementById("verifyBox")
+        .style.display = "block";
+
+
+      document.getElementById("authSubmit")
+        .textContent = "✅ Bevestigen";
+
+
+      document.getElementById("authName")
+        .style.display = "none";
+
+
+      document.getElementById("authEmail")
+        .style.display = "none";
+
+
+      document.getElementById("authPass")
+        .style.display = "none";
+
+
+      document.getElementById("authSub")
+        .textContent =
+          "Bevestig dat jij het bent";
+
+
+      setMsg("");
+
+
+      document.getElementById("verifyInput")
+        .focus();
+    }
+
+
+    function hideVerify() {
+      pendingCode = null;
+      pendingAction = null;
+
+
+      const box =
+        document.getElementById("verifyBox");
+
+
+      if (box) {
+        box.style.display = "none";
+      }
+
+
+      document.getElementById("authEmail")
+        .style.display = "block";
+
+
+      document.getElementById("authPass")
+        .style.display = "block";
     }
 
 
@@ -1926,6 +2126,105 @@
 
 
     function submitAuth() {
+
+
+      /* stap 2: code controleren */
+      if (pendingCode) {
+
+
+        const typed = document
+          .getElementById("verifyInput")
+          .value.trim();
+
+
+        if (typed !== pendingCode) {
+          setMsg("Onjuiste code, probeer opnieuw.");
+          return;
+        }
+
+
+        const act = pendingAction;
+        hideVerify();
+        finishAuth(act);
+        return;
+      }
+
+
+      doValidate();
+    }
+
+
+    function finishAuth(act) {
+      const users = getUsers();
+
+
+      if (act.mode === "register") {
+
+
+        const newUser = {
+          name: act.name,
+          email: act.email,
+          pass: act.pass,
+          verified: true,
+          directie:
+            act.email === OWNER_EMAIL.toLowerCase()
+        };
+
+
+        users.push(newUser);
+        saveUsers(users);
+        markEmailUsed(act.email);
+
+
+        localStorage.setItem(
+          "mh_current",
+          JSON.stringify(newUser)
+        );
+
+
+        setMsg(
+          "Geverifieerd! Account aangemaakt 🎉",
+          true
+        );
+
+
+      } else {
+
+
+        const found = users.find(function(u) {
+          return u.email === act.email;
+        });
+
+
+        if (
+          found.email === OWNER_EMAIL.toLowerCase()
+        ) {
+          found.directie = true;
+        }
+
+
+        found.verified = true;
+        saveUsers(users);
+
+
+        localStorage.setItem(
+          "mh_current",
+          JSON.stringify(found)
+        );
+
+
+        setMsg("Geverifieerd! Ingelogd 🎉", true);
+      }
+
+
+      setTimeout(function() {
+        closeAuth();
+        refreshAuthUI();
+      }, 800);
+    }
+
+
+    function doValidate() {
       const name = document
         .getElementById("authName").value.trim();
 
@@ -1976,32 +2275,24 @@
         }
 
 
-        const newUser = {
+        /* e-mail is ooit gebruikt en weer
+           verwijderd -> blijft geblokkeerd */
+        if (isEmailUsed(email)) {
+          setMsg(
+            "Dit e-mailadres is al eens gebruikt " +
+            "en kan niet opnieuw worden " +
+            "geregistreerd."
+          );
+          return;
+        }
+
+
+        showVerify({
+          mode: "register",
           name: name,
           email: email,
-          pass: pass,
-          directie:
-            email === OWNER_EMAIL.toLowerCase()
-        };
-
-
-        users.push(newUser);
-        saveUsers(users);
-
-
-        localStorage.setItem(
-          "mh_current",
-          JSON.stringify(newUser)
-        );
-
-
-        setMsg("Account aangemaakt! 🎉", true);
-
-
-        setTimeout(function() {
-          closeAuth();
-          refreshAuthUI();
-        }, 700);
+          pass: pass
+        });
 
 
         return;
@@ -2019,27 +2310,10 @@
       }
 
 
-      if (
-        found.email === OWNER_EMAIL.toLowerCase()
-      ) {
-        found.directie = true;
-        saveUsers(users);
-      }
-
-
-      localStorage.setItem(
-        "mh_current",
-        JSON.stringify(found)
-      );
-
-
-      setMsg("Ingelogd! 🎉", true);
-
-
-      setTimeout(function() {
-        closeAuth();
-        refreshAuthUI();
-      }, 600);
+      showVerify({
+        mode: "login",
+        email: email
+      });
     }
 
 
@@ -2088,6 +2362,17 @@
         dirLink.style.display = "none";
       }
     }
+
+
+    document.addEventListener("keydown", function(e) {
+      if (
+        e.key === "Enter" &&
+        document.getElementById("authModal")
+          .classList.contains("show")
+      ) {
+        submitAuth();
+      }
+    });
 
 
     syncOwner();
@@ -2330,4 +2615,4 @@
 
 
 </body>
-</html>
+</html>a
