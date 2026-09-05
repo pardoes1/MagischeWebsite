@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Teampagina - Magische Heuvel</title>
+
+
+  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="shortcut icon" type="image/png" href="./logo.png">
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+      font-family: 'Righteous', cursive;
+      background:
+        linear-gradient(
+          180deg,
+          #1a0a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+      background-attachment: fixed;
+      color: #e0e0e0;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
+
+
+    @keyframes magicGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(186, 85, 211, 0.3),
+          inset 0 0 20px rgba(186, 85, 211, 0.1);
+      }
+
+
+      50% {
+        box-shadow:
+          0 0 40px rgba(186, 85, 211, 0.6),
+          inset 0 0 30px rgba(186, 85, 211, 0.2);
+      }
+    }
+
+
+    header {
+      position: relative;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      border-bottom: 4px solid;
+      border-image:
+        linear-gradient(
+          90deg,
+          #d4af37,
+          #ba55d3,
+          #d4af37
+        ) 1;
+      box-shadow:
+        0 4px 15px rgba(186, 85, 211, 0.3),
+        0 0 20px rgba(186, 85, 211, 0.2);
+    }
+
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+
+    .site-logo img {
+      width: 130px;
+      height: 90px;
+      object-fit: contain;
+      display: block;
+      filter:
+        drop-shadow(
+          0 0 12px rgba(186, 85, 211, 0.6)
+        )
+        drop-shadow(
+          2px 2px 3px rgba(0, 0, 0, 0.8)
+        );
+      transition:
+        transform 0.3s,
+        filter 0.3s;
+    }
+
+
+    .site-logo img:hover {
+      transform: scale(1.05);
+      filter:
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.9)
+        )
+        drop-shadow(
+          2px 2px 3px rgba(0, 0, 0, 0.8)
+        );
+    }
+
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background:
+        linear-gradient(
+          90deg,
+          #ba55d3,
+          #d4af37
+        );
+      transition: width 0.3s;
+    }
+
+
+    nav a:hover {
+      color: #ba55d3;
+      transform: scale(1.1);
+    }
+
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+
+    /* ===== TEAM DROPDOWN ===== */
+    .nav-dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .nav-dropdown > a {
+      cursor: pointer;
+    }
+
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      margin-top: 1.1rem;
+      min-width: 240px;
+      background: rgba(15, 8, 30, 0.97);
+      backdrop-filter: blur(12px);
+      border: 2px solid #ba55d3;
+      border-radius: 12px;
+      padding: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.25s,
+        transform 0.25s,
+        visibility 0.25s;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(186, 85, 211, 0.45);
+      z-index: 200;
+    }
+
+
+    /* onzichtbare brug zodat de muis niet
+       "valt" tussen knop en menu */
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -1.3rem;
+      left: 0;
+      right: 0;
+      height: 1.4rem;
+    }
+
+
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      white-space: nowrap;
+      transition: all 0.25s;
+    }
+
+
+    .dropdown-menu a::after {
+      display: none;
+    }
+
+
+    .dropdown-menu a:hover {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(212, 175, 55, 0.25),
+          rgba(186, 85, 211, 0.25)
+        );
+      color: #d4af37;
+      transform: translateX(4px) scale(1);
+    }
+
+
+    .dropdown-top {
+      color: #d4af37 !important;
+      font-size: 1.05rem !important;
+      text-align: center;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(212, 175, 55, 0.18),
+          rgba(186, 85, 211, 0.18)
+        );
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      margin-bottom: 0.35rem;
+    }
+
+
+    .dropdown-divider {
+      height: 1px;
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          #ba55d3,
+          transparent
+        );
+      margin: 0.3rem 0;
+    }
+
+
+    .login-btn {
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+      color: #fff;
+      border: 2px solid #ba55d3;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-family:
+        'Righteous',
+        cursive;
+      box-shadow:
+        0 4px 8px rgba(186, 85, 211, 0.5);
+    }
+
+
+    .login-btn:hover {
+      background:
+        linear-gradient(
+          135deg,
+          #ba55d3,
+          #d4af37
+        );
+      transform: translateY(-2px);
+      box-shadow:
+        0 6px 12px rgba(186, 85, 211, 0.8),
+        0 0 20px rgba(186, 85, 211, 0.4);
+    }
+
+
+    .page-header {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(186, 85, 211, 0.1),
+          rgba(212, 175, 55, 0.08)
+        );
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      border-bottom: 2px solid #ba55d3;
+      box-shadow:
+        0 4px 15px rgba(186, 85, 211, 0.2);
+    }
+
+
+    .header-logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .header-logo-container img {
+      width: 380px;
+      max-width: 90vw;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      filter:
+        drop-shadow(
+          0 10px 25px rgba(0, 0, 0, 0.8)
+        )
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.7)
+        );
+      border-radius: 15px;
+      transition:
+        transform 0.3s,
+        filter 0.3s;
+    }
+
+
+    .header-logo-container img:hover {
+      transform: scale(1.03);
+      filter:
+        drop-shadow(
+          0 12px 30px rgba(0, 0, 0, 0.9)
+        )
+        drop-shadow(
+          0 0 30px rgba(186, 85, 211, 0.9)
+        );
+    }
+
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      min-height: 50vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background:
+        radial-gradient(
+          circle,
+          rgba(186, 85, 211, 0.15),
+          transparent
+        );
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background:
+        radial-gradient(
+          circle,
+          rgba(186, 85, 211, 0.1),
+          transparent
+        );
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+
+    .logo-container {
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+
+    .logo-container img {
+      width: 500px;
+      max-width: 90vw;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      filter:
+        drop-shadow(
+          0 10px 30px rgba(0, 0, 0, 0.8)
+        )
+        drop-shadow(
+          0 0 20px rgba(186, 85, 211, 0.5)
+        );
+      border-radius: 15px;
+    }
+
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+
+      50% {
+        transform: scale(1.03);
+      }
+    }
+
+
+    .hero p {
+      font-size: 1.4rem;
+      color: #fff;
+      text-shadow:
+        2px 2px 4px rgba(186, 85, 211, 0.5),
+        2px 2px 8px rgba(0, 0, 0, 0.8);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      z-index: 1;
+      position: relative;
+    }
+
+
+    .cta-btn {
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+      color: #fff;
+      border: 3px solid #ba55d3;
+      padding: 1.2rem 3rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.3s;
+      font-family:
+        'Righteous',
+        cursive;
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.6);
+      z-index: 1;
+      position: relative;
+    }
+
+
+    .cta-btn:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 24px rgba(186, 85, 211, 1),
+        0 0 30px rgba(186, 85, 211, 0.8);
+      background:
+        linear-gradient(
+          135deg,
+          #ba55d3,
+          #d4af37
+        );
+    }
+
+
+    /* ===== OPENING / COUNTDOWN ===== */
+    .opening-banner {
+      max-width: 800px;
+      margin: 2.5rem auto 0;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.15),
+          rgba(186, 85, 211, 0.12)
+        );
+      border: 3px solid #d4af37;
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      animation: magicGlow 3s ease-in-out infinite;
+    }
+
+
+    .opening-label {
+      font-size: 1.05rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+
+    .opening-date {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin: 0.3rem 0 1.2rem;
+      background:
+        linear-gradient(135deg, #d4af37, #ba55d3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter:
+        drop-shadow(
+          2px 2px 0 rgba(0, 0, 0, 0.6)
+        );
+    }
+
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+
+    .countdown-box {
+      min-width: 88px;
+      padding: 0.8rem 0.5rem;
+      background: rgba(0, 0, 0, 0.45);
+      border: 2px solid #ba55d3;
+      border-radius: 12px;
+      box-shadow:
+        0 4px 12px rgba(186, 85, 211, 0.4);
+    }
+
+
+    .countdown-num {
+      display: block;
+      font-size: 2.2rem;
+      color: #fff;
+      line-height: 1;
+      text-shadow:
+        0 0 12px rgba(186, 85, 211, 0.9);
+    }
+
+
+    .countdown-lbl {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: #d4af37;
+      margin-top: 0.35rem;
+    }
+
+
+    .opening-open {
+      font-size: 1.6rem;
+      color: #fff;
+      text-shadow:
+        0 0 15px rgba(186, 85, 211, 0.9);
+    }
+
+
+    @media (max-width: 768px) {
+      .opening-date {
+        font-size: 1.8rem;
+      }
+
+
+      .countdown-box {
+        min-width: 70px;
+      }
+
+
+      .countdown-num {
+        font-size: 1.6rem;
+      }
+    }
+
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+
+    .section-title {
+      font-size: 3rem;
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: 2px;
+      filter:
+        drop-shadow(
+          3px 3px 0px rgba(0, 0, 0, 0.7)
+        );
+    }
+
+
+    .attractions-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            280px,
+            1fr
+          )
+        );
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+
+    .attraction-card {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.1),
+          rgba(186, 85, 211, 0.08)
+        );
+      border: 3px solid #ba55d3;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.3);
+    }
+
+
+    .attraction-card:hover {
+      transform:
+        translateY(-10px)
+        scale(1.05);
+      box-shadow:
+        0 16px 32px rgba(186, 85, 211, 0.6),
+        0 0 30px rgba(186, 85, 211, 0.4);
+      border-color: #d4af37;
+      animation:
+        magicGlow 2s ease-in-out infinite;
+    }
+
+
+    .attraction-card h3 {
+      font-size: 1.8rem;
+      color: #ba55d3;
+      margin-bottom: 1rem;
+    }
+
+
+    .attraction-card p {
+      color: #c0c0c0;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+
+    .features {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(186, 85, 211, 0.08),
+          rgba(212, 175, 55, 0.06)
+        );
+      border: 3px solid #ba55d3;
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.3);
+    }
+
+
+    .features-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            250px,
+            1fr
+          )
+        );
+      gap: 2rem;
+    }
+
+
+    .feature-item {
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 10px;
+      background: rgba(186, 85, 211, 0.05);
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+
+    .feature-item:hover {
+      border-color: #ba55d3;
+      background: rgba(186, 85, 211, 0.1);
+      box-shadow:
+        0 0 15px rgba(186, 85, 211, 0.4);
+    }
+
+
+    .feature-item h3 {
+      font-size: 1.5rem;
+      color: #ba55d3;
+      margin-bottom: 0.8rem;
+    }
+
+
+    .feature-item p {
+      color: #c0c0c0;
+      font-size: 0.95rem;
+    }
+
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 4px solid;
+      border-image:
+        linear-gradient(
+          90deg,
+          #d4af37,
+          #ba55d3,
+          #d4af37
+        ) 1;
+      color: #fff;
+      margin-top: 4rem;
+    }
+
+
+    footer a {
+      color: #ba55d3;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+
+    footer a:hover {
+      color: #d4af37;
+      text-decoration: underline;
+    }
+
+
+    /* SERVER POPUP */
+
+
+    /* ===== LOGIN / AUTH ===== */
+    .auth-area {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+
+    .user-chip {
+      color: #d4af37;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.35);
+      white-space: nowrap;
+    }
+
+
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+
+    .directie-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+
+    .auth-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+
+    .auth-modal.show {
+      display: flex;
+    }
+
+
+    .auth-box {
+      background:
+        linear-gradient(
+          135deg,
+          #1a0a2e,
+          #16213e
+        );
+      border: 3px solid #ba55d3;
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 0 40px rgba(186, 85, 211, 0.6);
+    }
+
+
+    .auth-box h2 {
+      color: #d4af37;
+      margin-bottom: 0.4rem;
+      font-size: 1.7rem;
+    }
+
+
+    .auth-box .auth-sub {
+      color: #bbb;
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .auth-box input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.9rem;
+      border-radius: 10px;
+      border: 2px solid rgba(186, 85, 211, 0.6);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-family: 'Righteous', cursive;
+      font-size: 1rem;
+      outline: none;
+    }
+
+
+    .auth-box input:focus {
+      border-color: #d4af37;
+      box-shadow:
+        0 0 12px rgba(212, 175, 55, 0.5);
+    }
+
+
+    .auth-msg {
+      min-height: 1.4rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      color: #ff8080;
+    }
+
+
+    .auth-msg.ok {
+      color: #7CFC98;
+    }
+
+
+    .auth-switch {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+
+    .auth-switch a {
+      color: #ba55d3;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+
+    .server-modal {
+      display: none;
+      position: fixed;
+      z-index: 99999;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(7px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+
+    .server-modal.show {
+      display: flex;
+    }
+
+
+    .server-modal-content {
+      background:
+        linear-gradient(
+          135deg,
+          #1a0a2e,
+          #16213e
+        );
+      border: 3px solid #ba55d3;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 520px;
+      padding: 35px 30px;
+      text-align: center;
+      box-shadow:
+        0 0 40px rgba(186, 85, 211, 0.7),
+        0 20px 60px rgba(0, 0, 0, 0.8);
+      animation:
+        popupIn 0.25s ease-out;
+    }
+
+
+    @keyframes popupIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+
+    .server-modal-content h2 {
+      color: #d4af37;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+
+    .server-modal-content p {
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+
+
+    .server-ip {
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #ba55d3;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 1.25rem;
+      color: #fff;
+      word-break: break-all;
+    }
+
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+
+    .modal-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-family:
+        'Righteous',
+        cursive;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.2s;
+    }
+
+
+    .copy-btn {
+      background:
+        linear-gradient(
+          135deg,
+          #d4af37,
+          #ba55d3
+        );
+    }
+
+
+    .close-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+
+    .modal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 5px 15px rgba(186, 85, 211, 0.5);
+    }
+
+
+    /* ===== SHOP ===== */
+    .shop-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+
+    .shop-card {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.12),
+          rgba(186, 85, 211, 0.08)
+        );
+      border: 3px solid #d4af37;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      box-shadow:
+        0 8px 16px rgba(186, 85, 211, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .shop-card:hover {
+      transform: translateY(-8px);
+      border-color: #ba55d3;
+      box-shadow:
+        0 14px 28px rgba(186, 85, 211, 0.6),
+        0 0 30px rgba(212, 175, 55, 0.3);
+    }
+
+
+    .shop-badge {
+      position: absolute;
+      top: 12px;
+      right: -34px;
+      transform: rotate(45deg);
+      background:
+        linear-gradient(135deg, #ba55d3, #d4af37);
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      padding: 0.3rem 2.5rem;
+      box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+
+    .shop-icon {
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      filter:
+        drop-shadow(
+          0 0 12px rgba(186, 85, 211, 0.7)
+        );
+    }
+
+
+    .shop-card h3 {
+      color: #d4af37;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+
+    .shop-card p {
+      color: #e0e0e0;
+      font-size: 0.98rem;
+      flex-grow: 1;
+      margin-bottom: 1rem;
+    }
+
+
+    .shop-price {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      text-shadow:
+        0 0 12px rgba(186, 85, 211, 0.8),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+
+    .shop-btn {
+      display: inline-block;
+      background:
+        linear-gradient(135deg, #d4af37, #ba55d3);
+      color: #fff;
+      text-decoration: none;
+      border: 2px solid #ba55d3;
+      padding: 0.9rem 1.5rem;
+      border-radius: 10px;
+      font-family: 'Righteous', cursive;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow:
+        0 4px 10px rgba(186, 85, 211, 0.5);
+    }
+
+
+    .shop-btn:hover {
+      transform: translateY(-3px);
+      background:
+        linear-gradient(135deg, #ba55d3, #d4af37);
+      box-shadow:
+        0 8px 18px rgba(186, 85, 211, 0.9),
+        0 0 22px rgba(212, 175, 55, 0.5);
+    }
+
+
+    .shop-note {
+      text-align: center;
+      color: #bbb;
+      font-size: 0.95rem;
+      margin: -2rem 0 4rem;
+    }
+
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+
+      .site-logo img {
+        width: 140px;
+        height: 90px;
+      }
+
+
+      nav {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+
+      nav a {
+        font-size: 0.9rem;
+      }
+
+
+      .dropdown-menu {
+        min-width: 200px;
+      }
+
+
+      .dropdown-menu a {
+        font-size: 0.9rem;
+      }
+
+
+      .header-logo-container img {
+        width: 280px;
+      }
+
+
+      .logo-container img {
+        width: 350px;
+      }
+
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+
+      .server-modal-content h2 {
+        font-size: 1.6rem;
+      }
+
+
+      .server-ip {
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+
+  <style>
+    .dir-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+
+    .locked {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+
+    .locked h2 {
+      color: #ff8080;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+
+    .locked p {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .dir-card {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.1),
+          rgba(186, 85, 211, 0.08)
+        );
+      border: 3px solid #ba55d3;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+
+    .dir-card h3 {
+      color: #d4af37;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+
+    .mini-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Righteous', cursive;
+      border: 2px solid #ba55d3;
+      background:
+        linear-gradient(135deg, #d4af37, #ba55d3);
+      color: #fff;
+      transition: all 0.25s;
+    }
+
+
+    .mini-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 4px 12px rgba(186, 85, 211, 0.6);
+    }
+
+
+    .mini-btn.remove {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 120, 120, 0.6);
+    }
+
+
+    .empty-note {
+      color: #999;
+      font-style: italic;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+
+    /* ===== TODO ===== */
+    .todo-form {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .todo-form input,
+    .todo-form select {
+      flex: 1;
+      min-width: 160px;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 2px solid rgba(186, 85, 211, 0.6);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-family: 'Righteous', cursive;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+
+    .todo-form input:focus,
+    .todo-form select:focus {
+      border-color: #d4af37;
+    }
+
+
+    .todo-form option {
+      background: #1a0a2e;
+    }
+
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+      margin-bottom: 0.7rem;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 2px solid rgba(186, 85, 211, 0.35);
+      transition: all 0.25s;
+    }
+
+
+    .todo-item.done {
+      border-color: rgba(124, 252, 152, 0.5);
+      background: rgba(40, 90, 50, 0.25);
+    }
+
+
+    .todo-check {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 2px solid #ba55d3;
+      background: rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      color: #7CFC98;
+      flex-shrink: 0;
+    }
+
+
+    .todo-text {
+      flex: 1;
+      min-width: 180px;
+      text-align: left;
+      color: #fff;
+    }
+
+
+    .todo-item.done .todo-text {
+      text-decoration: line-through;
+      color: #9ad1a5;
+    }
+
+
+    .todo-for {
+      font-size: 0.78rem;
+      color: #d4af37;
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+      justify-content: center;
+    }
+
+
+    .filter-btn {
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      border: 2px solid rgba(186, 85, 211, 0.5);
+      background: rgba(0, 0, 0, 0.35);
+      color: #ddd;
+      cursor: pointer;
+      font-family: 'Righteous', cursive;
+      font-size: 0.85rem;
+    }
+
+
+    .filter-btn.active {
+      background:
+        linear-gradient(135deg, #d4af37, #ba55d3);
+      color: #fff;
+      border-color: #d4af37;
+    }
+
+
+    .role-note {
+      text-align: center;
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+
+
+</head>
+
+
+<body>
+
+
+  <header>
+
+
+    <a href="./index.html" class="site-logo">
+      <img src="./logo.png" alt="Magische Heuvel">
+    </a>
+
+
+    <nav>
+      <a href="./index.html#attractions">Attracties</a>
+      <a href="./index.html#team">Team</a>
+      <a href="./directie.html" id="navDirectie"
+         style="display: none;">Directie</a>
+      <a href="./index.html">&larr; Terug naar site</a>
+    </nav>
+
+
+    <div class="auth-area">
+      <span class="user-chip" id="userChip"></span>
+      <button
+        class="login-btn logout-btn"
+        type="button"
+        onclick="doLogout()"
+      >
+        Uitloggen
+      </button>
+    </div>
+
+
+  </header>
+
+
+  <div class="page-header">
+    <div class="header-logo-container">
+      <img src="./logo.png" alt="Magische Heuvel">
+    </div>
+  </div>
+
+
+  <!-- GEEN TOEGANG -->
+  <div class="locked" id="lockedView">
+
+
+    <h2>&#128274; Geen toegang</h2>
+
+
+    <p>
+      Deze pagina is alleen voor teamleden.<br>
+      Log in met een team- of directie-account.
+    </p>
+
+
+    <a href="./index.html" class="mini-btn"
+       style="text-decoration: none;
+              display: inline-block;">
+      &larr; Terug naar de website
+    </a>
+
+
+  </div>
+
+
+  <!-- TEAMPAGINA -->
+  <div
+    class="dir-wrap"
+    id="teamView"
+    style="display: none;"
+  >
+
+
+    <h2 class="section-title">
+      &#128203; TAKENLIJST
+    </h2>
+
+
+    <p class="role-note" id="roleNote"></p>
+
+
+    <!-- alleen directie ziet dit -->
+    <div
+      class="dir-card"
+      id="addCard"
+      style="display: none;"
+    >
+
+
+      <h3>&#10133; Nieuwe taak toevoegen</h3>
+
+
+      <div class="todo-form">
+
+
+        <input
+          type="text"
+          id="taskText"
+          placeholder="Wat moet er gebeuren?"
+        >
+
+
+        <select id="taskFor">
+          <option value="__all__">
+            Voor het hele team
+          </option>
+        </select>
+
+
+        <button
+          class="mini-btn"
+          type="button"
+          onclick="addTask()"
+        >
+          Toevoegen
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div class="dir-card">
+
+
+      <h3 id="listTitle">&#9989; Taken</h3>
+
+
+      <div class="filter-bar" id="filterBar"></div>
+
+
+      <div id="todoList"></div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <footer>
+    <p>
+      &copy; 2026 Magische Heuvel - Teampagina
+    </p>
+  </footer>
+
+
+  <script>
+    const OWNER_EMAIL = "weszonneveld@gmail.com";
+
+
+    function getUsers() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_users") || "[]"
+        );
+      } catch (e) {
+        return [];
+      }
+    }
+
+
+    function getCurrentUser() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_current") || "null"
+        );
+      } catch (e) {
+        return null;
+      }
+    }
+
+
+    function freshUser(user) {
+      if (!user) {
+        return null;
+      }
+
+
+      return getUsers().find(function(u) {
+        return u.email === user.email;
+      }) || user;
+    }
+
+
+    function isOwner(email) {
+      return (
+        email.toLowerCase() ===
+        OWNER_EMAIL.toLowerCase()
+      );
+    }
+
+
+    function isDirectie(u) {
+      if (!u) {
+        return false;
+      }
+
+
+      return isOwner(u.email) || u.directie === true;
+    }
+
+
+    function hasAccess(u) {
+      return (
+        isDirectie(u) ||
+        (u && u.team === true)
+      );
+    }
+
+
+    function doLogout() {
+      localStorage.removeItem("mh_current");
+      window.location.href = "./index.html";
+    }
+
+
+    /* --- taken opslaan --- */
+    function getTasks() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_tasks") || "[]"
+        );
+      } catch (e) {
+        return [];
+      }
+    }
+
+
+    function saveTasks(list) {
+      localStorage.setItem(
+        "mh_tasks",
+        JSON.stringify(list)
+      );
+    }
+
+
+    let me = null;
+    let filter = "mine";
+
+
+    function addTask() {
+      const txt = document
+        .getElementById("taskText")
+        .value.trim();
+
+
+      const who = document
+        .getElementById("taskFor").value;
+
+
+      if (!txt) {
+        alert("Vul een taak in.");
+        return;
+      }
+
+
+      const tasks = getTasks();
+
+
+      tasks.push({
+        id: Date.now(),
+        text: txt,
+        forEmail: who,
+        done: false,
+        by: me.name
+      });
+
+
+      saveTasks(tasks);
+
+
+      document.getElementById("taskText").value = "";
+      renderTasks();
+    }
+
+
+    function toggleTask(id) {
+      const tasks = getTasks();
+
+
+      const t = tasks.find(function(x) {
+        return x.id === id;
+      });
+
+
+      if (!t) {
+        return;
+      }
+
+
+      t.done = !t.done;
+      saveTasks(tasks);
+      renderTasks();
+    }
+
+
+    function removeTask(id) {
+      if (!isDirectie(me)) {
+        return;
+      }
+
+
+      if (!confirm("Deze taak verwijderen?")) {
+        return;
+      }
+
+
+      saveTasks(
+        getTasks().filter(function(t) {
+          return t.id !== id;
+        })
+      );
+
+
+      renderTasks();
+    }
+
+
+    function setFilter(f) {
+      filter = f;
+      renderTasks();
+    }
+
+
+    function nameFor(email) {
+      if (email === "__all__") {
+        return "Hele team";
+      }
+
+
+      const u = getUsers().find(function(x) {
+        return x.email === email;
+      });
+
+
+      return u ? u.name : email;
+    }
+
+
+    function renderFilters() {
+      const bar =
+        document.getElementById("filterBar");
+
+
+      const opts = isDirectie(me)
+        ? [
+            ["mine", "\u2b50 Voor mij"],
+            ["all", "\ud83d\udcc2 Alle taken"],
+            ["open", "\u23f3 Nog te doen"],
+            ["done", "\u2705 Afgerond"]
+          ]
+        : [
+            ["mine", "\u2b50 Voor mij"],
+            ["open", "\u23f3 Nog te doen"],
+            ["done", "\u2705 Afgerond"]
+          ];
+
+
+      bar.innerHTML = opts
+        .map(function(o) {
+          return (
+            '<button class="filter-btn' +
+            (filter === o[0] ? " active" : "") +
+            '" onclick="setFilter(\'' +
+            o[0] + '\')">' + o[1] + "</button>"
+          );
+        })
+        .join("");
+    }
+
+
+    function renderTasks() {
+      renderFilters();
+
+
+      const box =
+        document.getElementById("todoList");
+
+
+      let tasks = getTasks();
+
+
+      if (!isDirectie(me)) {
+        tasks = tasks.filter(function(t) {
+          return (
+            t.forEmail === "__all__" ||
+            t.forEmail === me.email
+          );
+        });
+      }
+
+
+      if (filter === "mine") {
+        tasks = tasks.filter(function(t) {
+          return (
+            t.forEmail === "__all__" ||
+            t.forEmail === me.email
+          );
+        });
+      } else if (filter === "open") {
+        tasks = tasks.filter(function(t) {
+          return !t.done;
+        });
+      } else if (filter === "done") {
+        tasks = tasks.filter(function(t) {
+          return t.done;
+        });
+      }
+
+
+      if (!tasks.length) {
+        box.innerHTML =
+          '<p class="empty-note">' +
+          "Geen taken in deze lijst. \ud83c\udf89" +
+          "</p>";
+        return;
+      }
+
+
+      box.innerHTML = tasks
+        .map(function(t) {
+
+
+          const del = isDirectie(me)
+            ? '<button class="mini-btn remove" ' +
+              "onclick=\"removeTask(" + t.id +
+              ')">\ud83d\uddd1\ufe0f</button>'
+            : "";
+
+
+          return (
+            '<div class="todo-item' +
+              (t.done ? " done" : "") + '">' +
+              '<button class="todo-check" ' +
+                'onclick="toggleTask(' + t.id +
+                ')">' + (t.done ? "\u2714" : "") +
+              "</button>" +
+              '<div class="todo-text">' +
+                t.text +
+                '<span class="todo-for">Voor: ' +
+                nameFor(t.forEmail) +
+                "</span>" +
+              "</div>" +
+              del +
+            "</div>"
+          );
+
+
+        })
+        .join("");
+    }
+
+
+    function fillPersonList() {
+      const sel =
+        document.getElementById("taskFor");
+
+
+      const people = getUsers().filter(function(u) {
+        return (
+          u.team === true ||
+          u.directie === true ||
+          isOwner(u.email)
+        );
+      });
+
+
+      sel.innerHTML =
+        '<option value="__all__">' +
+        "Voor het hele team</option>" +
+        people
+          .map(function(u) {
+            return (
+              '<option value="' + u.email + '">' +
+              u.name + "</option>"
+            );
+          })
+          .join("");
+    }
+
+
+    (function init() {
+      me = freshUser(getCurrentUser());
+
+
+      if (!hasAccess(me)) {
+        document.getElementById("userChip")
+          .style.display = "none";
+        return;
+      }
+
+
+      document.getElementById("lockedView")
+        .style.display = "none";
+
+
+      document.getElementById("teamView")
+        .style.display = "block";
+
+
+      document.getElementById("userChip")
+        .textContent = "\ud83d\udc64 " + me.name;
+
+
+      if (isDirectie(me)) {
+        document.getElementById("addCard")
+          .style.display = "block";
+
+
+        document.getElementById("navDirectie")
+          .style.display = "inline-block";
+
+
+        document.getElementById("roleNote")
+          .textContent =
+            "Je bent directie: je kunt taken " +
+            "toevoegen en verwijderen voor " +
+            "iedereen.";
+
+
+        fillPersonList();
+        filter = "all";
+      } else {
+        document.getElementById("roleNote")
+          .textContent =
+            "Vink af wat je hebt gedaan. " +
+            "Alleen de directie kan taken " +
+            "toevoegen.";
+      }
+
+
+      renderTasks();
+    })();
+  </script>
+
+
+</body>
+</html>
