@@ -2266,6 +2266,14 @@
         };
 
 
+        if (inviteRole === "directie") {
+          newUser.directie = true;
+          newUser.team = true;
+        } else if (inviteRole === "team") {
+          newUser.team = true;
+        }
+
+
         users.push(newUser);
         saveUsers(users);
         markEmailUsed(act.email);
@@ -2314,6 +2322,14 @@
         }
 
 
+        if (inviteRole === "directie") {
+          found.directie = true;
+          found.team = true;
+        } else if (inviteRole === "team") {
+          found.team = true;
+        }
+
+
         found.verified = true;
         saveUsers(users);
 
@@ -2325,6 +2341,16 @@
 
 
         setMsg("Geverifieerd! Ingelogd 🎉", true);
+      }
+
+
+      if (inviteRole) {
+        inviteRole = null;
+
+
+        history.replaceState(
+          {}, "", window.location.pathname
+        );
       }
 
 
@@ -2542,8 +2568,120 @@
     })();
 
 
+    /* --- uitnodigingslink uitlezen --- */
+    function readInvite() {
+      const p = new URLSearchParams(
+        window.location.search
+      );
+
+
+      const role = p.get("invite");
+      const k = p.get("k");
+
+
+      if (!role) {
+        return null;
+      }
+
+
+      const ok =
+        (role === "directie" && k === "d7k2") ||
+        (role === "team" && k === "t9m4");
+
+
+      return ok ? role : null;
+    }
+
+
+    let inviteRole = readInvite();
+
+
+    function showInviteBanner() {
+      if (!inviteRole) {
+        return;
+      }
+
+
+      const cur = getCurrentUser();
+
+
+      /* al ingelogd -> meteen toepassen */
+      if (cur) {
+        applyInviteTo(cur.email);
+
+
+        alert(
+          "\u2705 Je hebt nu " +
+          (inviteRole === "directie"
+            ? "directie" : "team") +
+          "-rechten!"
+        );
+
+
+        inviteRole = null;
+
+
+        history.replaceState(
+          {}, "", window.location.pathname
+        );
+
+
+        refreshAuthUI();
+        return;
+      }
+
+
+      /* niet ingelogd -> registratievenster */
+      setTimeout(function() {
+        openAuth("register");
+
+
+        setMsg(
+          "\ud83c\udf9f\ufe0f Uitnodiging voor " +
+          (inviteRole === "directie"
+            ? "DIRECTIE" : "TEAM") +
+          " - maak je account aan",
+          true
+        );
+      }, 400);
+    }
+
+
+    function applyInviteTo(email) {
+      const users = getUsers();
+
+
+      const u = users.find(function(x) {
+        return x.email === email;
+      });
+
+
+      if (!u) {
+        return;
+      }
+
+
+      if (inviteRole === "directie") {
+        u.directie = true;
+        u.team = true;
+      } else if (inviteRole === "team") {
+        u.team = true;
+      }
+
+
+      saveUsers(users);
+
+
+      localStorage.setItem(
+        "mh_current",
+        JSON.stringify(u)
+      );
+    }
+
+
     syncOwner();
     refreshAuthUI();
+    showInviteBanner();
 
 
     /* ==================================================================
