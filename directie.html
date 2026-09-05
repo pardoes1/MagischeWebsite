@@ -1399,6 +1399,27 @@
     }
 
 
+    .tag-team {
+      background: rgba(80, 200, 255, 0.18);
+      color: #7ecbff;
+      border: 1px solid #7ecbff;
+    }
+
+
+    .row-btns {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+
+    .mini-btn.team {
+      background:
+        linear-gradient(135deg, #2b8cd6, #7ecbff);
+      border-color: #7ecbff;
+    }
+
+
     .mini-btn.remove {
       background: rgba(255, 255, 255, 0.12);
       border-color: rgba(255, 120, 120, 0.6);
@@ -1431,7 +1452,7 @@
     <nav>
       <a href="./index.html#attractions">Attracties</a>
       <a href="./index.html#features">Features</a>
-      <a href="./index.html#team">Team</a>
+      <a href="./team.html" class="teampage-link-nav">📋 Teampagina</a>
       <a href="./index.html">← Terug naar site</a>
     </nav>
 
@@ -1685,31 +1706,54 @@
 
           const owner = isOwner(u.email);
           const isDir = owner || u.directie;
+          const isTeam = isDir || u.team;
 
 
-          const tag = isDir
-            ? '<span class="tag tag-dir">' +
-              (owner ? "👑 EIGENAAR" : "🏛️ DIRECTIE") +
-              "</span>"
-            : '<span class="tag tag-lid">LID</span>';
+          let tag;
 
 
-          const toggleBtn = owner
+          if (owner) {
+            tag = '<span class="tag tag-dir">' +
+                  "\ud83d\udc51 EIGENAAR</span>";
+          } else if (u.directie) {
+            tag = '<span class="tag tag-dir">' +
+                  "\ud83c\udfdb\ufe0f DIRECTIE</span>";
+          } else if (u.team) {
+            tag = '<span class="tag tag-team">' +
+                  "\ud83d\udc77 TEAM</span>";
+          } else {
+            tag = '<span class="tag tag-lid">' +
+                  "LID</span>";
+          }
+
+
+          const dirBtn = owner
             ? ""
             : '<button class="mini-btn" ' +
               "onclick=\"toggleDirectie('" +
               u.email + "')\">" +
               (u.directie
-                ? "Toegang intrekken"
-                : "Maak directie") +
+                ? "\u2796 Directie eraf"
+                : "\ud83c\udfdb\ufe0f Maak directie") +
               "</button>";
+
+
+          const teamBtn = (owner || u.directie)
+            ? ""
+            : '<button class="mini-btn team" ' +
+              "onclick=\"toggleTeam('" +
+              u.email + "')\">" +
+              (u.team
+                ? "\u2796 Team eraf"
+                : "\ud83d\udc77 Maak team")
+              + "</button>";
 
 
           const delBtn = owner
             ? ""
             : '<button class="mini-btn remove" ' +
               "onclick=\"removeUser('" +
-              u.email + "')\">🗑️</button>";
+              u.email + "')\">\ud83d\uddd1\ufe0f</button>";
 
 
           return (
@@ -1719,14 +1763,35 @@
                 "<span>" + u.email + "</span>" +
               "</div>" +
               tag +
-              toggleBtn +
-              delBtn +
+              '<div class="row-btns">' +
+                dirBtn + teamBtn + delBtn +
+              "</div>" +
             "</div>"
           );
 
 
         })
         .join("");
+    }
+
+
+    function toggleTeam(email) {
+      const users = getUsers();
+
+
+      const u = users.find(function(x) {
+        return x.email === email;
+      });
+
+
+      if (!u || isOwner(u.email) || u.directie) {
+        return;
+      }
+
+
+      u.team = !u.team;
+      saveUsers(users);
+      renderUsers();
     }
 
 
