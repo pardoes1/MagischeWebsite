@@ -1619,6 +1619,92 @@
     <div class="dir-card">
 
 
+      <h3>🔗 Uitnodigingslink maken</h3>
+
+
+      <p style="color: #bbb;
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;">
+        Maak een link en stuur die via Discord.
+        Wie hem opent en een account aanmaakt,
+        krijgt automatisch de gekozen rechten.
+        <strong>Dit werkt ook op andere
+        computers.</strong>
+      </p>
+
+
+      <div class="todo-form">
+
+
+        <select id="inviteRole">
+          <option value="team">
+            👷 Team
+          </option>
+          <option value="directie">
+            🏛️ Directie
+          </option>
+        </select>
+
+
+        <button
+          class="mini-btn"
+          type="button"
+          onclick="makeInvite()"
+        >
+          Link maken
+        </button>
+
+
+      </div>
+
+
+      <div
+        id="inviteResult"
+        style="display: none;"
+      >
+
+
+        <input
+          type="text"
+          id="inviteLink"
+          readonly
+          onclick="this.select()"
+          style="width: 100%;
+                 padding: 0.8rem 1rem;
+                 border-radius: 10px;
+                 border: 2px solid #d4af37;
+                 background: rgba(0, 0, 0, 0.6);
+                 color: #7ecbff;
+                 font-family: monospace;
+                 font-size: 0.85rem;
+                 margin-bottom: 0.7rem;"
+        >
+
+
+        <button
+          class="mini-btn"
+          type="button"
+          onclick="copyInvite()"
+        >
+          📋 Kopieer link
+        </button>
+
+
+        <div
+          id="inviteMsg"
+          class="grant-msg"
+        ></div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div class="dir-card">
+
+
       <h3>👥 Alle accounts</h3>
 
 
@@ -2141,6 +2227,67 @@
             );
           })
           .join("");
+    }
+
+
+    /* --- uitnodigingslinks --- */
+    function makeInvite() {
+      const role = document
+        .getElementById("inviteRole").value;
+
+
+      /* eenvoudige controlecode zodat de link
+         niet zomaar te verzinnen is */
+      const token =
+        role === "directie" ? "d7k2" : "t9m4";
+
+
+      const base =
+        window.location.href
+          .split("?")[0]
+          .replace(/directie\.html$/, "index.html");
+
+
+      const url =
+        base + "?invite=" + role + "&k=" + token;
+
+
+      const box =
+        document.getElementById("inviteResult");
+
+
+      document.getElementById("inviteLink")
+        .value = url;
+
+
+      box.style.display = "block";
+
+
+      document.getElementById("inviteMsg")
+        .textContent = "";
+    }
+
+
+    function copyInvite() {
+      const inp =
+        document.getElementById("inviteLink");
+
+
+      inp.select();
+
+
+      navigator.clipboard
+        .writeText(inp.value)
+        .then(function() {
+          document.getElementById("inviteMsg")
+            .textContent =
+              "\u2705 Link gekopieerd!";
+        })
+        .catch(function() {
+          document.getElementById("inviteMsg")
+            .textContent =
+              "Kopieer de link handmatig.";
+        });
     }
 
 
