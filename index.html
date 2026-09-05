@@ -821,6 +821,136 @@
     /* SERVER POPUP */
 
 
+    /* ===== LOGIN / AUTH ===== */
+    .auth-area {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+
+    .user-chip {
+      color: #d4af37;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.35);
+      white-space: nowrap;
+    }
+
+
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+
+    .directie-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+
+    .auth-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+
+    .auth-modal.show {
+      display: flex;
+    }
+
+
+    .auth-box {
+      background:
+        linear-gradient(
+          135deg,
+          #1a0a2e,
+          #16213e
+        );
+      border: 3px solid #ba55d3;
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 0 40px rgba(186, 85, 211, 0.6);
+    }
+
+
+    .auth-box h2 {
+      color: #d4af37;
+      margin-bottom: 0.4rem;
+      font-size: 1.7rem;
+    }
+
+
+    .auth-box .auth-sub {
+      color: #bbb;
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .auth-box input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.9rem;
+      border-radius: 10px;
+      border: 2px solid rgba(186, 85, 211, 0.6);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-family: 'Righteous', cursive;
+      font-size: 1rem;
+      outline: none;
+    }
+
+
+    .auth-box input:focus {
+      border-color: #d4af37;
+      box-shadow:
+        0 0 12px rgba(212, 175, 55, 0.5);
+    }
+
+
+    .auth-msg {
+      min-height: 1.4rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      color: #ff8080;
+    }
+
+
+    .auth-msg.ok {
+      color: #7CFC98;
+    }
+
+
+    .auth-switch {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+
+    .auth-switch a {
+      color: #ba55d3;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+
     .server-modal {
       display: none;
       position: fixed;
@@ -1205,13 +1335,48 @@
     </nav>
 
 
-    <button
-      class="login-btn"
-      type="button"
-      onclick="alert('Inloggen komt binnenkort!')"
-    >
-      Inloggen
-    </button>
+    <div class="auth-area">
+
+
+      <a
+        href="./directie.html"
+        class="login-btn directie-link"
+        id="directieLink"
+        style="display: none;"
+      >
+        🏛️ Directie
+      </a>
+
+
+      <span
+        class="user-chip"
+        id="userChip"
+        style="display: none;"
+      ></span>
+
+
+      <button
+        class="login-btn"
+        type="button"
+        id="loginBtn"
+        onclick="openAuth('login')"
+      >
+        Inloggen
+      </button>
+
+
+      <button
+        class="login-btn logout-btn"
+        type="button"
+        id="logoutBtn"
+        onclick="doLogout()"
+        style="display: none;"
+      >
+        Uitloggen
+      </button>
+
+
+    </div>
 
 
   </header>
@@ -1532,7 +1697,403 @@
   </div>
 
 
+  <!-- ============================================================
+       LOGIN / REGISTREER VENSTER
+       ============================================================ -->
+  <div
+    id="authModal"
+    class="auth-modal"
+  >
+
+
+    <div class="auth-box">
+
+
+      <h2 id="authTitle">Inloggen</h2>
+
+
+      <p class="auth-sub" id="authSub">
+        Log in met je account
+      </p>
+
+
+      <input
+        type="text"
+        id="authName"
+        placeholder="Gebruikersnaam"
+        style="display: none;"
+        autocomplete="username"
+      >
+
+
+      <input
+        type="email"
+        id="authEmail"
+        placeholder="E-mailadres"
+        autocomplete="email"
+      >
+
+
+      <input
+        type="password"
+        id="authPass"
+        placeholder="Wachtwoord"
+        autocomplete="current-password"
+      >
+
+
+      <div class="auth-msg" id="authMsg"></div>
+
+
+      <button
+        type="button"
+        class="modal-btn copy-btn"
+        style="width: 100%;"
+        id="authSubmit"
+        onclick="submitAuth()"
+      >
+        Inloggen
+      </button>
+
+
+      <div class="auth-switch" id="authSwitch">
+        Nog geen account?
+        <a onclick="openAuth('register')">
+          Maak er een aan
+        </a>
+      </div>
+
+
+      <div class="auth-switch">
+        <a onclick="closeAuth()">Sluiten</a>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
   <script>
+    /* ==================================================================
+       ▼▼▼  DIRECTIE-TOEGANG  ▼▼▼
+       Dit e-mailadres is de hoofdbeheerder en krijgt altijd
+       toegang tot de directiepagina.
+       ================================================================== */
+    const OWNER_EMAIL = "weszonneveld@gmail.com";
+    /* ▲▲▲  EINDE  ▲▲▲ */
+
+
+    function getUsers() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_users") || "[]"
+        );
+      } catch (e) {
+        return [];
+      }
+    }
+
+
+    function saveUsers(list) {
+      localStorage.setItem(
+        "mh_users",
+        JSON.stringify(list)
+      );
+    }
+
+
+    function getCurrentUser() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_current") || "null"
+        );
+      } catch (e) {
+        return null;
+      }
+    }
+
+
+    function isDirectie(user) {
+      if (!user) {
+        return false;
+      }
+
+
+      if (
+        user.email.toLowerCase() ===
+        OWNER_EMAIL.toLowerCase()
+      ) {
+        return true;
+      }
+
+
+      const users = getUsers();
+
+
+      const fresh = users.find(function(u) {
+        return u.email === user.email;
+      });
+
+
+      return fresh
+        ? fresh.directie === true
+        : user.directie === true;
+    }
+
+
+    function syncOwner() {
+      const users = getUsers();
+      let changed = false;
+
+
+      users.forEach(function(u) {
+        if (
+          u.email.toLowerCase() ===
+            OWNER_EMAIL.toLowerCase() &&
+          !u.directie
+        ) {
+          u.directie = true;
+          changed = true;
+        }
+      });
+
+
+      if (changed) {
+        saveUsers(users);
+      }
+    }
+
+
+    let authMode = "login";
+
+
+    function openAuth(mode) {
+      authMode = mode || "login";
+      const isReg = authMode === "register";
+
+
+      document.getElementById("authTitle")
+        .textContent =
+          isReg ? "Account aanmaken" : "Inloggen";
+
+
+      document.getElementById("authSub")
+        .textContent = isReg
+          ? "Maak een account voor Magische Heuvel"
+          : "Log in met je account";
+
+
+      document.getElementById("authName")
+        .style.display = isReg ? "block" : "none";
+
+
+      document.getElementById("authSubmit")
+        .textContent =
+          isReg ? "Account aanmaken" : "Inloggen";
+
+
+      document.getElementById("authSwitch")
+        .innerHTML = isReg
+          ? 'Heb je al een account? ' +
+            '<a onclick="openAuth(\'login\')">' +
+            'Inloggen</a>'
+          : 'Nog geen account? ' +
+            '<a onclick="openAuth(\'register\')">' +
+            'Maak er een aan</a>';
+
+
+      setMsg("");
+
+
+      document.getElementById("authModal")
+        .classList.add("show");
+    }
+
+
+    function closeAuth() {
+      document.getElementById("authModal")
+        .classList.remove("show");
+    }
+
+
+    function setMsg(text, ok) {
+      const el = document.getElementById("authMsg");
+      el.textContent = text;
+      el.className = ok ? "auth-msg ok" : "auth-msg";
+    }
+
+
+    function submitAuth() {
+      const name = document
+        .getElementById("authName").value.trim();
+
+
+      const email = document
+        .getElementById("authEmail")
+        .value.trim().toLowerCase();
+
+
+      const pass = document
+        .getElementById("authPass").value;
+
+
+      if (!email || !pass) {
+        setMsg("Vul je e-mail en wachtwoord in.");
+        return;
+      }
+
+
+      const users = getUsers();
+
+
+      if (authMode === "register") {
+
+
+        if (!name) {
+          setMsg("Vul een gebruikersnaam in.");
+          return;
+        }
+
+
+        if (pass.length < 4) {
+          setMsg(
+            "Wachtwoord moet minstens 4 tekens zijn."
+          );
+          return;
+        }
+
+
+        const exists = users.some(function(u) {
+          return u.email === email;
+        });
+
+
+        if (exists) {
+          setMsg("Dit e-mailadres bestaat al.");
+          return;
+        }
+
+
+        const newUser = {
+          name: name,
+          email: email,
+          pass: pass,
+          directie:
+            email === OWNER_EMAIL.toLowerCase()
+        };
+
+
+        users.push(newUser);
+        saveUsers(users);
+
+
+        localStorage.setItem(
+          "mh_current",
+          JSON.stringify(newUser)
+        );
+
+
+        setMsg("Account aangemaakt! 🎉", true);
+
+
+        setTimeout(function() {
+          closeAuth();
+          refreshAuthUI();
+        }, 700);
+
+
+        return;
+      }
+
+
+      const found = users.find(function(u) {
+        return u.email === email && u.pass === pass;
+      });
+
+
+      if (!found) {
+        setMsg("Onjuiste e-mail of wachtwoord.");
+        return;
+      }
+
+
+      if (
+        found.email === OWNER_EMAIL.toLowerCase()
+      ) {
+        found.directie = true;
+        saveUsers(users);
+      }
+
+
+      localStorage.setItem(
+        "mh_current",
+        JSON.stringify(found)
+      );
+
+
+      setMsg("Ingelogd! 🎉", true);
+
+
+      setTimeout(function() {
+        closeAuth();
+        refreshAuthUI();
+      }, 600);
+    }
+
+
+    function doLogout() {
+      localStorage.removeItem("mh_current");
+      refreshAuthUI();
+    }
+
+
+    function refreshAuthUI() {
+      const user = getCurrentUser();
+
+
+      const chip =
+        document.getElementById("userChip");
+
+
+      const loginBtn =
+        document.getElementById("loginBtn");
+
+
+      const logoutBtn =
+        document.getElementById("logoutBtn");
+
+
+      const dirLink =
+        document.getElementById("directieLink");
+
+
+      if (!chip) {
+        return;
+      }
+
+
+      if (user) {
+        chip.textContent = "👤 " + user.name;
+        chip.style.display = "inline-block";
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+        dirLink.style.display =
+          isDirectie(user) ? "inline-block" : "none";
+      } else {
+        chip.style.display = "none";
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+        dirLink.style.display = "none";
+      }
+    }
+
+
+    syncOwner();
+    refreshAuthUI();
+
+
     /* ==================================================================
        ▼▼▼  TEAM  —  rangen en namen aanpassen  ▼▼▼
        Bovenste groep staat bovenaan de piramide.
