@@ -854,6 +854,14 @@
     }
 
 
+    .teampage-link {
+      background:
+        linear-gradient(135deg, #2b8cd6, #7ecbff)
+        !important;
+      border-color: #7ecbff !important;
+    }
+
+
     .auth-modal {
       display: none;
       position: fixed;
@@ -1380,6 +1388,16 @@
         style="display: none;"
       >
         🏛️ Directie
+      </a>
+
+
+      <a
+        href="./team.html"
+        class="login-btn directie-link teampage-link"
+        id="teamPageLink"
+        style="display: none;"
+      >
+        📋 Teampagina
       </a>
 
 
@@ -1961,6 +1979,26 @@
     }
 
 
+    function isTeamlid(user) {
+      if (!user) {
+        return false;
+      }
+
+
+      if (isDirectie(user)) {
+        return true;
+      }
+
+
+      const fresh = getUsers().find(function(u) {
+        return u.email === user.email;
+      });
+
+
+      return fresh ? fresh.team === true : false;
+    }
+
+
     function syncOwner() {
       const users = getUsers();
       let changed = false;
@@ -2343,6 +2381,10 @@
         document.getElementById("directieLink");
 
 
+      const teamLink =
+        document.getElementById("teamPageLink");
+
+
       if (!chip) {
         return;
       }
@@ -2355,11 +2397,16 @@
         logoutBtn.style.display = "inline-block";
         dirLink.style.display =
           isDirectie(user) ? "inline-block" : "none";
+
+
+        teamLink.style.display =
+          isTeamlid(user) ? "inline-block" : "none";
       } else {
         chip.style.display = "none";
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
         dirLink.style.display = "none";
+        teamLink.style.display = "none";
       }
     }
 
@@ -2615,4 +2662,4 @@
 
 
 </body>
-</html>a
+</html>
