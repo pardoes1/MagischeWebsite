@@ -1477,6 +1477,78 @@
     }
 
 
+    .voice-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+
+    .voice-btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-size: 1.15rem;
+      border-radius: 12px;
+      font-family: 'Righteous', cursive;
+      color: #fff;
+      background:
+        linear-gradient(135deg, #2b8cd6, #7ecbff);
+      border: 3px solid #7ecbff;
+      box-shadow:
+        0 6px 16px rgba(43, 140, 214, 0.5);
+      transition: all 0.3s;
+    }
+
+
+    .voice-btn:hover {
+      transform: translateY(-3px);
+      background:
+        linear-gradient(135deg, #7ecbff, #2b8cd6);
+      box-shadow:
+        0 10px 24px rgba(126, 203, 255, 0.8),
+        0 0 30px rgba(126, 203, 255, 0.4);
+    }
+
+
+    .voice-note {
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+
+
+    .save-bar {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.25),
+          rgba(186, 85, 211, 0.2)
+        );
+      border: 2px solid #d4af37;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: #fff;
+      font-size: 0.92rem;
+    }
+
+
+    .grant-msg {
+      min-height: 1.3rem;
+      font-size: 0.9rem;
+      margin-top: 0.6rem;
+      color: #7CFC98;
+    }
+
+
     .role-note {
       text-align: center;
       color: #bbb;
@@ -1570,6 +1642,27 @@
     <p class="role-note" id="roleNote"></p>
 
 
+    <div class="voice-bar">
+
+
+      <a
+        href="https://teamvoice.lovable.app/"
+        target="_blank"
+        rel="noopener"
+        class="voice-btn"
+      >
+        &#127908; Join Teamvoice
+      </a>
+
+
+      <span class="voice-note">
+        Praat live met het team in de voice-room
+      </span>
+
+
+    </div>
+
+
     <!-- alleen directie ziet dit -->
     <div
       class="dir-card"
@@ -1608,6 +1701,94 @@
 
 
       </div>
+
+
+    </div>
+
+
+    <div
+      id="saveBar"
+      class="save-bar"
+      style="display: none;"
+    >
+
+
+      <span>
+        &#9888;&#65039; Je hebt taken gewijzigd &mdash;
+        sla ze op zodat het team ze ziet.
+      </span>
+
+
+      <button
+        class="mini-btn"
+        type="button"
+        onclick="exportTasks()"
+      >
+        &#128190; Opslaan naar GitHub
+      </button>
+
+
+    </div>
+
+
+    <div
+      class="dir-card"
+      id="exportBox"
+      style="display: none;"
+    >
+
+
+      <h3>&#128190; Opslaan naar GitHub</h3>
+
+
+      <p style="color: #bbb;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;">
+        1. Klik "Kopieer"<br>
+        2. Ga naar je repo &rarr; open
+        <strong>tasks.json</strong> &rarr; potlood
+        &#9998;<br>
+        3. Alles selecteren, plakken,
+        <strong>Commit changes</strong><br>
+        4. Na ~1 minuut ziet iedereen de nieuwe lijst
+      </p>
+
+
+      <textarea
+        id="exportText"
+        readonly
+        style="width: 100%;
+               height: 200px;
+               padding: 1rem;
+               border-radius: 10px;
+               border: 2px solid #d4af37;
+               background: rgba(0, 0, 0, 0.6);
+               color: #7ecbff;
+               font-family: monospace;
+               font-size: 0.8rem;
+               margin-bottom: 0.8rem;"
+      ></textarea>
+
+
+      <button
+        class="mini-btn"
+        type="button"
+        onclick="copyExport()"
+      >
+        &#128203; Kopieer
+      </button>
+
+
+      <button
+        class="mini-btn remove"
+        type="button"
+        onclick="document.getElementById('exportBox').style.display='none'"
+      >
+        Sluiten
+      </button>
+
+
+      <div id="exportMsg" class="grant-msg"></div>
 
 
     </div>
@@ -1788,22 +1969,149 @@
 
 
     /* --- taken opslaan --- */
-    function getTasks() {
+    /* ==================================================================
+       TAKEN
+       Gedeelde taken staan in het bestand tasks.json in je
+       GitHub-repo. Iedereen die de site opent leest dat bestand,
+       dus alle teamleden zien dezelfde lijst.
+
+       Directie past taken aan op de site en klikt daarna op
+       "Opslaan naar GitHub" -> je krijgt de nieuwe inhoud van
+       tasks.json, die plak je in GitHub. Klaar.
+       ================================================================== */
+    let sharedTasks = [];
+    let localDone = {};
+    let dirty = false;
+
+
+    function loadLocalDone() {
       try {
-        return JSON.parse(
-          localStorage.getItem("mh_tasks") || "[]"
+        localDone = JSON.parse(
+          localStorage.getItem("mh_done") || "{}"
         );
       } catch (e) {
-        return [];
+        localDone = {};
       }
     }
 
 
+    function saveLocalDone() {
+      localStorage.setItem(
+        "mh_done",
+        JSON.stringify(localDone)
+      );
+    }
+
+
+    function getTasks() {
+      return sharedTasks;
+    }
+
+
     function saveTasks(list) {
+      sharedTasks = list;
+      dirty = true;
+      updateSaveBar();
+    }
+
+
+    function fetchTasks(cb) {
+      fetch(
+        "./tasks.json?v=" + Date.now()
+      )
+        .then(function(r) {
+          if (!r.ok) {
+            throw new Error("geen bestand");
+          }
+          return r.json();
+        })
+        .then(function(data) {
+          sharedTasks = data.tasks || [];
+          cb();
+        })
+        .catch(function() {
+          /* geen tasks.json -> lokale reserve */
+          try {
+            sharedTasks = JSON.parse(
+              localStorage.getItem("mh_tasks") || "[]"
+            );
+          } catch (e) {
+            sharedTasks = [];
+          }
+          cb();
+        });
+    }
+
+
+    function updateSaveBar() {
+      const bar =
+        document.getElementById("saveBar");
+
+
+      if (!bar) {
+        return;
+      }
+
+
+      bar.style.display =
+        dirty && isDirectie(me) ? "block" : "none";
+    }
+
+
+    function exportTasks() {
+      const out = JSON.stringify(
+        {
+          updated: new Date()
+            .toISOString().slice(0, 10),
+          tasks: sharedTasks
+        },
+        null,
+        2
+      );
+
+
+      const box =
+        document.getElementById("exportBox");
+
+
+      const ta =
+        document.getElementById("exportText");
+
+
+      ta.value = out;
+      box.style.display = "block";
+      ta.select();
+
+
       localStorage.setItem(
         "mh_tasks",
-        JSON.stringify(list)
+        JSON.stringify(sharedTasks)
       );
+    }
+
+
+    function copyExport() {
+      const ta =
+        document.getElementById("exportText");
+
+
+      ta.select();
+
+
+      navigator.clipboard
+        .writeText(ta.value)
+        .then(function() {
+          document.getElementById("exportMsg")
+            .textContent =
+              "\u2705 Gekopieerd! Plak dit nu in " +
+              "tasks.json op GitHub.";
+        })
+        .catch(function() {
+          document.getElementById("exportMsg")
+            .textContent =
+              "Selecteer de tekst en kopieer " +
+              "handmatig.";
+        });
     }
 
 
@@ -1844,6 +2152,20 @@
 
       document.getElementById("taskText").value = "";
       renderTasks();
+      updateSaveBar();
+    }
+
+
+    function isDone(t) {
+      if (isDirectie(me)) {
+        return t.done === true;
+      }
+
+
+      return (
+        localDone[me.email + "_" + t.id] === true ||
+        t.done === true
+      );
     }
 
 
@@ -1861,8 +2183,16 @@
       }
 
 
-      t.done = !t.done;
-      saveTasks(tasks);
+      if (isDirectie(me)) {
+        t.done = !t.done;
+        saveTasks(tasks);
+      } else {
+        const key = me.email + "_" + id;
+        localDone[key] = !localDone[key];
+        saveLocalDone();
+      }
+
+
       renderTasks();
     }
 
@@ -1972,11 +2302,11 @@
         });
       } else if (filter === "open") {
         tasks = tasks.filter(function(t) {
-          return !t.done;
+          return !isDone(t);
         });
       } else if (filter === "done") {
         tasks = tasks.filter(function(t) {
-          return t.done;
+          return isDone(t);
         });
       }
 
@@ -2001,12 +2331,15 @@
             : "";
 
 
+          const dn = isDone(t);
+
+
           return (
             '<div class="todo-item' +
-              (t.done ? " done" : "") + '">' +
+              (dn ? " done" : "") + '">' +
               '<button class="todo-check" ' +
                 'onclick="toggleTask(' + t.id +
-                ')">' + (t.done ? "\u2714" : "") +
+                ')">' + (dn ? "\u2714" : "") +
               "</button>" +
               '<div class="todo-text">' +
                 t.text +
@@ -2102,7 +2435,13 @@
       }
 
 
-      renderTasks();
+      loadLocalDone();
+
+
+      fetchTasks(function() {
+        renderTasks();
+        updateSaveBar();
+      });
     })();
   </script>
 
