@@ -99,10 +99,6 @@ nav button:hover {
     font-weight: 700;
 }
 
-.admin-button:hover {
-    filter: brightness(1.08);
-}
-
 .page {
     display: none;
     max-width: 1200px;
@@ -197,6 +193,12 @@ h1,h2,h3 {
     background: rgba(255,255,255,.07);
     border: 1px solid rgba(255,255,255,.12);
     color: white;
+}
+
+.danger {
+    background: rgba(220,60,60,.15);
+    border: 1px solid rgba(255,80,80,.3);
+    color: #ffb2b2;
 }
 
 .section-title {
@@ -361,6 +363,12 @@ option {
     color: #a7f0bd;
 }
 
+.warning {
+    background: rgba(241,204,115,.12);
+    border: 1px solid rgba(241,204,115,.3);
+    color: #f1cc73;
+}
+
 .profile {
     display: flex;
     gap: 18px;
@@ -423,6 +431,71 @@ option {
     font-size: 11px;
     background: rgba(241,204,115,.12);
     color: #f1cc73;
+}
+
+.link-card {
+    margin-top: 22px;
+}
+
+.link-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 10px 0 18px;
+}
+
+.linked {
+    background: rgba(50,180,100,.15);
+    border: 1px solid rgba(70,220,130,.3);
+    color: #a7f0bd;
+}
+
+.not-linked {
+    background: rgba(241,204,115,.12);
+    border: 1px solid rgba(241,204,115,.25);
+    color: #f1cc73;
+}
+
+.minecraft-profile {
+    background: rgba(0,0,0,.2);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 15px;
+}
+
+.minecraft-profile strong {
+    color: #f1cc73;
+}
+
+.code-box {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.code-box input {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.code-box button {
+    white-space: nowrap;
+}
+
+.steps {
+    margin-top: 18px;
+    padding-left: 22px;
+    color: #bbb;
+    line-height: 2;
+}
+
+.steps strong {
+    color: white;
 }
 
 .admin-table {
@@ -515,6 +588,14 @@ footer strong {
     .hero img {
         width: 135px;
         height: 135px;
+    }
+
+    .code-box {
+        flex-direction: column;
+    }
+
+    .code-box button {
+        width: 100%;
     }
 }
 </style>
@@ -645,7 +726,6 @@ Solliciteren
 </button>
 </div>
 
-
 <div class="vacature-card">
 <div class="icon">🧱</div>
 <h3>Builder</h3>
@@ -666,7 +746,6 @@ themagebieden.
 Solliciteren
 </button>
 </div>
-
 
 <div class="vacature-card">
 <div class="icon">🎨</div>
@@ -900,7 +979,7 @@ Sollicitatie versturen
 
 <div class="section-title">
 <h2>Mijn account</h2>
-<p>Bekijk je gegevens en sollicitaties.</p>
+<p>Bekijk je gegevens, sollicitaties en Minecraft-account.</p>
 </div>
 
 <div class="profile">
@@ -914,14 +993,142 @@ Sollicitatie versturen
 
 </div>
 
+
+<!-- MINECRAFT LINKING -->
+
+<div class="card link-card">
+
+<h3>🔗 Minecraft-account koppelen</h3>
+
+<p>
+Koppel jouw Minecraft-account aan je Magische Heuvel-account.
+Zo kunnen de website en het Minecraft-serveraccount aan elkaar
+worden gekoppeld.
+</p>
+
+<div id="minecraftLinkMessage" class="message"></div>
+
+<div id="minecraftNotLinked">
+
+<div class="link-status not-linked">
+⚠️ Minecraft-account nog niet gekoppeld
+</div>
+
+<div class="form-group">
+<label>Minecraft-naam</label>
+<input
+    id="linkMinecraftName"
+    maxlength="16"
+    placeholder="Bijvoorbeeld: Steve">
+</div>
+
+<button
+    class="btn primary"
+    onclick="generateMinecraftLinkCode()">
+
+    🔗 Koppel Minecraft-account
+
+</button>
+
+<div id="linkCodeArea" style="display:none;">
+
+<p style="margin-top:20px;color:#bbb;">
+Je tijdelijke koppelcode:
+</p>
+
+<div class="code-box">
+
+<input
+    id="minecraftLinkCode"
+    readonly>
+
+<button
+    class="btn gold"
+    onclick="copyMinecraftCode()">
+
+    Code kopiëren
+
+</button>
+
+</div>
+
+<ol class="steps">
+
+<li>
+<strong>Open Minecraft</strong> en join de Magische Heuvel-server.
+</li>
+
+<li>
+Voer in Minecraft uit:
+<strong>/link JOUW_CODE</strong>
+</li>
+
+<li>
+Wacht tot de website bevestigt dat je account gekoppeld is.
+</li>
+
+</ol>
+
+<button
+    class="btn dark"
+    style="margin-top:18px;"
+    onclick="checkMinecraftLinkStatus()">
+
+    🔄 Controleren
+
+</button>
+
+</div>
+
+</div>
+
+
+<div id="minecraftLinked" style="display:none;">
+
+<div class="link-status linked">
+✅ Minecraft-account gekoppeld
+</div>
+
+<div class="minecraft-profile">
+
+<p>
+<strong>🎮 Minecraft-naam:</strong>
+<span id="linkedMinecraftName"></span>
+</p>
+
+<p style="margin-top:8px;">
+<strong>🆔 UUID:</strong>
+<span id="linkedMinecraftUuid"></span>
+</p>
+
+</div>
+
+<button
+    class="btn danger"
+    style="margin-top:18px;"
+    onclick="unlinkMinecraftAccount()">
+
+    Minecraft-account ontkoppelen
+
+</button>
+
+</div>
+
+</div>
+
+
 <div class="dashboard">
 
 <div class="card">
+
 <h3>Mijn sollicitaties</h3>
+
 <div id="myApplications"></div>
+
 </div>
 
 <div class="card">
+
 <h3>Account</h3>
 
 <p>
@@ -929,6 +1136,7 @@ Je bent ingelogd op Magische Heuvel.
 </p>
 
 <div class="buttons">
+
 <button class="btn primary" onclick="showPage('vacatures')">
 Vacatures bekijken
 </button>
@@ -936,6 +1144,7 @@ Vacatures bekijken
 <button class="btn dark" onclick="logout()">
 Uitloggen
 </button>
+
 </div>
 
 </div>
@@ -1060,27 +1269,60 @@ Beheerder uitloggen
 
 <script>
 
+/* =========================================================
+   MAGISCHE HEUVEL WEBSITE
+   ========================================================= */
+
+
+/* =========================================================
+   API INSTELLING
+   =========================================================
+
+   Vervang dit later door jouw echte API.
+
+   Bijvoorbeeld:
+
+   https://api.magischeheuvel.nl
+
+   BELANGRIJK:
+   Zet hier NOOIT een databasewachtwoord of geheime API-key.
+*/
+
+const API_BASE_URL = "https://YOUR-API-DOMAIN.example";
+
+
+/* =========================================================
+   EMAILJS
+   ========================================================= */
+
 emailjs.init({
     publicKey: "YOUR_EMAILJS_PUBLIC_KEY"
 });
 
-/* =========================================
-   INSTELLINGEN
-========================================= */
+const EMAILJS_SERVICE_ID =
+    "YOUR_SERVICE_ID";
+
+const EMAILJS_STATUS_TEMPLATE_ID =
+    "YOUR_STATUS_TEMPLATE_ID";
+
+
+/* =========================================================
+   ADMIN
+   =========================================================
+
+   Dit is alleen behouden voor je huidige demo/localStorage
+   systeem.
+
+   Voor een echte productiewebsite moet admin-authenticatie
+   naar de backend worden verplaatst.
+*/
 
 const ADMIN_CODE = "MH2026ADMIN";
 
-/*
-   EMAILJS INSTELLINGEN
-   Vul deze 3 waarden in vanuit je EmailJS-account.
-*/
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_STATUS_TEMPLATE_ID = "YOUR_STATUS_TEMPLATE_ID";
 
-
-/* =========================================
+/* =========================================================
    PAGINA'S
-========================================= */
+   ========================================================= */
 
 function showPage(id) {
 
@@ -1098,20 +1340,18 @@ function showPage(id) {
         top: 0,
         behavior: "smooth"
     });
-
 }
 
 
-/* =========================================
-   DATA
-========================================= */
+/* =========================================================
+   LOCAL DATA
+   ========================================================= */
 
 function getUsers() {
 
     return JSON.parse(
         localStorage.getItem("mh_users") || "[]"
     );
-
 }
 
 function saveUsers(users) {
@@ -1120,7 +1360,6 @@ function saveUsers(users) {
         "mh_users",
         JSON.stringify(users)
     );
-
 }
 
 function getApplications() {
@@ -1128,7 +1367,6 @@ function getApplications() {
     return JSON.parse(
         localStorage.getItem("mh_applications") || "[]"
     );
-
 }
 
 function saveApplications(applications) {
@@ -1137,35 +1375,87 @@ function saveApplications(applications) {
         "mh_applications",
         JSON.stringify(applications)
     );
-
 }
 
 function currentUser() {
 
-    return localStorage.getItem("mh_currentUser");
-
+    return localStorage.getItem(
+        "mh_currentUser"
+    );
 }
 
 
-/* =========================================
+/* =========================================================
+   API HELPER
+   ========================================================= */
+
+async function apiRequest(endpoint, options = {}) {
+
+    const response = await fetch(
+        API_BASE_URL + endpoint,
+        {
+            method: options.method || "GET",
+
+            headers: {
+                "Content-Type": "application/json",
+
+                ...(options.headers || {})
+            },
+
+            body:
+                options.body
+                    ? JSON.stringify(options.body)
+                    : undefined
+        }
+    );
+
+    let data = {};
+
+    try {
+        data = await response.json();
+    } catch {
+        data = {};
+    }
+
+    if (!response.ok) {
+
+        throw new Error(
+            data.message ||
+            "Er is een fout opgetreden bij de API."
+        );
+    }
+
+    return data;
+}
+
+
+/* =========================================================
    REGISTREREN
-========================================= */
+   ========================================================= */
 
 function register(event) {
 
     event.preventDefault();
 
     const username =
-        document.getElementById("registerUsername").value.trim();
+        document.getElementById(
+            "registerUsername"
+        ).value.trim();
 
     const email =
-        document.getElementById("registerEmail").value.trim();
+        document.getElementById(
+            "registerEmail"
+        ).value.trim();
 
     const password =
-        document.getElementById("registerPassword").value;
+        document.getElementById(
+            "registerPassword"
+        ).value;
 
     const password2 =
-        document.getElementById("registerPassword2").value;
+        document.getElementById(
+            "registerPassword2"
+        ).value;
 
     const users = getUsers();
 
@@ -1180,9 +1470,12 @@ function register(event) {
         return;
     }
 
-    if (users.some(user =>
-        user.email.toLowerCase() === email.toLowerCase()
-    )) {
+    if (
+        users.some(user =>
+            user.email.toLowerCase() ===
+            email.toLowerCase()
+        )
+    ) {
 
         message(
             "registerMessage",
@@ -1194,11 +1487,18 @@ function register(event) {
     }
 
     users.push({
+
         id: Date.now(),
+
         username: username,
+
         email: email,
+
         password: password,
-        createdAt: new Date().toISOString()
+
+        createdAt:
+            new Date().toISOString()
+
     });
 
     saveUsers(users);
@@ -1215,31 +1515,38 @@ function register(event) {
     );
 
     setTimeout(() => {
-        updateAccount();
-        showPage("account");
-    }, 700);
 
+        updateAccount();
+
+        showPage("account");
+
+    }, 700);
 }
 
 
-/* =========================================
+/* =========================================================
    INLOGGEN
-========================================= */
+   ========================================================= */
 
 function login(event) {
 
     event.preventDefault();
 
     const email =
-        document.getElementById("loginEmail").value.trim();
+        document.getElementById(
+            "loginEmail"
+        ).value.trim();
 
     const password =
-        document.getElementById("loginPassword").value;
+        document.getElementById(
+            "loginPassword"
+        ).value;
 
     const users = getUsers();
 
     const user = users.find(u =>
-        u.email.toLowerCase() === email.toLowerCase()
+        u.email.toLowerCase() ===
+        email.toLowerCase()
         &&
         u.password === password
     );
@@ -1269,31 +1576,31 @@ function login(event) {
     setTimeout(() => {
 
         updateNavigation();
+
         updateAccount();
+
         showPage("account");
 
     }, 500);
-
 }
 
 
-/* =========================================
+/* =========================================================
    ACCOUNT
-========================================= */
+   ========================================================= */
 
 function accountPage() {
 
     if (currentUser()) {
 
         updateAccount();
+
         showPage("account");
 
     } else {
 
         showPage("login");
-
     }
-
 }
 
 
@@ -1303,9 +1610,10 @@ function updateAccount() {
 
     if (!email) return;
 
-    const user = getUsers().find(u =>
-        u.email === email
-    );
+    const user =
+        getUsers().find(
+            u => u.email === email
+        );
 
     if (!user) return;
 
@@ -1324,12 +1632,13 @@ function updateAccount() {
 
     loadMyApplications();
 
+    loadMinecraftLinkStatus();
 }
 
 
-/* =========================================
+/* =========================================================
    SOLLICITEREN
-========================================= */
+   ========================================================= */
 
 function apply(functionName) {
 
@@ -1351,13 +1660,12 @@ function apply(functionName) {
     ).value = functionName;
 
     showPage("sollicitatie");
-
 }
 
 
-/* =========================================
+/* =========================================================
    SOLLICITATIE OPSLAAN
-========================================= */
+   ========================================================= */
 
 function submitApplication(event) {
 
@@ -1368,8 +1676,8 @@ function submitApplication(event) {
     if (!email) {
 
         showPage("login");
-        return;
 
+        return;
     }
 
     const application = {
@@ -1379,32 +1687,46 @@ function submitApplication(event) {
         email: email,
 
         function:
-            document.getElementById("applicationFunction").value,
+            document.getElementById(
+                "applicationFunction"
+            ).value,
 
         minecraftName:
-            document.getElementById("minecraftName").value.trim(),
+            document.getElementById(
+                "minecraftName"
+            ).value.trim(),
 
         age:
-            document.getElementById("age").value,
+            document.getElementById(
+                "age"
+            ).value,
 
         experience:
-            document.getElementById("experience").value.trim(),
+            document.getElementById(
+                "experience"
+            ).value.trim(),
 
         motivation:
-            document.getElementById("motivation").value.trim(),
+            document.getElementById(
+                "motivation"
+            ).value.trim(),
 
         availability:
-            document.getElementById("availability").value.trim(),
+            document.getElementById(
+                "availability"
+            ).value.trim(),
 
         status:
             "In behandeling",
 
         date:
-            new Date().toLocaleString("nl-NL")
-
+            new Date().toLocaleString(
+                "nl-NL"
+            )
     };
 
-    const applications = getApplications();
+    const applications =
+        getApplications();
 
     applications.push(application);
 
@@ -1423,16 +1745,16 @@ function submitApplication(event) {
     setTimeout(() => {
 
         updateAccount();
+
         showPage("account");
 
     }, 800);
-
 }
 
 
-/* =========================================
+/* =========================================================
    MIJN SOLLICITATIES
-========================================= */
+   ========================================================= */
 
 function loadMyApplications() {
 
@@ -1444,7 +1766,11 @@ function loadMyApplications() {
         );
 
     const container =
-        document.getElementById("myApplications");
+        document.getElementById(
+            "myApplications"
+        );
+
+    if (!container) return;
 
     if (applications.length === 0) {
 
@@ -1457,7 +1783,8 @@ function loadMyApplications() {
         return;
     }
 
-    container.innerHTML = applications
+    container.innerHTML =
+        applications
         .slice()
         .reverse()
         .map(app => `
@@ -1491,20 +1818,387 @@ function loadMyApplications() {
 
         `)
         .join("");
-
 }
 
 
-/* =========================================
+/* =========================================================
+   MINECRAFT LINKING
+   ========================================================= */
+
+
+/*
+   Generate a one-time linking code.
+
+   POST /api/minecraft/link-code
+
+   Body:
+   {
+       "email": "player@example.com",
+       "minecraftName": "Steve"
+   }
+*/
+
+async function generateMinecraftLinkCode() {
+
+    const email = currentUser();
+
+    if (!email) {
+
+        showPage("login");
+
+        return;
+    }
+
+    const minecraftName =
+        document.getElementById(
+            "linkMinecraftName"
+        ).value.trim();
+
+    if (!minecraftName) {
+
+        message(
+            "minecraftLinkMessage",
+            "Vul eerst je Minecraft-naam in.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (!/^[A-Za-z0-9_]{3,16}$/.test(minecraftName)) {
+
+        message(
+            "minecraftLinkMessage",
+            "Gebruik een geldige Minecraft-naam van 3 tot 16 tekens.",
+            "error"
+        );
+
+        return;
+    }
+
+    try {
+
+        message(
+            "minecraftLinkMessage",
+            "Koppelcode wordt aangemaakt...",
+            "warning"
+        );
+
+        const data =
+            await apiRequest(
+                "/api/minecraft/link-code",
+                {
+                    method: "POST",
+
+                    body: {
+                        email: email,
+                        minecraftName:
+                            minecraftName
+                    }
+                }
+            );
+
+        document.getElementById(
+            "minecraftLinkCode"
+        ).value =
+            data.code;
+
+        document.getElementById(
+            "linkCodeArea"
+        ).style.display = "block";
+
+        message(
+            "minecraftLinkMessage",
+            "Koppelcode aangemaakt. Gebruik deze code in Minecraft.",
+            "success"
+        );
+
+        startMinecraftLinkPolling();
+
+    } catch (error) {
+
+        console.error(error);
+
+        message(
+            "minecraftLinkMessage",
+            error.message ||
+            "De koppelcode kon niet worden aangemaakt.",
+            "error"
+        );
+    }
+}
+
+
+/*
+   Check current Minecraft link status.
+*/
+
+async function loadMinecraftLinkStatus() {
+
+    const email = currentUser();
+
+    if (!email) return;
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/api/minecraft/link-status?email=" +
+                encodeURIComponent(email)
+            );
+
+        updateMinecraftLinkUI(data);
+
+    } catch (error) {
+
+        console.warn(
+            "Minecraft link status kon niet worden geladen:",
+            error
+        );
+    }
+}
+
+
+function updateMinecraftLinkUI(data) {
+
+    const notLinked =
+        document.getElementById(
+            "minecraftNotLinked"
+        );
+
+    const linked =
+        document.getElementById(
+            "minecraftLinked"
+        );
+
+    if (!data || !data.linked) {
+
+        notLinked.style.display =
+            "block";
+
+        linked.style.display =
+            "none";
+
+        return;
+    }
+
+    notLinked.style.display =
+        "none";
+
+    linked.style.display =
+        "block";
+
+    document.getElementById(
+        "linkedMinecraftName"
+    ).textContent =
+        data.minecraftName || "-";
+
+    document.getElementById(
+        "linkedMinecraftUuid"
+    ).textContent =
+        data.minecraftUuid || "-";
+}
+
+
+/*
+   Manual status check.
+*/
+
+async function checkMinecraftLinkStatus() {
+
+    const email = currentUser();
+
+    if (!email) return;
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/api/minecraft/link-status?email=" +
+                encodeURIComponent(email)
+            );
+
+        updateMinecraftLinkUI(data);
+
+        if (data.linked) {
+
+            message(
+                "minecraftLinkMessage",
+                "Je Minecraft-account is succesvol gekoppeld!",
+                "success"
+            );
+
+            stopMinecraftLinkPolling();
+
+        } else {
+
+            message(
+                "minecraftLinkMessage",
+                "Je Minecraft-account is nog niet gekoppeld. Gebruik /link CODE in Minecraft.",
+                "warning"
+            );
+        }
+
+    } catch (error) {
+
+        message(
+            "minecraftLinkMessage",
+            "De verbindingsstatus kon niet worden gecontroleerd.",
+            "error"
+        );
+    }
+}
+
+
+/*
+   Automatically check every few seconds after
+   a code has been generated.
+*/
+
+let minecraftLinkPolling = null;
+
+function startMinecraftLinkPolling() {
+
+    stopMinecraftLinkPolling();
+
+    minecraftLinkPolling =
+        setInterval(
+            checkMinecraftLinkStatus,
+            5000
+        );
+}
+
+
+function stopMinecraftLinkPolling() {
+
+    if (minecraftLinkPolling) {
+
+        clearInterval(
+            minecraftLinkPolling
+        );
+
+        minecraftLinkPolling = null;
+    }
+}
+
+
+/*
+   Copy code.
+*/
+
+async function copyMinecraftCode() {
+
+    const input =
+        document.getElementById(
+            "minecraftLinkCode"
+        );
+
+    try {
+
+        await navigator.clipboard.writeText(
+            input.value
+        );
+
+        message(
+            "minecraftLinkMessage",
+            "Koppelcode gekopieerd!",
+            "success"
+        );
+
+    } catch {
+
+        input.select();
+
+        document.execCommand("copy");
+
+        message(
+            "minecraftLinkMessage",
+            "Koppelcode gekopieerd!",
+            "success"
+        );
+    }
+}
+
+
+/*
+   Unlink Minecraft account.
+
+   DELETE /api/minecraft/link
+
+   Body:
+   {
+       "email": "player@example.com"
+   }
+*/
+
+async function unlinkMinecraftAccount() {
+
+    const email = currentUser();
+
+    if (!email) return;
+
+    const confirmed =
+        confirm(
+            "Weet je zeker dat je jouw Minecraft-account wilt ontkoppelen?"
+        );
+
+    if (!confirmed) return;
+
+    try {
+
+        await apiRequest(
+            "/api/minecraft/link",
+            {
+                method: "DELETE",
+
+                body: {
+                    email: email
+                }
+            }
+        );
+
+        updateMinecraftLinkUI({
+            linked: false
+        });
+
+        document.getElementById(
+            "minecraftLinkCode"
+        ).value = "";
+
+        document.getElementById(
+            "linkCodeArea"
+        ).style.display = "none";
+
+        message(
+            "minecraftLinkMessage",
+            "Je Minecraft-account is ontkoppeld.",
+            "success"
+        );
+
+    } catch (error) {
+
+        message(
+            "minecraftLinkMessage",
+            error.message ||
+            "Het ontkoppelen is mislukt.",
+            "error"
+        );
+    }
+}
+
+
+/* =========================================================
    ADMIN LOGIN
-========================================= */
+   ========================================================= */
 
 function adminLogin(event) {
 
     event.preventDefault();
 
     const code =
-        document.getElementById("adminCode").value;
+        document.getElementById(
+            "adminCode"
+        ).value;
 
     if (code !== ADMIN_CODE) {
 
@@ -1515,7 +2209,6 @@ function adminLogin(event) {
         );
 
         return;
-
     }
 
     sessionStorage.setItem(
@@ -1530,28 +2223,33 @@ function adminLogin(event) {
     loadAdminApplications();
 
     showPage("admin");
-
 }
 
 
-/* =========================================
+/* =========================================================
    ADMIN PANEL
-========================================= */
+   ========================================================= */
 
 function loadAdminApplications() {
 
-    if (sessionStorage.getItem("mh_admin") !== "true") {
+    if (
+        sessionStorage.getItem(
+            "mh_admin"
+        ) !== "true"
+    ) {
 
         showPage("adminLogin");
-        return;
 
+        return;
     }
 
     const applications =
         getApplications();
 
     const tbody =
-        document.getElementById("adminApplications");
+        document.getElementById(
+            "adminApplications"
+        );
 
     if (applications.length === 0) {
 
@@ -1564,7 +2262,6 @@ function loadAdminApplications() {
         `;
 
         return;
-
     }
 
     tbody.innerHTML =
@@ -1596,7 +2293,9 @@ function loadAdminApplications() {
                 <button
                     class="btn primary"
                     onclick="viewApplication(${app.id})">
+
                     Bekijken
+
                 </button>
 
             </td>
@@ -1605,13 +2304,12 @@ function loadAdminApplications() {
 
         `)
         .join("");
-
 }
 
 
-/* =========================================
+/* =========================================================
    SOLLICITATIE BEKIJKEN
-========================================= */
+   ========================================================= */
 
 function viewApplication(id) {
 
@@ -1678,15 +2376,18 @@ function viewApplication(id) {
                 id="status-${application.id}"
                 onchange="changeStatus(${application.id}, this.value)">
 
-                <option ${application.status === "In behandeling" ? "selected" : ""}>
+                <option
+                    ${application.status === "In behandeling" ? "selected" : ""}>
                     In behandeling
                 </option>
 
-                <option ${application.status === "Aangenomen" ? "selected" : ""}>
+                <option
+                    ${application.status === "Aangenomen" ? "selected" : ""}>
                     Aangenomen
                 </option>
 
-                <option ${application.status === "Afgewezen" ? "selected" : ""}>
+                <option
+                    ${application.status === "Afgewezen" ? "selected" : ""}>
                     Afgewezen
                 </option>
 
@@ -1703,13 +2404,12 @@ function viewApplication(id) {
 
         </div>
     `;
-
 }
 
 
-/* =========================================
+/* =========================================================
    STATUS WIJZIGEN
-========================================= */
+   ========================================================= */
 
 async function changeStatus(id, status) {
 
@@ -1723,20 +2423,26 @@ async function changeStatus(id, status) {
 
     if (!application) return;
 
-    const oldStatus = application.status;
+    const oldStatus =
+        application.status;
 
-    application.status = status;
+    application.status =
+        status;
 
-    saveApplications(applications);
+    saveApplications(
+        applications
+    );
 
     loadAdminApplications();
+
     viewApplication(id);
 
-    // Alleen een mail sturen als de status echt verandert
-    // naar Aangenomen of Afgewezen.
     if (
         status !== oldStatus &&
-        (status === "Aangenomen" || status === "Afgewezen")
+        (
+            status === "Aangenomen" ||
+            status === "Afgewezen"
+        )
     ) {
 
         try {
@@ -1745,10 +2451,17 @@ async function changeStatus(id, status) {
                 EMAILJS_SERVICE_ID,
                 EMAILJS_STATUS_TEMPLATE_ID,
                 {
-                    to_email: application.email,
-                    minecraft_name: application.minecraftName,
-                    vacature: application.function,
-                    status: status
+                    to_email:
+                        application.email,
+
+                    minecraft_name:
+                        application.minecraftName,
+
+                    vacature:
+                        application.function,
+
+                    status:
+                        status
                 }
             );
 
@@ -1760,22 +2473,22 @@ async function changeStatus(id, status) {
 
         } catch (error) {
 
-            console.error("E-mail kon niet worden verstuurd:", error);
+            console.error(
+                "E-mail kon niet worden verstuurd:",
+                error
+            );
 
             alert(
                 "De status is aangepast, maar de e-mail kon niet worden verstuurd. Controleer je EmailJS-instellingen."
             );
-
         }
-
     }
-
 }
 
 
-/* =========================================
+/* =========================================================
    SOLLICITATIE VERWIJDEREN
-========================================= */
+   ========================================================= */
 
 function deleteApplication(id) {
 
@@ -1788,37 +2501,43 @@ function deleteApplication(id) {
 
     const applications =
         getApplications()
-        .filter(app => app.id !== id);
+        .filter(
+            app => app.id !== id
+        );
 
-    saveApplications(applications);
+    saveApplications(
+        applications
+    );
 
     document.getElementById(
         "adminDetail"
     ).innerHTML = "";
 
     loadAdminApplications();
-
 }
 
 
-/* =========================================
+/* =========================================================
    ADMIN UITLOGGEN
-========================================= */
+   ========================================================= */
 
 function adminLogout() {
 
-    sessionStorage.removeItem("mh_admin");
+    sessionStorage.removeItem(
+        "mh_admin"
+    );
 
     showPage("home");
-
 }
 
 
-/* =========================================
+/* =========================================================
    NORMALE UITLOG
-========================================= */
+   ========================================================= */
 
 function logout() {
+
+    stopMinecraftLinkPolling();
 
     localStorage.removeItem(
         "mh_currentUser"
@@ -1827,18 +2546,19 @@ function logout() {
     updateNavigation();
 
     showPage("home");
-
 }
 
 
-/* =========================================
+/* =========================================================
    NAVIGATIE
-========================================= */
+   ========================================================= */
 
 function updateNavigation() {
 
     const button =
-        document.getElementById("accountButton");
+        document.getElementById(
+            "accountButton"
+        );
 
     if (currentUser()) {
 
@@ -1849,55 +2569,63 @@ function updateNavigation() {
 
         button.textContent =
             "Inloggen";
-
     }
-
 }
 
 
-/* =========================================
+/* =========================================================
    MELDING
-========================================= */
+   ========================================================= */
 
 function message(id, text, type) {
 
     const element =
         document.getElementById(id);
 
-    element.textContent = text;
+    if (!element) return;
+
+    element.textContent =
+        text;
 
     element.className =
         "message show " + type;
-
 }
 
 
-/* =========================================
+/* =========================================================
    HTML VEILIG MAKEN
-========================================= */
+   ========================================================= */
 
 function safe(value) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     div.textContent =
-        value == null ? "" : String(value);
+        value == null
+            ? ""
+            : String(value);
 
     return div.innerHTML;
-
 }
 
 
-/* =========================================
+/* =========================================================
    START
-========================================= */
+   ========================================================= */
 
 document.getElementById(
     "year"
-).textContent = new Date().getFullYear();
+).textContent =
+    new Date().getFullYear();
 
 updateNavigation();
+
+if (currentUser()) {
+    updateAccount();
+}
 
 </script>
 
