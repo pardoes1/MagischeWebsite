@@ -1,2970 +1,1843 @@
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Magische Heuvel - Minecraft Themapark</title>
+<link rel="icon" href="./logo.png">
 
-  <title>Magische Heuvel - Minecraft Themapark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Righteous&display=swap" rel="stylesheet">
 
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-  <link rel="icon" type="image/png" href="./logo.png">
-  <link rel="shortcut icon" type="image/png" href="./logo.png">
+html {
+    scroll-behavior: smooth;
+}
 
+body {
+    font-family: Poppins, sans-serif;
+    background:
+        radial-gradient(circle at top, #4b2180, #190d2e 48%, #090611);
+    color: white;
+    min-height: 100vh;
+}
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
-    rel="stylesheet"
-  >
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 6, 20, .94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(241,204,115,.2);
+}
 
+.navbar {
+    max-width: 1200px;
+    margin: auto;
+    padding: 13px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.brand img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.brand span {
+    font-family: Righteous;
+    color: #f1cc73;
+    font-size: 22px;
+}
+
+nav {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+nav button {
+    border: 0;
+    background: transparent;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+nav button:hover {
+    background: rgba(255,255,255,.08);
+    color: #f1cc73;
+}
+
+.account-button {
+    background: linear-gradient(135deg,#a76ce8,#7040b6) !important;
+}
+
+.page {
+    display: none;
+    max-width: 1200px;
+    margin: auto;
+    padding: 55px 22px;
+    animation: fade .3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
-
-
-    body {
-      font-family: 'Righteous', cursive;
-      background:
-        linear-gradient(
-          180deg,
-          #1a0a2e 0%,
-          #16213e 50%,
-          #0f3460 100%
-        );
-      background-attachment: fixed;
-      color: #e0e0e0;
-      line-height: 1.6;
-      min-height: 100vh;
-      position: relative;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-    @keyframes magicGlow {
-      0%, 100% {
-        box-shadow:
-          0 0 20px rgba(186, 85, 211, 0.3),
-          inset 0 0 20px rgba(186, 85, 211, 0.1);
-      }
+.hero-content {
+    max-width: 850px;
+}
 
+.hero img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
 
-      50% {
-        box-shadow:
-          0 0 40px rgba(186, 85, 211, 0.6),
-          inset 0 0 30px rgba(186, 85, 211, 0.2);
-      }
+h1,h2,h3 {
+    font-family: Righteous;
+}
+
+.hero h1 {
+    font-size: clamp(48px,8vw,82px);
+    color: #f1cc73;
+    margin-top: 20px;
+}
+
+.hero p {
+    color: #ddd;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-top: 15px;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.btn {
+    border: 0;
+    border-radius: 11px;
+    padding: 13px 21px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.primary {
+    background: linear-gradient(135deg,#a76ce8,#7040b6);
+    color: white;
+}
+
+.gold {
+    background: linear-gradient(135deg,#f1cc73,#c79b3e);
+    color: #24162f;
+}
+
+.dark {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    color: white;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    color: #f1cc73;
+    font-size: 42px;
+}
+
+.section-title p {
+    color: #aaa;
+    margin-top: 8px;
+}
+
+.info-grid,
+.vacature-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.card {
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 18px;
+    padding: 28px;
+}
+
+.info-card {
+    text-align: center;
+}
+
+.icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #f1cc73;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #bbb;
+    line-height: 1.7;
+}
+
+.vacature-card {
+    background: linear-gradient(145deg,rgba(72,35,110,.8),rgba(15,8,29,.9));
+    border: 1px solid rgba(241,204,115,.2);
+    border-radius: 20px;
+    padding: 28px;
+}
+
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 18px 0;
+}
+
+.tag {
+    background: rgba(167,108,232,.15);
+    border: 1px solid rgba(167,108,232,.3);
+    padding: 5px 9px;
+    border-radius: 20px;
+    color: #d7b4f5;
+    font-size: 12px;
+}
+
+.vacature-card .btn {
+    width: 100%;
+}
+
+.form-container {
+    max-width: 700px;
+    margin: auto;
+}
+
+.form-box {
+    background: rgba(12,7,23,.9);
+    border: 1px solid rgba(241,204,115,.2);
+    border-radius: 20px;
+    padding: 35px;
+}
+
+.form-box h2 {
+    color: #f1cc73;
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.form-box > p {
+    color: #999;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #ddd;
+    font-size: 14px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    background: rgba(255,255,255,.055);
+    color: white;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 10px;
+    padding: 13px;
+    outline: none;
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #a76ce8;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+option {
+    background: #21132f;
+}
+
+.message {
+    display: none;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.message.show {
+    display: block;
+}
+
+.error {
+    background: rgba(220,60,60,.15);
+    border: 1px solid rgba(255,80,80,.3);
+    color: #ffb2b2;
+}
+
+.success {
+    background: rgba(50,180,100,.15);
+    border: 1px solid rgba(70,220,130,.3);
+    color: #a7f0bd;
+}
+
+.profile {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#a76ce8,#f1cc73);
+    color: #20102d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.profile h2 {
+    color: #f1cc73;
+}
+
+.profile p {
+    color: #999;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+}
+
+.application {
+    background: rgba(0,0,0,.2);
+    border-left: 3px solid #a76ce8;
+    padding: 17px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.application strong {
+    color: #f1cc73;
+}
+
+.application small {
+    color: #888;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 9px;
+    margin-top: 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    background: rgba(241,204,115,.12);
+    color: #f1cc73;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    vertical-align: top;
+}
+
+.admin-table th {
+    color: #f1cc73;
+}
+
+.admin-table td {
+    color: #ccc;
+    font-size: 13px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-detail {
+    margin-top: 25px;
+    padding: 22px;
+    border-radius: 15px;
+    background: rgba(0,0,0,.2);
+}
+
+.admin-detail h3 {
+    color: #f1cc73;
+    margin-bottom: 15px;
+}
+
+.admin-detail p {
+    color: #bbb;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.admin-detail strong {
+    color: white;
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 30px;
+    margin-top: 60px;
+}
+
+footer strong {
+    color: #f1cc73;
+}
+
+@media(max-width:850px) {
+    .info-grid,
+    .vacature-grid,
+    .dashboard {
+        grid-template-columns: 1fr;
     }
-
-
-    header {
-      position: relative;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(10px);
-      border-bottom: 4px solid;
-      border-image:
-        linear-gradient(
-          90deg,
-          #d4af37,
-          #ba55d3,
-          #d4af37
-        ) 1;
-      box-shadow:
-        0 4px 15px rgba(186, 85, 211, 0.3),
-        0 0 20px rgba(186, 85, 211, 0.2);
-    }
-
-
-    .site-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-
-
-    .site-logo img {
-      width: 130px;
-      height: 90px;
-      object-fit: contain;
-      display: block;
-      filter:
-        drop-shadow(
-          0 0 12px rgba(186, 85, 211, 0.6)
-        )
-        drop-shadow(
-          2px 2px 3px rgba(0, 0, 0, 0.8)
-        );
-      transition:
-        transform 0.3s,
-        filter 0.3s;
-    }
-
-
-    .site-logo img:hover {
-      transform: scale(1.05);
-      filter:
-        drop-shadow(
-          0 0 20px rgba(186, 85, 211, 0.9)
-        )
-        drop-shadow(
-          2px 2px 3px rgba(0, 0, 0, 0.8)
-        );
-    }
-
 
     nav {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
+        display: none;
     }
 
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.7);
-      position: relative;
-    }
-
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background:
-        linear-gradient(
-          90deg,
-          #ba55d3,
-          #d4af37
-        );
-      transition: width 0.3s;
-    }
-
-
-    nav a:hover {
-      color: #ba55d3;
-      transform: scale(1.1);
-    }
-
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-
-    /* ===== TEAM DROPDOWN ===== */
-    .nav-dropdown {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-
-    .nav-dropdown > a {
-      cursor: pointer;
-    }
-
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      margin-top: 1.1rem;
-      min-width: 240px;
-      background: rgba(15, 8, 30, 0.97);
-      backdrop-filter: blur(12px);
-      border: 2px solid #ba55d3;
-      border-radius: 12px;
-      padding: 0.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition:
-        opacity 0.25s,
-        transform 0.25s,
-        visibility 0.25s;
-      box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.7),
-        0 0 25px rgba(186, 85, 211, 0.45);
-      z-index: 200;
-    }
-
-
-    /* onzichtbare brug zodat de muis niet
-       "valt" tussen knop en menu */
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: -1.3rem;
-      left: 0;
-      right: 0;
-      height: 1.4rem;
-    }
-
-
-    .nav-dropdown:hover .dropdown-menu,
-    .nav-dropdown:focus-within .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
-
-
-    .dropdown-menu a {
-      display: block;
-      padding: 0.6rem 0.9rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      white-space: nowrap;
-      transition: all 0.25s;
-    }
-
-
-    .dropdown-menu a::after {
-      display: none;
-    }
-
-
-    .dropdown-menu a:hover {
-      background:
-        linear-gradient(
-          90deg,
-          rgba(212, 175, 55, 0.25),
-          rgba(186, 85, 211, 0.25)
-        );
-      color: #d4af37;
-      transform: translateX(4px) scale(1);
-    }
-
-
-    .dropdown-top {
-      color: #d4af37 !important;
-      font-size: 1.05rem !important;
-      text-align: center;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(212, 175, 55, 0.18),
-          rgba(186, 85, 211, 0.18)
-        );
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      margin-bottom: 0.35rem;
-    }
-
-
-    .dropdown-divider {
-      height: 1px;
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          #ba55d3,
-          transparent
-        );
-      margin: 0.3rem 0;
-    }
-
-
-    .login-btn {
-      background:
-        linear-gradient(
-          135deg,
-          #d4af37,
-          #ba55d3
-        );
-      color: #fff;
-      border: 2px solid #ba55d3;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s;
-      font-family:
-        'Righteous',
-        cursive;
-      box-shadow:
-        0 4px 8px rgba(186, 85, 211, 0.5);
-    }
-
-
-    .login-btn:hover {
-      background:
-        linear-gradient(
-          135deg,
-          #ba55d3,
-          #d4af37
-        );
-      transform: translateY(-2px);
-      box-shadow:
-        0 6px 12px rgba(186, 85, 211, 0.8),
-        0 0 20px rgba(186, 85, 211, 0.4);
-    }
-
-
-    .page-header {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(186, 85, 211, 0.1),
-          rgba(212, 175, 55, 0.08)
-        );
-      padding: 3rem 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      border-bottom: 2px solid #ba55d3;
-      box-shadow:
-        0 4px 15px rgba(186, 85, 211, 0.2);
-    }
-
-
-    .header-logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-
-    .header-logo-container img {
-      width: 380px;
-      max-width: 90vw;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      filter:
-        drop-shadow(
-          0 10px 25px rgba(0, 0, 0, 0.8)
-        )
-        drop-shadow(
-          0 0 20px rgba(186, 85, 211, 0.7)
-        );
-      border-radius: 15px;
-      transition:
-        transform 0.3s,
-        filter 0.3s;
-    }
-
-
-    .header-logo-container img:hover {
-      transform: scale(1.03);
-      filter:
-        drop-shadow(
-          0 12px 30px rgba(0, 0, 0, 0.9)
-        )
-        drop-shadow(
-          0 0 30px rgba(186, 85, 211, 0.9)
-        );
-    }
-
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 4rem 2rem;
-      min-height: 50vh;
-      position: relative;
-      overflow: hidden;
-    }
-
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background:
-        radial-gradient(
-          circle,
-          rgba(186, 85, 211, 0.15),
-          transparent
-        );
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
-    }
-
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -50%;
-      left: -10%;
-      width: 400px;
-      height: 400px;
-      background:
-        radial-gradient(
-          circle,
-          rgba(186, 85, 211, 0.1),
-          transparent
-        );
-      border-radius: 50%;
-      animation: float 8s ease-in-out infinite reverse;
-    }
-
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-
-      50% {
-        transform: translateY(-20px);
-      }
-    }
-
-
-    .logo-container {
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-
-    .logo-container img {
-      width: 500px;
-      max-width: 90vw;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      filter:
-        drop-shadow(
-          0 10px 30px rgba(0, 0, 0, 0.8)
-        )
-        drop-shadow(
-          0 0 20px rgba(186, 85, 211, 0.5)
-        );
-      border-radius: 15px;
-    }
-
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-
-      50% {
-        transform: scale(1.03);
-      }
-    }
-
-
-    .hero p {
-      font-size: 1.4rem;
-      color: #fff;
-      text-shadow:
-        2px 2px 4px rgba(186, 85, 211, 0.5),
-        2px 2px 8px rgba(0, 0, 0, 0.8);
-      margin-bottom: 2rem;
-      max-width: 600px;
-      z-index: 1;
-      position: relative;
-    }
-
-
-    .cta-btn {
-      background:
-        linear-gradient(
-          135deg,
-          #d4af37,
-          #ba55d3
-        );
-      color: #fff;
-      border: 3px solid #ba55d3;
-      padding: 1.2rem 3rem;
-      font-size: 1.3rem;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 12px;
-      transition: all 0.3s;
-      font-family:
-        'Righteous',
-        cursive;
-      box-shadow:
-        0 8px 16px rgba(186, 85, 211, 0.6);
-      z-index: 1;
-      position: relative;
-    }
-
-
-    .cta-btn:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 12px 24px rgba(186, 85, 211, 1),
-        0 0 30px rgba(186, 85, 211, 0.8);
-      background:
-        linear-gradient(
-          135deg,
-          #ba55d3,
-          #d4af37
-        );
-    }
-
-
-    /* ===== OPENING / COUNTDOWN ===== */
-    .hero-btns {
-      display: flex;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-      position: relative;
-    }
-
-
-    .solli-btn {
-      text-decoration: none;
-      display: inline-block;
-      background:
-        linear-gradient(135deg, #2b8cd6, #7ecbff);
-      border-color: #7ecbff;
-      box-shadow:
-        0 8px 16px rgba(43, 140, 214, 0.6);
-    }
-
-
-    .solli-btn:hover {
-      background:
-        linear-gradient(135deg, #7ecbff, #2b8cd6);
-      box-shadow:
-        0 12px 24px rgba(126, 203, 255, 0.9),
-        0 0 30px rgba(126, 203, 255, 0.5);
-    }
-
-
-    .opening-banner {
-      max-width: 800px;
-      margin: 2.5rem auto 0;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(212, 175, 55, 0.15),
-          rgba(186, 85, 211, 0.12)
-        );
-      border: 3px solid #d4af37;
-      border-radius: 18px;
-      backdrop-filter: blur(10px);
-      animation: magicGlow 3s ease-in-out infinite;
-    }
-
-
-    .opening-label {
-      font-size: 1.05rem;
-      letter-spacing: 3px;
-      color: #d4af37;
-      text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-
-    .opening-date {
-      font-size: 2.6rem;
-      line-height: 1.2;
-      margin: 0.3rem 0 1.2rem;
-      background:
-        linear-gradient(135deg, #d4af37, #ba55d3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter:
-        drop-shadow(
-          2px 2px 0 rgba(0, 0, 0, 0.6)
-        );
-    }
-
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-
-    .countdown-box {
-      min-width: 88px;
-      padding: 0.8rem 0.5rem;
-      background: rgba(0, 0, 0, 0.45);
-      border: 2px solid #ba55d3;
-      border-radius: 12px;
-      box-shadow:
-        0 4px 12px rgba(186, 85, 211, 0.4);
-    }
-
-
-    .countdown-num {
-      display: block;
-      font-size: 2.2rem;
-      color: #fff;
-      line-height: 1;
-      text-shadow:
-        0 0 12px rgba(186, 85, 211, 0.9);
-    }
-
-
-    .countdown-lbl {
-      display: block;
-      font-size: 0.8rem;
-      letter-spacing: 1.5px;
-      color: #d4af37;
-      margin-top: 0.35rem;
-    }
-
-
-    .opening-open {
-      font-size: 1.6rem;
-      color: #fff;
-      text-shadow:
-        0 0 15px rgba(186, 85, 211, 0.9);
-    }
-
-
-    @media (max-width: 768px) {
-      .opening-date {
-        font-size: 1.8rem;
-      }
-
-
-      .countdown-box {
-        min-width: 70px;
-      }
-
-
-      .countdown-num {
-        font-size: 1.6rem;
-      }
-    }
-
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-
-    .section-title {
-      font-size: 3rem;
-      background:
-        linear-gradient(
-          135deg,
-          #d4af37,
-          #ba55d3
-        );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-      margin-bottom: 3rem;
-      letter-spacing: 2px;
-      filter:
-        drop-shadow(
-          3px 3px 0px rgba(0, 0, 0, 0.7)
-        );
-    }
-
-
-    .attractions-grid {
-      display: grid;
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(
-            280px,
-            1fr
-          )
-        );
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-
-
-    .attraction-card {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(212, 175, 55, 0.1),
-          rgba(186, 85, 211, 0.08)
-        );
-      border: 3px solid #ba55d3;
-      border-radius: 15px;
-      padding: 2rem;
-      text-align: center;
-      transition: all 0.3s;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      box-shadow:
-        0 8px 16px rgba(186, 85, 211, 0.3);
-    }
-
-
-    .attraction-card:hover {
-      transform:
-        translateY(-10px)
-        scale(1.05);
-      box-shadow:
-        0 16px 32px rgba(186, 85, 211, 0.6),
-        0 0 30px rgba(186, 85, 211, 0.4);
-      border-color: #d4af37;
-      animation:
-        magicGlow 2s ease-in-out infinite;
-    }
-
-
-    .attraction-card h3 {
-      font-size: 1.8rem;
-      color: #ba55d3;
-      margin-bottom: 1rem;
-    }
-
-
-    .attraction-card p {
-      color: #c0c0c0;
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-
-    .features {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(186, 85, 211, 0.08),
-          rgba(212, 175, 55, 0.06)
-        );
-      border: 3px solid #ba55d3;
-      border-radius: 15px;
-      padding: 3rem 2rem;
-      margin-bottom: 3rem;
-      backdrop-filter: blur(10px);
-      box-shadow:
-        0 8px 16px rgba(186, 85, 211, 0.3);
-    }
-
-
-    .features-grid {
-      display: grid;
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(
-            250px,
-            1fr
-          )
-        );
-      gap: 2rem;
-    }
-
-
-    .feature-item {
-      text-align: center;
-      padding: 1.5rem;
-      border-radius: 10px;
-      background: rgba(186, 85, 211, 0.05);
-      transition: all 0.3s;
-      border: 2px solid transparent;
-    }
-
-
-    .feature-item:hover {
-      border-color: #ba55d3;
-      background: rgba(186, 85, 211, 0.1);
-      box-shadow:
-        0 0 15px rgba(186, 85, 211, 0.4);
-    }
-
-
-    .feature-item h3 {
-      font-size: 1.5rem;
-      color: #ba55d3;
-      margin-bottom: 0.8rem;
-    }
-
-
-    .feature-item p {
-      color: #c0c0c0;
-      font-size: 0.95rem;
-    }
-
-
-    footer {
-      background: rgba(0, 0, 0, 0.7);
-      text-align: center;
-      padding: 2.5rem;
-      border-top: 4px solid;
-      border-image:
-        linear-gradient(
-          90deg,
-          #d4af37,
-          #ba55d3,
-          #d4af37
-        ) 1;
-      color: #fff;
-      margin-top: 4rem;
-    }
-
-
-    footer a {
-      color: #ba55d3;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s;
-    }
-
-
-    footer a:hover {
-      color: #d4af37;
-      text-decoration: underline;
-    }
-
-
-    /* SERVER POPUP */
-
-
-    /* ===== LOGIN / AUTH ===== */
-    .auth-area {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-
-    .user-chip {
-      color: #d4af37;
-      font-size: 0.95rem;
-      padding: 0.4rem 0.8rem;
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      border-radius: 20px;
-      background: rgba(0, 0, 0, 0.35);
-      white-space: nowrap;
-    }
-
-
-    .logout-btn {
-      background: rgba(255, 255, 255, 0.12) !important;
-      border-color: rgba(255, 255, 255, 0.3) !important;
-    }
-
-
-    .directie-link {
-      text-decoration: none;
-      display: inline-block;
-    }
-
-
-    .teampage-link {
-      background:
-        linear-gradient(135deg, #2b8cd6, #7ecbff)
-        !important;
-      border-color: #7ecbff !important;
-    }
-
-
-    .auth-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 99999;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-    }
-
-
-    .auth-modal.show {
-      display: flex;
-    }
-
-
-    .auth-box {
-      background:
-        linear-gradient(
-          135deg,
-          #1a0a2e,
-          #16213e
-        );
-      border: 3px solid #ba55d3;
-      border-radius: 18px;
-      padding: 2.5rem 2rem;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      box-shadow:
-        0 0 40px rgba(186, 85, 211, 0.6);
-    }
-
-
-    .auth-box h2 {
-      color: #d4af37;
-      margin-bottom: 0.4rem;
-      font-size: 1.7rem;
-    }
-
-
-    .auth-box .auth-sub {
-      color: #bbb;
-      font-size: 0.92rem;
-      margin-bottom: 1.5rem;
-    }
-
-
-    .auth-box input {
-      width: 100%;
-      padding: 0.9rem 1rem;
-      margin-bottom: 0.9rem;
-      border-radius: 10px;
-      border: 2px solid rgba(186, 85, 211, 0.6);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-family: 'Righteous', cursive;
-      font-size: 1rem;
-      outline: none;
-    }
-
-
-    .auth-box input:focus {
-      border-color: #d4af37;
-      box-shadow:
-        0 0 12px rgba(212, 175, 55, 0.5);
-    }
-
-
-    .auth-msg {
-      min-height: 1.4rem;
-      font-size: 0.9rem;
-      margin-bottom: 0.8rem;
-      color: #ff8080;
-    }
-
-
-    .auth-msg.ok {
-      color: #7CFC98;
-    }
-
-
-    .auth-switch {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #bbb;
-    }
-
-
-    .auth-switch a {
-      color: #ba55d3;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-
-    .verify-box {
-      background: rgba(0, 0, 0, 0.45);
-      border: 2px dashed #d4af37;
-      border-radius: 12px;
-      padding: 1.2rem 1rem 0.6rem;
-      margin-bottom: 1rem;
-    }
-
-
-    .verify-label {
-      color: #d4af37;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
-    }
-
-
-    .verify-code {
-      font-size: 2.3rem;
-      letter-spacing: 10px;
-      color: #fff;
-      padding-left: 10px;
-      text-shadow:
-        0 0 15px rgba(186, 85, 211, 0.9);
-      user-select: all;
-    }
-
-
-    .verify-hint {
-      color: #aaa;
-      font-size: 0.82rem;
-      margin: 0.4rem 0 0.9rem;
-    }
-
-
-    .server-modal {
-      display: none;
-      position: fixed;
-      z-index: 99999;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(7px);
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-
-    .server-modal.show {
-      display: flex;
-    }
-
-
-    .server-modal-content {
-      background:
-        linear-gradient(
-          135deg,
-          #1a0a2e,
-          #16213e
-        );
-      border: 3px solid #ba55d3;
-      border-radius: 18px;
-      width: 100%;
-      max-width: 520px;
-      padding: 35px 30px;
-      text-align: center;
-      box-shadow:
-        0 0 40px rgba(186, 85, 211, 0.7),
-        0 20px 60px rgba(0, 0, 0, 0.8);
-      animation:
-        popupIn 0.25s ease-out;
-    }
-
-
-    @keyframes popupIn {
-      from {
-        opacity: 0;
-        transform: scale(0.85);
-      }
-
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-
-    .server-modal-content h2 {
-      color: #d4af37;
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
-
-    .server-modal-content p {
-      color: #ddd;
-      margin-bottom: 20px;
-    }
-
-
-    .server-ip {
-      background: rgba(0, 0, 0, 0.5);
-      border: 2px solid #ba55d3;
-      border-radius: 10px;
-      padding: 15px;
-      margin: 20px 0;
-      font-family: monospace;
-      font-size: 1.25rem;
-      color: #fff;
-      word-break: break-all;
-    }
-
-
-    .modal-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-
-    .modal-btn {
-      border: none;
-      border-radius: 10px;
-      padding: 12px 20px;
-      font-family:
-        'Righteous',
-        cursive;
-      font-size: 1rem;
-      cursor: pointer;
-      color: #fff;
-      transition: all 0.2s;
-    }
-
-
-    .copy-btn {
-      background:
-        linear-gradient(
-          135deg,
-          #d4af37,
-          #ba55d3
-        );
-    }
-
-
-    .close-btn {
-      background: rgba(255, 255, 255, 0.12);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-    }
-
-
-    .modal-btn:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 5px 15px rgba(186, 85, 211, 0.5);
-    }
-
-
-    /* ===== SHOP ===== */
-    .shop-grid {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-
-
-    .shop-card {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(212, 175, 55, 0.12),
-          rgba(186, 85, 211, 0.08)
-        );
-      border: 3px solid #d4af37;
-      border-radius: 15px;
-      padding: 2rem;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-      box-shadow:
-        0 8px 16px rgba(186, 85, 211, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-
-    .shop-card:hover {
-      transform: translateY(-8px);
-      border-color: #ba55d3;
-      box-shadow:
-        0 14px 28px rgba(186, 85, 211, 0.6),
-        0 0 30px rgba(212, 175, 55, 0.3);
-    }
-
-
-    .shop-badge {
-      position: absolute;
-      top: 12px;
-      right: -34px;
-      transform: rotate(45deg);
-      background:
-        linear-gradient(135deg, #ba55d3, #d4af37);
-      color: #fff;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      padding: 0.3rem 2.5rem;
-      box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.6);
-    }
-
-
-    .shop-icon {
-      font-size: 3rem;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      filter:
-        drop-shadow(
-          0 0 12px rgba(186, 85, 211, 0.7)
-        );
-    }
-
-
-    .shop-card h3 {
-      color: #d4af37;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-
-    .shop-card p {
-      color: #e0e0e0;
-      font-size: 0.98rem;
-      flex-grow: 1;
-      margin-bottom: 1rem;
-    }
-
-
-    .shop-price {
-      font-size: 2rem;
-      color: #fff;
-      margin-bottom: 1rem;
-      text-shadow:
-        0 0 12px rgba(186, 85, 211, 0.8),
-        2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-
-    .shop-btn {
-      display: inline-block;
-      background:
-        linear-gradient(135deg, #d4af37, #ba55d3);
-      color: #fff;
-      text-decoration: none;
-      border: 2px solid #ba55d3;
-      padding: 0.9rem 1.5rem;
-      border-radius: 10px;
-      font-family: 'Righteous', cursive;
-      font-size: 1.05rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow:
-        0 4px 10px rgba(186, 85, 211, 0.5);
-    }
-
-
-    .shop-btn:hover {
-      transform: translateY(-3px);
-      background:
-        linear-gradient(135deg, #ba55d3, #d4af37);
-      box-shadow:
-        0 8px 18px rgba(186, 85, 211, 0.9),
-        0 0 22px rgba(212, 175, 55, 0.5);
-    }
-
-
-    .shop-note {
-      text-align: center;
-      color: #bbb;
-      font-size: 0.95rem;
-      margin: -2rem 0 4rem;
-    }
-
-
-    @media (max-width: 768px) {
-      header {
+    .profile {
         flex-direction: column;
-        gap: 1rem;
-      }
-
-
-      .site-logo img {
-        width: 140px;
-        height: 90px;
-      }
-
-
-      nav {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-
-      nav a {
-        font-size: 0.9rem;
-      }
-
-
-      .dropdown-menu {
-        min-width: 200px;
-      }
-
-
-      .dropdown-menu a {
-        font-size: 0.9rem;
-      }
-
-
-      .header-logo-container img {
-        width: 280px;
-      }
-
-
-      .logo-container img {
-        width: 350px;
-      }
-
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-
-      .server-modal-content h2 {
-        font-size: 1.6rem;
-      }
-
-
-      .server-ip {
-        font-size: 1rem;
-      }
+        text-align: center;
     }
-  </style>
-</head>
+}
 
+@media(max-width:550px) {
+    .form-box {
+        padding: 23px;
+    }
+
+    .page {
+        padding: 40px 15px;
+    }
+
+    .hero img {
+        width: 135px;
+        height: 135px;
+    }
+}
+</style>
+</head>
 
 <body>
 
+<header>
+<div class="navbar">
 
-  <header>
+<div class="brand" onclick="showPage('home')">
+<img src="./logo.png" alt="Magische Heuvel">
+<span>Magische Heuvel</span>
+</div>
+
+<nav id="nav">
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('vacatures')">Vacatures</button>
+<button onclick="showPage('overons')">Over ons</button>
+<button class="account-button" id="accountButton" onclick="accountPage()">Inloggen</button>
+</nav>
+
+</div>
+</header>
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+<div class="hero-content">
+
+<img src="./logo.png" alt="Magische Heuvel logo">
+
+<h1>Magische Heuvel</h1>
+
+<p>
+Welkom bij Magische Heuvel, een Minecraft-themapark
+waar creativiteit, techniek en fantasie samenkomen.
+</p>
+
+<div class="buttons">
+<button class="btn primary" onclick="showPage('vacatures')">
+Bekijk vacatures
+</button>
+
+<button class="btn gold" onclick="showPage('overons')">
+Ontdek ons park
+</button>
+</div>
+
+</div>
+</div>
+
+<div class="section-title">
+<h2>Een wereld vol magie</h2>
+<p>Bouw samen met ons mee aan Magische Heuvel.</p>
+</div>
+
+<div class="info-grid">
+
+<div class="card info-card">
+<div class="icon">🎢</div>
+<h3>Attracties</h3>
+<p>
+Werk mee aan attracties, achtbanen en bijzondere
+ervaringen voor onze bezoekers.
+</p>
+</div>
+
+<div class="card info-card">
+<div class="icon">🏗️</div>
+<h3>Bouwen</h3>
+<p>
+Maak prachtige gebouwen, themagebieden, straten
+en decoratie voor het park.
+</p>
+</div>
+
+<div class="card info-card">
+<div class="icon">✨</div>
+<h3>Magie</h3>
+<p>
+Geef bezoekers een bijzondere ervaring met
+creativiteit, techniek en modellen.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- VACATURES -->
+
+<section id="vacatures" class="page">
+
+<div class="section-title">
+<h2>Vacatures</h2>
+<p>
+Wil jij deel uitmaken van het team van Magische Heuvel?
+</p>
+</div>
+
+<div class="vacature-grid">
+
+<div class="vacature-card">
+<div class="icon">🔧</div>
+<h3>Techniek</h3>
+<p>
+Werk aan de technische kant van onze attracties.
+Je kunt werken met redstone, commands, plugins,
+TrainCarts en andere systemen.
+</p>
+
+<div class="tags">
+<span class="tag">Techniek</span>
+<span class="tag">Redstone</span>
+<span class="tag">Plugins</span>
+<span class="tag">Commands</span>
+</div>
+
+<button class="btn primary" onclick="apply('Techniek')">
+Solliciteren
+</button>
+</div>
+
+
+<div class="vacature-card">
+<div class="icon">🧱</div>
+<h3>Builder</h3>
+<p>
+Bouw mee aan de wereld van Magische Heuvel.
+Van gebouwen en attracties tot complete
+themagebieden.
+</p>
+
+<div class="tags">
+<span class="tag">Builder</span>
+<span class="tag">WorldEdit</span>
+<span class="tag">Axiom</span>
+<span class="tag">Decoratie</span>
+</div>
+
+<button class="btn primary" onclick="apply('Builder')">
+Solliciteren
+</button>
+</div>
+
+
+<div class="vacature-card">
+<div class="icon">🎨</div>
+<h3>Modelaar</h3>
+<p>
+Maak 3D-modellen voor attracties, decoratie,
+voertuigen en andere onderdelen van Magische Heuvel.
+</p>
+
+<div class="tags">
+<span class="tag">Blockbench</span>
+<span class="tag">3D</span>
+<span class="tag">Modellen</span>
+<span class="tag">Resourcepack</span>
+</div>
 
+<button class="btn primary" onclick="apply('Modelaar')">
+Solliciteren
+</button>
+</div>
 
-    <a href="#" class="site-logo">
-      <img
-        src="./logo.png"
-        alt="Magische Heuvel"
-      >
-    </a>
+</div>
 
+</section>
 
-    <nav>
-      <a href="#attractions">Attracties</a>
-      <a href="#features">Features</a>
-      <a
-        href="https://magischeheuvel.tebex.io"
-        target="_blank"
-        rel="noopener"
-      >Shop</a>
 
+<!-- OVER ONS -->
 
-      <!-- TEAM dropdown: hover erover = menu eronder -->
-      <div class="nav-dropdown">
+<section id="overons" class="page">
 
+<div class="section-title">
+<h2>Over ons</h2>
+<p>Welkom bij Magische Heuvel.</p>
+</div>
 
-        <a href="#team">Team ▾</a>
+<div class="info-grid">
 
+<div class="card info-card">
+<div class="icon">🏰</div>
+<h3>Het park</h3>
+<p>
+Magische Heuvel is een Minecraft-themapark
+waarin we attracties, entertainment en
+themagebieden samenbrengen.
+</p>
+</div>
 
-        <div class="dropdown-menu">
+<div class="card info-card">
+<div class="icon">👥</div>
+<h3>Het team</h3>
+<p>
+Ons team bestaat uit creatieve mensen die
+samen werken aan één grote Minecraft-wereld.
+</p>
+</div>
 
+<div class="card info-card">
+<div class="icon">🌟</div>
+<h3>De toekomst</h3>
+<p>
+We blijven het park uitbreiden met nieuwe
+attracties, gebieden en belevenissen.
+</p>
+</div>
 
-          <a
-            href="#team"
-            class="dropdown-top"
-          >
-            👑 Algemeen Directeur
-          </a>
+</div>
 
+</section>
 
-          <div class="dropdown-divider"></div>
 
+<!-- LOGIN -->
 
-          <a href="#team">Directie</a>
-          <a href="#team">Algemeen Management</a>
-          <a href="#team">Management</a>
-          <a href="#team">Team</a>
+<section id="login" class="page">
 
+<div class="form-container">
+<div class="form-box">
 
-        </div>
+<h2>Inloggen</h2>
+<p>Log in op jouw Magische Heuvel-account.</p>
 
+<div id="loginMessage" class="message"></div>
 
-      </div>
+<form onsubmit="login(event)">
 
+<div class="form-group">
+<label>E-mailadres</label>
+<input id="loginEmail" type="email" required placeholder="jouw@email.nl">
+</div>
 
-      <a href="#contact">Contact</a>
-    </nav>
+<div class="form-group">
+<label>Wachtwoord</label>
+<input id="loginPassword" type="password" required placeholder="Jouw wachtwoord">
+</div>
 
+<button class="btn primary" style="width:100%">
+Inloggen
+</button>
 
-    <div class="auth-area">
+</form>
 
+<div class="buttons">
+<button class="btn dark" onclick="showPage('register')">
+Account aanmaken
+</button>
+</div>
 
-      <a
-        href="./directie.html"
-        class="login-btn directie-link"
-        id="directieLink"
-        style="display: none;"
-      >
-        🏛️ Directie
-      </a>
+</div>
+</div>
 
+</section>
 
-      <a
-        href="./team.html"
-        class="login-btn directie-link teampage-link"
-        id="teamPageLink"
-        style="display: none;"
-      >
-        📋 Teampagina
-      </a>
 
+<!-- REGISTREREN -->
 
-      <span
-        class="user-chip"
-        id="userChip"
-        style="display: none;"
-      ></span>
+<section id="register" class="page">
 
+<div class="form-container">
+<div class="form-box">
 
-      <button
-        class="login-btn"
-        type="button"
-        id="loginBtn"
-        onclick="openAuth('login')"
-      >
-        Inloggen
-      </button>
+<h2>Account aanmaken</h2>
+<p>Maak een account om te kunnen solliciteren.</p>
 
+<div id="registerMessage" class="message"></div>
 
-      <button
-        class="login-btn logout-btn"
-        type="button"
-        id="logoutBtn"
-        onclick="doLogout()"
-        style="display: none;"
-      >
-        Uitloggen
-      </button>
+<form onsubmit="register(event)">
 
+<div class="form-group">
+<label>Gebruikersnaam</label>
+<input id="registerUsername" required placeholder="Jouw gebruikersnaam">
+</div>
 
-    </div>
+<div class="form-group">
+<label>E-mailadres</label>
+<input id="registerEmail" type="email" required placeholder="jouw@email.nl">
+</div>
 
+<div class="form-group">
+<label>Wachtwoord</label>
+<input id="registerPassword" type="password" minlength="6" required placeholder="Minimaal 6 tekens">
+</div>
 
-  </header>
+<div class="form-group">
+<label>Wachtwoord opnieuw</label>
+<input id="registerPassword2" type="password" minlength="6" required placeholder="Herhaal je wachtwoord">
+</div>
 
+<button class="btn primary" style="width:100%">
+Account aanmaken
+</button>
 
-  <div class="page-header">
+</form>
 
+<div class="buttons">
+<button class="btn dark" onclick="showPage('login')">
+Terug naar inloggen
+</button>
+</div>
 
-    <div class="header-logo-container">
+</div>
+</div>
 
+</section>
 
-      <img
-        src="./logo.png"
-        alt="Magische Heuvel"
-      >
 
+<!-- SOLLICITATIE -->
 
-    </div>
+<section id="sollicitatie" class="page">
 
+<div class="form-container">
+<div class="form-box">
 
-  </div>
+<h2>Solliciteren</h2>
+<p>Vul hieronder jouw sollicitatie in.</p>
 
+<div id="applicationMessage" class="message"></div>
 
-  <section class="hero">
+<form onsubmit="submitApplication(event)">
 
+<div class="form-group">
+<label>Vacature</label>
 
-    <div class="logo-container">
+<select id="applicationFunction" required>
+<option value="">Kies een vacature</option>
+<option value="Techniek">Techniek</option>
+<option value="Builder">Builder</option>
+<option value="Modelaar">Modelaar</option>
+</select>
 
+</div>
 
-      <img
-        src="./logo.png"
-        alt="Magische Heuvel"
-      >
+<div class="form-group">
+<label>Minecraft-naam</label>
+<input id="minecraftName" required placeholder="Jouw Minecraft-naam">
+</div>
 
+<div class="form-group">
+<label>Leeftijd</label>
+<input id="age" type="number" min="1" max="100" required>
+</div>
 
-    </div>
+<div class="form-group">
+<label>Ervaring</label>
+<textarea id="experience" required placeholder="Vertel iets over je ervaring."></textarea>
+</div>
 
+<div class="form-group">
+<label>Motivatie</label>
+<textarea id="motivation" required placeholder="Waarom wil je bij Magische Heuvel werken?"></textarea>
+</div>
 
-    <p>
-      Het ultieme Minecraft themapark vol magie,
-      avontuur en oneindige plezier!
-    </p>
+<div class="form-group">
+<label>Beschikbaarheid</label>
+<textarea id="availability" required placeholder="Wanneer ben je beschikbaar?"></textarea>
+</div>
 
+<button class="btn primary">
+Sollicitatie versturen
+</button>
 
-    <div class="hero-btns">
+</form>
 
+</div>
+</div>
 
-      <button
-        type="button"
-        class="cta-btn"
-        onclick="openServerPopup()"
-      >
-        🎮 Speel Nu
-      </button>
+</section>
 
 
-      <a
-        href="https://magischeheuvelsolicitatie.base44.app/"
-        target="_blank"
-        rel="noopener"
-        class="cta-btn solli-btn"
-      >
-        📝 Solliciteren
-      </a>
+<!-- ACCOUNT -->
 
+<section id="account" class="page">
 
-    </div>
+<div class="section-title">
+<h2>Mijn account</h2>
+<p>Bekijk je gegevens en sollicitaties.</p>
+</div>
 
+<div class="profile">
 
-    <!-- ========================================================
-         OPENING  —  datum aanpassen in het <script> onderaan
-                     (zoek op:  const OPENING_DATE)
-         ======================================================== -->
-    <div class="opening-banner">
+<div class="avatar" id="avatar">M</div>
 
+<div>
+<h2 id="profileUsername"></h2>
+<p id="profileEmail"></p>
+</div>
 
-      <div class="opening-label">
-        🎉 GROTE OPENING
-      </div>
+</div>
 
+<div class="dashboard">
 
-      <div
-        class="opening-date"
-        id="openingDate"
-      >
-        18 oktober
-      </div>
+<div class="card">
+<h3>Mijn sollicitaties</h3>
+<div id="myApplications"></div>
+</div>
 
+<div class="card">
+<h3>Account</h3>
 
-      <div
-        class="countdown"
-        id="countdown"
-      ></div>
+<p>
+Je bent ingelogd op Magische Heuvel.
+</p>
 
+<div class="buttons">
+<button class="btn primary" onclick="showPage('vacatures')">
+Vacatures bekijken
+</button>
 
-    </div>
+<button class="btn dark" onclick="logout()">
+Uitloggen
+</button>
+</div>
 
+</div>
 
-  </section>
+</div>
 
+</section>
 
-  <div class="container">
 
+<!-- ADMIN LOGIN -->
 
-    <section id="attractions">
+<section id="adminLogin" class="page">
 
+<div class="form-container">
+<div class="form-box">
 
-      <h2 class="section-title">
-        ✨ ATTRACTIES
-      </h2>
+<h2>Beheerder</h2>
 
+<p>
+Dit gedeelte is alleen toegankelijk voor de
+beheerder van Magische Heuvel.
+</p>
 
-      <div class="attractions-grid">
+<div id="adminMessage" class="message"></div>
 
+<form onsubmit="adminLogin(event)">
 
-        <div class="attraction-card">
-          <h3>🎢 Achtbanen</h3>
-          <p>
-            Adrenaline-kickende achtbanen
-            door fantastische landschappen!
-          </p>
-        </div>
+<div class="form-group">
+<label>Beheerderscode</label>
 
+<input
+id="adminCode"
+type="password"
+placeholder="Voer de beheerderscode in"
+required>
 
-        <div class="attraction-card">
-          <h3>🏰 Kastelen</h3>
-          <p>
-            Majestueuze kastelen vol geheimen
-            en magische verrassingen!
-          </p>
-        </div>
+</div>
 
+<button class="btn gold" style="width:100%">
+Naar beheerpanel
+</button>
 
-        <div class="attraction-card">
-          <h3>✨ Magie</h3>
-          <p>
-            Mystieke biomen vol enchantments
-            en magische wezens!
-          </p>
-        </div>
+</form>
 
+</div>
+</div>
 
-        <div class="attraction-card">
-          <h3>🎉 Evenementen</h3>
-          <p>
-            Elke maand een nieuw thema
-            met exclusive rewards!
-          </p>
-        </div>
+</section>
 
 
-        <div class="attraction-card">
-          <h3>🎮 Mini-Games</h3>
-          <p>
-            Parkour, PvP-arena's en spelletjes
-            vol plezier!
-          </p>
-        </div>
+<!-- ADMIN PANEL -->
 
+<section id="admin" class="page">
 
-        <div class="attraction-card">
-          <h3>🌍 Custom Werelden</h3>
-          <p>
-            Hand-gemaakte biomen met
-            prachtige landschappen!
-          </p>
-        </div>
+<div class="section-title">
 
+<h2>Beheerpanel</h2>
 
-      </div>
+<p>
+Welkom in het beheerpanel van Magische Heuvel.
+</p>
 
+</div>
 
-    </section>
+<div class="card">
 
+<h3>Sollicitaties</h3>
 
-    <section
-      class="features"
-      id="features"
-    >
+<p style="color:#999">
+Hieronder staan de ontvangen sollicitaties.
+</p>
 
+<div class="table-wrapper">
 
-      <h2 class="section-title">
-        🏆 WAAROM MAGISCHE HEUVEL?
-      </h2>
+<table class="admin-table">
 
+<thead>
+<tr>
+<th>Naam</th>
+<th>E-mail</th>
+<th>Vacature</th>
+<th>Datum</th>
+<th>Actie</th>
+</tr>
+</thead>
 
-      <div class="features-grid">
+<tbody id="adminApplications"></tbody>
 
+</table>
 
-        <div class="feature-item">
-          <h3>🕐 24/7 Online</h3>
-          <p>
-            De server staat altijd klaar
-            voor je avontuur!
-          </p>
-        </div>
+</div>
 
+<div id="adminDetail"></div>
 
-        <div class="feature-item">
-          <h3>👥 Community</h3>
-          <p>
-            Maak vrienden en deel
-            je ervaringen!
-          </p>
-        </div>
+</div>
 
+<div class="buttons">
 
-        <div class="feature-item">
-          <h3>🏅 Beloningen</h3>
-          <p>
-            Verdien munten en exclusieve items!
-          </p>
-        </div>
+<button class="btn dark" onclick="adminLogout()">
+Beheerder uitloggen
+</button>
 
+</div>
 
-        <div class="feature-item">
-          <h3>🎨 Creatief</h3>
-          <p>
-            Build je eigen creaties
-            in creative zones!
-          </p>
-        </div>
+</section>
 
+</main>
 
-      </div>
 
+<footer>
 
-    </section>
+<p>
+© <span id="year"></span>
+<strong>Magische Heuvel</strong>
+— Minecraft Themapark
+</p>
 
+</footer>
 
-    <!-- ============================================================
-         TEAM  —  namen pas je aan in het <script> onderaan
-                  (zoek op:  const TEAM_GROUPS)
-         ============================================================ -->
-    <section id="team">
 
+<script>
 
-      <h2 class="section-title">
-        👑 ONS TEAM
-      </h2>
+/* =========================================
+   INSTELLINGEN
+========================================= */
 
+const ADMIN_CODE = "MH2026ADMIN";
 
-      <div
-        class="attractions-grid"
-        id="teamGrid"
-      ></div>
 
+/* =========================================
+   PAGINA'S
+========================================= */
 
-    </section>
+function showPage(id) {
 
-
-  </div>
-
-
-  <footer id="contact">
-
-
-    <p>
-      &copy; 2026 Magische Heuvel -
-      Een Minecraft Themapark vol Magie
-    </p>
-
-
-    <p style="margin-top: 1rem;">
-
-
-      <a
-        href="https://discord.com/channels/1418964223546884351/"
-        target="_blank"
-      >
-        📱 Join Discord Community →
-      </a>
-
-
-    </p>
-
-
-  </footer>
-
-
-  <div
-    id="serverModal"
-    class="server-modal"
-    aria-hidden="true"
-  >
-
-
-    <div class="server-modal-content">
-
-
-      <h2>
-        🎮 Speel Magische Heuvel
-      </h2>
-
-
-      <p>
-        Gebruik dit adres om verbinding te maken
-        met de Minecraft-server:
-      </p>
-
-
-      <div class="server-ip">
-        gp-node-01.future-node.com:35003
-      </div>
-
-
-      <div class="modal-buttons">
-
-
-        <button
-          type="button"
-          class="modal-btn copy-btn"
-          onclick="copyServerIP()"
-        >
-          📋 Kopieer IP
-        </button>
-
-
-        <button
-          type="button"
-          class="modal-btn close-btn"
-          onclick="closeServerPopup()"
-        >
-          ✕ Sluiten
-        </button>
-
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ============================================================
-       LOGIN / REGISTREER VENSTER
-       ============================================================ -->
-  <div
-    id="authModal"
-    class="auth-modal"
-  >
-
-
-    <div class="auth-box">
-
-
-      <h2 id="authTitle">Inloggen</h2>
-
-
-      <p class="auth-sub" id="authSub">
-        Log in met je account
-      </p>
-
-
-      <input
-        type="text"
-        id="authName"
-        placeholder="Gebruikersnaam"
-        style="display: none;"
-        autocomplete="username"
-      >
-
-
-      <input
-        type="email"
-        id="authEmail"
-        placeholder="E-mailadres"
-        autocomplete="email"
-      >
-
-
-      <input
-        type="password"
-        id="authPass"
-        placeholder="Wachtwoord"
-        autocomplete="current-password"
-      >
-
-
-      <div class="auth-msg" id="authMsg"></div>
-
-
-      <!-- VERIFICATIE -->
-      <div
-        id="verifyBox"
-        class="verify-box"
-        style="display: none;"
-      >
-
-
-        <div class="verify-label">
-          🔐 Verificatiecode
-        </div>
-
-
-        <div
-          class="verify-code"
-          id="verifyCode"
-        ></div>
-
-
-        <div class="verify-hint">
-          Typ bovenstaande code over
-          om te bevestigen
-        </div>
-
-
-        <input
-          type="text"
-          id="verifyInput"
-          placeholder="Code invullen"
-          maxlength="6"
-          inputmode="numeric"
-          style="text-align: center;
-                 letter-spacing: 5px;
-                 font-size: 1.3rem;"
-        >
-
-
-      </div>
-
-
-      <button
-        type="button"
-        class="modal-btn copy-btn"
-        style="width: 100%;"
-        id="authSubmit"
-        onclick="submitAuth()"
-      >
-        Inloggen
-      </button>
-
-
-      <div class="auth-switch" id="authSwitch">
-        Nog geen account?
-        <a onclick="openAuth('register')">
-          Maak er een aan
-        </a>
-      </div>
-
-
-      <div class="auth-switch">
-        <a onclick="closeAuth()">Sluiten</a>
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-  <script>
-    /* ==================================================================
-       ▼▼▼  DIRECTIE-TOEGANG  ▼▼▼
-       Dit e-mailadres is de hoofdbeheerder en krijgt altijd
-       toegang tot de directiepagina.
-       ================================================================== */
-    const OWNER_EMAIL = "weszonneveld@gmail.com";
-    /* ▲▲▲  EINDE  ▲▲▲ */
-
-
-    function getUsers() {
-      try {
-        return JSON.parse(
-          localStorage.getItem("mh_users") || "[]"
-        );
-      } catch (e) {
-        return [];
-      }
-    }
-
-
-    function saveUsers(list) {
-      localStorage.setItem(
-        "mh_users",
-        JSON.stringify(list)
-      );
-    }
-
-
-    function getCurrentUser() {
-      try {
-        return JSON.parse(
-          localStorage.getItem("mh_current") || "null"
-        );
-      } catch (e) {
-        return null;
-      }
-    }
-
-
-    /* --- lijst van e-mails die ooit gebruikt zijn.
-           Een adres hierin kan NIET opnieuw worden
-           geregistreerd, ook niet na verwijderen. --- */
-    function getUsedEmails() {
-      try {
-        return JSON.parse(
-          localStorage.getItem("mh_used") || "[]"
-        );
-      } catch (e) {
-        return [];
-      }
-    }
-
-
-    function saveUsedEmails(list) {
-      localStorage.setItem(
-        "mh_used",
-        JSON.stringify(list)
-      );
-    }
-
-
-    function markEmailUsed(email) {
-      const used = getUsedEmails();
-      const low = email.toLowerCase();
-
-
-      if (used.indexOf(low) === -1) {
-        used.push(low);
-        saveUsedEmails(used);
-      }
-    }
-
-
-    function isEmailUsed(email) {
-      return (
-        getUsedEmails().indexOf(
-          email.toLowerCase()
-        ) !== -1
-      );
-    }
-
-
-    function isDirectie(user) {
-      if (!user) {
-        return false;
-      }
-
-
-      if (
-        user.email.toLowerCase() ===
-        OWNER_EMAIL.toLowerCase()
-      ) {
-        return true;
-      }
-
-
-      const users = getUsers();
-
-
-      const fresh = users.find(function(u) {
-        return u.email === user.email;
-      });
-
-
-      return fresh
-        ? fresh.directie === true
-        : user.directie === true;
-    }
-
-
-    function getGrants() {
-      try {
-        return JSON.parse(
-          localStorage.getItem("mh_grants") || "{}"
-        );
-      } catch (e) {
-        return {};
-      }
-    }
-
-
-    function consumeGrant(email, name) {
-      const g = getGrants();
-      const keys = [];
-
-
-      if (email) {
-        keys.push(email.toLowerCase());
-      }
-
-
-      if (name) {
-        keys.push(name.toLowerCase());
-      }
-
-
-      let role = null;
-
-
-      keys.forEach(function(k) {
-        if (g[k] && !role) {
-          role = g[k];
-          delete g[k];
-        }
-      });
-
-
-      if (role) {
-        localStorage.setItem(
-          "mh_grants",
-          JSON.stringify(g)
-        );
-      }
-
-
-      return role;
-    }
-
-
-    function isTeamlid(user) {
-      if (!user) {
-        return false;
-      }
-
-
-      if (isDirectie(user)) {
-        return true;
-      }
-
-
-      const fresh = getUsers().find(function(u) {
-        return u.email === user.email;
-      });
-
-
-      return fresh ? fresh.team === true : false;
-    }
-
-
-    function syncOwner() {
-      const users = getUsers();
-      let changed = false;
-
-
-      users.forEach(function(u) {
-        if (
-          u.email.toLowerCase() ===
-            OWNER_EMAIL.toLowerCase() &&
-          !u.directie
-        ) {
-          u.directie = true;
-          changed = true;
-        }
-      });
-
-
-      if (changed) {
-        saveUsers(users);
-      }
-    }
-
-
-    let authMode = "login";
-
-
-    function openAuth(mode) {
-      authMode = mode || "login";
-      const isReg = authMode === "register";
-
-
-      document.getElementById("authTitle")
-        .textContent =
-          isReg ? "Account aanmaken" : "Inloggen";
-
-
-      document.getElementById("authSub")
-        .textContent = isReg
-          ? "Maak een account voor Magische Heuvel"
-          : "Log in met je account";
-
-
-      document.getElementById("authName")
-        .style.display = isReg ? "block" : "none";
-
-
-      document.getElementById("authSubmit")
-        .textContent =
-          isReg ? "Account aanmaken" : "Inloggen";
-
-
-      document.getElementById("authSwitch")
-        .innerHTML = isReg
-          ? 'Heb je al een account? ' +
-            '<a onclick="openAuth(\'login\')">' +
-            'Inloggen</a>'
-          : 'Nog geen account? ' +
-            '<a onclick="openAuth(\'register\')">' +
-            'Maak er een aan</a>';
-
-
-      setMsg("");
-      hideVerify();
-
-
-      document.getElementById("authModal")
-        .classList.add("show");
-    }
-
-
-    /* --- verificatiecode --- */
-    let pendingCode = null;
-    let pendingAction = null;
-
-
-    function makeCode() {
-      return String(
-        Math.floor(100000 + Math.random() * 900000)
-      );
-    }
-
-
-    function showVerify(action) {
-      pendingAction = action;
-      pendingCode = makeCode();
-
-
-      document.getElementById("verifyCode")
-        .textContent = pendingCode;
-
-
-      document.getElementById("verifyInput")
-        .value = "";
-
-
-      document.getElementById("verifyBox")
-        .style.display = "block";
-
-
-      document.getElementById("authSubmit")
-        .textContent = "✅ Bevestigen";
-
-
-      document.getElementById("authName")
-        .style.display = "none";
-
-
-      document.getElementById("authEmail")
-        .style.display = "none";
-
-
-      document.getElementById("authPass")
-        .style.display = "none";
-
-
-      document.getElementById("authSub")
-        .textContent =
-          "Bevestig dat jij het bent";
-
-
-      setMsg("");
-
-
-      document.getElementById("verifyInput")
-        .focus();
-    }
-
-
-    function hideVerify() {
-      pendingCode = null;
-      pendingAction = null;
-
-
-      const box =
-        document.getElementById("verifyBox");
-
-
-      if (box) {
-        box.style.display = "none";
-      }
-
-
-      document.getElementById("authEmail")
-        .style.display = "block";
-
-
-      document.getElementById("authPass")
-        .style.display = "block";
-    }
-
-
-    function closeAuth() {
-      document.getElementById("authModal")
-        .classList.remove("show");
-    }
-
-
-    function setMsg(text, ok) {
-      const el = document.getElementById("authMsg");
-      el.textContent = text;
-      el.className = ok ? "auth-msg ok" : "auth-msg";
-    }
-
-
-    function submitAuth() {
-
-
-      /* stap 2: code controleren */
-      if (pendingCode) {
-
-
-        const typed = document
-          .getElementById("verifyInput")
-          .value.trim();
-
-
-        if (typed !== pendingCode) {
-          setMsg("Onjuiste code, probeer opnieuw.");
-          return;
-        }
-
-
-        const act = pendingAction;
-        hideVerify();
-        finishAuth(act);
-        return;
-      }
-
-
-      doValidate();
-    }
-
-
-    function finishAuth(act) {
-      const users = getUsers();
-
-
-      if (act.mode === "register") {
-
-
-        const granted =
-          consumeGrant(act.email, act.name);
-
-
-        const newUser = {
-          name: act.name,
-          email: act.email,
-          pass: act.pass,
-          verified: true,
-          directie:
-            act.email === OWNER_EMAIL.toLowerCase() ||
-            granted === "directie",
-          team:
-            granted === "team" ||
-            granted === "directie"
-        };
-
-
-        if (inviteRole === "directie") {
-          newUser.directie = true;
-          newUser.team = true;
-        } else if (inviteRole === "team") {
-          newUser.team = true;
-        }
-
-
-        users.push(newUser);
-        saveUsers(users);
-        markEmailUsed(act.email);
-
-
-        localStorage.setItem(
-          "mh_current",
-          JSON.stringify(newUser)
-        );
-
-
-        setMsg(
-          "Geverifieerd! Account aangemaakt 🎉",
-          true
-        );
-
-
-      } else {
-
-
-        const found = users.find(function(u) {
-          return u.email === act.email;
-        });
-
-
-        if (
-          found.email === OWNER_EMAIL.toLowerCase()
-        ) {
-          found.directie = true;
-          found.team = true;
-        }
-
-
-        /* rechten die intussen zijn klaargezet */
-        const g2 = consumeGrant(
-          found.email,
-          found.name
-        );
-
-
-        if (g2 === "directie") {
-          found.directie = true;
-          found.team = true;
-        } else if (g2 === "team") {
-          found.team = true;
-        }
-
-
-        if (inviteRole === "directie") {
-          found.directie = true;
-          found.team = true;
-        } else if (inviteRole === "team") {
-          found.team = true;
-        }
-
-
-        found.verified = true;
-        saveUsers(users);
-
-
-        localStorage.setItem(
-          "mh_current",
-          JSON.stringify(found)
-        );
-
-
-        setMsg("Geverifieerd! Ingelogd 🎉", true);
-      }
-
-
-      if (inviteRole) {
-        inviteRole = null;
-
-
-        history.replaceState(
-          {}, "", window.location.pathname
-        );
-      }
-
-
-      setTimeout(function() {
-        closeAuth();
-        refreshAuthUI();
-      }, 800);
-    }
-
-
-    function doValidate() {
-      const name = document
-        .getElementById("authName").value.trim();
-
-
-      const email = document
-        .getElementById("authEmail")
-        .value.trim().toLowerCase();
-
-
-      const pass = document
-        .getElementById("authPass").value;
-
-
-      if (!email || !pass) {
-        setMsg("Vul je e-mail en wachtwoord in.");
-        return;
-      }
-
-
-      const users = getUsers();
-
-
-      if (authMode === "register") {
-
-
-        if (!name) {
-          setMsg("Vul een gebruikersnaam in.");
-          return;
-        }
-
-
-        if (pass.length < 4) {
-          setMsg(
-            "Wachtwoord moet minstens 4 tekens zijn."
-          );
-          return;
-        }
-
-
-        const exists = users.some(function(u) {
-          return u.email === email;
-        });
-
-
-        if (exists) {
-          setMsg("Dit e-mailadres bestaat al.");
-          return;
-        }
-
-
-        /* e-mail is ooit gebruikt en weer
-           verwijderd -> blijft geblokkeerd */
-        if (isEmailUsed(email)) {
-          setMsg(
-            "Dit e-mailadres is al eens gebruikt " +
-            "en kan niet opnieuw worden " +
-            "geregistreerd."
-          );
-          return;
-        }
-
-
-        showVerify({
-          mode: "register",
-          name: name,
-          email: email,
-          pass: pass
-        });
-
-
-        return;
-      }
-
-
-      const found = users.find(function(u) {
-        return u.email === email && u.pass === pass;
-      });
-
-
-      if (!found) {
-        setMsg("Onjuiste e-mail of wachtwoord.");
-        return;
-      }
-
-
-      showVerify({
-        mode: "login",
-        email: email
-      });
-    }
-
-
-    function doLogout() {
-      localStorage.removeItem("mh_current");
-      refreshAuthUI();
-    }
-
-
-    function refreshAuthUI() {
-      const user = getCurrentUser();
-
-
-      const chip =
-        document.getElementById("userChip");
-
-
-      const loginBtn =
-        document.getElementById("loginBtn");
-
-
-      const logoutBtn =
-        document.getElementById("logoutBtn");
-
-
-      const dirLink =
-        document.getElementById("directieLink");
-
-
-      const teamLink =
-        document.getElementById("teamPageLink");
-
-
-      if (!chip) {
-        return;
-      }
-
-
-      if (user) {
-        chip.textContent = "👤 " + user.name;
-        chip.style.display = "inline-block";
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-        dirLink.style.display =
-          isDirectie(user) ? "inline-block" : "none";
-
-
-        teamLink.style.display =
-          isTeamlid(user) ? "inline-block" : "none";
-      } else {
-        chip.style.display = "none";
-        loginBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-        dirLink.style.display = "none";
-        teamLink.style.display = "none";
-      }
-    }
-
-
-    document.addEventListener("keydown", function(e) {
-      if (
-        e.key === "Enter" &&
-        document.getElementById("authModal")
-          .classList.contains("show")
-      ) {
-        submitAuth();
-      }
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
     });
 
+    const page = document.getElementById(id);
 
-    /* klaargezette rechten toepassen op het
-       al ingelogde account */
-    (function applyGrantsOnLoad() {
-      const cur = getCurrentUser();
-
-
-      if (!cur) {
-        return;
-      }
-
-
-      const role = consumeGrant(cur.email, cur.name);
-
-
-      if (!role) {
-        return;
-      }
-
-
-      const users = getUsers();
-
-
-      const u = users.find(function(x) {
-        return x.email === cur.email;
-      });
-
-
-      if (u) {
-        if (role === "directie") {
-          u.directie = true;
-          u.team = true;
-        } else {
-          u.team = true;
-        }
-
-
-        saveUsers(users);
-
-
-        localStorage.setItem(
-          "mh_current",
-          JSON.stringify(u)
-        );
-      }
-    })();
-
-
-    /* --- uitnodigingslink uitlezen --- */
-    function readInvite() {
-      const p = new URLSearchParams(
-        window.location.search
-      );
-
-
-      const role = p.get("invite");
-      const k = p.get("k");
-
-
-      if (!role) {
-        return null;
-      }
-
-
-      const ok =
-        (role === "directie" && k === "d7k2") ||
-        (role === "team" && k === "t9m4");
-
-
-      return ok ? role : null;
+    if (page) {
+        page.classList.add("active");
     }
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-    let inviteRole = readInvite();
+}
 
 
-    function showInviteBanner() {
-      if (!inviteRole) {
-        return;
-      }
+/* =========================================
+   DATA
+========================================= */
 
+function getUsers() {
 
-      const cur = getCurrentUser();
-
-
-      /* al ingelogd -> meteen toepassen */
-      if (cur) {
-        applyInviteTo(cur.email);
-
-
-        alert(
-          "\u2705 Je hebt nu " +
-          (inviteRole === "directie"
-            ? "directie" : "team") +
-          "-rechten!"
-        );
-
-
-        inviteRole = null;
-
-
-        history.replaceState(
-          {}, "", window.location.pathname
-        );
-
-
-        refreshAuthUI();
-        return;
-      }
-
-
-      /* niet ingelogd -> registratievenster */
-      setTimeout(function() {
-        openAuth("register");
-
-
-        setMsg(
-          "\ud83c\udf9f\ufe0f Uitnodiging voor " +
-          (inviteRole === "directie"
-            ? "DIRECTIE" : "TEAM") +
-          " - maak je account aan",
-          true
-        );
-      }, 400);
-    }
-
-
-    function applyInviteTo(email) {
-      const users = getUsers();
-
-
-      const u = users.find(function(x) {
-        return x.email === email;
-      });
-
-
-      if (!u) {
-        return;
-      }
-
-
-      if (inviteRole === "directie") {
-        u.directie = true;
-        u.team = true;
-      } else if (inviteRole === "team") {
-        u.team = true;
-      }
-
-
-      saveUsers(users);
-
-
-      localStorage.setItem(
-        "mh_current",
-        JSON.stringify(u)
-      );
-    }
-
-
-    syncOwner();
-    refreshAuthUI();
-    showInviteBanner();
-
-
-    /* ==================================================================
-       ▼▼▼  TEAM  —  rangen en namen aanpassen  ▼▼▼
-       Bovenste groep staat bovenaan de piramide.
-       Zet namen tussen "" met komma's ertussen.
-       ================================================================== */
-    const TEAM_GROUPS = [
-      {
-        icon: "👑",
-        rank: "Algemeen Directeur",
-        members: ["SANCOPHAS"]
-      },
-      {
-        icon: "🏛️",
-        rank: "Directie",
-        members: ["TomasIlze", "Wesosaurus"]
-      },
-      {
-        icon: "📋",
-        rank: "Algemeen Management",
-        members: ["Daylano"]
-      },
-      {
-        icon: "🛠️",
-        rank: "Management",
-        members: ["EftelNathan", "Axel", "Fedde"]
-      },
-      {
-        icon: "👷",
-        rank: "Team",
-        members: [
-          "Alisha",
-          "Funleader36",
-          "Luka",
-          "Snoer",
-          "Kyan",
-          "Matthijs",
-          "Vince"
-        ]
-      }
-    ];
-    /* ▲▲▲  EINDE TEAM  ▲▲▲ */
-
-
-    function renderTeam() {
-      const grid =
-        document.getElementById("teamGrid");
-
-
-      if (!grid) {
-        return;
-      }
-
-
-      grid.innerHTML = TEAM_GROUPS
-        .map(function(group) {
-          return (
-            '<div class="attraction-card">' +
-              "<h3>" +
-                group.icon + " " + group.rank +
-              "</h3>" +
-              "<p>" +
-                group.members.join("<br>") +
-              "</p>" +
-            "</div>"
-          );
-        })
-        .join("");
-    }
-
-
-    renderTeam();
-
-
-    /* ==================================================================
-       ▼▼▼  OPENINGSDATUM  —  HIER AANPASSEN  ▼▼▼
-       Volgorde: jaar, maand, dag, uur, minuut
-       LET OP: maand telt vanaf 0 → 0=jan, 9=okt, 11=dec
-       Hieronder: 18 oktober 2026 om 15:00 uur
-       ================================================================== */
-    const OPENING_DATE =
-      new Date(2026, 9, 18, 15, 0);
-
-
-    const OPENING_TEXT = "18 oktober";
-    /* ▲▲▲  EINDE OPENINGSDATUM  ▲▲▲ */
-
-
-    function updateCountdown() {
-      const box =
-        document.getElementById("countdown");
-
-
-      const label =
-        document.getElementById("openingDate");
-
-
-      if (!box) {
-        return;
-      }
-
-
-      if (label) {
-        label.textContent = OPENING_TEXT;
-      }
-
-
-      const diff = OPENING_DATE - new Date();
-
-
-      if (diff <= 0) {
-        box.innerHTML =
-          '<div class="opening-open">' +
-          "🎊 We zijn OPEN! Kom langs!" +
-          "</div>";
-        return;
-      }
-
-
-      const sec = Math.floor(diff / 1000);
-      const days = Math.floor(sec / 86400);
-      const hours = Math.floor((sec % 86400) / 3600);
-      const mins = Math.floor((sec % 3600) / 60);
-      const secs = sec % 60;
-
-
-      const parts = [
-        [days, "DAGEN"],
-        [hours, "UREN"],
-        [mins, "MIN"],
-        [secs, "SEC"]
-      ];
-
-
-      box.innerHTML = parts
-        .map(function(p) {
-          return (
-            '<div class="countdown-box">' +
-              '<span class="countdown-num">' +
-                p[0] +
-              "</span>" +
-              '<span class="countdown-lbl">' +
-                p[1] +
-              "</span>" +
-            "</div>"
-          );
-        })
-        .join("");
-    }
-
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-
-    const serverIP =
-      "gp-node-01.future-node.com:35003";
-
-
-    function openServerPopup() {
-      const modal =
-        document.getElementById("serverModal");
-
-
-      modal.classList.add("show");
-
-
-      modal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-    }
-
-
-    function closeServerPopup() {
-      const modal =
-        document.getElementById("serverModal");
-
-
-      modal.classList.remove("show");
-
-
-      modal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-    }
-
-
-    function copyServerIP() {
-      navigator.clipboard
-        .writeText(serverIP)
-        .then(() => {
-          alert(
-            "Minecraft server IP gekopieerd! 🎉"
-          );
-        })
-        .catch(() => {
-          alert(
-            "IP: " + serverIP
-          );
-        });
-    }
-
-
-    document
-      .getElementById("serverModal")
-      .addEventListener(
-        "click",
-        function(event) {
-
-
-          if (event.target === this) {
-            closeServerPopup();
-          }
-
-
-        }
-      );
-
-
-    document.addEventListener(
-      "keydown",
-      function(event) {
-
-
-        if (event.key === "Escape") {
-          closeServerPopup();
-        }
-
-
-      }
+    return JSON.parse(
+        localStorage.getItem("mh_users") || "[]"
     );
-  </script>
 
+}
+
+function saveUsers(users) {
+
+    localStorage.setItem(
+        "mh_users",
+        JSON.stringify(users)
+    );
+
+}
+
+function getApplications() {
+
+    return JSON.parse(
+        localStorage.getItem("mh_applications") || "[]"
+    );
+
+}
+
+function saveApplications(applications) {
+
+    localStorage.setItem(
+        "mh_applications",
+        JSON.stringify(applications)
+    );
+
+}
+
+function currentUser() {
+
+    return localStorage.getItem("mh_currentUser");
+
+}
+
+
+/* =========================================
+   REGISTREREN
+========================================= */
+
+function register(event) {
+
+    event.preventDefault();
+
+    const username =
+        document.getElementById("registerUsername").value.trim();
+
+    const email =
+        document.getElementById("registerEmail").value.trim();
+
+    const password =
+        document.getElementById("registerPassword").value;
+
+    const password2 =
+        document.getElementById("registerPassword2").value;
+
+    const users = getUsers();
+
+    if (password !== password2) {
+
+        message(
+            "registerMessage",
+            "De wachtwoorden komen niet overeen.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (users.some(user =>
+        user.email.toLowerCase() === email.toLowerCase()
+    )) {
+
+        message(
+            "registerMessage",
+            "Er bestaat al een account met dit e-mailadres.",
+            "error"
+        );
+
+        return;
+    }
+
+    users.push({
+        id: Date.now(),
+        username: username,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+    });
+
+    saveUsers(users);
+
+    localStorage.setItem(
+        "mh_currentUser",
+        email
+    );
+
+    message(
+        "registerMessage",
+        "Je account is aangemaakt!",
+        "success"
+    );
+
+    setTimeout(() => {
+        updateAccount();
+        showPage("account");
+    }, 700);
+
+}
+
+
+/* =========================================
+   INLOGGEN
+========================================= */
+
+function login(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    const users = getUsers();
+
+    const user = users.find(u =>
+        u.email.toLowerCase() === email.toLowerCase()
+        &&
+        u.password === password
+    );
+
+    if (!user) {
+
+        message(
+            "loginMessage",
+            "Het e-mailadres of wachtwoord is onjuist.",
+            "error"
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "mh_currentUser",
+        user.email
+    );
+
+    message(
+        "loginMessage",
+        "Succesvol ingelogd!",
+        "success"
+    );
+
+    setTimeout(() => {
+
+        updateNavigation();
+        updateAccount();
+        showPage("account");
+
+    }, 500);
+
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+function accountPage() {
+
+    if (currentUser()) {
+
+        updateAccount();
+        showPage("account");
+
+    } else {
+
+        showPage("login");
+
+    }
+
+}
+
+
+function updateAccount() {
+
+    const email = currentUser();
+
+    if (!email) return;
+
+    const user = getUsers().find(u =>
+        u.email === email
+    );
+
+    if (!user) return;
+
+    document.getElementById(
+        "profileUsername"
+    ).textContent = user.username;
+
+    document.getElementById(
+        "profileEmail"
+    ).textContent = user.email;
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        user.username.charAt(0).toUpperCase();
+
+    loadMyApplications();
+
+}
+
+
+/* =========================================
+   SOLLICITEREN
+========================================= */
+
+function apply(functionName) {
+
+    if (!currentUser()) {
+
+        showPage("login");
+
+        message(
+            "loginMessage",
+            "Log eerst in om te kunnen solliciteren.",
+            "error"
+        );
+
+        return;
+    }
+
+    document.getElementById(
+        "applicationFunction"
+    ).value = functionName;
+
+    showPage("sollicitatie");
+
+}
+
+
+/* =========================================
+   SOLLICITATIE OPSLAAN
+========================================= */
+
+function submitApplication(event) {
+
+    event.preventDefault();
+
+    const email = currentUser();
+
+    if (!email) {
+
+        showPage("login");
+        return;
+
+    }
+
+    const application = {
+
+        id: Date.now(),
+
+        email: email,
+
+        function:
+            document.getElementById("applicationFunction").value,
+
+        minecraftName:
+            document.getElementById("minecraftName").value.trim(),
+
+        age:
+            document.getElementById("age").value,
+
+        experience:
+            document.getElementById("experience").value.trim(),
+
+        motivation:
+            document.getElementById("motivation").value.trim(),
+
+        availability:
+            document.getElementById("availability").value.trim(),
+
+        status:
+            "In behandeling",
+
+        date:
+            new Date().toLocaleString("nl-NL")
+
+    };
+
+    const applications = getApplications();
+
+    applications.push(application);
+
+    saveApplications(applications);
+
+    message(
+        "applicationMessage",
+        "Je sollicitatie is succesvol verstuurd!",
+        "success"
+    );
+
+    document.querySelector(
+        "#sollicitatie form"
+    ).reset();
+
+    setTimeout(() => {
+
+        updateAccount();
+        showPage("account");
+
+    }, 800);
+
+}
+
+
+/* =========================================
+   MIJN SOLLICITATIES
+========================================= */
+
+function loadMyApplications() {
+
+    const email = currentUser();
+
+    const applications =
+        getApplications().filter(
+            app => app.email === email
+        );
+
+    const container =
+        document.getElementById("myApplications");
+
+    if (applications.length === 0) {
+
+        container.innerHTML = `
+            <p style="color:#888;margin-top:15px;">
+                Je hebt nog geen sollicitaties verstuurd.
+            </p>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = applications
+        .slice()
+        .reverse()
+        .map(app => `
+
+            <div class="application">
+
+                <strong>
+                    ${safe(app.function)}
+                </strong>
+
+                <br>
+
+                <span style="color:#bbb;">
+                    Minecraft-naam:
+                    ${safe(app.minecraftName)}
+                </span>
+
+                <br>
+
+                <small>
+                    ${safe(app.date)}
+                </small>
+
+                <br>
+
+                <span class="status">
+                    ${safe(app.status)}
+                </span>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================
+   ADMIN LOGIN
+========================================= */
+
+function adminLogin(event) {
+
+    event.preventDefault();
+
+    const code =
+        document.getElementById("adminCode").value;
+
+    if (code !== ADMIN_CODE) {
+
+        message(
+            "adminMessage",
+            "De beheerderscode is onjuist.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    sessionStorage.setItem(
+        "mh_admin",
+        "true"
+    );
+
+    document.getElementById(
+        "adminCode"
+    ).value = "";
+
+    loadAdminApplications();
+
+    showPage("admin");
+
+}
+
+
+/* =========================================
+   ADMIN PANEL
+========================================= */
+
+function loadAdminApplications() {
+
+    if (sessionStorage.getItem("mh_admin") !== "true") {
+
+        showPage("adminLogin");
+        return;
+
+    }
+
+    const applications =
+        getApplications();
+
+    const tbody =
+        document.getElementById("adminApplications");
+
+    if (applications.length === 0) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    Er zijn nog geen sollicitaties.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML =
+        applications
+        .slice()
+        .reverse()
+        .map(app => `
+
+        <tr>
+
+            <td>
+                ${safe(app.minecraftName)}
+            </td>
+
+            <td>
+                ${safe(app.email)}
+            </td>
+
+            <td>
+                ${safe(app.function)}
+            </td>
+
+            <td>
+                ${safe(app.date)}
+            </td>
+
+            <td>
+
+                <button
+                    class="btn primary"
+                    onclick="viewApplication(${app.id})">
+                    Bekijken
+                </button>
+
+            </td>
+
+        </tr>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================
+   SOLLICITATIE BEKIJKEN
+========================================= */
+
+function viewApplication(id) {
+
+    const application =
+        getApplications().find(
+            app => app.id === id
+        );
+
+    if (!application) return;
+
+    document.getElementById(
+        "adminDetail"
+    ).innerHTML = `
+
+        <div class="admin-detail">
+
+            <h3>Sollicitatie bekijken</h3>
+
+            <p>
+                <strong>E-mailadres:</strong><br>
+                ${safe(application.email)}
+            </p>
+
+            <p>
+                <strong>Minecraft-naam:</strong><br>
+                ${safe(application.minecraftName)}
+            </p>
+
+            <p>
+                <strong>Vacature:</strong><br>
+                ${safe(application.function)}
+            </p>
+
+            <p>
+                <strong>Leeftijd:</strong><br>
+                ${safe(application.age)}
+            </p>
+
+            <p>
+                <strong>Ervaring:</strong><br>
+                ${safe(application.experience)}
+            </p>
+
+            <p>
+                <strong>Motivatie:</strong><br>
+                ${safe(application.motivation)}
+            </p>
+
+            <p>
+                <strong>Beschikbaarheid:</strong><br>
+                ${safe(application.availability)}
+            </p>
+
+            <p>
+                <strong>Datum:</strong><br>
+                ${safe(application.date)}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+            </p>
+
+            <select
+                id="status-${application.id}"
+                onchange="changeStatus(${application.id}, this.value)">
+
+                <option ${application.status === "In behandeling" ? "selected" : ""}>
+                    In behandeling
+                </option>
+
+                <option ${application.status === "Aangenomen" ? "selected" : ""}>
+                    Aangenomen
+                </option>
+
+                <option ${application.status === "Afgewezen" ? "selected" : ""}>
+                    Afgewezen
+                </option>
+
+            </select>
+
+            <button
+                class="btn dark"
+                style="margin-top:15px;"
+                onclick="deleteApplication(${application.id})">
+
+                Sollicitatie verwijderen
+
+            </button>
+
+        </div>
+    `;
+
+}
+
+
+/* =========================================
+   STATUS WIJZIGEN
+========================================= */
+
+function changeStatus(id, status) {
+
+    const applications =
+        getApplications();
+
+    const application =
+        applications.find(
+            app => app.id === id
+        );
+
+    if (!application) return;
+
+    application.status = status;
+
+    saveApplications(applications);
+
+    loadAdminApplications();
+
+    viewApplication(id);
+
+}
+
+
+/* =========================================
+   SOLLICITATIE VERWIJDEREN
+========================================= */
+
+function deleteApplication(id) {
+
+    const confirmed =
+        confirm(
+            "Weet je zeker dat je deze sollicitatie wilt verwijderen?"
+        );
+
+    if (!confirmed) return;
+
+    const applications =
+        getApplications()
+        .filter(app => app.id !== id);
+
+    saveApplications(applications);
+
+    document.getElementById(
+        "adminDetail"
+    ).innerHTML = "";
+
+    loadAdminApplications();
+
+}
+
+
+/* =========================================
+   ADMIN UITLOGGEN
+========================================= */
+
+function adminLogout() {
+
+    sessionStorage.removeItem("mh_admin");
+
+    showPage("home");
+
+}
+
+
+/* =========================================
+   NORMALE UITLOG
+========================================= */
+
+function logout() {
+
+    localStorage.removeItem(
+        "mh_currentUser"
+    );
+
+    updateNavigation();
+
+    showPage("home");
+
+}
+
+
+/* =========================================
+   NAVIGATIE
+========================================= */
+
+function updateNavigation() {
+
+    const button =
+        document.getElementById("accountButton");
+
+    if (currentUser()) {
+
+        button.textContent =
+            "Mijn account";
+
+    } else {
+
+        button.textContent =
+            "Inloggen";
+
+    }
+
+}
+
+
+/* =========================================
+   MELDING
+========================================= */
+
+function message(id, text, type) {
+
+    const element =
+        document.getElementById(id);
+
+    element.textContent = text;
+
+    element.className =
+        "message show " + type;
+
+}
+
+
+/* =========================================
+   HTML VEILIG MAKEN
+========================================= */
+
+function safe(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value == null ? "" : String(value);
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+document.getElementById(
+    "year"
+).textContent = new Date().getFullYear();
+
+updateNavigation();
+
+</script>
 
 </body>
 </html>
+```
