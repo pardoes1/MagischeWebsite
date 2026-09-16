@@ -1056,13 +1056,26 @@ Beheerder uitloggen
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
+
+emailjs.init({
+    publicKey: "YOUR_EMAILJS_PUBLIC_KEY"
+});
 
 /* =========================================
    INSTELLINGEN
 ========================================= */
 
 const ADMIN_CODE = "MH2026ADMIN";
+
+/*
+   EMAILJS INSTELLINGEN
+   Vul deze 3 waarden in vanuit je EmailJS-account.
+*/
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_STATUS_TEMPLATE_ID = "YOUR_STATUS_TEMPLATE_ID";
 
 
 /* =========================================
@@ -1698,7 +1711,7 @@ function viewApplication(id) {
    STATUS WIJZIGEN
 ========================================= */
 
-function changeStatus(id, status) {
+async function changeStatus(id, status) {
 
     const applications =
         getApplications();
@@ -1710,13 +1723,52 @@ function changeStatus(id, status) {
 
     if (!application) return;
 
+    const oldStatus = application.status;
+
     application.status = status;
 
     saveApplications(applications);
 
     loadAdminApplications();
-
     viewApplication(id);
+
+    // Alleen een mail sturen als de status echt verandert
+    // naar Aangenomen of Afgewezen.
+    if (
+        status !== oldStatus &&
+        (status === "Aangenomen" || status === "Afgewezen")
+    ) {
+
+        try {
+
+            await emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_STATUS_TEMPLATE_ID,
+                {
+                    to_email: application.email,
+                    minecraft_name: application.minecraftName,
+                    vacature: application.function,
+                    status: status
+                }
+            );
+
+            message(
+                "adminMessage",
+                "De sollicitatie is bijgewerkt en de kandidaat heeft een e-mail ontvangen.",
+                "success"
+            );
+
+        } catch (error) {
+
+            console.error("E-mail kon niet worden verstuurd:", error);
+
+            alert(
+                "De status is aangepast, maar de e-mail kon niet worden verstuurd. Controleer je EmailJS-instellingen."
+            );
+
+        }
+
+    }
 
 }
 
