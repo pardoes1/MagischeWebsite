@@ -93,6 +93,16 @@ nav button:hover {
     background: linear-gradient(135deg,#a76ce8,#7040b6) !important;
 }
 
+.admin-button {
+    background: linear-gradient(135deg,#f1cc73,#c79b3e) !important;
+    color: #24162f !important;
+    font-weight: 700;
+}
+
+.admin-button:hover {
+    filter: brightness(1.08);
+}
+
 .page {
     display: none;
     max-width: 1200px;
@@ -525,6 +535,7 @@ footer strong {
 <button onclick="showPage('vacatures')">Vacatures</button>
 <button onclick="showPage('overons')">Over ons</button>
 <button class="account-button" id="accountButton" onclick="accountPage()">Inloggen</button>
+<button class="admin-button" onclick="showPage('adminLogin')">👑 Beheerder</button>
 </nav>
 
 </div>
