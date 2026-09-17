@@ -1904,67 +1904,16 @@ Je bent ingelogd op Magische Heuvel.
 
 
 <!-- ==============================
-     ADMIN LOGIN
+     ADMIN TOEGANG
 ============================== -->
 
 <section id="adminLogin" class="page">
-
-
-<div class="form-container">
-
-<div class="form-box">
-
-
-<h2>
-Beheerder
-</h2>
-
-<p>
-Dit gedeelte is alleen toegankelijk voor de
-beheerder van Magische Heuvel.
-</p>
-
-
-<div
-    id="adminMessage"
-    class="message">
-</div>
-
-
-<form onsubmit="adminLogin(event)">
-
-
-<div class="form-group">
-
-<label>
-Beheerderscode
-</label>
-
-<input
-    id="adminCode"
-    type="password"
-    placeholder="Voer de beheerderscode in"
-    required>
-
-</div>
-
-
-<button
-    class="btn gold"
-    style="width:100%">
-
-    Naar beheerpanel
-
-</button>
-
-
-</form>
-
-
-</div>
-
-</div>
-
+<div class="form-container"><div class="form-box">
+<h2>Beheerder</h2>
+<p>Je kunt het beheerpanel openen als je e-mailadres als beheerder is toegevoegd.</p>
+<div id="adminMessage" class="message"></div>
+<button class="btn gold" style="width:100%" onclick="openAdmin()">Naar beheerpanel</button>
+</div></div>
 </section>
 
 
@@ -2053,6 +2002,18 @@ Actie
 </div>
 
 
+<div class="card" style="margin-top:22px;">
+<h3>Beheerders beheren</h3>
+<p style="color:#999; margin-bottom:18px;">Alleen de hoofdbeheerder kan andere geregistreerde gebruikers beheerder maken of verwijderen.</p>
+<div id="adminManager"></div>
+<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+<input id="newAdminEmail" type="email" placeholder="E-mailadres van geregistreerde gebruiker" style="flex:1; min-width:240px;">
+<button class="btn gold" onclick="addAdmin()">+ Beheerder toevoegen</button>
+</div>
+<div id="adminManagerMessage" class="message" style="margin-top:15px;"></div>
+</div>
+
+
 <div class="buttons">
 
 
@@ -2108,8 +2069,6 @@ emailjs.init({
    INSTELLINGEN
 ============================== */
 
-const ADMIN_CODE = "MH2026ADMIN";
-
 const EMAILJS_SERVICE_ID =
     "YOUR_SERVICE_ID";
 
@@ -2155,22 +2114,16 @@ function showPage(id) {
 ============================== */
 
 function openAdmin() {
-
-    if (
-        localStorage.getItem("mh_admin")
-        === "true"
-    ) {
-
-        loadAdminApplications();
-
-        showPage("admin");
-
-    } else {
-
+    const user = currentUser();
+    if (!user) { showPage("login"); return; }
+    if (!isAdmin(user)) {
         showPage("adminLogin");
-
+        message("adminMessage","Je account heeft geen beheerderstoegang.","error");
+        return;
     }
-
+    loadAdminApplications();
+    loadAdminManager();
+    showPage("admin");
 }
 
 
@@ -2708,55 +2661,8 @@ function loadMyApplications() {
 ============================== */
 
 function adminLogin(event) {
-
     event.preventDefault();
-
-
-    const code =
-        document.getElementById(
-            "adminCode"
-        ).value;
-
-
-    if (code !== ADMIN_CODE) {
-
-        message(
-            "adminMessage",
-            "De beheerderscode is onjuist.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    /*
-
-       PERSISTENT ADMIN LOGIN
-
-       This stays active after:
-       - refresh
-       - closing browser
-       - reopening browser
-
-    */
-
-    localStorage.setItem(
-        "mh_admin",
-        "true"
-    );
-
-
-    document.getElementById(
-        "adminCode"
-    ).value = "";
-
-
-    loadAdminApplications();
-
-    showPage("admin");
-
+    openAdmin();
 }
 
 
@@ -2764,18 +2670,64 @@ function adminLogin(event) {
    ADMIN PANEL
 ============================== */
 
+function getAdminEmails() {
+    return JSON.parse(localStorage.getItem("mh_admins") || '["wezonneveld@outlook.com"]');
+}
+
+function saveAdminEmails(emails) {
+    localStorage.setItem("mh_admins", JSON.stringify(emails));
+}
+
+function isMainAdmin(email) {
+    return String(email || "").trim().toLowerCase() === "wezonneveld@outlook.com";
+}
+
+function isAdmin(email) {
+    const normalized = String(email || "").trim().toLowerCase();
+    return isMainAdmin(normalized) || getAdminEmails().map(e => String(e).toLowerCase()).includes(normalized);
+}
+
+function loadAdminManager() {
+    const box = document.getElementById("adminManager");
+    if (!box) return;
+    const input = document.getElementById("newAdminEmail");
+    if (!isMainAdmin(currentUser())) {
+        box.innerHTML = '<p style="color:#aaa;">Alleen de hoofdbeheerder kan beheerders beheren.</p>';
+        if (input) input.style.display = "none";
+        return;
+    }
+    if (input) input.style.display = "";
+    box.innerHTML = getAdminEmails().map(email => {
+        const main = isMainAdmin(email);
+        return `<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.05);border-radius:10px;margin-bottom:8px;"><span style="color:#ddd;">${safe(email)}${main ? ' <strong style="color:#f1cc73;">— Hoofdbeheerder</strong>' : ''}</span>${main ? '' : `<button class="btn dark" onclick="removeAdmin('${safe(email)}')">Verwijderen</button>`}</div>`;
+    }).join("");
+}
+
+function addAdmin() {
+    if (!isMainAdmin(currentUser())) { message("adminManagerMessage","Alleen de hoofdbeheerder kan beheerders toevoegen.","error"); return; }
+    const input = document.getElementById("newAdminEmail");
+    const email = input.value.trim().toLowerCase();
+    if (!email) return;
+    const registered = getUsers().some(user => String(user.email || "").toLowerCase() === email);
+    if (!registered) { message("adminManagerMessage","Dit e-mailadres is nog niet geregistreerd op de website.","error"); return; }
+    const admins = getAdminEmails();
+    if (admins.map(e => String(e).toLowerCase()).includes(email)) { message("adminManagerMessage","Deze gebruiker is al beheerder.","error"); return; }
+    admins.push(email); saveAdminEmails(admins); input.value = ""; loadAdminManager(); message("adminManagerMessage","Beheerder toegevoegd.","success");
+}
+
+function removeAdmin(email) {
+    if (!isMainAdmin(currentUser())) { message("adminManagerMessage","Alleen de hoofdbeheerder kan beheerders verwijderen.","error"); return; }
+    saveAdminEmails(getAdminEmails().filter(admin => String(admin).toLowerCase() !== String(email).toLowerCase()));
+    loadAdminManager(); message("adminManagerMessage","Beheerder verwijderd.","success");
+}
+
 function loadAdminApplications() {
 
-    if (
-        localStorage.getItem(
-            "mh_admin"
-        ) !== "true"
-    ) {
+    const user = currentUser();
 
+    if (!user || !isAdmin(user)) {
         showPage("adminLogin");
-
         return;
-
     }
 
 
@@ -3191,14 +3143,7 @@ function deleteApplication(id) {
 ============================== */
 
 function adminLogout() {
-
-    localStorage.removeItem(
-        "mh_admin"
-    );
-
-
     showPage("home");
-
 }
 
 
@@ -3307,24 +3252,7 @@ document.getElementById(
 updateNavigation();
 
 
-/*
 
-   The admin login is stored in
-   localStorage, so it remains active.
-
-*/
-
-if (
-    localStorage.getItem(
-        "mh_admin"
-    ) === "true"
-) {
-
-    console.log(
-        "Beheerder login actief."
-    );
-
-}
 
 </script>
 
