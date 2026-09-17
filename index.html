@@ -9,9 +9,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Righteous&display=swap" rel="stylesheet">
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -30,6 +32,10 @@ body {
     min-height: 100vh;
 }
 
+/* ==============================
+   HEADER
+============================== */
+
 header {
     position: sticky;
     top: 0;
@@ -43,6 +49,7 @@ header {
     max-width: 1200px;
     margin: auto;
     padding: 13px 22px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,8 +84,10 @@ nav button {
     border: 0;
     background: transparent;
     color: white;
+
     padding: 10px 14px;
     border-radius: 10px;
+
     cursor: pointer;
     font-family: inherit;
 }
@@ -102,11 +111,18 @@ nav button:hover {
     filter: brightness(1.08);
 }
 
+/* ==============================
+   PAGES
+============================== */
+
 .page {
     display: none;
+
     max-width: 1200px;
     margin: auto;
+
     padding: 55px 22px;
+
     animation: fade .3s ease;
 }
 
@@ -115,21 +131,30 @@ nav button:hover {
 }
 
 @keyframes fade {
+
     from {
         opacity: 0;
         transform: translateY(8px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
+
 }
+
+/* ==============================
+   HERO
+============================== */
 
 .hero {
     min-height: 650px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-align: center;
 }
 
@@ -152,31 +177,44 @@ h3 {
 .hero h1 {
     font-size: clamp(48px,8vw,82px);
     color: #f1cc73;
+
     margin-top: 20px;
 }
 
 .hero p {
     color: #ddd;
+
     font-size: 18px;
     line-height: 1.8;
+
     margin-top: 15px;
 }
+
+/* ==============================
+   BUTTONS
+============================== */
 
 .buttons {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+
     margin-top: 30px;
+
     justify-content: center;
 }
 
 .btn {
     border: 0;
     border-radius: 11px;
+
     padding: 13px 21px;
+
     cursor: pointer;
+
     font-family: inherit;
     font-weight: 600;
+
     transition: .2s;
 }
 
@@ -196,9 +234,15 @@ h3 {
 
 .dark {
     background: rgba(255,255,255,.07);
+
     border: 1px solid rgba(255,255,255,.12);
+
     color: white;
 }
+
+/* ==============================
+   SECTIONS
+============================== */
 
 .section-title {
     text-align: center;
@@ -215,17 +259,26 @@ h3 {
     margin-top: 8px;
 }
 
+/* ==============================
+   CARDS
+============================== */
+
 .info-grid,
 .vacature-grid {
     display: grid;
+
     grid-template-columns: repeat(3,1fr);
+
     gap: 22px;
 }
 
 .card {
     background: rgba(255,255,255,.055);
+
     border: 1px solid rgba(255,255,255,.1);
+
     border-radius: 18px;
+
     padding: 28px;
 }
 
@@ -240,41 +293,187 @@ h3 {
 
 .card h3 {
     color: #f1cc73;
+
     font-size: 26px;
+
     margin-bottom: 10px;
 }
 
 .card p {
     color: #bbb;
+
     line-height: 1.7;
 }
 
+/* ==============================
+   VACATURES
+============================== */
+
 .vacature-card {
-    background: linear-gradient(145deg,rgba(72,35,110,.8),rgba(15,8,29,.9));
+    background:
+        linear-gradient(
+            145deg,
+            rgba(72,35,110,.8),
+            rgba(15,8,29,.9)
+        );
+
     border: 1px solid rgba(241,204,115,.2);
+
     border-radius: 20px;
+
     padding: 28px;
 }
 
 .tags {
     display: flex;
     gap: 6px;
+
     flex-wrap: wrap;
+
     margin: 18px 0;
 }
 
 .tag {
     background: rgba(167,108,232,.15);
+
     border: 1px solid rgba(167,108,232,.3);
+
     padding: 5px 9px;
+
     border-radius: 20px;
+
     color: #d7b4f5;
+
     font-size: 12px;
 }
 
 .vacature-card .btn {
     width: 100%;
 }
+
+/* ==============================
+   TEAM
+============================== */
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+}
+
+.team-card {
+    width: 300px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(72,35,110,.85),
+            rgba(15,8,29,.95)
+        );
+
+    border: 1px solid rgba(241,204,115,.25);
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 30px rgba(167,108,232,.12);
+
+    transition: .25s;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(241,204,115,.55);
+
+    box-shadow:
+        0 10px 40px rgba(167,108,232,.25);
+}
+
+.team-role {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8e42d6,
+            #5b2497
+        );
+
+    color: white;
+
+    padding: 9px 18px;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+}
+
+.team-head {
+    width: 180px;
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    display: block;
+
+    margin: 0 auto 20px auto;
+
+    border: 2px solid rgba(241,204,115,.35);
+
+    background: #170d24;
+
+    box-shadow:
+        0 0 25px rgba(167,108,232,.3);
+}
+
+.team-card h3 {
+    font-family: Poppins, sans-serif;
+
+    color: white;
+
+    font-size: 25px;
+
+    margin-bottom: 5px;
+}
+
+.team-card .role {
+    color: #f1cc73;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.team-card .description {
+    color: #999;
+
+    font-size: 13px;
+
+    margin-top: 12px;
+}
+
+/* ==============================
+   FORMS
+============================== */
 
 .form-container {
     max-width: 700px;
@@ -283,19 +482,25 @@ h3 {
 
 .form-box {
     background: rgba(12,7,23,.9);
+
     border: 1px solid rgba(241,204,115,.2);
+
     border-radius: 20px;
+
     padding: 35px;
 }
 
 .form-box h2 {
     color: #f1cc73;
+
     font-size: 35px;
+
     margin-bottom: 8px;
 }
 
 .form-box > p {
     color: #999;
+
     margin-bottom: 25px;
 }
 
@@ -305,8 +510,11 @@ h3 {
 
 label {
     display: block;
+
     margin-bottom: 6px;
+
     color: #ddd;
+
     font-size: 14px;
 }
 
@@ -314,12 +522,19 @@ input,
 textarea,
 select {
     width: 100%;
+
     background: rgba(255,255,255,.055);
+
     color: white;
+
     border: 1px solid rgba(255,255,255,.13);
+
     border-radius: 10px;
+
     padding: 13px;
+
     outline: none;
+
     font-family: inherit;
 }
 
@@ -331,6 +546,7 @@ select:focus {
 
 textarea {
     min-height: 130px;
+
     resize: vertical;
 }
 
@@ -338,11 +554,19 @@ option {
     background: #21132f;
 }
 
+/* ==============================
+   MESSAGES
+============================== */
+
 .message {
     display: none;
+
     padding: 12px;
+
     border-radius: 10px;
+
     margin-bottom: 15px;
+
     font-size: 14px;
 }
 
@@ -352,37 +576,64 @@ option {
 
 .error {
     background: rgba(220,60,60,.15);
+
     border: 1px solid rgba(255,80,80,.3);
+
     color: #ffb2b2;
 }
 
 .success {
     background: rgba(50,180,100,.15);
+
     border: 1px solid rgba(70,220,130,.3);
+
     color: #a7f0bd;
 }
 
+/* ==============================
+   PROFILE
+============================== */
+
 .profile {
     display: flex;
+
     gap: 18px;
+
     align-items: center;
+
     background: rgba(255,255,255,.055);
+
     border: 1px solid rgba(255,255,255,.1);
+
     border-radius: 18px;
+
     padding: 25px;
+
     margin-bottom: 22px;
 }
 
 .avatar {
     width: 70px;
     height: 70px;
+
     border-radius: 50%;
-    background: linear-gradient(135deg,#a76ce8,#f1cc73);
+
+    background:
+        linear-gradient(
+            135deg,
+            #a76ce8,
+            #f1cc73
+        );
+
     color: #20102d;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     font-size: 28px;
+
     font-weight: 700;
 }
 
@@ -396,15 +647,25 @@ option {
 
 .dashboard {
     display: grid;
+
     grid-template-columns: 2fr 1fr;
+
     gap: 22px;
 }
 
+/* ==============================
+   APPLICATIONS
+============================== */
+
 .application {
     background: rgba(0,0,0,.2);
+
     border-left: 3px solid #a76ce8;
+
     padding: 17px;
+
     border-radius: 10px;
+
     margin-bottom: 12px;
 }
 
@@ -418,25 +679,41 @@ option {
 
 .status {
     display: inline-block;
+
     padding: 4px 9px;
+
     margin-top: 8px;
+
     border-radius: 20px;
+
     font-size: 11px;
+
     background: rgba(241,204,115,.12);
+
     color: #f1cc73;
 }
 
+/* ==============================
+   ADMIN TABLE
+============================== */
+
 .admin-table {
     width: 100%;
+
     border-collapse: collapse;
+
     margin-top: 20px;
 }
 
 .admin-table th,
 .admin-table td {
     text-align: left;
+
     padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,.1);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.1);
+
     vertical-align: top;
 }
 
@@ -446,6 +723,7 @@ option {
 
 .admin-table td {
     color: #ccc;
+
     font-size: 13px;
 }
 
@@ -455,19 +733,25 @@ option {
 
 .admin-detail {
     margin-top: 25px;
+
     padding: 22px;
+
     border-radius: 15px;
+
     background: rgba(0,0,0,.2);
 }
 
 .admin-detail h3 {
     color: #f1cc73;
+
     margin-bottom: 15px;
 }
 
 .admin-detail p {
     color: #bbb;
+
     margin-bottom: 10px;
+
     line-height: 1.6;
 }
 
@@ -475,11 +759,20 @@ option {
     color: white;
 }
 
+/* ==============================
+   FOOTER
+============================== */
+
 footer {
     text-align: center;
+
     color: #777;
-    border-top: 1px solid rgba(255,255,255,.08);
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
     padding: 30px;
+
     margin-top: 60px;
 }
 
@@ -487,7 +780,12 @@ footer strong {
     color: #f1cc73;
 }
 
+/* ==============================
+   MOBILE
+============================== */
+
 @media(max-width:850px) {
+
     .info-grid,
     .vacature-grid,
     .dashboard {
@@ -500,11 +798,14 @@ footer strong {
 
     .profile {
         flex-direction: column;
+
         text-align: center;
     }
+
 }
 
 @media(max-width:550px) {
+
     .form-box {
         padding: 23px;
     }
@@ -517,102 +818,164 @@ footer strong {
         width: 135px;
         height: 135px;
     }
+
+    .team-card {
+        width: 100%;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
+
 <header>
+
 <div class="navbar">
 
+
 <div class="brand" onclick="showPage('home')">
-<img src="./logo.png" alt="Magische Heuvel">
-<span>Magische Heuvel</span>
+
+<img
+    src="./logo.png"
+    alt="Magische Heuvel">
+
+<span>
+Magische Heuvel
+</span>
+
 </div>
 
+
 <nav id="nav">
+
 
 <button onclick="showPage('home')">
 Home
 </button>
 
+
 <button onclick="showPage('vacatures')">
 Vacatures
 </button>
+
+
+<button onclick="showPage('team')">
+Team
+</button>
+
 
 <button onclick="showPage('overons')">
 Over ons
 </button>
 
+
 <button onclick="window.open('https://discord.gg/magischeheuvelmc', '_blank')">
 💬 Discord
 </button>
+
 
 <button
     class="account-button"
     id="accountButton"
     onclick="accountPage()">
+
     Inloggen
+
 </button>
+
 
 <button
     class="admin-button"
-    onclick="showPage('adminLogin')">
+    onclick="openAdmin()">
+
     👑 Beheerder
+
 </button>
+
 
 </nav>
 
 </div>
+
 </header>
+
 
 <main>
 
-<!-- HOME -->
+
+<!-- ==============================
+     HOME
+============================== -->
 
 <section id="home" class="page active">
 
+
 <div class="hero">
+
 <div class="hero-content">
 
-<img src="./logo.png" alt="Magische Heuvel logo">
 
-<h1>Magische Heuvel</h1>
+<img
+    src="./logo.png"
+    alt="Magische Heuvel logo">
+
+
+<h1>
+Magische Heuvel
+</h1>
+
 
 <p>
 Welkom bij Magische Heuvel, een Minecraft-themapark
 waar creativiteit, techniek en fantasie samenkomen.
 </p>
 
+
 <div class="buttons">
+
 
 <button
     class="btn primary"
     onclick="showPage('vacatures')">
+
     Bekijk vacatures
+
 </button>
+
 
 <button
     class="btn gold"
-    onclick="showPage('overons')">
-    Ontdek ons park
+    onclick="showPage('team')">
+
+    Ontdek ons team
+
 </button>
+
 
 <button
     class="btn dark"
     onclick="window.open('https://discord.gg/magischeheuvelmc', '_blank')">
+
     💬 Join onze Discord
+
 </button>
 
+
 </div>
 
 </div>
+
 </div>
+
 
 <div class="section-title">
 
-<h2>Een wereld vol magie</h2>
+<h2>
+Een wereld vol magie
+</h2>
 
 <p>
 Bouw samen met ons mee aan Magische Heuvel.
@@ -620,13 +983,19 @@ Bouw samen met ons mee aan Magische Heuvel.
 
 </div>
 
+
 <div class="info-grid">
+
 
 <div class="card info-card">
 
-<div class="icon">🎢</div>
+<div class="icon">
+🎢
+</div>
 
-<h3>Attracties</h3>
+<h3>
+Attracties
+</h3>
 
 <p>
 Werk mee aan attracties, achtbanen en bijzondere
@@ -635,11 +1004,16 @@ ervaringen voor onze bezoekers.
 
 </div>
 
+
 <div class="card info-card">
 
-<div class="icon">🏗️</div>
+<div class="icon">
+🏗️
+</div>
 
-<h3>Bouwen</h3>
+<h3>
+Bouwen
+</h3>
 
 <p>
 Maak prachtige gebouwen, themagebieden, straten
@@ -648,11 +1022,16 @@ en decoratie voor het park.
 
 </div>
 
+
 <div class="card info-card">
 
-<div class="icon">✨</div>
+<div class="icon">
+✨
+</div>
 
-<h3>Magie</h3>
+<h3>
+Magie
+</h3>
 
 <p>
 Geef bezoekers een bijzondere ervaring met
@@ -661,18 +1040,24 @@ creativiteit, techniek en modellen.
 
 </div>
 
+
 </div>
 
 </section>
 
 
-<!-- VACATURES -->
+<!-- ==============================
+     VACATURES
+============================== -->
 
 <section id="vacatures" class="page">
 
+
 <div class="section-title">
 
-<h2>Vacatures</h2>
+<h2>
+Vacatures
+</h2>
 
 <p>
 Wil jij deel uitmaken van het team van Magische Heuvel?
@@ -680,13 +1065,19 @@ Wil jij deel uitmaken van het team van Magische Heuvel?
 
 </div>
 
+
 <div class="vacature-grid">
+
 
 <div class="vacature-card">
 
-<div class="icon">🔧</div>
+<div class="icon">
+🔧
+</div>
 
-<h3>Techniek</h3>
+<h3>
+Techniek
+</h3>
 
 <p>
 Werk aan de technische kant van onze attracties.
@@ -694,19 +1085,34 @@ Je kunt werken met redstone, commands, plugins,
 TrainCarts en andere systemen.
 </p>
 
+
 <div class="tags">
 
-<span class="tag">Techniek</span>
-<span class="tag">Redstone</span>
-<span class="tag">Plugins</span>
-<span class="tag">Commands</span>
+<span class="tag">
+Techniek
+</span>
+
+<span class="tag">
+Redstone
+</span>
+
+<span class="tag">
+Plugins
+</span>
+
+<span class="tag">
+Commands
+</span>
 
 </div>
+
 
 <button
     class="btn primary"
     onclick="apply('Techniek')">
+
     Solliciteren
+
 </button>
 
 </div>
@@ -714,9 +1120,13 @@ TrainCarts en andere systemen.
 
 <div class="vacature-card">
 
-<div class="icon">🧱</div>
+<div class="icon">
+🧱
+</div>
 
-<h3>Builder</h3>
+<h3>
+Builder
+</h3>
 
 <p>
 Bouw mee aan de wereld van Magische Heuvel.
@@ -724,19 +1134,34 @@ Van gebouwen en attracties tot complete
 themagebieden.
 </p>
 
+
 <div class="tags">
 
-<span class="tag">Builder</span>
-<span class="tag">WorldEdit</span>
-<span class="tag">Axiom</span>
-<span class="tag">Decoratie</span>
+<span class="tag">
+Builder
+</span>
+
+<span class="tag">
+WorldEdit
+</span>
+
+<span class="tag">
+Axiom
+</span>
+
+<span class="tag">
+Decoratie
+</span>
 
 </div>
+
 
 <button
     class="btn primary"
     onclick="apply('Builder')">
+
     Solliciteren
+
 </button>
 
 </div>
@@ -744,44 +1169,133 @@ themagebieden.
 
 <div class="vacature-card">
 
-<div class="icon">🎨</div>
+<div class="icon">
+🎨
+</div>
 
-<h3>Modelaar</h3>
+<h3>
+Modelaar
+</h3>
 
 <p>
 Maak 3D-modellen voor attracties, decoratie,
 voertuigen en andere onderdelen van Magische Heuvel.
 </p>
 
+
 <div class="tags">
 
-<span class="tag">Blockbench</span>
-<span class="tag">3D</span>
-<span class="tag">Modellen</span>
-<span class="tag">Resourcepack</span>
+<span class="tag">
+Blockbench
+</span>
+
+<span class="tag">
+3D
+</span>
+
+<span class="tag">
+Modellen
+</span>
+
+<span class="tag">
+Resourcepack
+</span>
 
 </div>
+
 
 <button
     class="btn primary"
     onclick="apply('Modelaar')">
+
     Solliciteren
+
 </button>
 
 </div>
+
 
 </div>
 
 </section>
 
 
-<!-- OVER ONS -->
+<!-- ==============================
+     TEAM
+============================== -->
 
-<section id="overons" class="page">
+<section id="team" class="page">
+
 
 <div class="section-title">
 
-<h2>Over ons</h2>
+<h2>
+Ons Team
+</h2>
+
+<p>
+Maak kennis met het team achter Magische Heuvel.
+</p>
+
+</div>
+
+
+<div class="team-grid">
+
+
+<!-- ALGEMEEN DIRECTEUR -->
+
+<div class="team-card">
+
+
+<div class="team-role">
+👑 Algemeen Directeur
+</div>
+
+
+<img
+    class="team-head"
+    src="https://api.mcheads.org/head/SANCOPHAS/256"
+    alt="Minecraft hoofd van SANCOPHAS"
+    onerror="this.src='https://mc-heads.net/avatar/SANCOPHAS/180';">
+
+
+<h3>
+SANCOPHAS
+</h3>
+
+
+<div class="role">
+Algemeen Directeur
+</div>
+
+
+<div class="description">
+Verantwoordelijk voor de algemene leiding
+en ontwikkeling van Magische Heuvel.
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ==============================
+     OVER ONS
+============================== -->
+
+<section id="overons" class="page">
+
+
+<div class="section-title">
+
+<h2>
+Over ons
+</h2>
 
 <p>
 Welkom bij Magische Heuvel.
@@ -789,13 +1303,19 @@ Welkom bij Magische Heuvel.
 
 </div>
 
+
 <div class="info-grid">
+
 
 <div class="card info-card">
 
-<div class="icon">🏰</div>
+<div class="icon">
+🏰
+</div>
 
-<h3>Het park</h3>
+<h3>
+Het park
+</h3>
 
 <p>
 Magische Heuvel is een Minecraft-themapark
@@ -805,11 +1325,16 @@ themagebieden samenbrengen.
 
 </div>
 
+
 <div class="card info-card">
 
-<div class="icon">👥</div>
+<div class="icon">
+👥
+</div>
 
-<h3>Het team</h3>
+<h3>
+Het team
+</h3>
 
 <p>
 Ons team bestaat uit creatieve mensen die
@@ -818,11 +1343,16 @@ samen werken aan één grote Minecraft-wereld.
 
 </div>
 
+
 <div class="card info-card">
 
-<div class="icon">🌟</div>
+<div class="icon">
+🌟
+</div>
 
-<h3>De toekomst</h3>
+<h3>
+De toekomst
+</h3>
 
 <p>
 We blijven het park uitbreiden met nieuwe
@@ -831,28 +1361,41 @@ attracties, gebieden en belevenissen.
 
 </div>
 
+
 </div>
 
 </section>
 
 
-<!-- LOGIN -->
+<!-- ==============================
+     LOGIN
+============================== -->
 
 <section id="login" class="page">
+
 
 <div class="form-container">
 
 <div class="form-box">
 
-<h2>Inloggen</h2>
+
+<h2>
+Inloggen
+</h2>
 
 <p>
 Log in op jouw Magische Heuvel-account.
 </p>
 
-<div id="loginMessage" class="message"></div>
+
+<div
+    id="loginMessage"
+    class="message">
+</div>
+
 
 <form onsubmit="login(event)">
+
 
 <div class="form-group">
 
@@ -868,6 +1411,7 @@ E-mailadres
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -882,37 +1426,50 @@ Wachtwoord
 
 </div>
 
+
 <button
     class="btn primary"
     style="width:100%">
+
     Inloggen
+
 </button>
 
+
 </form>
+
 
 <div class="buttons">
 
 <button
     class="btn dark"
     onclick="showPage('register')">
+
     Account aanmaken
+
 </button>
 
 </div>
 
+
 </div>
+
 </div>
 
 </section>
 
 
-<!-- REGISTREREN -->
+<!-- ==============================
+     REGISTER
+============================== -->
 
 <section id="register" class="page">
+
 
 <div class="form-container">
 
 <div class="form-box">
+
 
 <h2>
 Account aanmaken
@@ -922,9 +1479,15 @@ Account aanmaken
 Maak een account om te kunnen solliciteren.
 </p>
 
-<div id="registerMessage" class="message"></div>
+
+<div
+    id="registerMessage"
+    class="message">
+</div>
+
 
 <form onsubmit="register(event)">
+
 
 <div class="form-group">
 
@@ -939,6 +1502,7 @@ Gebruikersnaam
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -952,6 +1516,7 @@ E-mailadres
     placeholder="jouw@email.nl">
 
 </div>
+
 
 <div class="form-group">
 
@@ -968,6 +1533,7 @@ Wachtwoord
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -983,37 +1549,50 @@ Wachtwoord opnieuw
 
 </div>
 
+
 <button
     class="btn primary"
     style="width:100%">
+
     Account aanmaken
+
 </button>
 
+
 </form>
+
 
 <div class="buttons">
 
 <button
     class="btn dark"
     onclick="showPage('login')">
+
     Terug naar inloggen
+
 </button>
 
 </div>
 
+
 </div>
+
 </div>
 
 </section>
 
 
-<!-- SOLLICITATIE -->
+<!-- ==============================
+     SOLLICITATIE
+============================== -->
 
 <section id="sollicitatie" class="page">
+
 
 <div class="form-container">
 
 <div class="form-box">
+
 
 <h2>
 Solliciteren
@@ -1023,15 +1602,22 @@ Solliciteren
 Vul hieronder jouw sollicitatie in.
 </p>
 
-<div id="applicationMessage" class="message"></div>
+
+<div
+    id="applicationMessage"
+    class="message">
+</div>
+
 
 <form onsubmit="submitApplication(event)">
+
 
 <div class="form-group">
 
 <label>
 Vacature
 </label>
+
 
 <select
     id="applicationFunction"
@@ -1057,6 +1643,7 @@ Modelaar
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -1069,6 +1656,7 @@ Minecraft-naam
     placeholder="Jouw Minecraft-naam">
 
 </div>
+
 
 <div class="form-group">
 
@@ -1085,6 +1673,7 @@ Leeftijd
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -1098,6 +1687,7 @@ Ervaring
 </textarea>
 
 </div>
+
 
 <div class="form-group">
 
@@ -1113,6 +1703,7 @@ Motivatie
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -1127,21 +1718,28 @@ Beschikbaarheid
 
 </div>
 
+
 <button class="btn primary">
 Sollicitatie versturen
 </button>
 
+
 </form>
 
+
 </div>
+
 </div>
 
 </section>
 
 
-<!-- ACCOUNT -->
+<!-- ==============================
+     ACCOUNT
+============================== -->
 
 <section id="account" class="page">
+
 
 <div class="section-title">
 
@@ -1155,13 +1753,18 @@ Bekijk je gegevens en sollicitaties.
 
 </div>
 
+
 <div class="profile">
+
 
 <div
     class="avatar"
     id="avatar">
+
     M
+
 </div>
+
 
 <div>
 
@@ -1171,9 +1774,12 @@ Bekijk je gegevens en sollicitaties.
 
 </div>
 
+
 </div>
 
+
 <div class="dashboard">
+
 
 <div class="card">
 
@@ -1185,6 +1791,7 @@ Mijn sollicitaties
 
 </div>
 
+
 <div class="card">
 
 <h3>
@@ -1195,36 +1802,49 @@ Account
 Je bent ingelogd op Magische Heuvel.
 </p>
 
+
 <div class="buttons">
+
 
 <button
     class="btn primary"
     onclick="showPage('vacatures')">
+
     Vacatures bekijken
+
 </button>
+
 
 <button
     class="btn dark"
     onclick="logout()">
+
     Uitloggen
+
 </button>
 
+
 </div>
 
 </div>
+
 
 </div>
 
 </section>
 
 
-<!-- ADMIN LOGIN -->
+<!-- ==============================
+     ADMIN LOGIN
+============================== -->
 
 <section id="adminLogin" class="page">
+
 
 <div class="form-container">
 
 <div class="form-box">
+
 
 <h2>
 Beheerder
@@ -1235,9 +1855,15 @@ Dit gedeelte is alleen toegankelijk voor de
 beheerder van Magische Heuvel.
 </p>
 
-<div id="adminMessage" class="message"></div>
+
+<div
+    id="adminMessage"
+    class="message">
+</div>
+
 
 <form onsubmit="adminLogin(event)">
+
 
 <div class="form-group">
 
@@ -1253,23 +1879,32 @@ Beheerderscode
 
 </div>
 
+
 <button
     class="btn gold"
     style="width:100%">
+
     Naar beheerpanel
+
 </button>
+
 
 </form>
 
+
 </div>
+
 </div>
 
 </section>
 
 
-<!-- ADMIN PANEL -->
+<!-- ==============================
+     ADMIN PANEL
+============================== -->
 
 <section id="admin" class="page">
+
 
 <div class="section-title">
 
@@ -1283,19 +1918,27 @@ Welkom in het beheerpanel van Magische Heuvel.
 
 </div>
 
+
 <div class="card">
+
 
 <h3>
 Sollicitaties
 </h3>
 
+
 <p style="color:#999">
+
 Hieronder staan de ontvangen sollicitaties.
+
 </p>
+
 
 <div class="table-wrapper">
 
+
 <table class="admin-table">
+
 
 <thead>
 
@@ -1325,27 +1968,38 @@ Actie
 
 </thead>
 
+
 <tbody id="adminApplications"></tbody>
+
 
 </table>
 
+
 </div>
+
 
 <div id="adminDetail"></div>
 
+
 </div>
 
+
 <div class="buttons">
+
 
 <button
     class="btn dark"
     onclick="adminLogout()">
+
     Beheerder uitloggen
+
 </button>
+
 
 </div>
 
 </section>
+
 
 </main>
 
@@ -1369,38 +2023,55 @@ Magische Heuvel
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+
 <script>
+
+/* ==============================
+   EMAILJS
+============================== */
 
 emailjs.init({
     publicKey: "YOUR_EMAILJS_PUBLIC_KEY"
 });
 
 
-/* =========================================
+/* ==============================
    INSTELLINGEN
-========================================= */
+============================== */
 
 const ADMIN_CODE = "MH2026ADMIN";
 
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_STATUS_TEMPLATE_ID = "YOUR_STATUS_TEMPLATE_ID";
+const EMAILJS_SERVICE_ID =
+    "YOUR_SERVICE_ID";
+
+const EMAILJS_STATUS_TEMPLATE_ID =
+    "YOUR_STATUS_TEMPLATE_ID";
 
 
-/* =========================================
+/* ==============================
    PAGINA'S
-========================================= */
+============================== */
 
 function showPage(id) {
 
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+    document.querySelectorAll(".page")
+        .forEach(page => {
 
-    const page = document.getElementById(id);
+            page.classList.remove("active");
+
+        });
+
+
+    const page =
+        document.getElementById(id);
+
 
     if (page) {
+
         page.classList.add("active");
+
     }
+
 
     window.scrollTo({
         top: 0,
@@ -1410,14 +2081,40 @@ function showPage(id) {
 }
 
 
-/* =========================================
+/* ==============================
+   ADMIN OPENEN
+============================== */
+
+function openAdmin() {
+
+    if (
+        localStorage.getItem("mh_admin")
+        === "true"
+    ) {
+
+        loadAdminApplications();
+
+        showPage("admin");
+
+    } else {
+
+        showPage("adminLogin");
+
+    }
+
+}
+
+
+/* ==============================
    DATA
-========================================= */
+============================== */
 
 function getUsers() {
 
     return JSON.parse(
-        localStorage.getItem("mh_users") || "[]"
+        localStorage.getItem(
+            "mh_users"
+        ) || "[]"
     );
 
 }
@@ -1436,7 +2133,9 @@ function saveUsers(users) {
 function getApplications() {
 
     return JSON.parse(
-        localStorage.getItem("mh_applications") || "[]"
+        localStorage.getItem(
+            "mh_applications"
+        ) || "[]"
     );
 
 }
@@ -1454,32 +2153,48 @@ function saveApplications(applications) {
 
 function currentUser() {
 
-    return localStorage.getItem("mh_currentUser");
+    return localStorage.getItem(
+        "mh_currentUser"
+    );
 
 }
 
 
-/* =========================================
+/* ==============================
    REGISTREREN
-========================================= */
+============================== */
 
 function register(event) {
 
     event.preventDefault();
 
+
     const username =
-        document.getElementById("registerUsername").value.trim();
+        document.getElementById(
+            "registerUsername"
+        ).value.trim();
+
 
     const email =
-        document.getElementById("registerEmail").value.trim();
+        document.getElementById(
+            "registerEmail"
+        ).value.trim();
+
 
     const password =
-        document.getElementById("registerPassword").value;
+        document.getElementById(
+            "registerPassword"
+        ).value;
+
 
     const password2 =
-        document.getElementById("registerPassword2").value;
+        document.getElementById(
+            "registerPassword2"
+        ).value;
 
-    const users = getUsers();
+
+    const users =
+        getUsers();
 
 
     if (password !== password2) {
@@ -1491,12 +2206,15 @@ function register(event) {
         );
 
         return;
+
     }
 
 
     if (
-        users.some(user =>
-            user.email.toLowerCase() === email.toLowerCase()
+        users.some(
+            user =>
+                user.email.toLowerCase()
+                === email.toLowerCase()
         )
     ) {
 
@@ -1507,6 +2225,7 @@ function register(event) {
         );
 
         return;
+
     }
 
 
@@ -1520,7 +2239,8 @@ function register(event) {
 
         password: password,
 
-        createdAt: new Date().toISOString()
+        createdAt:
+            new Date().toISOString()
 
     });
 
@@ -1545,6 +2265,8 @@ function register(event) {
 
         updateAccount();
 
+        updateNavigation();
+
         showPage("account");
 
     }, 700);
@@ -1552,28 +2274,39 @@ function register(event) {
 }
 
 
-/* =========================================
+/* ==============================
    INLOGGEN
-========================================= */
+============================== */
 
 function login(event) {
 
     event.preventDefault();
 
+
     const email =
-        document.getElementById("loginEmail").value.trim();
+        document.getElementById(
+            "loginEmail"
+        ).value.trim();
+
 
     const password =
-        document.getElementById("loginPassword").value;
+        document.getElementById(
+            "loginPassword"
+        ).value;
 
-    const users = getUsers();
+
+    const users =
+        getUsers();
 
 
-    const user = users.find(u =>
-        u.email.toLowerCase() === email.toLowerCase()
-        &&
-        u.password === password
-    );
+    const user =
+        users.find(
+            u =>
+                u.email.toLowerCase()
+                === email.toLowerCase()
+                &&
+                u.password === password
+        );
 
 
     if (!user) {
@@ -1585,6 +2318,7 @@ function login(event) {
         );
 
         return;
+
     }
 
 
@@ -1614,9 +2348,9 @@ function login(event) {
 }
 
 
-/* =========================================
+/* ==============================
    ACCOUNT
-========================================= */
+============================== */
 
 function accountPage() {
 
@@ -1637,14 +2371,17 @@ function accountPage() {
 
 function updateAccount() {
 
-    const email = currentUser();
+    const email =
+        currentUser();
+
 
     if (!email) return;
 
 
-    const user = getUsers().find(u =>
-        u.email === email
-    );
+    const user =
+        getUsers().find(
+            u => u.email === email
+        );
 
 
     if (!user) return;
@@ -1652,18 +2389,22 @@ function updateAccount() {
 
     document.getElementById(
         "profileUsername"
-    ).textContent = user.username;
+    ).textContent =
+        user.username;
 
 
     document.getElementById(
         "profileEmail"
-    ).textContent = user.email;
+    ).textContent =
+        user.email;
 
 
     document.getElementById(
         "avatar"
     ).textContent =
-        user.username.charAt(0).toUpperCase();
+        user.username
+            .charAt(0)
+            .toUpperCase();
 
 
     loadMyApplications();
@@ -1671,9 +2412,9 @@ function updateAccount() {
 }
 
 
-/* =========================================
+/* ==============================
    SOLLICITEREN
-========================================= */
+============================== */
 
 function apply(functionName) {
 
@@ -1688,12 +2429,14 @@ function apply(functionName) {
         );
 
         return;
+
     }
 
 
     document.getElementById(
         "applicationFunction"
-    ).value = functionName;
+    ).value =
+        functionName;
 
 
     showPage("sollicitatie");
@@ -1701,15 +2444,17 @@ function apply(functionName) {
 }
 
 
-/* =========================================
+/* ==============================
    SOLLICITATIE OPSLAAN
-========================================= */
+============================== */
 
 function submitApplication(event) {
 
     event.preventDefault();
 
-    const email = currentUser();
+
+    const email =
+        currentUser();
 
 
     if (!email) {
@@ -1728,37 +2473,58 @@ function submitApplication(event) {
         email: email,
 
         function:
-            document.getElementById("applicationFunction").value,
+            document.getElementById(
+                "applicationFunction"
+            ).value,
 
         minecraftName:
-            document.getElementById("minecraftName").value.trim(),
+            document.getElementById(
+                "minecraftName"
+            ).value.trim(),
 
         age:
-            document.getElementById("age").value,
+            document.getElementById(
+                "age"
+            ).value,
 
         experience:
-            document.getElementById("experience").value.trim(),
+            document.getElementById(
+                "experience"
+            ).value.trim(),
 
         motivation:
-            document.getElementById("motivation").value.trim(),
+            document.getElementById(
+                "motivation"
+            ).value.trim(),
 
         availability:
-            document.getElementById("availability").value.trim(),
+            document.getElementById(
+                "availability"
+            ).value.trim(),
 
         status:
             "In behandeling",
 
         date:
-            new Date().toLocaleString("nl-NL")
+            new Date().toLocaleString(
+                "nl-NL"
+            )
 
     };
 
 
-    const applications = getApplications();
+    const applications =
+        getApplications();
 
-    applications.push(application);
 
-    saveApplications(applications);
+    applications.push(
+        application
+    );
+
+
+    saveApplications(
+        applications
+    );
 
 
     message(
@@ -1784,38 +2550,51 @@ function submitApplication(event) {
 }
 
 
-/* =========================================
+/* ==============================
    MIJN SOLLICITATIES
-========================================= */
+============================== */
 
 function loadMyApplications() {
 
-    const email = currentUser();
+    const email =
+        currentUser();
 
 
     const applications =
-        getApplications().filter(
+        getApplications()
+        .filter(
             app => app.email === email
         );
 
 
     const container =
-        document.getElementById("myApplications");
+        document.getElementById(
+            "myApplications"
+        );
 
 
-    if (applications.length === 0) {
+    if (
+        applications.length === 0
+    ) {
 
         container.innerHTML = `
+
             <p style="color:#888;margin-top:15px;">
-                Je hebt nog geen sollicitaties verstuurd.
+
+                Je hebt nog geen sollicitaties
+                verstuurd.
+
             </p>
+
         `;
 
         return;
+
     }
 
 
-    container.innerHTML = applications
+    container.innerHTML =
+        applications
         .slice()
         .reverse()
         .map(app => `
@@ -1829,8 +2608,10 @@ function loadMyApplications() {
                 <br>
 
                 <span style="color:#bbb;">
+
                     Minecraft-naam:
                     ${safe(app.minecraftName)}
+
                 </span>
 
                 <br>
@@ -1853,9 +2634,9 @@ function loadMyApplications() {
 }
 
 
-/* =========================================
+/* ==============================
    ADMIN LOGIN
-========================================= */
+============================== */
 
 function adminLogin(event) {
 
@@ -1863,7 +2644,9 @@ function adminLogin(event) {
 
 
     const code =
-        document.getElementById("adminCode").value;
+        document.getElementById(
+            "adminCode"
+        ).value;
 
 
     if (code !== ADMIN_CODE) {
@@ -1879,7 +2662,18 @@ function adminLogin(event) {
     }
 
 
-    sessionStorage.setItem(
+    /*
+
+       PERSISTENT ADMIN LOGIN
+
+       This stays active after:
+       - refresh
+       - closing browser
+       - reopening browser
+
+    */
+
+    localStorage.setItem(
         "mh_admin",
         "true"
     );
@@ -1897,14 +2691,16 @@ function adminLogin(event) {
 }
 
 
-/* =========================================
+/* ==============================
    ADMIN PANEL
-========================================= */
+============================== */
 
 function loadAdminApplications() {
 
     if (
-        sessionStorage.getItem("mh_admin") !== "true"
+        localStorage.getItem(
+            "mh_admin"
+        ) !== "true"
     ) {
 
         showPage("adminLogin");
@@ -1919,17 +2715,28 @@ function loadAdminApplications() {
 
 
     const tbody =
-        document.getElementById("adminApplications");
+        document.getElementById(
+            "adminApplications"
+        );
 
 
-    if (applications.length === 0) {
+    if (
+        applications.length === 0
+    ) {
 
         tbody.innerHTML = `
+
             <tr>
+
                 <td colspan="5">
-                    Er zijn nog geen sollicitaties.
+
+                    Er zijn nog geen
+                    sollicitaties.
+
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -1966,7 +2773,9 @@ function loadAdminApplications() {
                 <button
                     class="btn primary"
                     onclick="viewApplication(${app.id})">
+
                     Bekijken
+
                 </button>
 
             </td>
@@ -1979,14 +2788,15 @@ function loadAdminApplications() {
 }
 
 
-/* =========================================
+/* ==============================
    SOLLICITATIE BEKIJKEN
-========================================= */
+============================== */
 
 function viewApplication(id) {
 
     const application =
-        getApplications().find(
+        getApplications()
+        .find(
             app => app.id === id
         );
 
@@ -2004,68 +2814,151 @@ function viewApplication(id) {
                 Sollicitatie bekijken
             </h3>
 
+
             <p>
-                <strong>E-mailadres:</strong><br>
+
+                <strong>
+                    E-mailadres:
+                </strong>
+
+                <br>
+
                 ${safe(application.email)}
+
             </p>
 
+
             <p>
-                <strong>Minecraft-naam:</strong><br>
+
+                <strong>
+                    Minecraft-naam:
+                </strong>
+
+                <br>
+
                 ${safe(application.minecraftName)}
+
             </p>
 
+
             <p>
-                <strong>Vacature:</strong><br>
+
+                <strong>
+                    Vacature:
+                </strong>
+
+                <br>
+
                 ${safe(application.function)}
+
             </p>
 
+
             <p>
-                <strong>Leeftijd:</strong><br>
+
+                <strong>
+                    Leeftijd:
+                </strong>
+
+                <br>
+
                 ${safe(application.age)}
+
             </p>
 
+
             <p>
-                <strong>Ervaring:</strong><br>
+
+                <strong>
+                    Ervaring:
+                </strong>
+
+                <br>
+
                 ${safe(application.experience)}
+
             </p>
 
+
             <p>
-                <strong>Motivatie:</strong><br>
+
+                <strong>
+                    Motivatie:
+                </strong>
+
+                <br>
+
                 ${safe(application.motivation)}
+
             </p>
 
+
             <p>
-                <strong>Beschikbaarheid:</strong><br>
+
+                <strong>
+                    Beschikbaarheid:
+                </strong>
+
+                <br>
+
                 ${safe(application.availability)}
+
             </p>
 
+
             <p>
-                <strong>Datum:</strong><br>
+
+                <strong>
+                    Datum:
+                </strong>
+
+                <br>
+
                 ${safe(application.date)}
+
             </p>
 
+
             <p>
-                <strong>Status:</strong>
+
+                <strong>
+                    Status:
+                </strong>
+
             </p>
+
 
             <select
                 id="status-${application.id}"
                 onchange="changeStatus(${application.id}, this.value)">
 
+
                 <option
+                    value="In behandeling"
                     ${application.status === "In behandeling" ? "selected" : ""}>
+
                     In behandeling
+
                 </option>
 
+
                 <option
+                    value="Aangenomen"
                     ${application.status === "Aangenomen" ? "selected" : ""}>
+
                     Aangenomen
+
                 </option>
 
+
                 <option
+                    value="Afgewezen"
                     ${application.status === "Afgewezen" ? "selected" : ""}>
+
                     Afgewezen
+
                 </option>
+
 
             </select>
 
@@ -2079,6 +2972,7 @@ function viewApplication(id) {
 
             </button>
 
+
         </div>
 
     `;
@@ -2086,9 +2980,9 @@ function viewApplication(id) {
 }
 
 
-/* =========================================
+/* ==============================
    STATUS WIJZIGEN
-========================================= */
+============================== */
 
 async function changeStatus(id, status) {
 
@@ -2113,7 +3007,9 @@ async function changeStatus(id, status) {
         status;
 
 
-    saveApplications(applications);
+    saveApplications(
+        applications
+    );
 
 
     loadAdminApplications();
@@ -2122,9 +3018,11 @@ async function changeStatus(id, status) {
 
 
     if (
-        status !== oldStatus &&
+        status !== oldStatus
+        &&
         (
-            status === "Aangenomen" ||
+            status === "Aangenomen"
+            ||
             status === "Afgewezen"
         )
     ) {
@@ -2132,14 +3030,27 @@ async function changeStatus(id, status) {
         try {
 
             await emailjs.send(
+
                 EMAILJS_SERVICE_ID,
+
                 EMAILJS_STATUS_TEMPLATE_ID,
+
                 {
-                    to_email: application.email,
-                    minecraft_name: application.minecraftName,
-                    vacature: application.function,
-                    status: status
+
+                    to_email:
+                        application.email,
+
+                    minecraft_name:
+                        application.minecraftName,
+
+                    vacature:
+                        application.function,
+
+                    status:
+                        status
+
                 }
+
             );
 
 
@@ -2169,9 +3080,9 @@ async function changeStatus(id, status) {
 }
 
 
-/* =========================================
-   SOLLICITATIE VERWIJDEREN
-========================================= */
+/* ==============================
+   VERWIJDEREN
+============================== */
 
 function deleteApplication(id) {
 
@@ -2186,10 +3097,14 @@ function deleteApplication(id) {
 
     const applications =
         getApplications()
-        .filter(app => app.id !== id);
+        .filter(
+            app => app.id !== id
+        );
 
 
-    saveApplications(applications);
+    saveApplications(
+        applications
+    );
 
 
     document.getElementById(
@@ -2202,30 +3117,32 @@ function deleteApplication(id) {
 }
 
 
-/* =========================================
+/* ==============================
    ADMIN UITLOGGEN
-========================================= */
+============================== */
 
 function adminLogout() {
 
-    sessionStorage.removeItem(
+    localStorage.removeItem(
         "mh_admin"
     );
+
 
     showPage("home");
 
 }
 
 
-/* =========================================
+/* ==============================
    NORMALE UITLOG
-========================================= */
+============================== */
 
 function logout() {
 
     localStorage.removeItem(
         "mh_currentUser"
     );
+
 
     updateNavigation();
 
@@ -2234,14 +3151,16 @@ function logout() {
 }
 
 
-/* =========================================
+/* ==============================
    NAVIGATIE
-========================================= */
+============================== */
 
 function updateNavigation() {
 
     const button =
-        document.getElementById("accountButton");
+        document.getElementById(
+            "accountButton"
+        );
 
 
     if (currentUser()) {
@@ -2259,11 +3178,15 @@ function updateNavigation() {
 }
 
 
-/* =========================================
+/* ==============================
    MELDING
-========================================= */
+============================== */
 
-function message(id, text, type) {
+function message(
+    id,
+    text,
+    type
+) {
 
     const element =
         document.getElementById(id);
@@ -2279,18 +3202,22 @@ function message(id, text, type) {
 }
 
 
-/* =========================================
+/* ==============================
    HTML VEILIG MAKEN
-========================================= */
+============================== */
 
 function safe(value) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.textContent =
-        value == null ? "" : String(value);
+        value == null
+            ? ""
+            : String(value);
 
 
     return div.innerHTML;
@@ -2298,9 +3225,9 @@ function safe(value) {
 }
 
 
-/* =========================================
+/* ==============================
    START
-========================================= */
+============================== */
 
 document.getElementById(
     "year"
@@ -2309,6 +3236,26 @@ document.getElementById(
 
 
 updateNavigation();
+
+
+/*
+
+   The admin login is stored in
+   localStorage, so it remains active.
+
+*/
+
+if (
+    localStorage.getItem(
+        "mh_admin"
+    ) === "true"
+) {
+
+    console.log(
+        "Beheerder login actief."
+    );
+
+}
 
 </script>
 
