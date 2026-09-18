@@ -16,7 +16,6 @@
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-
 body{
     margin:0;
     font-family:Poppins,sans-serif;
@@ -24,7 +23,6 @@ body{
     color:white;
     min-height:100vh;
 }
-
 body::before{
     content:"";
     position:fixed;
@@ -34,7 +32,6 @@ body::before{
         radial-gradient(circle at 20% 20%,rgba(180,80,255,.12),transparent 30%),
         radial-gradient(circle at 80% 80%,rgba(255,200,70,.08),transparent 30%);
 }
-
 header{
     position:sticky;
     top:0;
@@ -43,7 +40,6 @@ header{
     backdrop-filter:blur(12px);
     border-bottom:1px solid rgba(255,210,80,.25);
 }
-
 .nav{
     max-width:1250px;
     margin:auto;
@@ -53,27 +49,22 @@ header{
     gap:12px;
     flex-wrap:wrap;
 }
-
 .logo{
     width:52px;
     height:52px;
     object-fit:contain;
 }
-
 .brand{
     font-family:Righteous;
     color:#ffd85a;
     font-size:22px;
     margin-right:auto;
 }
-
 button{
     font-family:Poppins,sans-serif;
     cursor:pointer;
 }
-
-.nav button,
-.gold-btn{
+.nav button,.gold-btn{
     border:1px solid rgba(255,215,90,.4);
     background:linear-gradient(135deg,#6f2dbd,#9d4edd);
     color:white;
@@ -81,24 +72,17 @@ button{
     border-radius:10px;
     font-weight:600;
 }
-
-.nav button:hover,
-.gold-btn:hover{
+.nav button:hover,.gold-btn:hover{
     transform:translateY(-1px);
     filter:brightness(1.12);
 }
-
 .page{
     display:none;
     max-width:1200px;
     margin:auto;
     padding:55px 20px;
 }
-
-.page.active{
-    display:block;
-}
-
+.page.active{display:block}
 .hero{
     min-height:72vh;
     display:flex;
@@ -107,26 +91,16 @@ button{
     justify-content:center;
     text-align:center;
 }
-
 .hero img{
     width:min(360px,80vw);
     margin-bottom:25px;
 }
-
 h1,h2,h3{
     font-family:Righteous;
     color:#ffd85a;
 }
-
-h1{
-    font-size:clamp(38px,6vw,70px);
-    margin:10px 0;
-}
-
-h2{
-    font-size:38px;
-}
-
+h1{font-size:clamp(38px,6vw,70px);margin:10px 0}
+h2{font-size:38px}
 .card{
     background:rgba(35,10,60,.8);
     border:1px solid rgba(255,216,90,.2);
@@ -135,16 +109,12 @@ h2{
     margin:15px 0;
     box-shadow:0 10px 35px rgba(0,0,0,.25);
 }
-
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:18px;
 }
-
-input,
-textarea,
-select{
+input,textarea,select{
     width:100%;
     padding:12px;
     margin:7px 0 14px;
@@ -154,17 +124,7 @@ select{
     color:white;
     font-family:Poppins;
 }
-
-textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-label{
-    font-weight:600;
-    color:#e6caff;
-}
-
+textarea{min-height:120px;resize:vertical}
 .status{
     display:inline-block;
     padding:5px 10px;
@@ -173,7 +133,6 @@ label{
     color:#ffd85a;
     font-weight:600;
 }
-
 .modal{
     display:none;
     position:fixed;
@@ -184,11 +143,7 @@ label{
     justify-content:center;
     padding:20px;
 }
-
-.modal.show{
-    display:flex;
-}
-
+.modal.show{display:flex}
 .modal-box{
     width:min(550px,100%);
     background:#21102f;
@@ -198,7 +153,6 @@ label{
     max-height:90vh;
     overflow:auto;
 }
-
 .close{
     float:right;
     border:0;
@@ -206,20 +160,17 @@ label{
     color:white;
     font-size:26px;
 }
-
 .notice{
     padding:12px;
     border-radius:10px;
     margin:10px 0;
     background:#29113e;
 }
-
 .person{
     display:flex;
     align-items:center;
     gap:15px;
 }
-
 .avatar{
     width:48px;
     height:48px;
@@ -230,20 +181,12 @@ label{
     justify-content:center;
     font-weight:bold;
 }
-
 .small{
     opacity:.75;
     font-size:13px;
 }
-
-.danger{
-    background:#9b2c2c!important;
-}
-
-.success{
-    background:#26734d!important;
-}
-
+.danger{background:#9b2c2c!important}
+.success{background:#26734d!important}
 footer{
     text-align:center;
     padding:35px;
@@ -256,24 +199,12 @@ footer{
 
 <header>
 <div class="nav">
-
     <img src="./logo.png" class="logo">
+    <div class="brand">Magische Heuvel</div>
 
-    <div class="brand">
-        Magische Heuvel
-    </div>
-
-    <button type="button" onclick="showPage('home')">
-        Home
-    </button>
-
-    <button type="button" onclick="showPage('vacatures')">
-        Vacatures
-    </button>
-
-    <button type="button" onclick="showPage('community')">
-        Community
-    </button>
+    <button type="button" onclick="showPage('home')">Home</button>
+    <button type="button" onclick="showPage('vacatures')">Vacatures</button>
+    <button type="button" onclick="showPage('community')">Community</button>
 
     <button
         type="button"
@@ -305,30 +236,17 @@ footer{
         style="display:none">
         Uitloggen
     </button>
-
 </div>
 </header>
 
 <main>
 
 <section id="home" class="page active">
-
     <div class="hero">
-
         <img src="./logo.png" alt="Magische Heuvel">
-
-        <h1>
-            Magische Heuvel
-        </h1>
-
-        <p>
-            Minecraft Themapark
-        </p>
-
-        <p>
-            Beleef een magische wereld vol attracties,
-            shows en avonturen.
-        </p>
+        <h1>Magische Heuvel</h1>
+        <p>Minecraft Themapark</p>
+        <p>Beleef een magische wereld vol attracties, shows en avonturen.</p>
 
         <button
             type="button"
@@ -336,99 +254,56 @@ footer{
             onclick="openServer()">
             🎮 Speel mee
         </button>
-
     </div>
-
 </section>
 
-
 <section id="vacatures" class="page">
-
-    <h2>
-        Vacatures
-    </h2>
-
-    <p>
-        Wil jij onderdeel worden van het team van Magische Heuvel?
-    </p>
+    <h2>Vacatures</h2>
+    <p>Wil jij onderdeel worden van het team van Magische Heuvel?</p>
 
     <div class="grid">
 
         <div class="card">
-
-            <h3>
-                Bouwer
-            </h3>
-
-            <p>
-                Bouw mee aan gebouwen, attracties en decoratie.
-            </p>
-
+            <h3>Bouwer</h3>
+            <p>Bouw mee aan gebouwen, attracties en decoratie.</p>
             <button
                 type="button"
                 class="gold-btn"
                 onclick="openApplication('Bouwer')">
                 Solliciteren
             </button>
-
         </div>
 
-
         <div class="card">
-
-            <h3>
-                Techniek
-            </h3>
-
-            <p>
-                Help met plugins, redstone, systemen en attracties.
-            </p>
-
+            <h3>Techniek</h3>
+            <p>Help met plugins, redstone, systemen en attracties.</p>
             <button
                 type="button"
                 class="gold-btn"
                 onclick="openApplication('Techniek')">
                 Solliciteren
             </button>
-
         </div>
 
-
         <div class="card">
-
-            <h3>
-                Modelaar
-            </h3>
-
-            <p>
-                Maak modellen en unieke assets voor het park.
-            </p>
-
+            <h3>Modelaar</h3>
+            <p>Maak modellen en unieke assets voor het park.</p>
             <button
                 type="button"
                 class="gold-btn"
                 onclick="openApplication('Modelaar')">
                 Solliciteren
             </button>
-
         </div>
 
     </div>
-
 </section>
 
-
 <section id="account" class="page">
-
-    <h2>
-        Mijn account
-    </h2>
+    <h2>Mijn account</h2>
 
     <div class="card">
-
-        <h3 id="accountUsername">
-            Gebruiker
-        </h3>
+        <h3 id="accountUsername">Gebruiker</h3>
 
         <p>
             Email:
@@ -437,18 +312,14 @@ footer{
 
         <p>
             Status:
-            <span
-                class="status"
-                id="accountStatus">
+            <span class="status" id="accountStatus">
                 Bezoeker
             </span>
         </p>
 
         <p>
             Beheerder:
-            <span id="accountAdmin">
-                Nee
-            </span>
+            <span id="accountAdmin">Nee</span>
         </p>
 
         <button
@@ -457,104 +328,53 @@ footer{
             onclick="logout()">
             Uitloggen
         </button>
-
     </div>
-
 </section>
-
 
 <section id="community" class="page">
-
-    <h2>
-        Community
-    </h2>
-
-    <p>
-        Bekijk welke leden momenteel online zijn.
-    </p>
+    <h2>Community</h2>
+    <p>Bekijk welke leden momenteel online zijn.</p>
 
     <div class="card">
-
-        <h3>
-            🟢 Online
-        </h3>
-
-        <p id="onlineCount">
-            Laden...
-        </p>
-
+        <h3>🟢 Online</h3>
+        <p id="onlineCount">Laden...</p>
         <div id="communityUsers"></div>
-
     </div>
-
 </section>
 
-
 <section id="admin" class="page">
-
-    <h2>
-        Beheerder
-    </h2>
+    <h2>Beheerder</h2>
 
     <div class="card">
-
-        <h3>
-            Sollicitaties
-        </h3>
-
-        <div id="adminApplications">
-            Laden...
-        </div>
-
+        <h3>Sollicitaties</h3>
+        <div id="adminApplications">Laden...</div>
     </div>
 
-
     <div class="card">
-
-        <h3>
-            Alle gebruikers
-        </h3>
-
-        <div id="adminUsers">
-            Laden...
-        </div>
-
+        <h3>Alle gebruikers</h3>
+        <div id="adminUsers">Laden...</div>
     </div>
 
-
     <div class="card">
-
-        <h3>
-            Sollicitatie toevoegen
-        </h3>
-
+        <h3>Sollicitatie toevoegen</h3>
         <button
             type="button"
             class="gold-btn"
             onclick="openAdminApplication()">
             Sollicitatie toevoegen
         </button>
-
     </div>
-
 </section>
 
 </main>
-
 
 <footer>
     © Magische Heuvel - Minecraft Themapark
 </footer>
 
-
 <!-- SERVER MODAL -->
-
-<div
-    class="modal"
-    id="serverModal">
-
+<div class="modal" id="serverModal">
     <div class="modal-box">
-
         <button
             type="button"
             class="close"
@@ -562,18 +382,11 @@ footer{
             ×
         </button>
 
-        <h2>
-            Server
-        </h2>
-
-        <p>
-            Ons Minecraft serveradres:
-        </p>
+        <h2>Server</h2>
+        <p>Ons Minecraft serveradres:</p>
 
         <div class="notice">
-            <strong>
-                gp-node-01.future-node.com:35003
-            </strong>
+            <strong>gp-node-01.future-node.com:35003</strong>
         </div>
 
         <button
@@ -582,18 +395,11 @@ footer{
             onclick="copyServer()">
             IP kopiëren
         </button>
-
     </div>
-
 </div>
 
-
 <!-- LOGIN MODAL -->
-
-<div
-    class="modal"
-    id="loginModal">
-
+<div class="modal" id="loginModal">
     <div class="modal-box">
 
         <button
@@ -603,9 +409,7 @@ footer{
             ×
         </button>
 
-        <h2>
-            Inloggen
-        </h2>
+        <h2>Inloggen</h2>
 
         <input
             id="loginEmail"
@@ -631,22 +435,12 @@ footer{
             Account maken
         </button>
 
-        <div
-            id="loginMessage"
-            class="notice">
-        </div>
-
+        <div id="loginMessage" class="notice"></div>
     </div>
-
 </div>
 
-
 <!-- REGISTER MODAL -->
-
-<div
-    class="modal"
-    id="registerModal">
-
+<div class="modal" id="registerModal">
     <div class="modal-box">
 
         <button
@@ -656,9 +450,7 @@ footer{
             ×
         </button>
 
-        <h2>
-            Account maken
-        </h2>
+        <h2>Account maken</h2>
 
         <input
             id="registerUsername"
@@ -681,22 +473,12 @@ footer{
             Registreren
         </button>
 
-        <div
-            id="registerMessage"
-            class="notice">
-        </div>
-
+        <div id="registerMessage" class="notice"></div>
     </div>
-
 </div>
 
-
 <!-- APPLICATION MODAL -->
-
-<div
-    class="modal"
-    id="applicationModal">
-
+<div class="modal" id="applicationModal">
     <div class="modal-box">
 
         <button
@@ -706,22 +488,11 @@ footer{
             ×
         </button>
 
-        <h2>
-            Solliciteren
-        </h2>
+        <h2>Solliciteren</h2>
 
-        <input
-            id="applicationFunction"
-            readonly>
-
-        <input
-            id="applicationMinecraft"
-            placeholder="Minecraft naam">
-
-        <input
-            id="applicationAge"
-            type="number"
-            placeholder="Leeftijd">
+        <input id="applicationFunction" readonly>
+        <input id="applicationMinecraft" placeholder="Minecraft naam">
+        <input id="applicationAge" type="number" placeholder="Leeftijd">
 
         <textarea
             id="applicationExperience"
@@ -746,18 +517,11 @@ footer{
             id="applicationMessage"
             class="notice">
         </div>
-
     </div>
-
 </div>
 
-
 <!-- ADMIN CODE -->
-
-<div
-    class="modal"
-    id="adminCodeModal">
-
+<div class="modal" id="adminCodeModal">
     <div class="modal-box">
 
         <button
@@ -767,9 +531,7 @@ footer{
             ×
         </button>
 
-        <h2>
-            Beheerder
-        </h2>
+        <h2>Beheerder</h2>
 
         <p>
             Voer de beheerderscode in.
@@ -791,18 +553,11 @@ footer{
             id="adminCodeMessage"
             class="notice">
         </div>
-
     </div>
-
 </div>
 
-
 <!-- ADMIN APPLICATION -->
-
-<div
-    class="modal"
-    id="adminApplicationModal">
-
+<div class="modal" id="adminApplicationModal">
     <div class="modal-box">
 
         <button
@@ -812,9 +567,7 @@ footer{
             ×
         </button>
 
-        <h2>
-            Sollicitatie toevoegen
-        </h2>
+        <h2>Sollicitatie toevoegen</h2>
 
         <input
             id="adminAppUserId"
@@ -830,19 +583,9 @@ footer{
             placeholder="Minecraft naam">
 
         <select id="adminAppFunction">
-
-            <option>
-                Bouwer
-            </option>
-
-            <option>
-                Techniek
-            </option>
-
-            <option>
-                Modelaar
-            </option>
-
+            <option>Bouwer</option>
+            <option>Techniek</option>
+            <option>Modelaar</option>
         </select>
 
         <input
@@ -873,106 +616,116 @@ footer{
             id="adminApplicationMessage"
             class="notice">
         </div>
-
     </div>
-
 </div>
-
 
 <script>
 
 const SUPABASE_URL =
-    "https://zmhldveqqogxysoldhrf.supabase.co";
+"https://zmhldveqqogxysoldhrf.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
+"sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 let currentUser = null;
 let currentSession = null;
 let currentProfile = null;
-
 let communityTimer = null;
 let activeSessionTimer = null;
 
 
 /* =====================================================
-   BROWSER SHORTCUT PROTECTION
-   Windows + macOS
+   BLOCK COMMON DEVELOPER-TOOLS SHORTCUTS
+   Windows / Linux / macOS
 ===================================================== */
 
-document.addEventListener(
-    "contextmenu",
-    function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    },
-    true
-);
+(function(){
 
-
-document.addEventListener(
-    "keydown",
-    function(event){
+    function block(event){
 
         const key =
-            String(event.key).toLowerCase();
-
+            String(event.key || "").toLowerCase();
 
         /* F12 */
-
         if(event.key === "F12"){
             event.preventDefault();
             event.stopImmediatePropagation();
             return false;
         }
 
-
-        /* Windows / Linux:
-           Ctrl + Shift + I
-           Ctrl + Shift + J
-           Ctrl + Shift + C
-        */
-
+        /* CTRL + SHIFT + I */
         if(
             event.ctrlKey &&
             event.shiftKey &&
-            ["i","j","c"].includes(key)
+            key === "i"
         ){
             event.preventDefault();
             event.stopImmediatePropagation();
             return false;
         }
 
+        /* CTRL + SHIFT + J */
+        if(
+            event.ctrlKey &&
+            event.shiftKey &&
+            key === "j"
+        ){
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return false;
+        }
 
-        /* macOS:
-           Command + Option + I
-           Command + Option + J
-           Command + Option + C
-        */
+        /* CTRL + SHIFT + C */
+        if(
+            event.ctrlKey &&
+            event.shiftKey &&
+            key === "c"
+        ){
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return false;
+        }
 
+        /* COMMAND + OPTION + I - Mac */
         if(
             event.metaKey &&
             event.altKey &&
-            ["i","j","c"].includes(key)
+            key === "i"
         ){
             event.preventDefault();
             event.stopImmediatePropagation();
             return false;
         }
 
+        /* COMMAND + OPTION + J - Mac */
+        if(
+            event.metaKey &&
+            event.altKey &&
+            key === "j"
+        ){
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return false;
+        }
 
-        /* View Source:
-           Ctrl + U / Command + U
-        */
+        /* COMMAND + OPTION + C - Mac */
+        if(
+            event.metaKey &&
+            event.altKey &&
+            key === "c"
+        ){
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return false;
+        }
 
+        /* CTRL + U / COMMAND + U */
         if(
             (event.ctrlKey || event.metaKey) &&
             key === "u"
@@ -982,11 +735,7 @@ document.addEventListener(
             return false;
         }
 
-
-        /* Save page:
-           Ctrl + S / Command + S
-        */
-
+        /* CTRL + S / COMMAND + S */
         if(
             (event.ctrlKey || event.metaKey) &&
             key === "s"
@@ -995,10 +744,31 @@ document.addEventListener(
             event.stopImmediatePropagation();
             return false;
         }
+    }
 
-    },
-    true
-);
+    document.addEventListener(
+        "keydown",
+        block,
+        true
+    );
+
+    window.addEventListener(
+        "keydown",
+        block,
+        true
+    );
+
+    document.addEventListener(
+        "contextmenu",
+        function(event){
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return false;
+        },
+        true
+    );
+
+})();
 
 
 /* =====================================================
@@ -1013,70 +783,49 @@ function showPage(page){
             p.classList.remove("active");
         });
 
-
     const element =
         document.getElementById(page);
-
 
     if(element){
         element.classList.add("active");
     }
-
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
 
-
     if(page === "community"){
-
         loadCommunityUsers();
-
         startCommunityRefresh();
-
     }else{
-
         stopCommunityRefresh();
-
     }
-
 
     if(page === "admin"){
         loadAdminPage();
     }
-
 }
 
-
 function openServer(){
-
     document
         .getElementById("serverModal")
         .classList.add("show");
-
 }
 
-
 function openLogin(){
-
     document
         .getElementById("loginModal")
         .classList.add("show");
-
 }
 
-
 function showRegister(){
-
     closeModal("loginModal");
 
     document
         .getElementById("registerModal")
         .classList.add("show");
-
 }
-
 
 function closeModal(id){
 
@@ -1086,9 +835,7 @@ function closeModal(id){
     if(modal){
         modal.classList.remove("show");
     }
-
 }
-
 
 function copyServer(){
 
@@ -1097,7 +844,6 @@ function copyServer(){
     );
 
     alert("Server IP gekopieerd!");
-
 }
 
 
@@ -1108,17 +854,20 @@ function copyServer(){
 async function login(){
 
     const email =
-        document.getElementById("loginEmail")
+        document
+        .getElementById("loginEmail")
         .value
         .trim();
 
     const password =
-        document.getElementById("loginPassword")
+        document
+        .getElementById("loginPassword")
         .value;
 
     const message =
-        document.getElementById("loginMessage");
-
+        document.getElementById(
+            "loginMessage"
+        );
 
     const {
         data,
@@ -1129,7 +878,6 @@ async function login(){
             password
         });
 
-
     if(error){
 
         message.textContent =
@@ -1138,50 +886,56 @@ async function login(){
         return;
     }
 
-
-    message.textContent =
-        "Inloggen gelukt!";
-
-
     closeModal("loginModal");
 
-
-    await syncAuthState(data.session);
-
+    await syncAuthState(
+        data.session
+    );
 
     showPage("account");
-
 }
-
 
 async function register(){
 
     const username =
-        document.getElementById("registerUsername")
+        document
+        .getElementById(
+            "registerUsername"
+        )
         .value
         .trim();
 
     const email =
-        document.getElementById("registerEmail")
+        document
+        .getElementById(
+            "registerEmail"
+        )
         .value
         .trim();
 
     const password =
-        document.getElementById("registerPassword")
+        document
+        .getElementById(
+            "registerPassword"
+        )
         .value;
 
     const message =
-        document.getElementById("registerMessage");
+        document.getElementById(
+            "registerMessage"
+        );
 
-
-    if(!username || !email || !password){
+    if(
+        !username ||
+        !email ||
+        !password
+    ){
 
         message.textContent =
             "Vul alles in.";
 
         return;
     }
-
 
     const {
         data,
@@ -1201,7 +955,6 @@ async function register(){
 
         });
 
-
     if(error){
 
         message.textContent =
@@ -1210,23 +963,20 @@ async function register(){
         return;
     }
 
-
     message.textContent =
         data.session
-            ? "Account aangemaakt!"
-            : "Account aangemaakt. Controleer je email als emailbevestiging aanstaat.";
-
+        ? "Account aangemaakt!"
+        : "Account aangemaakt. Controleer je email als emailbevestiging aanstaat.";
 
     if(data.session){
 
         closeModal("registerModal");
 
-        await syncAuthState(data.session);
-
+        await syncAuthState(
+            data.session
+        );
     }
-
 }
-
 
 async function logout(){
 
@@ -1234,19 +984,15 @@ async function logout(){
 
     stopActiveSessionHeartbeat();
 
-
     await supabaseClient.auth.signOut();
-
 
     currentUser = null;
     currentSession = null;
     currentProfile = null;
 
-
     updateNavigation();
 
     showPage("home");
-
 }
 
 
@@ -1260,17 +1006,20 @@ async function loadProfile(){
         return;
     }
 
-
     const {
         data,
         error
     } =
         await supabaseClient
-            .from("profiles")
-            .select("username,email,status,is_admin")
-            .eq("id",currentUser.id)
-            .maybeSingle();
-
+        .from("profiles")
+        .select(
+            "username,email,status,is_admin"
+        )
+        .eq(
+            "id",
+            currentUser.id
+        )
+        .maybeSingle();
 
     if(error){
 
@@ -1282,9 +1031,7 @@ async function loadProfile(){
         return;
     }
 
-
     currentProfile = data;
-
 
     document.getElementById(
         "accountUsername"
@@ -1294,7 +1041,6 @@ async function loadProfile(){
         currentUser.email?.split("@")[0] ||
         "Gebruiker";
 
-
     document.getElementById(
         "accountEmail"
     ).textContent =
@@ -1302,33 +1048,27 @@ async function loadProfile(){
         currentUser.email ||
         "-";
 
-
     document.getElementById(
         "accountStatus"
     ).textContent =
         data?.status ||
         "Bezoeker";
 
-
     document.getElementById(
         "accountAdmin"
     ).textContent =
         data?.is_admin
-            ? "Ja"
-            : "Nee";
-
+        ? "Ja"
+        : "Nee";
 
     updateNavigation();
-
 }
-
 
 async function checkAdminStatus(){
 
     if(!currentUser){
         return false;
     }
-
 
     const {
         data,
@@ -1337,7 +1077,6 @@ async function checkAdminStatus(){
         await supabaseClient.rpc(
             "is_admin"
         );
-
 
     if(error){
 
@@ -1349,49 +1088,41 @@ async function checkAdminStatus(){
         return false;
     }
 
-
     return data === true;
-
 }
-
 
 function updateNavigation(){
 
     const loggedIn =
         !!currentUser;
 
-
     document.getElementById(
         "loginNav"
     ).style.display =
         loggedIn
-            ? "none"
-            : "block";
-
+        ? "none"
+        : "block";
 
     document.getElementById(
         "logoutNav"
     ).style.display =
         loggedIn
-            ? "block"
-            : "none";
-
+        ? "block"
+        : "none";
 
     document.getElementById(
         "accountNav"
     ).style.display =
         loggedIn
-            ? "block"
-            : "none";
-
+        ? "block"
+        : "none";
 
     document.getElementById(
         "adminNav"
     ).style.display =
         loggedIn
-            ? "block"
-            : "none";
-
+        ? "block"
+        : "none";
 }
 
 
@@ -1408,10 +1139,8 @@ async function openAdmin(){
         return;
     }
 
-
     const isAdmin =
         await checkAdminStatus();
-
 
     if(isAdmin){
 
@@ -1420,37 +1149,32 @@ async function openAdmin(){
         return;
     }
 
-
     document.getElementById(
         "adminCode"
     ).value = "";
-
 
     document.getElementById(
         "adminCodeMessage"
     ).textContent = "";
 
-
     document.getElementById(
         "adminCodeModal"
     ).classList.add("show");
-
 }
-
 
 async function adminCodeLogin(){
 
     const code =
         document.getElementById(
             "adminCode"
-        ).value.trim();
-
+        )
+        .value
+        .trim();
 
     const message =
         document.getElementById(
             "adminCodeMessage"
         );
-
 
     if(!code){
 
@@ -1459,7 +1183,6 @@ async function adminCodeLogin(){
 
         return;
     }
-
 
     const {
         data,
@@ -1472,7 +1195,6 @@ async function adminCodeLogin(){
             }
         );
 
-
     if(error){
 
         console.error(error);
@@ -1483,7 +1205,6 @@ async function adminCodeLogin(){
         return;
     }
 
-
     if(data !== true){
 
         message.textContent =
@@ -1492,25 +1213,18 @@ async function adminCodeLogin(){
         return;
     }
 
-
     currentProfile = {
-
         ...(currentProfile || {}),
-
         is_admin:true
-
     };
-
 
     closeModal(
         "adminCodeModal"
     );
 
-
     updateNavigation();
 
     showPage("admin");
-
 }
 
 
@@ -1527,12 +1241,10 @@ function openApplication(functionName){
         return;
     }
 
-
     document.getElementById(
         "applicationFunction"
     ).value =
         functionName;
-
 
     document.getElementById(
         "applicationMinecraft"
@@ -1541,18 +1253,14 @@ function openApplication(functionName){
         currentUser.user_metadata?.username ||
         "";
 
-
     document.getElementById(
         "applicationMessage"
     ).textContent = "";
 
-
     document.getElementById(
         "applicationModal"
     ).classList.add("show");
-
 }
-
 
 async function submitApplication(){
 
@@ -1560,12 +1268,10 @@ async function submitApplication(){
         return;
     }
 
-
     const message =
         document.getElementById(
             "applicationMessage"
         );
-
 
     const application = {
 
@@ -1609,9 +1315,7 @@ async function submitApplication(){
 
         status:
             "In behandeling"
-
     };
-
 
     if(
         !application.minecraft_name ||
@@ -1627,14 +1331,12 @@ async function submitApplication(){
         return;
     }
 
-
     const {
         error
     } =
         await supabaseClient
-            .from("applications")
-            .insert(application);
-
+        .from("applications")
+        .insert(application);
 
     if(error){
 
@@ -1646,10 +1348,8 @@ async function submitApplication(){
         return;
     }
 
-
     message.textContent =
         "Je sollicitatie is verstuurd!";
-
 
     setTimeout(
         function(){
@@ -1659,9 +1359,12 @@ async function submitApplication(){
         },
         1200
     );
-
 }
 
+
+/* =====================================================
+   ADMIN APPLICATIONS
+===================================================== */
 
 async function loadAdminPage(){
 
@@ -1669,10 +1372,8 @@ async function loadAdminPage(){
         return;
     }
 
-
     const isAdmin =
         await checkAdminStatus();
-
 
     if(!isAdmin){
 
@@ -1681,13 +1382,9 @@ async function loadAdminPage(){
         return;
     }
 
-
     loadAdminApplications();
-
     loadAdminUsers();
-
 }
-
 
 async function loadAdminApplications(){
 
@@ -1696,25 +1393,22 @@ async function loadAdminApplications(){
             "adminApplications"
         );
 
-
     container.innerHTML =
         "Laden...";
-
 
     const {
         data,
         error
     } =
         await supabaseClient
-            .from("applications")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
-
+        .from("applications")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
 
     if(error){
 
@@ -1726,7 +1420,6 @@ async function loadAdminApplications(){
         return;
     }
 
-
     if(!data?.length){
 
         container.innerHTML =
@@ -1735,9 +1428,9 @@ async function loadAdminApplications(){
         return;
     }
 
-
     container.innerHTML =
-        data.map(function(app){
+        data
+        .map(function(app){
 
             return `
 
@@ -1803,6 +1496,7 @@ async function loadAdminApplications(){
                     ${
                         app.status ===
                         "In behandeling"
+
                         ?
 
                         `
@@ -1838,10 +1532,9 @@ async function loadAdminApplications(){
 
             `;
 
-        }).join("");
-
+        })
+        .join("");
 }
-
 
 async function changeApplicationStatus(
     id,
@@ -1850,7 +1543,6 @@ async function changeApplicationStatus(
 
     const isAdmin =
         await checkAdminStatus();
-
 
     if(!isAdmin){
 
@@ -1861,20 +1553,21 @@ async function changeApplicationStatus(
         return;
     }
 
-
     const {
         data,
         error
     } =
         await supabaseClient
-            .from("applications")
-            .update({
-                status:status
-            })
-            .eq("id",id)
-            .select()
-            .single();
-
+        .from("applications")
+        .update({
+            status:status
+        })
+        .eq(
+            "id",
+            id
+        )
+        .select()
+        .single();
 
     if(error){
 
@@ -1886,7 +1579,6 @@ async function changeApplicationStatus(
 
         return;
     }
-
 
     if(
         data &&
@@ -1903,12 +1595,10 @@ async function changeApplicationStatus(
             } =
                 await supabaseClient.auth.getSession();
 
-
             await fetch(
                 SUPABASE_URL +
                 "/functions/v1/send-application-email",
                 {
-
                     method:"POST",
 
                     headers:{
@@ -1918,15 +1608,14 @@ async function changeApplicationStatus(
                         "Authorization":
                             "Bearer " +
                             sessionData
-                                .session
-                                .access_token
+                            .session
+                            .access_token
                     },
 
                     body:
                         JSON.stringify({
                             application:data
                         })
-
                 }
             );
 
@@ -1938,16 +1627,11 @@ async function changeApplicationStatus(
             );
 
         }
-
     }
 
-
     await loadAdminApplications();
-
     await loadAdminUsers();
-
 }
-
 
 async function loadAdminUsers(){
 
@@ -1956,22 +1640,19 @@ async function loadAdminUsers(){
             "adminUsers"
         );
 
-
     container.innerHTML =
         "Laden...";
-
 
     const {
         data,
         error
     } =
         await supabaseClient
-            .from("profiles")
-            .select(
-                "id,username,email,status,is_admin"
-            )
-            .order("username");
-
+        .from("profiles")
+        .select(
+            "id,username,email,status,is_admin"
+        )
+        .order("username");
 
     if(error){
 
@@ -1983,88 +1664,80 @@ async function loadAdminUsers(){
         return;
     }
 
-
     container.innerHTML =
         (data || [])
-            .map(function(user){
+        .map(function(user){
 
-                return `
+            return `
 
-                    <div class="card">
+                <div class="card">
 
-                        <strong>
+                    <strong>
+                        ${escapeHtml(
+                            user.username ||
+                            "Onbekend"
+                        )}
+                    </strong>
+
+                    <p>
+                        ${escapeHtml(
+                            user.email || ""
+                        )}
+                    </p>
+
+                    <p>
+                        Status:
+                        <span class="status">
                             ${escapeHtml(
-                                user.username ||
-                                "Onbekend"
+                                user.status ||
+                                "Bezoeker"
                             )}
-                        </strong>
+                        </span>
+                    </p>
 
-                        <p>
-                            ${escapeHtml(
-                                user.email || ""
-                            )}
-                        </p>
+                    <p>
+                        Beheerder:
+                        ${user.is_admin
+                            ? "Ja"
+                            : "Nee"}
+                    </p>
 
-                        <p>
-                            Status:
-                            <span class="status">
-                                ${escapeHtml(
-                                    user.status ||
-                                    "Bezoeker"
-                                )}
-                            </span>
-                        </p>
+                    <p class="small">
+                        ${escapeHtml(
+                            user.id
+                        )}
+                    </p>
 
-                        <p>
-                            Beheerder:
-                            ${user.is_admin
-                                ? "Ja"
-                                : "Nee"}
-                        </p>
+                </div>
 
-                        <p class="small">
-                            ${escapeHtml(
-                                user.id
-                            )}
-                        </p>
+            `;
 
-                    </div>
-
-                `;
-
-            })
-            .join("");
-
+        })
+        .join("");
 }
-
 
 function openAdminApplication(){
 
     document
-        .getElementById(
-            "adminApplicationModal"
-        )
-        .classList.add("show");
-
+    .getElementById(
+        "adminApplicationModal"
+    )
+    .classList.add("show");
 }
-
 
 async function adminAddApplication(){
 
     const isAdmin =
         await checkAdminStatus();
 
-
     if(!isAdmin){
         return;
     }
-
 
     const message =
         document.getElementById(
             "adminApplicationMessage"
         );
-
 
     const application = {
 
@@ -2112,19 +1785,14 @@ async function adminAddApplication(){
 
         status:
             "In behandeling"
-
     };
-
 
     const {
         error
     } =
         await supabaseClient
-            .from("applications")
-            .insert(
-                application
-            );
-
+        .from("applications")
+        .insert(application);
 
     if(error){
 
@@ -2136,13 +1804,10 @@ async function adminAddApplication(){
         return;
     }
 
-
     message.textContent =
         "Sollicitatie toegevoegd!";
 
-
     await loadAdminApplications();
-
 
     setTimeout(
         function(){
@@ -2152,7 +1817,6 @@ async function adminAddApplication(){
         },
         1000
     );
-
 }
 
 
@@ -2166,27 +1830,25 @@ async function updateActiveSession(){
         return;
     }
 
-
     const {
         error
     } =
         await supabaseClient
-            .from("active_sessions")
-            .upsert(
-                {
-                    user_id:
-                        currentUser.id,
+        .from("active_sessions")
+        .upsert(
+            {
+                user_id:
+                    currentUser.id,
 
-                    last_seen:
-                        new Date()
-                            .toISOString()
-                },
-                {
-                    onConflict:
-                        "user_id"
-                }
-            );
-
+                last_seen:
+                    new Date()
+                    .toISOString()
+            },
+            {
+                onConflict:
+                    "user_id"
+            }
+        );
 
     if(error){
 
@@ -2194,11 +1856,8 @@ async function updateActiveSession(){
             "Active session error:",
             error
         );
-
     }
-
 }
-
 
 async function removeActiveSession(){
 
@@ -2206,18 +1865,16 @@ async function removeActiveSession(){
         return;
     }
 
-
     const {
         error
     } =
         await supabaseClient
-            .from("active_sessions")
-            .delete()
-            .eq(
-                "user_id",
-                currentUser.id
-            );
-
+        .from("active_sessions")
+        .delete()
+        .eq(
+            "user_id",
+            currentUser.id
+        );
 
     if(error){
 
@@ -2225,24 +1882,18 @@ async function removeActiveSession(){
             "Remove session error:",
             error
         );
-
     }
-
 }
-
 
 function startActiveSessionHeartbeat(){
 
     stopActiveSessionHeartbeat();
 
-
     if(!currentUser){
         return;
     }
 
-
     updateActiveSession();
-
 
     activeSessionTimer =
         setInterval(
@@ -2252,13 +1903,13 @@ function startActiveSessionHeartbeat(){
 
                 if(
                     document
-                        .getElementById(
-                            "community"
-                        )
-                        ?.classList
-                        .contains(
-                            "active"
-                        )
+                    .getElementById(
+                        "community"
+                    )
+                    ?.classList
+                    .contains(
+                        "active"
+                    )
                 ){
 
                     loadCommunityUsers();
@@ -2268,9 +1919,7 @@ function startActiveSessionHeartbeat(){
             },
             30000
         );
-
 }
-
 
 function stopActiveSessionHeartbeat(){
 
@@ -2282,9 +1931,7 @@ function stopActiveSessionHeartbeat(){
 
         activeSessionTimer =
             null;
-
     }
-
 }
 
 
@@ -2304,11 +1951,9 @@ async function loadCommunityUsers(){
             "onlineCount"
         );
 
-
     if(!container || !count){
         return;
     }
-
 
     if(!currentUser){
 
@@ -2320,22 +1965,13 @@ async function loadCommunityUsers(){
         return;
     }
 
-
     container.innerHTML =
         "Laden...";
 
-
     /*
-       Community gebruikt alleen de veilige RPC.
-
-       De browser ontvangt:
-       - username
-       - status
-
-       De browser ontvangt NIET:
-       - email
-       - user ID
-       - is_admin
+      Alleen veilige community data
+      wordt via de RPC teruggegeven:
+      username + status.
     */
 
     const {
@@ -2346,7 +1982,6 @@ async function loadCommunityUsers(){
             "get_online_community_users"
         );
 
-
     if(error){
 
         console.error(
@@ -2354,10 +1989,8 @@ async function loadCommunityUsers(){
             error
         );
 
-
         count.textContent =
             "Community kon niet worden geladen.";
-
 
         container.innerHTML =
             "<p>Er ging iets mis bij het laden van de community.</p>";
@@ -2365,19 +1998,16 @@ async function loadCommunityUsers(){
         return;
     }
 
-
     const users =
         data || [];
-
 
     count.textContent =
         users.length +
         (
             users.length === 1
-                ? " persoon online"
-                : " personen online"
+            ? " persoon online"
+            : " personen online"
         );
-
 
     if(users.length === 0){
 
@@ -2387,19 +2017,17 @@ async function loadCommunityUsers(){
         return;
     }
 
-
     container.innerHTML =
-        users.map(function(user){
+        users
+        .map(function(user){
 
             const username =
                 user.username ||
                 "Onbekende gebruiker";
 
-
             const status =
                 user.status ||
                 "Bezoeker";
-
 
             return `
 
@@ -2408,8 +2036,8 @@ async function loadCommunityUsers(){
                     <div class="avatar">
                         ${escapeHtml(
                             username
-                                .charAt(0)
-                                .toUpperCase()
+                            .charAt(0)
+                            .toUpperCase()
                         )}
                     </div>
 
@@ -2435,31 +2063,24 @@ async function loadCommunityUsers(){
 
             `;
 
-        }).join("");
-
+        })
+        .join("");
 }
-
 
 function startCommunityRefresh(){
 
     stopCommunityRefresh();
 
-
     loadCommunityUsers();
-
 
     communityTimer =
         setInterval(
             function(){
-
                 loadCommunityUsers();
-
             },
             15000
         );
-
 }
-
 
 function stopCommunityRefresh(){
 
@@ -2471,9 +2092,7 @@ function stopCommunityRefresh(){
 
         communityTimer =
             null;
-
     }
-
 }
 
 
@@ -2489,7 +2108,6 @@ async function syncAuthState(session){
     currentUser =
         session?.user || null;
 
-
     if(currentUser){
 
         await loadProfile();
@@ -2504,11 +2122,8 @@ async function syncAuthState(session){
 
     }
 
-
     updateNavigation();
-
 }
-
 
 supabaseClient.auth.onAuthStateChange(
     function(event,session){
@@ -2523,13 +2138,12 @@ supabaseClient.auth.onAuthStateChange(
             },
             0
         );
-
     }
 );
 
 
 /* =====================================================
-   HELPERS
+   HTML SECURITY HELPER
 ===================================================== */
 
 function escapeHtml(value){
@@ -2537,32 +2151,26 @@ function escapeHtml(value){
     return String(
         value ?? ""
     )
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 }
 
 
@@ -2576,7 +2184,6 @@ function escapeHtml(value){
         data
     } =
         await supabaseClient.auth.getSession();
-
 
     if(data.session){
 
