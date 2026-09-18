@@ -9,7 +9,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Righteous&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -17,8 +16,6 @@
 <style>
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html {
@@ -26,10 +23,11 @@ html {
 }
 
 body {
-    font-family: "Poppins", sans-serif;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
     background:
-        radial-gradient(circle at top, #35205f 0%, #170d2b 42%, #090510 100%);
-    color: white;
+        radial-gradient(circle at top, #35145f 0%, #160824 45%, #09030f 100%);
+    color: #fff;
     min-height: 100vh;
 }
 
@@ -44,29 +42,21 @@ button {
     cursor: pointer;
 }
 
-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
-}
-
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(12, 6, 24, 0.94);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 215, 100, 0.18);
+    background: rgba(12, 5, 24, .94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 210, 90, .25);
 }
 
 .navbar {
     max-width: 1250px;
     margin: auto;
-    min-height: 76px;
     padding: 12px 20px;
-
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 20px;
 }
 
@@ -74,255 +64,403 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-right: auto;
 }
 
 .logo-area img {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
 .logo-text {
-    font-family: "Righteous", cursive;
-    font-size: 22px;
-    color: #ffd76a;
+    font-family: 'Righteous', cursive;
+    color: #ffd35a;
+    font-size: 21px;
 }
 
-nav {
+.nav-buttons {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px;
+    justify-content: center;
+    gap: 7px;
 }
 
 .nav-btn {
-    border: 1px solid transparent;
+    border: 0;
+    color: #fff;
     background: transparent;
-    color: white;
-    padding: 10px 14px;
+    padding: 10px 13px;
     border-radius: 10px;
-    transition: 0.2s;
+    transition: .2s;
+    font-weight: 500;
 }
 
-.nav-btn:hover {
-    background: rgba(255, 215, 106, 0.12);
-    border-color: rgba(255, 215, 106, 0.3);
-    color: #ffd76a;
+.nav-btn:hover,
+.nav-btn.active {
+    background: rgba(255, 211, 90, .14);
+    color: #ffd35a;
+}
+
+.nav-btn.admin {
+    border: 1px solid rgba(255, 211, 90, .4);
+}
+
+.nav-btn.community {
+    border: 1px solid rgba(139, 92, 246, .55);
+}
+
+.page {
+    display: none;
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 20px 80px;
+}
+
+.page.active {
+    display: block;
 }
 
 .hero {
     min-height: 600px;
-    max-width: 1250px;
-    margin: auto;
-    padding: 90px 20px 70px;
-
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.hero-content {
-    max-width: 850px;
-}
-
-.hero-logo {
-    width: min(260px, 70vw);
-    max-height: 220px;
-    object-fit: contain;
-    margin-bottom: 25px;
-}
-
-h1,
-h2,
-h3 {
-    font-family: "Righteous", cursive;
+.hero img {
+    width: min(280px, 70vw);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 35px rgba(255, 211, 90, .2));
 }
 
 .hero h1 {
-    font-size: clamp(42px, 7vw, 82px);
-    color: #ffd76a;
-    text-shadow: 0 0 35px rgba(255, 215, 106, 0.25);
+    font-family: 'Righteous', cursive;
+    color: #ffd35a;
+    font-size: clamp(38px, 7vw, 72px);
+    margin: 0 0 12px;
 }
 
 .hero p {
-    margin: 18px auto 28px;
-    max-width: 700px;
-    color: #ddd2ee;
-    font-size: 18px;
-    line-height: 1.7;
+    max-width: 720px;
+    color: #ddd;
+    font-size: 17px;
 }
 
 .primary-btn,
 .secondary-btn,
-.danger-btn,
-.success-btn {
-    border: none;
-    padding: 12px 20px;
+.danger-btn {
+    border: 0;
     border-radius: 10px;
+    padding: 12px 18px;
     font-weight: 600;
-    transition: 0.2s;
+    transition: .2s;
 }
 
 .primary-btn {
-    background: #ffd76a;
-    color: #21112f;
+    background: #ffd35a;
+    color: #241032;
 }
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 215, 106, 0.2);
+    box-shadow: 0 8px 25px rgba(255, 211, 90, .22);
 }
 
 .secondary-btn {
-    background: #6f45a5;
+    background: #6c3bc0;
     color: white;
 }
 
 .secondary-btn:hover {
-    background: #8055ba;
-}
-
-.success-btn {
-    background: #2e9b68;
-    color: white;
-}
-
-.success-btn:hover {
-    background: #36b979;
+    background: #7c4bd4;
 }
 
 .danger-btn {
-    background: #a83b4b;
-    color: white;
+    background: #a62e45;
+    color: #fff;
 }
 
-.danger-btn:hover {
-    background: #c04b5c;
-}
-
-.small-btn {
-    padding: 8px 12px;
-    font-size: 13px;
-}
-
-section.page {
-    display: none;
-    max-width: 1250px;
-    margin: auto;
-    padding: 60px 20px;
-}
-
-section.page.active {
-    display: block;
-}
-
-.section-title {
-    color: #ffd76a;
-    font-size: 42px;
-    margin-bottom: 12px;
-}
-
-.section-description {
-    color: #cfc4df;
-    margin-bottom: 30px;
-}
-
-.cards {
+.card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
 .card {
-    background: rgba(29, 16, 49, 0.82);
-    border: 1px solid rgba(255, 215, 106, 0.13);
+    background: rgba(255, 255, 255, .055);
+    border: 1px solid rgba(255, 255, 255, .1);
     border-radius: 18px;
     padding: 24px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .18);
 }
 
+.card h2,
 .card h3 {
-    color: #ffd76a;
-    font-size: 25px;
-    margin-bottom: 12px;
+    margin-top: 0;
+    color: #ffd35a;
 }
 
-.card p {
-    color: #d6cae4;
-    line-height: 1.65;
+.muted {
+    color: #aaa;
 }
 
-.card .primary-btn {
-    margin-top: 20px;
-}
-
-.account-box {
-    max-width: 750px;
+.account-box,
+.community-box,
+.admin-box {
+    max-width: 950px;
+    margin: auto;
 }
 
 .profile-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
     padding: 15px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .profile-row:last-child {
-    border-bottom: none;
+    border-bottom: 0;
 }
 
 .profile-label {
-    color: #aaa0b9;
+    color: #aaa;
 }
 
 .profile-value {
-    text-align: right;
-    word-break: break-word;
-}
-
-.status {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 13px;
     font-weight: 600;
+    text-align: right;
 }
 
-.status.pending {
-    background: rgba(255, 215, 106, 0.15);
-    color: #ffd76a;
+.status-team {
+    color: #70e89a;
 }
 
-.status.accepted {
-    background: rgba(46, 155, 104, 0.18);
-    color: #67e8a4;
+.status-visitor {
+    color: #ffd35a;
 }
 
-.status.rejected {
-    background: rgba(168, 59, 75, 0.18);
-    color: #ff8797;
+.community-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.community-intro h1 {
+    font-family: 'Righteous', cursive;
+    color: #ffd35a;
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.online-count {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 15px;
+    border-radius: 999px;
+    background: rgba(100, 230, 150, .1);
+    border: 1px solid rgba(100, 230, 150, .25);
+    color: #7cf0a3;
+}
+
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.person-card {
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+}
+
+.person-top {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7b42d4, #ffd35a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.person-name {
+    font-weight: 700;
+    color: #fff;
+}
+
+.person-status {
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.online-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #61e88b;
+    display: inline-block;
+    margin-right: 5px;
+    box-shadow: 0 0 8px rgba(97,232,139,.7);
+}
+
+.community-note {
+    margin-top: 25px;
+    text-align: center;
+    color: #999;
+    font-size: 13px;
+}
+
+.vacancy-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.vacancy-card .primary-btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #ddd;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.25);
+    color: #fff;
+    border-radius: 10px;
+    padding: 12px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #ffd35a;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 3000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: min(560px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #1a0b2b;
+    border: 1px solid rgba(255,211,90,.25);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 25px 80px rgba(0,0,0,.5);
+}
+
+.modal-content h2 {
+    color: #ffd35a;
+    margin-top: 0;
+}
+
+.modal-close {
+    float: right;
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    font-size: 25px;
+}
+
+.message {
+    display: none;
+    padding: 10px 13px;
+    border-radius: 9px;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.message.show {
+    display: block;
+}
+
+.message.error {
+    background: rgba(220, 60, 80, .15);
+    border: 1px solid rgba(220, 60, 80, .3);
+    color: #ff9ba9;
+}
+
+.message.success {
+    background: rgba(70, 220, 120, .12);
+    border: 1px solid rgba(70, 220, 120, .25);
+    color: #8cf0a8;
+}
+
+.server-ip {
+    background: #0d0615;
+    border: 1px solid rgba(255,211,90,.2);
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    color: #ffd35a;
+    font-weight: 700;
+    margin: 15px 0;
 }
 
 .admin-tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .admin-tab {
-    padding: 10px 15px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.05);
+    color: #fff;
+    padding: 10px 14px;
     border-radius: 9px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: white;
 }
 
 .admin-tab.active {
-    background: #ffd76a;
-    color: #21112f;
+    background: #6c3bc0;
 }
 
 .admin-panel {
@@ -333,236 +471,86 @@ section.page.active {
     display: block;
 }
 
-.application-card {
-    background: rgba(29, 16, 49, 0.88);
-    border: 1px solid rgba(255, 215, 106, 0.13);
-    border-radius: 16px;
-    padding: 22px;
-    margin-bottom: 16px;
+.application-item,
+.user-item {
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 13px;
+    padding: 17px;
+    margin-bottom: 12px;
 }
 
 .application-header {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.application-header h3 {
-    color: #ffd76a;
-}
-
-.application-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-}
-
-.detail {
-    background: rgba(0,0,0,0.12);
-    border-radius: 10px;
-    padding: 12px;
-}
-
-.detail strong {
-    display: block;
-    color: #aaa0b9;
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-.detail span,
-.detail div {
-    color: #eee;
-    white-space: pre-wrap;
-    word-break: break-word;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .application-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
+    gap: 7px;
+    margin-top: 13px;
 }
 
-.user-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 16px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    background: rgba(29,16,49,0.8);
+.application-status {
+    font-weight: 700;
 }
 
-.admin-badge {
-    display: inline-block;
-    padding: 5px 9px;
-    border-radius: 7px;
-    background: rgba(255,215,106,0.15);
-    color: #ffd76a;
-    font-size: 12px;
+.status-pending {
+    color: #ffd35a;
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px;
+.status-accepted {
+    color: #70e89a;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group.full {
-    grid-column: 1 / -1;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 7px;
-    color: #d9cee6;
-    font-size: 14px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 9px;
-    background: rgba(0,0,0,0.25);
-    color: white;
-    padding: 12px;
-    outline: none;
-}
-
-.form-group textarea {
-    min-height: 130px;
-    resize: vertical;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    border-color: rgba(255,215,106,0.6);
-}
-
-.form-group select option {
-    background: #21112f;
-    color: white;
-}
-
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 5000;
-    background: rgba(0,0,0,0.72);
-    backdrop-filter: blur(5px);
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-box {
-    width: min(620px, 100%);
-    max-height: 90vh;
-    overflow-y: auto;
-
-    background: #1b1030;
-    border: 1px solid rgba(255,215,106,0.2);
-    border-radius: 18px;
-    padding: 25px;
-
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-}
-
-.modal-box h2 {
-    color: #ffd76a;
-    margin-bottom: 18px;
-}
-
-.close-btn {
-    float: right;
-    border: none;
-    background: transparent;
-    color: #aaa;
-    font-size: 25px;
-}
-
-.close-btn:hover {
-    color: white;
-}
-
-.form-message {
-    margin-top: 12px;
-    padding: 10px;
-    border-radius: 8px;
-    display: none;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-
-.form-message.show {
-    display: block;
-}
-
-.form-message.error {
-    background: rgba(168,59,75,0.2);
-    color: #ff9baa;
-}
-
-.form-message.success {
-    background: rgba(46,155,104,0.2);
-    color: #72e9ac;
-}
-
-.loading {
-    color: #aaa0b9;
-    padding: 20px 0;
+.status-rejected {
+    color: #ff8093;
 }
 
 .empty {
-    color: #aaa0b9;
-    padding: 25px 0;
+    text-align: center;
+    padding: 35px 15px;
+    color: #888;
 }
 
 footer {
-    margin-top: 50px;
-    padding: 35px 20px;
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    color: #8e829d;
+    padding: 30px 20px;
+    color: #777;
+    border-top: 1px solid rgba(255,255,255,.06);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
     .navbar {
-        flex-direction: column;
+        flex-wrap: wrap;
     }
 
-    nav {
+    .logo-area {
+        width: 100%;
+        margin-right: 0;
         justify-content: center;
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
+    .nav-buttons {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-btn {
+        padding: 8px 9px;
+        font-size: 13px;
     }
 
-    .form-group.full {
-        grid-column: auto;
+    .page {
+        padding-top: 30px;
     }
 
     .profile-row {
+        align-items: flex-start;
         flex-direction: column;
         gap: 5px;
     }
@@ -577,723 +565,445 @@ footer {
 <body>
 
 <header>
-    <div class="navbar">
-
+    <nav class="navbar">
         <div class="logo-area">
             <img src="./logo.png" alt="Magische Heuvel">
             <div class="logo-text">Magische Heuvel</div>
         </div>
 
-        <nav>
-
-            <button type="button"
-                    class="nav-btn"
-                    onclick="showPage('home')">
-                Home
-            </button>
-
-            <button type="button"
-                    class="nav-btn"
-                    onclick="openServerModal()">
-                Server
-            </button>
-
-            <button type="button"
-                    class="nav-btn"
-                    onclick="showPage('vacatures')">
-                Vacatures
-            </button>
-
-            <button type="button"
-                    class="nav-btn"
-                    id="accountNavBtn"
-                    onclick="showAccount()">
-                Mijn account
-            </button>
-
-            <button type="button"
-                    class="nav-btn"
-                    id="adminNavBtn"
-                    onclick="showAdmin()">
-                Beheerder
-            </button>
-
-            <button type="button"
-                    class="nav-btn"
-                    id="loginNavBtn"
-                    onclick="openLoginModal()">
-                Inloggen
-            </button>
-
-        </nav>
-
-    </div>
+        <div class="nav-buttons">
+            <button type="button" class="nav-btn active" onclick="showPage('home')">Home</button>
+            <button type="button" class="nav-btn" onclick="showPage('vacatures')">Vacatures</button>
+            <button type="button" class="nav-btn community" onclick="showCommunity()">Community</button>
+            <button type="button" class="nav-btn" onclick="showAccount()">Mijn account</button>
+            <button type="button" class="nav-btn" onclick="openServerModal()">Server</button>
+            <button type="button" class="nav-btn" id="loginNavButton" onclick="openLoginModal()">Inloggen</button>
+            <button type="button" class="nav-btn admin" id="adminNavButton" onclick="showAdmin()">Beheerder</button>
+        </div>
+    </nav>
 </header>
 
+<main>
 
-<!-- HOME -->
-
-<section id="home" class="page active">
-
+<section id="homePage" class="page active">
     <div class="hero">
+        <img src="./logo.png" alt="Magische Heuvel logo">
 
-        <div class="hero-content">
+        <h1>Magische Heuvel</h1>
 
-            <img class="hero-logo"
-                 src="./logo.png"
-                 alt="Magische Heuvel logo">
+        <p>
+            Welkom op de officiële website van Magische Heuvel,
+            ons Minecraft-themapark vol attracties, shows en magie.
+        </p>
 
-            <h1>Magische Heuvel</h1>
-
-            <p>
-                Welkom bij Magische Heuvel, een groot Minecraft-themapark
-                vol attracties, shows en magische avonturen.
-            </p>
-
-            <button type="button"
-                    class="primary-btn"
-                    onclick="openServerModal()">
-                Speel mee
-            </button>
-
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px;">
+            <button type="button" class="primary-btn" onclick="openServerModal()">Speel mee</button>
+            <button type="button" class="secondary-btn" onclick="showCommunity()">Community</button>
         </div>
-
     </div>
-
 </section>
 
+<section id="vacaturesPage" class="page">
+    <div class="community-intro">
+        <h1>Vacatures</h1>
+        <p class="muted">Wil jij meehelpen aan Magische Heuvel?</p>
+    </div>
 
-<!-- VACATURES -->
+    <div class="card-grid">
 
-<section id="vacatures" class="page">
-
-    <h2 class="section-title">Vacatures</h2>
-
-    <p class="section-description">
-        Wil jij meewerken aan Magische Heuvel? Bekijk onze vacatures en solliciteer.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <h3>Bouwer</h3>
-
+        <div class="card vacancy-card">
+            <h2>Bouwer</h2>
             <p>
-                Bouw mee aan attracties, gebouwen, gebieden en andere onderdelen
-                van het themapark.
+                Bouw mee aan attracties, gebouwen, themagebieden en decoratie
+                voor het park.
             </p>
-
-            <button type="button"
-                    class="primary-btn"
+            <button type="button" class="primary-btn"
                     onclick="openApplicationModal('Bouwer')">
                 Solliciteren
             </button>
-
         </div>
 
-
-        <div class="card">
-
-            <h3>Techniek</h3>
-
+        <div class="card vacancy-card">
+            <h2>Techniek</h2>
             <p>
-                Werk mee aan plugins, commands, redstone, attractiesystemen
-                en andere technische onderdelen.
+                Werk aan redstone, plugins, systemen en technische onderdelen
+                van onze attracties.
             </p>
-
-            <button type="button"
-                    class="primary-btn"
+            <button type="button" class="primary-btn"
                     onclick="openApplicationModal('Techniek')">
                 Solliciteren
             </button>
-
         </div>
 
-
-        <div class="card">
-
-            <h3>Modelaar</h3>
-
+        <div class="card vacancy-card">
+            <h2>Modelaar</h2>
             <p>
-                Maak modellen, decoratie en andere 3D-assets voor ons Minecraft-themapark.
+                Maak custom modellen, decoratie en andere 3D-assets voor
+                Magische Heuvel.
             </p>
-
-            <button type="button"
-                    class="primary-btn"
+            <button type="button" class="primary-btn"
                     onclick="openApplicationModal('Modelaar')">
                 Solliciteren
             </button>
-
         </div>
 
     </div>
-
 </section>
 
+<section id="communityPage" class="page">
+    <div class="community-box">
 
-<!-- ACCOUNT -->
+        <div class="community-intro">
+            <h1>Community</h1>
+            <p>
+                Bekijk welke gebruikers momenteel zijn ingelogd op
+                Magische Heuvel.
+            </p>
 
-<section id="account" class="page">
-
-    <h2 class="section-title">Mijn account</h2>
-
-    <div class="card account-box">
-
-        <div class="profile-row">
-            <span class="profile-label">Gebruikersnaam</span>
-            <span class="profile-value" id="profileUsername">-</span>
+            <div class="online-count" id="onlineCount">
+                Online gebruikers laden...
+            </div>
         </div>
 
-        <div class="profile-row">
-            <span class="profile-label">E-mailadres</span>
-            <span class="profile-value" id="profileEmail">-</span>
+        <div id="communityPeople" class="people-grid">
+            <div class="empty">Gebruikers worden geladen...</div>
         </div>
 
-        <div class="profile-row">
-            <span class="profile-label">Status</span>
-            <span class="profile-value" id="profileAdminStatus">
-                Gebruiker
-            </span>
+        <div class="community-note">
+            Alleen ingelogde gebruikers worden hier weergegeven.
+            Beheerders en gewone gebruikers staan samen in de community.
         </div>
 
-        <div style="margin-top:25px;">
+    </div>
+</section>
 
-            <button type="button"
-                    class="danger-btn"
-                    onclick="logout()">
-                Uitloggen
+<section id="accountPage" class="page">
+    <div class="account-box">
+
+        <div class="community-intro">
+            <h1>Mijn account</h1>
+        </div>
+
+        <div id="accountLoggedOut" class="card">
+            <h2>Je bent niet ingelogd</h2>
+            <p class="muted">
+                Log in om je accountgegevens te bekijken.
+            </p>
+            <button type="button" class="primary-btn" onclick="openLoginModal()">
+                Inloggen
+            </button>
+        </div>
+
+        <div id="accountLoggedIn" class="card" style="display:none;">
+            <div class="profile-row">
+                <span class="profile-label">Gebruikersnaam</span>
+                <span class="profile-value" id="accountUsername">-</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">E-mail</span>
+                <span class="profile-value" id="accountEmail">-</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Status</span>
+                <span class="profile-value" id="accountStatus">-</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Accounttype</span>
+                <span class="profile-value" id="accountAdminStatus">Gebruiker</span>
+            </div>
+
+            <div style="margin-top:20px;">
+                <button type="button" class="danger-btn" onclick="logout()">
+                    Uitloggen
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="adminPage" class="page">
+    <div class="admin-box">
+
+        <div class="community-intro">
+            <h1>Beheerder</h1>
+            <p class="muted">Beheer sollicitaties en gebruikers.</p>
+        </div>
+
+        <div class="admin-tabs">
+            <button type="button" class="admin-tab active"
+                    id="applicationsTabButton"
+                    onclick="showAdminTab('applications')">
+                Sollicitaties
             </button>
 
+            <button type="button" class="admin-tab"
+                    id="usersTabButton"
+                    onclick="showAdminTab('users')">
+                Gebruikers
+            </button>
+
+            <button type="button" class="admin-tab"
+                    id="addApplicationTabButton"
+                    onclick="showAdminTab('addApplication')">
+                Sollicitatie toevoegen
+            </button>
         </div>
 
-    </div>
+        <div id="adminApplicationsPanel" class="admin-panel active">
+            <div id="adminApplications"></div>
+        </div>
 
-</section>
+        <div id="adminUsersPanel" class="admin-panel">
+            <div id="adminUsers"></div>
+        </div>
 
+        <div id="adminAddApplicationPanel" class="admin-panel">
+            <div class="card">
+                <h2>Sollicitatie toevoegen</h2>
 
-<!-- ADMIN -->
+                <div id="adminAddMessage" class="message"></div>
 
-<section id="admin" class="page">
+                <form id="adminApplicationForm">
+                    <div class="form-group">
+                        <label for="adminTargetUser">Gebruiker</label>
+                        <select id="adminTargetUser" required></select>
+                    </div>
 
-    <h2 class="section-title">Beheerder</h2>
+                    <div class="form-group">
+                        <label for="adminMinecraftName">Minecraft naam</label>
+                        <input id="adminMinecraftName" required>
+                    </div>
 
-    <p class="section-description">
-        Beheer hier de sollicitaties en gebruikers van Magische Heuvel.
-    </p>
+                    <div class="form-group">
+                        <label for="adminFunction">Functie</label>
+                        <select id="adminFunction" required>
+                            <option value="Bouwer">Bouwer</option>
+                            <option value="Techniek">Techniek</option>
+                            <option value="Modelaar">Modelaar</option>
+                        </select>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="adminAge">Leeftijd</label>
+                        <input id="adminAge" type="number" min="1" required>
+                    </div>
 
-    <div class="admin-tabs">
+                    <div class="form-group">
+                        <label for="adminExperience">Ervaring</label>
+                        <textarea id="adminExperience" required></textarea>
+                    </div>
 
-        <button type="button"
-                class="admin-tab active"
-                id="adminTabApplications"
-                onclick="showAdminTab('applications')">
-            Sollicitaties
-        </button>
+                    <div class="form-group">
+                        <label for="adminMotivation">Motivatie</label>
+                        <textarea id="adminMotivation" required></textarea>
+                    </div>
 
-        <button type="button"
-                class="admin-tab"
-                id="adminTabUsers"
-                onclick="showAdminTab('users')">
-            Gebruikers
-        </button>
+                    <div class="form-group">
+                        <label for="adminAvailability">Beschikbaarheid</label>
+                        <textarea id="adminAvailability" required></textarea>
+                    </div>
 
-        <button type="button"
-                class="admin-tab"
-                id="adminTabAdd"
-                onclick="showAdminTab('add')">
-            Sollicitatie toevoegen
-        </button>
-
-    </div>
-
-
-    <div id="adminApplications"
-         class="admin-panel active">
-
-        <div id="adminApplicationsList">
-            <div class="loading">
-                Sollicitaties laden...
+                    <button type="submit" class="primary-btn">
+                        Sollicitatie toevoegen
+                    </button>
+                </form>
             </div>
         </div>
 
     </div>
-
-
-    <div id="adminUsers"
-         class="admin-panel">
-
-        <div id="adminUsersList">
-            <div class="loading">
-                Gebruikers laden...
-            </div>
-        </div>
-
-    </div>
-
-
-    <div id="adminAdd"
-         class="admin-panel">
-
-        <div class="card">
-
-            <h3>Sollicitatie toevoegen</h3>
-
-            <form id="adminApplicationForm">
-
-                <div class="form-grid">
-
-                    <div class="form-group full">
-
-                        <label>Gebruiker</label>
-
-                        <select id="adminApplicationUser"
-                                required>
-
-                            <option value="">
-                                Gebruiker kiezen...
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>Minecraft naam</label>
-
-                        <input id="adminMinecraftName"
-                               required>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>Functie</label>
-
-                        <select id="adminFunction"
-                                required>
-
-                            <option value="Bouwer">
-                                Bouwer
-                            </option>
-
-                            <option value="Techniek">
-                                Techniek
-                            </option>
-
-                            <option value="Modelaar">
-                                Modelaar
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>Leeftijd</label>
-
-                        <input id="adminAge"
-                               type="number"
-                               min="1"
-                               max="100"
-                               required>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>Ervaring</label>
-
-                        <textarea id="adminExperience"
-                                  required></textarea>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>Motivatie</label>
-
-                        <textarea id="adminMotivation"
-                                  required></textarea>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>Beschikbaarheid</label>
-
-                        <textarea id="adminAvailability"
-                                  required></textarea>
-
-                    </div>
-
-                </div>
-
-
-                <button type="submit"
-                        class="primary-btn">
-                    Sollicitatie toevoegen
-                </button>
-
-
-                <div id="adminApplicationMessage"
-                     class="form-message">
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
 </section>
 
+</main>
 
 <footer>
     © 2026 Magische Heuvel - Minecraft Themapark
 </footer>
 
-
 <!-- SERVER MODAL -->
+<div id="serverModal" class="modal">
+    <div class="modal-content">
+        <button type="button" class="modal-close" onclick="closeModal('serverModal')">×</button>
+        <h2>Magische Heuvel Minecraft Server</h2>
 
-<div id="serverModal"
-     class="modal">
+        <p>Serveradres:</p>
 
-    <div class="modal-box">
-
-        <button type="button"
-                class="close-btn"
-                onclick="closeModal('serverModal')">
-            ×
-        </button>
-
-        <h2>Onze Minecraft server</h2>
-
-        <p style="color:#d6cae4; margin-bottom:20px;">
-            Kom gezellig spelen op Magische Heuvel!
-        </p>
-
-        <div class="card"
-             style="margin-bottom:20px;">
-
-            <strong style="color:#aaa0b9;">
-                Server IP
-            </strong>
-
-            <div style="
-                font-size:20px;
-                color:#ffd76a;
-                margin-top:8px;
-                word-break:break-all;
-            ">
-                gp-node-01.future-node.com:35003
-            </div>
-
+        <div class="server-ip" id="serverIp">
+            gp-node-01.future-node.com:35003
         </div>
 
-        <button type="button"
-                class="primary-btn"
-                onclick="copyServerIP()">
+        <button type="button" class="primary-btn" onclick="copyServerIp()">
             IP kopiëren
         </button>
 
+        <div id="serverCopyMessage" class="message"></div>
     </div>
-
 </div>
 
-
-<!-- LOGIN -->
-
-<div id="loginModal"
-     class="modal">
-
-    <div class="modal-box">
-
-        <button type="button"
-                class="close-btn"
-                onclick="closeModal('loginModal')">
-            ×
-        </button>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <button type="button" class="modal-close" onclick="closeModal('loginModal')">×</button>
 
         <h2>Inloggen</h2>
 
+        <div id="loginMessage" class="message"></div>
+
         <form id="loginForm">
-
             <div class="form-group">
-
-                <label>E-mailadres</label>
-
-                <input id="loginEmail"
-                       type="email"
-                       required>
-
+                <label for="loginEmail">E-mail</label>
+                <input id="loginEmail" type="email" required>
             </div>
 
-
             <div class="form-group">
-
-                <label>Wachtwoord</label>
-
-                <input id="loginPassword"
-                       type="password"
-                       required>
-
+                <label for="loginPassword">Wachtwoord</label>
+                <input id="loginPassword" type="password" required>
             </div>
 
-
-            <button type="submit"
-                    class="primary-btn">
+            <button type="submit" class="primary-btn">
                 Inloggen
             </button>
-
-
-            <button type="button"
-                    class="secondary-btn"
-                    style="margin-left:8px;"
-                    onclick="switchToRegister()">
-                Account maken
-            </button>
-
-
-            <div id="loginMessage"
-                 class="form-message">
-            </div>
-
         </form>
 
+        <p style="margin-bottom:0;margin-top:18px;">
+            Nog geen account?
+            <button type="button" class="secondary-btn"
+                    onclick="switchToRegister()">
+                Registreren
+            </button>
+        </p>
     </div>
-
 </div>
 
-
-<!-- REGISTER -->
-
-<div id="registerModal"
-     class="modal">
-
-    <div class="modal-box">
-
-        <button type="button"
-                class="close-btn"
-                onclick="closeModal('registerModal')">
-            ×
-        </button>
+<!-- REGISTER MODAL -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <button type="button" class="modal-close" onclick="closeModal('registerModal')">×</button>
 
         <h2>Account maken</h2>
 
+        <div id="registerMessage" class="message"></div>
+
         <form id="registerForm">
-
             <div class="form-group">
-
-                <label>Gebruikersnaam</label>
-
-                <input id="registerUsername"
-                       required>
-
+                <label for="registerUsername">Gebruikersnaam</label>
+                <input id="registerUsername" required>
             </div>
 
-
             <div class="form-group">
-
-                <label>E-mailadres</label>
-
-                <input id="registerEmail"
-                       type="email"
-                       required>
-
+                <label for="registerEmail">E-mail</label>
+                <input id="registerEmail" type="email" required>
             </div>
 
-
             <div class="form-group">
-
-                <label>Wachtwoord</label>
-
-                <input id="registerPassword"
-                       type="password"
-                       minlength="6"
-                       required>
-
+                <label for="registerPassword">Wachtwoord</label>
+                <input id="registerPassword" type="password" minlength="6" required>
             </div>
 
-
-            <button type="submit"
-                    class="primary-btn">
+            <button type="submit" class="primary-btn">
                 Registreren
             </button>
-
-
-            <div id="registerMessage"
-                 class="form-message">
-            </div>
-
         </form>
 
+        <p style="margin-bottom:0;margin-top:18px;">
+            Heb je al een account?
+            <button type="button" class="secondary-btn"
+                    onclick="switchToLogin()">
+                Inloggen
+            </button>
+        </p>
     </div>
-
 </div>
 
+<!-- ADMIN CODE MODAL -->
+<div id="adminCodeModal" class="modal">
+    <div class="modal-content">
+        <button type="button" class="modal-close" onclick="closeModal('adminCodeModal')">×</button>
 
-<!-- ADMIN CODE -->
+        <h2>Beheerder toegang</h2>
 
-<div id="adminCodeModal"
-     class="modal">
-
-    <div class="modal-box">
-
-        <button type="button"
-                class="close-btn"
-                onclick="closeModal('adminCodeModal')">
-            ×
-        </button>
-
-        <h2>Beheerderstoegang</h2>
-
-        <p style="color:#d6cae4; margin-bottom:20px;">
+        <p class="muted">
             Voer de beheerdercode in om beheerder te worden.
         </p>
 
+        <div id="adminCodeMessage" class="message"></div>
 
         <form id="adminCodeForm">
-
             <div class="form-group">
-
-                <label>Beheerdercode</label>
-
-                <input id="adminCode"
-                       type="password"
-                       autocomplete="off"
-                       required>
-
+                <label for="adminCode">Beheerdercode</label>
+                <input id="adminCode" type="password" required>
             </div>
 
-
-            <button type="submit"
-                    class="primary-btn">
-                Beheerder worden
+            <button type="submit" class="primary-btn">
+                Doorgaan
             </button>
-
-
-            <div id="adminCodeMessage"
-                 class="form-message">
-            </div>
-
         </form>
-
     </div>
-
 </div>
 
-
-<!-- APPLICATION -->
-
-<div id="applicationModal"
-     class="modal">
-
-    <div class="modal-box">
-
-        <button type="button"
-                class="close-btn"
-                onclick="closeModal('applicationModal')">
-            ×
-        </button>
+<!-- APPLICATION MODAL -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <button type="button" class="modal-close" onclick="closeModal('applicationModal')">×</button>
 
         <h2>Solliciteren</h2>
 
-        <p style="color:#aaa0b9; margin-bottom:20px;">
+        <p>
             Functie:
-            <strong id="selectedFunction"
-                    style="color:#ffd76a;">
-            </strong>
+            <strong id="applicationFunction"></strong>
         </p>
 
+        <div id="applicationMessage" class="message"></div>
 
         <form id="applicationForm">
 
             <div class="form-group">
-
-                <label>Minecraft naam</label>
-
-                <input id="applicationMinecraftName"
-                       required>
-
+                <label for="applicationMinecraftName">
+                    Minecraft naam
+                </label>
+                <input id="applicationMinecraftName" required>
             </div>
-
 
             <div class="form-group">
-
-                <label>Leeftijd</label>
-
-                <input id="applicationAge"
-                       type="number"
-                       min="1"
-                       max="100"
-                       required>
-
+                <label for="applicationAge">
+                    Leeftijd
+                </label>
+                <input id="applicationAge" type="number" min="1" required>
             </div>
-
 
             <div class="form-group">
-
-                <label>Ervaring</label>
-
-                <textarea id="applicationExperience"
-                          required></textarea>
-
+                <label for="applicationExperience">
+                    Ervaring
+                </label>
+                <textarea id="applicationExperience" required></textarea>
             </div>
-
 
             <div class="form-group">
-
-                <label>Waarom wil je bij ons werken?</label>
-
-                <textarea id="applicationMotivation"
-                          required></textarea>
-
+                <label for="applicationMotivation">
+                    Waarom wil je deze functie?
+                </label>
+                <textarea id="applicationMotivation" required></textarea>
             </div>
-
 
             <div class="form-group">
-
-                <label>Beschikbaarheid</label>
-
-                <textarea id="applicationAvailability"
-                          required></textarea>
-
+                <label for="applicationAvailability">
+                    Beschikbaarheid
+                </label>
+                <textarea id="applicationAvailability" required></textarea>
             </div>
 
-
-            <button type="submit"
-                    class="primary-btn">
+            <button type="submit" class="primary-btn">
                 Sollicitatie versturen
             </button>
 
-
-            <div id="applicationMessage"
-                 class="form-message">
-            </div>
-
         </form>
-
     </div>
-
 </div>
 
-
 <script>
-
-/* =========================================================
-   SUPABASE
-========================================================= */
-
 const SUPABASE_URL =
     "https://zmhldveqqogxysoldhrf.supabase.co";
 
@@ -1306,526 +1016,406 @@ const supabaseClient =
         SUPABASE_KEY
     );
 
-
 let currentUser = null;
 let currentProfile = null;
 let selectedApplicationFunction = "";
+let communityRefreshTimer = null;
 
+/*
+    Prevent accidental browser navigation/reloads from forms.
+*/
+document.addEventListener("submit", function(event) {
+    event.preventDefault();
+}, true);
 
-/* =========================================================
-   PREVENT ACCIDENTAL PAGE RELOADS
-========================================================= */
+function showPage(page) {
+    document.querySelectorAll(".page").forEach(pageElement => {
+        pageElement.classList.remove("active");
+    });
 
-document.addEventListener(
-    "submit",
-    function(event) {
-        event.preventDefault();
-    },
-    true
-);
+    const target = document.getElementById(page + "Page");
 
-
-/* =========================================================
-   GENERAL
-========================================================= */
-
-function showPage(pageId) {
-
-    document.querySelectorAll("section.page")
-        .forEach(section => {
-            section.classList.remove("active");
-        });
-
-    const page =
-        document.getElementById(pageId);
-
-    if (page) {
-        page.classList.add("active");
+    if (target) {
+        target.classList.add("active");
     }
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    document.querySelectorAll(".nav-btn").forEach(button => {
+        button.classList.remove("active");
     });
+
+    const navButtons = document.querySelectorAll(".nav-btn");
+
+    if (page === "home" && navButtons[0]) navButtons[0].classList.add("active");
+    if (page === "vacatures" && navButtons[1]) navButtons[1].classList.add("active");
+    if (page === "community" && navButtons[2]) navButtons[2].classList.add("active");
+    if (page === "account" && navButtons[3]) navButtons[3].classList.add("active");
 }
 
-
 function openModal(id) {
-
-    const modal =
-        document.getElementById(id);
+    const modal = document.getElementById(id);
 
     if (modal) {
         modal.classList.add("show");
     }
 }
 
-
 function closeModal(id) {
-
-    const modal =
-        document.getElementById(id);
+    const modal = document.getElementById(id);
 
     if (modal) {
         modal.classList.remove("show");
     }
 }
 
-
-function showMessage(elementId, message, type = "error") {
-
-    const element =
-        document.getElementById(elementId);
+function showMessage(id, text, type = "success") {
+    const element = document.getElementById(id);
 
     if (!element) return;
 
-    element.textContent = message;
-
-    element.className =
-        "form-message show " + type;
+    element.textContent = text;
+    element.className = "message show " + type;
 }
 
-
-function clearMessage(elementId) {
-
-    const element =
-        document.getElementById(elementId);
+function clearMessage(id) {
+    const element = document.getElementById(id);
 
     if (!element) return;
 
     element.textContent = "";
-    element.className = "form-message";
+    element.className = "message";
 }
-
-
-/* =========================================================
-   SERVER
-========================================================= */
 
 function openServerModal() {
     openModal("serverModal");
 }
 
-
-async function copyServerIP() {
-
-    const ip =
-        "gp-node-01.future-node.com:35003";
+async function copyServerIp() {
+    const ip = "gp-node-01.future-node.com:35003";
 
     try {
-
         await navigator.clipboard.writeText(ip);
-
-        alert("Server IP gekopieerd!");
-
+        showMessage("serverCopyMessage", "Server IP gekopieerd!", "success");
     } catch (error) {
-
-        alert("Server IP: " + ip);
+        showMessage(
+            "serverCopyMessage",
+            "Kopiëren lukte niet. Server IP: " + ip,
+            "error"
+        );
     }
 }
 
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
 function openLoginModal() {
-
-    if (currentUser) {
-
-        showAccount();
-
-        return;
-    }
-
+    clearMessage("loginMessage");
     openModal("loginModal");
 }
 
-
 function switchToRegister() {
-
     closeModal("loginModal");
-
+    clearMessage("registerMessage");
     openModal("registerModal");
 }
 
+function switchToLogin() {
+    closeModal("registerModal");
+    clearMessage("loginMessage");
+    openModal("loginModal");
+}
 
-document.getElementById("loginForm")
-.addEventListener("submit", async function(event) {
+async function loadProfile() {
+    if (!currentUser) {
+        currentProfile = null;
+        return null;
+    }
 
+    const { data, error } = await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id", currentUser.id)
+        .maybeSingle();
+
+    if (error) {
+        console.error("Profiel laden:", error);
+
+        if (currentProfile) {
+            return currentProfile;
+        }
+
+        return null;
+    }
+
+    if (data) {
+        currentProfile = {
+            ...(currentProfile || {}),
+            ...data
+        };
+    }
+
+    return currentProfile;
+}
+
+async function checkAdminStatus() {
+    if (!currentUser) return false;
+
+    const { data, error } =
+        await supabaseClient.rpc("is_admin");
+
+    if (error) {
+        console.error("Adminstatus controleren:", error);
+        return false;
+    }
+
+    return data === true;
+}
+
+async function updateNavigation() {
+    const loginButton =
+        document.getElementById("loginNavButton");
+
+    if (!loginButton) return;
+
+    if (currentUser) {
+        loginButton.textContent = "Mijn account";
+        loginButton.onclick = () => showAccount();
+    } else {
+        loginButton.textContent = "Inloggen";
+        loginButton.onclick = () => openLoginModal();
+    }
+}
+
+async function showAccount() {
+    showPage("account");
+
+    const loggedOut =
+        document.getElementById("accountLoggedOut");
+
+    const loggedIn =
+        document.getElementById("accountLoggedIn");
+
+    if (!currentUser) {
+        loggedOut.style.display = "block";
+        loggedIn.style.display = "none";
+        return;
+    }
+
+    await loadProfile();
+
+    loggedOut.style.display = "none";
+    loggedIn.style.display = "block";
+
+    const username =
+        currentProfile?.username ||
+        currentUser.user_metadata?.username ||
+        currentUser.email?.split("@")[0] ||
+        "Onbekend";
+
+    const email =
+        currentProfile?.email ||
+        currentUser.email ||
+        "Onbekend";
+
+    const status =
+        currentProfile?.status ||
+        "Bezoeker";
+
+    document.getElementById("accountUsername").textContent =
+        username;
+
+    document.getElementById("accountEmail").textContent =
+        email;
+
+    const statusElement =
+        document.getElementById("accountStatus");
+
+    statusElement.textContent = status;
+
+    statusElement.className =
+        "profile-value " +
+        (status === "Team"
+            ? "status-team"
+            : "status-visitor");
+
+    const isAdmin =
+        await checkAdminStatus();
+
+    document.getElementById("accountAdminStatus").textContent =
+        isAdmin ? "Beheerder" : "Gebruiker";
+}
+
+function openApplicationModal(functionName) {
+    if (!currentUser) {
+        openLoginModal();
+        showMessage(
+            "loginMessage",
+            "Je moet ingelogd zijn om te solliciteren.",
+            "error"
+        );
+        return;
+    }
+
+    selectedApplicationFunction = functionName;
+
+    document.getElementById("applicationFunction").textContent =
+        functionName;
+
+    document.getElementById("applicationForm").reset();
+
+    clearMessage("applicationMessage");
+
+    openModal("applicationModal");
+}
+
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     clearMessage("loginMessage");
 
     const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
+        document.getElementById("loginEmail").value.trim();
 
     const password =
-        document.getElementById("loginPassword")
-        .value;
+        document.getElementById("loginPassword").value;
 
-    try {
+    const { error } =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
 
-        const result =
-            await supabaseClient.auth.signInWithPassword({
-                email,
-                password
-            });
-
-        if (result.error) {
-
-            showMessage(
-                "loginMessage",
-                result.error.message,
-                "error"
-            );
-
-            return;
-        }
-
-        currentUser =
-            result.data.user;
-
-        await loadProfile();
-
-        closeModal("loginModal");
-
-        updateNavigation();
-
-        showAccount();
-
-    } catch (error) {
-
-        console.error("Login error:", error);
-
+    if (error) {
         showMessage(
             "loginMessage",
-            error.message || "Inloggen mislukt.",
+            error.message,
             "error"
         );
+        return;
     }
+
+    closeModal("loginModal");
+
+    await loadProfile();
+    await updateNavigation();
 });
 
-
-/* =========================================================
-   REGISTER
-========================================================= */
-
-document.getElementById("registerForm")
-.addEventListener("submit", async function(event) {
-
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     clearMessage("registerMessage");
 
     const username =
-        document.getElementById("registerUsername")
-        .value
-        .trim();
+        document.getElementById("registerUsername").value.trim();
 
     const email =
-        document.getElementById("registerEmail")
-        .value
-        .trim();
+        document.getElementById("registerEmail").value.trim();
 
     const password =
-        document.getElementById("registerPassword")
-        .value;
+        document.getElementById("registerPassword").value;
 
-    try {
-
-        const result =
-            await supabaseClient.auth.signUp({
-
-                email,
-                password,
-
-                options: {
-                    data: {
-                        username
-                    }
+    const { data, error } =
+        await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    username: username
                 }
-            });
+            }
+        });
 
-        if (result.error) {
-
-            showMessage(
-                "registerMessage",
-                result.error.message,
-                "error"
-            );
-
-            return;
-        }
-
-        if (!result.data.user) {
-
-            showMessage(
-                "registerMessage",
-                "Account kon niet worden aangemaakt.",
-                "error"
-            );
-
-            return;
-        }
-
-        currentUser =
-            result.data.user;
-
-        await loadProfile();
-
+    if (error) {
         showMessage(
             "registerMessage",
-            "Account aangemaakt. Controleer eventueel je e-mail.",
+            error.message,
+            "error"
+        );
+        return;
+    }
+
+    if (data.session) {
+        closeModal("registerModal");
+        await loadProfile();
+        await updateNavigation();
+
+        showMessage(
+            "applicationMessage",
+            "Account aangemaakt!",
             "success"
         );
-
-        updateNavigation();
-
-        setTimeout(function() {
-
-            closeModal("registerModal");
-
-        }, 1500);
-
-    } catch (error) {
-
-        console.error("Register error:", error);
-
+    } else {
         showMessage(
             "registerMessage",
-            error.message || "Registreren mislukt.",
-            "error"
+            "Account aangemaakt. Controleer je e-mail om je account te bevestigen.",
+            "success"
         );
     }
 });
 
+document.getElementById("adminCodeForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-/* =========================================================
-   PROFILE
-========================================================= */
-
-async function loadProfile() {
+    clearMessage("adminCodeMessage");
 
     if (!currentUser) {
-
-        currentProfile = null;
-
+        showMessage(
+            "adminCodeMessage",
+            "Je moet ingelogd zijn.",
+            "error"
+        );
         return;
     }
 
-    try {
+    const code =
+        document.getElementById("adminCode").value.trim();
 
-        const result =
-            await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", currentUser.id)
-            .maybeSingle();
-
-        if (result.error) {
-
-            console.error(
-                "Profiel laden:",
-                result.error
-            );
-
-            return;
-        }
-
-        if (result.data) {
-
-            currentProfile =
-                result.data;
-        }
-
-        if (!currentProfile) {
-            return;
-        }
-
-        const username =
-            document.getElementById(
-                "profileUsername"
-            );
-
-        const email =
-            document.getElementById(
-                "profileEmail"
-            );
-
-        const adminStatus =
-            document.getElementById(
-                "profileAdminStatus"
-            );
-
-        if (username) {
-
-            username.textContent =
-                currentProfile.username || "-";
-        }
-
-        if (email) {
-
-            email.textContent =
-                currentProfile.email ||
-                currentUser.email ||
-                "-";
-        }
-
-        if (adminStatus) {
-
-            if (currentProfile.is_admin === true) {
-
-                adminStatus.innerHTML =
-                    '<span class="admin-badge">Beheerder</span>';
-
-            } else {
-
-                adminStatus.textContent =
-                    "Gebruiker";
-            }
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Profiel fout:",
-            error
-        );
-    }
-}
-
-
-/* =========================================================
-   ADMIN STATUS
-========================================================= */
-
-async function checkAdminStatus() {
-
-    if (!currentUser) {
-        return false;
-    }
-
-    try {
-
-        const result =
-            await supabaseClient.rpc(
-                "is_admin"
-            );
-
-        if (result.error) {
-
-            console.error(
-                "Admin status error:",
-                result.error
-            );
-
-            return false;
-        }
-
-        const isAdmin =
-            result.data === true;
-
-        if (isAdmin) {
-
-            if (!currentProfile) {
-                currentProfile = {};
-            }
-
-            currentProfile.is_admin = true;
-        }
-
-        return isAdmin;
-
-    } catch (error) {
-
-        console.error(
-            "Admin status exception:",
-            error
+    const { data, error } =
+        await supabaseClient.rpc(
+            "admin_code_login",
+            { code }
         );
 
-        return false;
-    }
-}
+    if (error) {
+        console.error(error);
 
-
-function showAccount() {
-
-    if (!currentUser) {
-
-        openLoginModal();
-
+        showMessage(
+            "adminCodeMessage",
+            error.message,
+            "error"
+        );
         return;
     }
 
-    showPage("account");
-
-    loadProfile();
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function updateNavigation() {
-
-    const accountBtn =
-        document.getElementById(
-            "accountNavBtn"
+    if (data !== true) {
+        showMessage(
+            "adminCodeMessage",
+            "De beheerdercode is onjuist.",
+            "error"
         );
-
-    const adminBtn =
-        document.getElementById(
-            "adminNavBtn"
-        );
-
-    const loginBtn =
-        document.getElementById(
-            "loginNavBtn"
-        );
-
-    if (!accountBtn || !adminBtn || !loginBtn) {
         return;
     }
 
-    if (currentUser) {
+    currentProfile = {
+        ...(currentProfile || {}),
+        is_admin: true
+    };
 
-        accountBtn.style.display =
-            "inline-block";
+    await loadProfile();
 
-        adminBtn.style.display =
-            "inline-block";
+    currentProfile = {
+        ...(currentProfile || {}),
+        is_admin: true
+    };
 
-        loginBtn.textContent =
-            "Ingelogd";
+    document.getElementById("adminCode").value = "";
 
-    } else {
+    closeModal("adminCodeModal");
 
-        accountBtn.style.display =
-            "none";
+    await updateNavigation();
 
-        adminBtn.style.display =
-            "none";
-
-        loginBtn.textContent =
-            "Inloggen";
-    }
-}
-
-
-/* =========================================================
-   ADMIN ACCESS
-========================================================= */
+    await openAdminPage();
+});
 
 async function showAdmin() {
-
     if (!currentUser) {
-
         openLoginModal();
-
         return;
     }
 
@@ -1833,178 +1423,24 @@ async function showAdmin() {
         await checkAdminStatus();
 
     if (isAdmin) {
+        currentProfile = {
+            ...(currentProfile || {}),
+            is_admin: true
+        };
 
         await openAdminPage();
-
         return;
     }
 
     clearMessage("adminCodeMessage");
-
-    const input =
-        document.getElementById("adminCode");
-
-    if (input) {
-        input.value = "";
-    }
+    document.getElementById("adminCode").value = "";
 
     openModal("adminCodeModal");
 }
 
-
-document.getElementById("adminCodeForm")
-.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    clearMessage("adminCodeMessage");
-
-    if (!currentUser) {
-
-        showMessage(
-            "adminCodeMessage",
-            "Je moet eerst ingelogd zijn.",
-            "error"
-        );
-
-        return;
-    }
-
-    const input =
-        document.getElementById("adminCode");
-
-    const code =
-        input.value.trim();
-
-    if (!code) {
-
-        showMessage(
-            "adminCodeMessage",
-            "Voer een beheerdercode in.",
-            "error"
-        );
-
-        return;
-    }
-
-    const button =
-        event.submitter ||
-        event.target.querySelector(
-            'button[type="submit"]'
-        );
-
-    if (button) {
-        button.disabled = true;
-        button.textContent = "Controleren...";
-    }
-
-    try {
-
-        const result =
-            await supabaseClient.rpc(
-                "admin_code_login",
-                {
-                    code: code
-                }
-            );
-
-        if (result.error) {
-
-            console.error(
-                "Admin code error:",
-                result.error
-            );
-
-            showMessage(
-                "adminCodeMessage",
-                "Beheerderstoegang kon niet worden geactiveerd:\n" +
-                result.error.message,
-                "error"
-            );
-
-            return;
-        }
-
-        if (result.data !== true) {
-
-            showMessage(
-                "adminCodeMessage",
-                "De beheerdercode is onjuist.",
-                "error"
-            );
-
-            return;
-        }
-
-        /*
-         * De RPC heeft de gebruiker succesvol
-         * beheerder gemaakt.
-         *
-         * We gebruiken daarna de aparte is_admin()
-         * RPC in plaats van afhankelijk te zijn van
-         * een SELECT op profiles.
-         */
-
-        const isAdmin =
-            await checkAdminStatus();
-
-        if (!isAdmin) {
-
-            showMessage(
-                "adminCodeMessage",
-                "De code is verwerkt, maar de beheerderstatus kon niet worden geladen.",
-                "error"
-            );
-
-            return;
-        }
-
-        if (!currentProfile) {
-            currentProfile = {};
-        }
-
-        currentProfile.is_admin = true;
-
-        input.value = "";
-
-        closeModal("adminCodeModal");
-
-        updateNavigation();
-
-        await openAdminPage();
-
-    } catch (error) {
-
-        console.error(
-            "Admin error:",
-            error
-        );
-
-        showMessage(
-            "adminCodeMessage",
-            "Er ging iets mis:\n" +
-            (error.message || error),
-            "error"
-        );
-
-    } finally {
-
-        if (button) {
-
-            button.disabled = false;
-            button.textContent =
-                "Beheerder worden";
-        }
-    }
-});
-
-
 async function openAdminPage() {
-
     if (!currentUser) {
-
         openLoginModal();
-
         return;
     }
 
@@ -2012,1170 +1448,697 @@ async function openAdminPage() {
         await checkAdminStatus();
 
     if (!isAdmin) {
-
         openModal("adminCodeModal");
-
         return;
     }
 
-    if (!currentProfile) {
-        currentProfile = {};
-    }
-
-    currentProfile.is_admin = true;
+    currentProfile = {
+        ...(currentProfile || {}),
+        is_admin: true
+    };
 
     showPage("admin");
 
     await loadAdminApplications();
-
     await loadAdminUsers();
 }
 
-
-/* =========================================================
-   ADMIN TABS
-========================================================= */
-
 async function showAdminTab(tab) {
-
     const isAdmin =
         await checkAdminStatus();
 
     if (!isAdmin) {
+        openModal("adminCodeModal");
         return;
     }
 
     document.querySelectorAll(".admin-tab")
-    .forEach(button => {
-
-        button.classList.remove("active");
-
-    });
+        .forEach(button => button.classList.remove("active"));
 
     document.querySelectorAll(".admin-panel")
-    .forEach(panel => {
-
-        panel.classList.remove("active");
-
-    });
-
+        .forEach(panel => panel.classList.remove("active"));
 
     if (tab === "applications") {
+        document
+            .getElementById("applicationsTabButton")
+            .classList.add("active");
 
-        document.getElementById(
-            "adminTabApplications"
-        ).classList.add("active");
-
-        document.getElementById(
-            "adminApplications"
-        ).classList.add("active");
+        document
+            .getElementById("adminApplicationsPanel")
+            .classList.add("active");
 
         await loadAdminApplications();
-
     }
-
 
     if (tab === "users") {
+        document
+            .getElementById("usersTabButton")
+            .classList.add("active");
 
-        document.getElementById(
-            "adminTabUsers"
-        ).classList.add("active");
-
-        document.getElementById(
-            "adminUsers"
-        ).classList.add("active");
+        document
+            .getElementById("adminUsersPanel")
+            .classList.add("active");
 
         await loadAdminUsers();
-
     }
 
+    if (tab === "addApplication") {
+        document
+            .getElementById("addApplicationTabButton")
+            .classList.add("active");
 
-    if (tab === "add") {
+        document
+            .getElementById("adminAddApplicationPanel")
+            .classList.add("active");
 
-        document.getElementById(
-            "adminTabAdd"
-        ).classList.add("active");
-
-        document.getElementById(
-            "adminAdd"
-        ).classList.add("active");
-
-        await loadAdminUsers();
+        await loadAdminUsersIntoSelect();
     }
 }
 
-
-/* =========================================================
-   ADMIN APPLICATIONS
-========================================================= */
-
 async function loadAdminApplications() {
-
     const container =
-        document.getElementById(
-            "adminApplicationsList"
-        );
+        document.getElementById("adminApplications");
 
-    if (!container) {
-        return;
-    }
+    container.innerHTML =
+        '<div class="empty">Sollicitaties laden...</div>';
 
     const isAdmin =
         await checkAdminStatus();
 
     if (!isAdmin) {
-
         container.innerHTML =
-            "<div class='empty'>Geen beheerderstoegang.</div>";
-
+            '<div class="empty">Geen toegang.</div>';
         return;
     }
 
-    container.innerHTML =
-        "<div class='loading'>Sollicitaties laden...</div>";
-
-    try {
-
-        const result =
-            await supabaseClient
+    const { data, error } =
+        await supabaseClient
             .from("applications")
             .select("*")
             .order("created_at", {
                 ascending: false
             });
 
-        if (result.error) {
-
-            console.error(
-                "Sollicitaties laden:",
-                result.error
-            );
-
-            container.innerHTML =
-                `<div class="form-message show error">
-                    Sollicitaties konden niet worden geladen:<br>
-                    ${escapeHtml(result.error.message)}
-                </div>`;
-
-            return;
-        }
-
-        const data =
-            result.data || [];
-
-        if (data.length === 0) {
-
-            container.innerHTML =
-                "<div class='empty'>Er zijn nog geen sollicitaties.</div>";
-
-            return;
-        }
-
-        container.innerHTML = "";
-
-        data.forEach(application => {
-
-            const card =
-                document.createElement("div");
-
-            card.className =
-                "application-card";
-
-            const statusClass =
-                getStatusClass(
-                    application.status
-                );
-
-            const isPending =
-                application.status ===
-                "In behandeling";
-
-            card.innerHTML = `
-
-                <div class="application-header">
-
-                    <h3>
-                        ${escapeHtml(
-                            application.minecraft_name ||
-                            "Onbekend"
-                        )}
-                    </h3>
-
-                    <span class="status ${statusClass}">
-                        ${escapeHtml(
-                            application.status ||
-                            "In behandeling"
-                        )}
-                    </span>
-
-                </div>
-
-
-                <div class="application-details">
-
-                    <div class="detail">
-                        <strong>E-mail</strong>
-                        <span>
-                            ${escapeHtml(
-                                application.email || "-"
-                            )}
-                        </span>
-                    </div>
-
-
-                    <div class="detail">
-                        <strong>Functie</strong>
-                        <span>
-                            ${escapeHtml(
-                                application.function || "-"
-                            )}
-                        </span>
-                    </div>
-
-
-                    <div class="detail">
-                        <strong>Leeftijd</strong>
-                        <span>
-                            ${escapeHtml(
-                                String(
-                                    application.age ?? "-"
-                                )
-                            )}
-                        </span>
-                    </div>
-
-
-                    <div class="detail">
-                        <strong>Datum</strong>
-                        <span>
-                            ${formatDate(
-                                application.created_at
-                            )}
-                        </span>
-                    </div>
-
-
-                    <div class="detail">
-                        <strong>Ervaring</strong>
-                        <div>
-                            ${escapeHtml(
-                                application.experience || "-"
-                            )}
-                        </div>
-                    </div>
-
-
-                    <div class="detail">
-                        <strong>Motivatie</strong>
-                        <div>
-                            ${escapeHtml(
-                                application.motivation || "-"
-                            )}
-                        </div>
-                    </div>
-
-
-                    <div class="detail">
-                        <strong>Beschikbaarheid</strong>
-                        <div>
-                            ${escapeHtml(
-                                application.availability || "-"
-                            )}
-                        </div>
-                    </div>
-
-                </div>
-
-
-                ${
-                    isPending
-                    ?
-                    `
-                    <div class="application-actions">
-
-                        <button
-                            type="button"
-                            class="success-btn"
-                            data-application-id="${application.id}"
-                            data-status="Aangenomen"
-                            onclick="handleApplicationAction(this)">
-                            Aannemen
-                        </button>
-
-                        <button
-                            type="button"
-                            class="danger-btn"
-                            data-application-id="${application.id}"
-                            data-status="Afgewezen"
-                            onclick="handleApplicationAction(this)">
-                            Afwijzen
-                        </button>
-
-                    </div>
-                    `
-                    :
-                    `
-                    <div style="
-                        margin-top:18px;
-                        color:#aaa0b9;
-                        font-size:14px;
-                    ">
-                        Deze sollicitatie is al verwerkt.
-                    </div>
-                    `
-                }
-
-            `;
-
-            container.appendChild(card);
-        });
-
-    } catch (error) {
-
-        console.error(
-            "Applications exception:",
-            error
-        );
+    if (error) {
+        console.error(error);
 
         container.innerHTML =
-            `<div class="form-message show error">
-                Er ging iets mis bij het laden van de sollicitaties:<br>
-                ${escapeHtml(error.message || String(error))}
-            </div>`;
+            '<div class="empty">Sollicitaties konden niet worden geladen.</div>';
+
+        return;
     }
+
+    if (!data || data.length === 0) {
+        container.innerHTML =
+            '<div class="empty">Er zijn nog geen sollicitaties.</div>';
+
+        return;
+    }
+
+    container.innerHTML = data.map(application => {
+
+        let statusClass = "status-pending";
+
+        if (application.status === "Aangenomen") {
+            statusClass = "status-accepted";
+        }
+
+        if (application.status === "Afgewezen") {
+            statusClass = "status-rejected";
+        }
+
+        return `
+            <div class="application-item">
+                <div class="application-header">
+                    <div>
+                        <strong>${escapeHtml(application.minecraft_name)}</strong>
+                        <div class="muted">
+                            ${escapeHtml(application.email || "")}
+                        </div>
+                    </div>
+
+                    <div class="application-status ${statusClass}">
+                        ${escapeHtml(application.status)}
+                    </div>
+                </div>
+
+                <p><strong>Functie:</strong> ${escapeHtml(application.function)}</p>
+                <p><strong>Leeftijd:</strong> ${escapeHtml(String(application.age))}</p>
+                <p><strong>Ervaring:</strong><br>${escapeHtml(application.experience)}</p>
+                <p><strong>Motivatie:</strong><br>${escapeHtml(application.motivation)}</p>
+                <p><strong>Beschikbaarheid:</strong><br>${escapeHtml(application.availability)}</p>
+
+                <div class="application-actions">
+                    <button type="button"
+                            class="primary-btn"
+                            onclick="handleApplicationAction('${application.id}', 'Aangenomen')">
+                        Aannemen
+                    </button>
+
+                    <button type="button"
+                            class="danger-btn"
+                            onclick="handleApplicationAction('${application.id}', 'Afgewezen')">
+                        Afwijzen
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join("");
 }
 
-
-/* =========================================================
-   ACCEPT / REJECT
-========================================================= */
-
-async function handleApplicationAction(button) {
-
-    if (!button) {
-        return;
-    }
-
-    const applicationId =
-        button.dataset.applicationId;
-
-    const newStatus =
-        button.dataset.status;
-
-    if (!applicationId || !newStatus) {
-
-        alert("Ongeldige sollicitatie.");
-
-        return;
-    }
-
+async function handleApplicationAction(applicationId, newStatus) {
     const isAdmin =
         await checkAdminStatus();
 
     if (!isAdmin) {
-
-        alert(
-            "Je hebt geen beheerderstoegang."
-        );
-
+        openModal("adminCodeModal");
         return;
     }
 
-    const actionButtons =
-        button.parentElement
-        .querySelectorAll("button");
+    const { data: application, error: fetchError } =
+        await supabaseClient
+            .from("applications")
+            .select("*")
+            .eq("id", applicationId)
+            .single();
 
-    actionButtons.forEach(btn => {
-        btn.disabled = true;
-    });
+    if (fetchError) {
+        alert(fetchError.message);
+        return;
+    }
 
-    const originalText =
-        button.textContent;
-
-    button.textContent =
-        "Bezig...";
-
-    try {
-
-        const result =
-            await supabaseClient
+    const { error } =
+        await supabaseClient
             .from("applications")
             .update({
                 status: newStatus
             })
-            .eq("id", applicationId)
-            .select()
-            .single();
+            .eq("id", applicationId);
 
-        if (result.error) {
-
-            console.error(
-                "Status update:",
-                result.error
-            );
-
-            throw new Error(
-                result.error.message
-            );
-        }
-
-        try {
-
-            await sendApplicationStatusEmail(
-                result.data
-            );
-
-        } catch (emailError) {
-
-            console.error(
-                "Email error:",
-                emailError
-            );
-        }
-
-        await loadAdminApplications();
-
-    } catch (error) {
-
-        console.error(
-            "Application action:",
-            error
-        );
-
-        alert(
-            "De status kon niet worden gewijzigd:\n\n" +
-            error.message
-        );
-
-        actionButtons.forEach(btn => {
-            btn.disabled = false;
-        });
-
-        button.textContent =
-            originalText;
+    if (error) {
+        alert(error.message);
+        return;
     }
+
+    /*
+        The database trigger automatically changes the user's
+        profile status to Team when the application becomes
+        Aangenomen.
+    */
+
+    await loadAdminApplications();
+
+    /*
+        Send the status email after the database update.
+    */
+    await sendApplicationStatusEmail({
+        ...application,
+        status: newStatus
+    });
 }
-
-
-/* =========================================================
-   EMAIL
-========================================================= */
 
 async function sendApplicationStatusEmail(application) {
+    if (!currentUser) return;
 
-    if (!application) {
-        return;
-    }
+    try {
+        const {
+            data: sessionData
+        } = await supabaseClient.auth.getSession();
 
-    if (
-        application.status !== "Aangenomen" &&
-        application.status !== "Afgewezen"
-    ) {
-        return;
-    }
+        const accessToken =
+            sessionData?.session?.access_token;
 
-    if (!application.email) {
-        return;
-    }
+        if (!accessToken) {
+            console.error("Geen actieve sessie voor e-mail.");
+            return;
+        }
 
-    const sessionResult =
-        await supabaseClient.auth.getSession();
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/functions/v1/send-application-email",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization":
+                            "Bearer " + accessToken
+                    },
+                    body: JSON.stringify({
+                        application
+                    })
+                }
+            );
 
-    const session =
-        sessionResult.data.session;
-
-    if (!session) {
-        return;
-    }
-
-    const response =
-        await fetch(
-            SUPABASE_URL +
-            "/functions/v1/send-application-email",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    "Authorization":
-                        "Bearer " +
-                        session.access_token
-                },
-
-                body: JSON.stringify({
-                    application
-                })
-            }
-        );
-
-    if (!response.ok) {
-
-        const text =
-            await response.text();
-
-        throw new Error(
-            text ||
-            "E-mailfunctie gaf een fout."
+        if (!response.ok) {
+            console.error(
+                "E-mail verzenden mislukt:",
+                await response.text()
+            );
+        }
+    } catch (error) {
+        console.error(
+            "E-mail fout:",
+            error
         );
     }
 }
 
-
-/* =========================================================
-   ADMIN USERS
-========================================================= */
-
 async function loadAdminUsers() {
+    const container =
+        document.getElementById("adminUsers");
+
+    container.innerHTML =
+        '<div class="empty">Gebruikers laden...</div>';
 
     const isAdmin =
         await checkAdminStatus();
 
     if (!isAdmin) {
+        container.innerHTML =
+            '<div class="empty">Geen toegang.</div>';
         return;
     }
 
-    const container =
-        document.getElementById(
-            "adminUsersList"
-        );
-
-    const select =
-        document.getElementById(
-            "adminApplicationUser"
-        );
-
-    if (!container) {
-        return;
-    }
-
-    container.innerHTML =
-        "<div class='loading'>Gebruikers laden...</div>";
-
-    try {
-
-        const result =
-            await supabaseClient
+    const { data, error } =
+        await supabaseClient
             .from("profiles")
             .select("*")
             .order("username", {
                 ascending: true
             });
 
-        if (result.error) {
-
-            container.innerHTML =
-                `<div class="form-message show error">
-                    Gebruikers konden niet worden geladen:<br>
-                    ${escapeHtml(result.error.message)}
-                </div>`;
-
-            return;
-        }
-
-        const data =
-            result.data || [];
-
-        container.innerHTML = "";
-
-        if (data.length === 0) {
-
-            container.innerHTML =
-                "<div class='empty'>Geen gebruikers gevonden.</div>";
-
-        } else {
-
-            data.forEach(user => {
-
-                const div =
-                    document.createElement("div");
-
-                div.className =
-                    "user-card";
-
-                div.innerHTML = `
-
-                    <div>
-
-                        <strong>
-                            ${escapeHtml(
-                                user.username ||
-                                "Geen gebruikersnaam"
-                            )}
-                        </strong>
-
-                        <div style="
-                            color:#aaa0b9;
-                            font-size:13px;
-                            margin-top:4px;
-                        ">
-                            ${escapeHtml(
-                                user.email || "-"
-                            )}
-                        </div>
-
-                    </div>
-
-                    ${
-                        user.is_admin
-                        ?
-                        '<span class="admin-badge">Beheerder</span>'
-                        :
-                        '<span style="color:#aaa0b9;">Gebruiker</span>'
-                    }
-
-                `;
-
-                container.appendChild(div);
-            });
-        }
-
-
-        if (select) {
-
-            select.innerHTML =
-                '<option value="">Gebruiker kiezen...</option>';
-
-            data.forEach(user => {
-
-                const option =
-                    document.createElement("option");
-
-                option.value =
-                    user.id;
-
-                option.textContent =
-                    (
-                        user.username ||
-                        "Geen naam"
-                    ) +
-                    " — " +
-                    (
-                        user.email ||
-                        "geen e-mail"
-                    );
-
-                option.dataset.email =
-                    user.email || "";
-
-                select.appendChild(option);
-            });
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Users exception:",
-            error
-        );
+    if (error) {
+        console.error(error);
 
         container.innerHTML =
-            `<div class="form-message show error">
-                Gebruikers konden niet worden geladen:<br>
-                ${escapeHtml(error.message || String(error))}
-            </div>`;
+            '<div class="empty">Gebruikers konden niet worden geladen.</div>';
+
+        return;
     }
+
+    if (!data || data.length === 0) {
+        container.innerHTML =
+            '<div class="empty">Geen gebruikers gevonden.</div>';
+
+        return;
+    }
+
+    container.innerHTML = data.map(user => `
+        <div class="user-item">
+            <strong>${escapeHtml(user.username || "Onbekend")}</strong>
+            <div class="muted">${escapeHtml(user.email || "")}</div>
+            <div style="margin-top:8px;">
+                Status:
+                <strong>${escapeHtml(user.status || "Bezoeker")}</strong>
+            </div>
+            <div style="margin-top:5px;">
+                Accounttype:
+                ${user.is_admin ? "Beheerder" : "Gebruiker"}
+            </div>
+        </div>
+    `).join("");
 }
 
+async function loadAdminUsersIntoSelect() {
+    const select =
+        document.getElementById("adminTargetUser");
 
-/* =========================================================
-   ADMIN ADD APPLICATION
-========================================================= */
+    const isAdmin =
+        await checkAdminStatus();
 
-document.getElementById(
-    "adminApplicationForm"
-)
-.addEventListener("submit", async function(event) {
+    if (!isAdmin) return;
 
+    const { data, error } =
+        await supabaseClient
+            .from("profiles")
+            .select("id, username, email")
+            .order("username", {
+                ascending: true
+            });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    select.innerHTML = "";
+
+    data.forEach(user => {
+        const option =
+            document.createElement("option");
+
+        option.value = user.id;
+
+        option.textContent =
+            `${user.username || "Onbekend"} (${user.email || "geen e-mail"})`;
+
+        select.appendChild(option);
+    });
+}
+
+document.getElementById("adminApplicationForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    clearMessage(
-        "adminApplicationMessage"
-    );
+    clearMessage("adminAddMessage");
 
     const isAdmin =
         await checkAdminStatus();
 
     if (!isAdmin) {
-
         showMessage(
-            "adminApplicationMessage",
-            "Je hebt geen beheerderstoegang.",
+            "adminAddMessage",
+            "Geen toegang.",
             "error"
         );
-
         return;
     }
 
     const userId =
-        document.getElementById(
-            "adminApplicationUser"
-        ).value;
+        document.getElementById("adminTargetUser").value;
 
-    const selectedOption =
-        document.querySelector(
-            "#adminApplicationUser option:checked"
-        );
+    const { data: userProfile } =
+        await supabaseClient
+            .from("profiles")
+            .select("email")
+            .eq("id", userId)
+            .maybeSingle();
 
-    const email =
-        selectedOption
-        ? selectedOption.dataset.email
-        : "";
+    const application = {
+        user_id: userId,
+        email: userProfile?.email || "",
+        minecraft_name:
+            document.getElementById("adminMinecraftName").value.trim(),
+        function:
+            document.getElementById("adminFunction").value,
+        age:
+            Number(document.getElementById("adminAge").value),
+        experience:
+            document.getElementById("adminExperience").value.trim(),
+        motivation:
+            document.getElementById("adminMotivation").value.trim(),
+        availability:
+            document.getElementById("adminAvailability").value.trim(),
+        status: "In behandeling"
+    };
 
-    const minecraftName =
-        document.getElementById(
-            "adminMinecraftName"
-        ).value.trim();
-
-    const func =
-        document.getElementById(
-            "adminFunction"
-        ).value;
-
-    const age =
-        Number(
-            document.getElementById(
-                "adminAge"
-            ).value
-        );
-
-    const experience =
-        document.getElementById(
-            "adminExperience"
-        ).value.trim();
-
-    const motivation =
-        document.getElementById(
-            "adminMotivation"
-        ).value.trim();
-
-    const availability =
-        document.getElementById(
-            "adminAvailability"
-        ).value.trim();
-
-    if (!userId || !email) {
-
-        showMessage(
-            "adminApplicationMessage",
-            "Kies eerst een gebruiker.",
-            "error"
-        );
-
-        return;
-    }
-
-    try {
-
-        const result =
-            await supabaseClient
+    const { error } =
+        await supabaseClient
             .from("applications")
-            .insert({
+            .insert(application);
 
-                user_id: userId,
-
-                email: email,
-
-                minecraft_name:
-                    minecraftName,
-
-                function:
-                    func,
-
-                age:
-                    age,
-
-                experience:
-                    experience,
-
-                motivation:
-                    motivation,
-
-                availability:
-                    availability,
-
-                status:
-                    "In behandeling"
-            });
-
-        if (result.error) {
-
-            showMessage(
-                "adminApplicationMessage",
-                "Sollicitatie kon niet worden toegevoegd: " +
-                result.error.message,
-                "error"
-            );
-
-            return;
-        }
-
+    if (error) {
         showMessage(
-            "adminApplicationMessage",
-            "Sollicitatie toegevoegd.",
-            "success"
-        );
-
-        document.getElementById(
-            "adminApplicationForm"
-        ).reset();
-
-        await loadAdminApplications();
-
-    } catch (error) {
-
-        showMessage(
-            "adminApplicationMessage",
-            "Er ging iets mis: " +
-            (error.message || String(error)),
+            "adminAddMessage",
+            error.message,
             "error"
         );
-    }
-});
-
-
-/* =========================================================
-   USER APPLICATION
-========================================================= */
-
-function openApplicationModal(functionName) {
-
-    if (!currentUser) {
-
-        openLoginModal();
-
         return;
     }
 
-    selectedApplicationFunction =
-        functionName;
+    this.reset();
 
-    document.getElementById(
-        "selectedFunction"
-    ).textContent =
-        functionName;
-
-    clearMessage(
-        "applicationMessage"
+    showMessage(
+        "adminAddMessage",
+        "Sollicitatie toegevoegd.",
+        "success"
     );
 
-    document.getElementById(
-        "applicationForm"
-    ).reset();
+    await loadAdminApplications();
+});
 
-    openModal("applicationModal");
-}
-
-
-document.getElementById(
-    "applicationForm"
-)
-.addEventListener("submit", async function(event) {
-
+document.getElementById("applicationForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    clearMessage(
-        "applicationMessage"
-    );
+    clearMessage("applicationMessage");
 
     if (!currentUser) {
+        showMessage(
+            "applicationMessage",
+            "Je moet ingelogd zijn.",
+            "error"
+        );
+        return;
+    }
+
+    const application = {
+        user_id: currentUser.id,
+        email: currentUser.email,
+        minecraft_name:
+            document.getElementById("applicationMinecraftName").value.trim(),
+        function: selectedApplicationFunction,
+        age:
+            Number(document.getElementById("applicationAge").value),
+        experience:
+            document.getElementById("applicationExperience").value.trim(),
+        motivation:
+            document.getElementById("applicationMotivation").value.trim(),
+        availability:
+            document.getElementById("applicationAvailability").value.trim(),
+        status: "In behandeling"
+    };
+
+    const { error } =
+        await supabaseClient
+            .from("applications")
+            .insert(application);
+
+    if (error) {
+        console.error(error);
 
         showMessage(
             "applicationMessage",
-            "Je moet eerst ingelogd zijn.",
+            error.message,
             "error"
         );
 
         return;
     }
 
-    const minecraftName =
-        document.getElementById(
-            "applicationMinecraftName"
-        ).value.trim();
+    showMessage(
+        "applicationMessage",
+        "Je sollicitatie is succesvol verstuurd!",
+        "success"
+    );
 
-    const age =
-        Number(
-            document.getElementById(
-                "applicationAge"
-            ).value
-        );
-
-    const experience =
-        document.getElementById(
-            "applicationExperience"
-        ).value.trim();
-
-    const motivation =
-        document.getElementById(
-            "applicationMotivation"
-        ).value.trim();
-
-    const availability =
-        document.getElementById(
-            "applicationAvailability"
-        ).value.trim();
-
-    try {
-
-        const result =
-            await supabaseClient
-            .from("applications")
-            .insert({
-
-                user_id:
-                    currentUser.id,
-
-                email:
-                    currentUser.email,
-
-                minecraft_name:
-                    minecraftName,
-
-                function:
-                    selectedApplicationFunction,
-
-                age:
-                    age,
-
-                experience:
-                    experience,
-
-                motivation:
-                    motivation,
-
-                availability:
-                    availability,
-
-                status:
-                    "In behandeling"
-            });
-
-        if (result.error) {
-
-            showMessage(
-                "applicationMessage",
-                "Sollicitatie kon niet worden verstuurd: " +
-                result.error.message,
-                "error"
-            );
-
-            return;
-        }
-
-        showMessage(
-            "applicationMessage",
-            "Je sollicitatie is succesvol verstuurd!",
-            "success"
-        );
-
-        setTimeout(function() {
-
-            closeModal("applicationModal");
-
-        }, 1500);
-
-    } catch (error) {
-
-        showMessage(
-            "applicationMessage",
-            "Er ging iets mis: " +
-            (error.message || String(error)),
-            "error"
-        );
-    }
+    setTimeout(() => {
+        closeModal("applicationModal");
+        document.getElementById("applicationForm").reset();
+    }, 1200);
 });
 
+async function showCommunity() {
+    showPage("community");
+    await loadCommunityUsers();
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+    if (communityRefreshTimer) {
+        clearInterval(communityRefreshTimer);
+    }
 
-async function logout() {
+    communityRefreshTimer =
+        setInterval(loadCommunityUsers, 15000);
+}
 
-    try {
+async function loadCommunityUsers() {
+    const container =
+        document.getElementById("communityPeople");
 
-        await supabaseClient.auth.signOut();
+    const countElement =
+        document.getElementById("onlineCount");
 
-    } catch (error) {
+    if (!container || !countElement) return;
 
+    /*
+        We only consider users with an active session.
+        active_sessions is updated when users are logged in.
+    */
+
+    const { data, error } =
+        await supabaseClient
+            .from("active_sessions")
+            .select(`
+                user_id,
+                last_seen,
+                profiles (
+                    username,
+                    status,
+                    is_admin
+                )
+            `)
+            .gte(
+                "last_seen",
+                new Date(Date.now() - 2 * 60 * 1000).toISOString()
+            )
+            .order("last_seen", {
+                ascending: false
+            });
+
+    if (error) {
+        console.error("Community laden:", error);
+
+        container.innerHTML =
+            '<div class="empty">De community kon niet worden geladen.</div>';
+
+        countElement.textContent =
+            "Community tijdelijk niet beschikbaar";
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        container.innerHTML =
+            '<div class="empty">Er zijn momenteel geen andere ingelogde gebruikers zichtbaar.</div>';
+
+        countElement.textContent =
+            "0 gebruikers online";
+
+        return;
+    }
+
+    countElement.textContent =
+        data.length === 1
+            ? "1 gebruiker online"
+            : `${data.length} gebruikers online`;
+
+    container.innerHTML = data.map(session => {
+        const profile = session.profiles;
+
+        const username =
+            profile?.username || "Onbekende gebruiker";
+
+        const status =
+            profile?.status || "Bezoeker";
+
+        const initial =
+            username.charAt(0).toUpperCase();
+
+        return `
+            <div class="person-card">
+                <div class="person-top">
+                    <div class="avatar">
+                        ${escapeHtml(initial)}
+                    </div>
+
+                    <div>
+                        <div class="person-name">
+                            <span class="online-dot"></span>
+                            ${escapeHtml(username)}
+                        </div>
+
+                        <div class="person-status ${
+                            status === "Team"
+                                ? "status-team"
+                                : "status-visitor"
+                        }">
+                            ${escapeHtml(status)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+async function updateActiveSession() {
+    if (!currentUser) return;
+
+    const { error } =
+        await supabaseClient
+            .from("active_sessions")
+            .upsert({
+                user_id: currentUser.id,
+                last_seen: new Date().toISOString()
+            });
+
+    if (error) {
         console.error(
-            "Logout error:",
+            "Active sessie bijwerken:",
             error
         );
     }
+}
+
+async function removeActiveSession(userId) {
+    if (!userId) return;
+
+    const { error } =
+        await supabaseClient
+            .from("active_sessions")
+            .delete()
+            .eq("user_id", userId);
+
+    if (error) {
+        console.error(
+            "Active sessie verwijderen:",
+            error
+        );
+    }
+}
+
+async function logout() {
+    const userId =
+        currentUser?.id;
+
+    await removeActiveSession(userId);
+
+    await supabaseClient.auth.signOut();
 
     currentUser = null;
-
     currentProfile = null;
 
-    updateNavigation();
+    await updateNavigation();
 
     showPage("home");
 }
 
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getStatusClass(status) {
-
-    if (status === "Aangenomen") {
-        return "accepted";
-    }
-
-    if (status === "Afgewezen") {
-        return "rejected";
-    }
-
-    return "pending";
-}
-
-
-function formatDate(dateString) {
-
-    if (!dateString) {
-        return "-";
-    }
-
-    const date =
-        new Date(dateString);
-
-    if (Number.isNaN(date.getTime())) {
-        return "-";
-    }
-
-    return date.toLocaleString(
-        "nl-NL",
-        {
-            dateStyle: "medium",
-            timeStyle: "short"
-        }
-    );
-}
-
-
 function escapeHtml(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
+async function syncAuthState(session) {
+    currentUser =
+        session?.user || null;
 
-/* =========================================================
-   AUTH STATE
-========================================================= */
+    if (currentUser) {
+        await loadProfile();
+        await updateActiveSession();
+    } else {
+        currentProfile = null;
+    }
+
+    await updateNavigation();
+}
 
 async function initializeApp() {
-
-    try {
-
-        const result =
-            await supabaseClient.auth.getSession();
-
-        currentUser =
-            result.data.session
-            ? result.data.session.user
-            : null;
-
-        if (currentUser) {
-
-            await loadProfile();
-
-        } else {
-
-            currentProfile = null;
+    const {
+        data: {
+            session
         }
+    } = await supabaseClient.auth.getSession();
 
-        updateNavigation();
-
-    } catch (error) {
-
-        console.error(
-            "Initialize error:",
-            error
-        );
-
-        currentUser = null;
-        currentProfile = null;
-
-        updateNavigation();
-    }
+    await syncAuthState(session);
 }
 
-
-/*
- * Supabase recommends not doing additional async Supabase
- * queries directly inside the auth state callback.
- *
- * setTimeout lets the auth event finish first.
- */
-
-supabaseClient.auth.onAuthStateChange(
-    function(event, session) {
-
-        setTimeout(async function() {
-
-            currentUser =
-                session
-                ? session.user
-                : null;
-
-            if (currentUser) {
-
-                await loadProfile();
-
-            } else {
-
-                currentProfile = null;
-            }
-
-            updateNavigation();
-
-        }, 0);
-    }
-);
-
-
-/* =========================================================
-   MODAL BACKGROUND
-========================================================= */
-
-document.querySelectorAll(".modal")
-.forEach(modal => {
-
-    modal.addEventListener(
-        "click",
-        function(event) {
-
-            if (event.target === modal) {
-
-                modal.classList.remove("show");
-            }
-        }
-    );
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    setTimeout(async () => {
+        await syncAuthState(session);
+    }, 0);
 });
 
-
-/* =========================================================
-   START
-========================================================= */
+document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.classList.remove("show");
+        }
+    });
+});
 
 initializeApp();
-
 </script>
 
 </body>
