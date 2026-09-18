@@ -507,6 +507,8 @@ style="display:none;">
 Mijn account
 </button>
 
+<!-- Beheerder is visible for every logged-in user.
+     The code is required before the admin page opens. -->
 <button
 id="adminButton"
 onclick="showAdmin()"
@@ -664,6 +666,8 @@ Nog geen sollicitaties.
 
 </section>
 
+
+<!-- BEHEERDER PAGE -->
 
 <section id="admin" class="page-section">
 
@@ -1259,6 +1263,10 @@ loadMyApplications();
 }
 
 
+/* =========================
+   BEHEERDER NAVIGATION
+========================= */
+
 function showAdmin() {
 
 if (!currentUser) {
@@ -1269,10 +1277,20 @@ return;
 
 }
 
+/*
+ * If the user is not already a verified administrator,
+ * always show the administrator code login.
+ */
 if (
 !currentProfile ||
 currentProfile.is_admin !== true
 ) {
+
+document.getElementById("adminCode").value = "";
+
+document.getElementById("adminLoginMessage").className = "message";
+
+document.getElementById("adminLoginMessage").textContent = "";
 
 document.getElementById("adminLoginModal").style.display = "flex";
 
@@ -1280,6 +1298,10 @@ return;
 
 }
 
+/*
+ * Only users whose Supabase profile says is_admin=true
+ * can reach this page.
+ */
 document.getElementById("home").style.display = "none";
 
 document.getElementById("vacancies").style.display = "none";
@@ -1288,8 +1310,15 @@ document.getElementById("account").style.display = "none";
 
 document.getElementById("admin").style.display = "block";
 
+showAdminTab("adminApplicationsTab");
+
 loadAdminApplications();
 loadAdminUsers();
+
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
 
 }
 
@@ -1383,6 +1412,18 @@ document
 .getElementById("adminCode")
 .value
 .trim();
+
+if (!code) {
+
+message(
+"adminLoginMessage",
+"Voer de beheerdercode in.",
+"error"
+);
+
+return;
+
+}
 
 const result =
 await supabaseClient
@@ -1632,22 +1673,15 @@ await loadProfile();
 
 await loadMyApplications();
 
-if (
-currentProfile &&
-currentProfile.is_admin === true
-) {
-
+/*
+ * IMPORTANT:
+ * The Beheerder button is visible to every
+ * logged-in user. Clicking it asks for the
+ * administrator code if they are not an admin.
+ */
 document
 .getElementById("adminButton")
 .style.display = "block";
-
-} else {
-
-document
-.getElementById("adminButton")
-.style.display = "none";
-
-}
 
 showLoggedIn();
 
@@ -1714,6 +1748,16 @@ document
 
 document
 .getElementById("accountButton")
+.style.display = "block";
+
+/*
+ * Beheerder button is intentionally visible
+ * for every logged-in user.
+ * The actual admin access is protected by
+ * the administrator code + Supabase.
+ */
+document
+.getElementById("adminButton")
 .style.display = "block";
 
 document
@@ -1927,6 +1971,15 @@ return;
 
 }
 
+/*
+ * NORMAL USERS:
+ * Only their own applications are loaded here.
+ *
+ * Even if an administrator opens Mijn account,
+ * the administrator's own applications are shown
+ * here. All applications are shown on the separate
+ * Beheerder page.
+ */
 const result =
 await supabaseClient
 .from("applications")
@@ -2011,6 +2064,11 @@ container.appendChild(div);
 
 async function loadAdminApplications() {
 
+/*
+ * Double protection:
+ * Only a profile with is_admin=true can
+ * request all applications.
+ */
 if (
 !currentProfile ||
 currentProfile.is_admin !== true
