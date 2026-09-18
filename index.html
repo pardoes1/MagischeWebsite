@@ -283,24 +283,6 @@ textarea {
     width: 100%;
 }
 
-.application {
-    padding: 15px;
-    margin-bottom: 12px;
-    border-radius: 12px;
-    background: rgba(0,0,0,.22);
-    border: 1px solid rgba(255,255,255,.08);
-}
-
-.status {
-    display: inline-block;
-    margin-bottom: 8px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    color: #f6c95f;
-    background: rgba(246,201,95,.12);
-    font-size: 12px;
-}
-
 .admin-nav {
     display: flex;
     gap: 8px;
@@ -460,7 +442,6 @@ footer {
 }
 
 @media(max-width:750px) {
-
     .nav {
         flex-direction: column;
         padding: 15px;
@@ -507,8 +488,6 @@ style="display:none;">
 Mijn account
 </button>
 
-<!-- Beheerder is visible for every logged-in user.
-     The code is required before the admin page opens. -->
 <button
 id="adminButton"
 onclick="showAdmin()"
@@ -532,7 +511,6 @@ Uitloggen
 <main>
 
 <section id="home" class="hero">
-
 <div class="hero-content">
 
 <img src="./logo.png" alt="Magische Heuvel">
@@ -541,16 +519,12 @@ Uitloggen
 
 <p>Minecraft Themapark</p>
 
-<button
-class="gold-button"
-onclick="openServerModal()">
+<button class="gold-button" onclick="openServerModal()">
 🎮 Minecraft Server
 </button>
 
 </div>
-
 </section>
-
 
 <section id="vacancies" class="page-section">
 
@@ -575,7 +549,6 @@ Solliciteren
 
 </div>
 
-
 <div class="vacancy">
 
 <h2>⚙️ Techniek</h2>
@@ -592,7 +565,6 @@ Solliciteren
 </button>
 
 </div>
-
 
 <div class="vacancy">
 
@@ -612,35 +584,61 @@ Solliciteren
 </div>
 
 </div>
-
 </section>
 
+<!-- ACCOUNT
+     Alleen profielinformatie.
+     GEEN "Mijn sollicitaties".
+-->
 
 <section id="account" class="page-section">
 
 <h2 class="title">Mijn account</h2>
-
-<div class="grid">
 
 <div class="panel">
 
 <h2>Profiel</h2>
 
 <div class="info">
-<div class="info-label">Gebruikersnaam</div>
-<div id="profileUsername" class="info-value">-</div>
+
+<div class="info-label">
+Gebruikersnaam
+</div>
+
+<div
+id="profileUsername"
+class="info-value">
+-
+</div>
+
 </div>
 
 <div class="info">
-<div class="info-label">E-mailadres</div>
-<div id="profileEmail" class="info-value">-</div>
+
+<div class="info-label">
+E-mailadres
+</div>
+
+<div
+id="profileEmail"
+class="info-value">
+-
+</div>
+
 </div>
 
 <div class="info">
-<div class="info-label">Status</div>
-<div id="profileStatus" class="info-value">
+
+<div class="info-label">
+Status
+</div>
+
+<div
+id="profileStatus"
+class="info-value">
 Bezoeker
 </div>
+
 </div>
 
 <button
@@ -651,23 +649,9 @@ Uitloggen
 
 </div>
 
-
-<div class="panel">
-
-<h2>Mijn sollicitaties</h2>
-
-<div id="myApplications">
-Nog geen sollicitaties.
-</div>
-
-</div>
-
-</div>
-
 </section>
 
-
-<!-- BEHEERDER PAGE -->
+<!-- BEHEERDER -->
 
 <section id="admin" class="page-section">
 
@@ -691,6 +675,7 @@ Sollicitatie toevoegen
 
 </div>
 
+<!-- ALLE SOLLICITATIES -->
 
 <div
 id="adminApplicationsTab"
@@ -704,6 +689,7 @@ Sollicitaties laden...
 
 </div>
 
+<!-- ALLE GEBRUIKERS -->
 
 <div
 id="adminUsersTab"
@@ -717,6 +703,7 @@ Gebruikers laden...
 
 </div>
 
+<!-- SOLLICITATIE TOEVOEGEN -->
 
 <div
 id="adminAddTab"
@@ -728,9 +715,13 @@ class="admin-tab">
 
 <div class="form-group">
 
-<label>Gebruiker</label>
+<label>
+Gebruiker
+</label>
 
-<select id="adminUserId" required>
+<select
+id="adminUserId"
+required>
 
 <option value="">
 Gebruiker kiezen
@@ -740,10 +731,11 @@ Gebruiker kiezen
 
 </div>
 
-
 <div class="form-group">
 
-<label>Minecraft naam</label>
+<label>
+Minecraft naam
+</label>
 
 <input
 id="adminMinecraftName"
@@ -752,12 +744,15 @@ required>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Vacature</label>
+<label>
+Vacature
+</label>
 
-<select id="adminFunction" required>
+<select
+id="adminFunction"
+required>
 
 <option value="">
 Kies vacature
@@ -779,10 +774,11 @@ Modelaar
 
 </div>
 
-
 <div class="form-group">
 
-<label>Leeftijd</label>
+<label>
+Leeftijd
+</label>
 
 <input
 id="adminAge"
@@ -793,42 +789,41 @@ required>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Ervaring</label>
+<label>
+Ervaring
+</label>
 
 <textarea
 id="adminExperience"
-required>
-</textarea>
+required></textarea>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Motivatie</label>
+<label>
+Motivatie
+</label>
 
 <textarea
 id="adminMotivation"
-required>
-</textarea>
+required></textarea>
 
 </div>
-
 
 <div class="form-group">
 
-<label>Beschikbaarheid</label>
+<label>
+Beschikbaarheid
+</label>
 
 <textarea
 id="adminAvailability"
-required>
-</textarea>
+required></textarea>
 
 </div>
-
 
 <button
 class="submit-button"
@@ -851,11 +846,9 @@ class="message">
 
 </main>
 
-
 <footer>
 © 2026 Magische Heuvel
 </footer>
-
 
 <!-- LOGIN -->
 
@@ -875,7 +868,9 @@ onclick="closeModal('loginModal')">
 
 <div class="form-group">
 
-<label>E-mailadres</label>
+<label>
+E-mailadres
+</label>
 
 <input
 id="loginEmail"
@@ -884,10 +879,11 @@ required>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Wachtwoord</label>
+<label>
+Wachtwoord
+</label>
 
 <input
 id="loginPassword"
@@ -895,7 +891,6 @@ type="password"
 required>
 
 </div>
-
 
 <button
 class="submit-button"
@@ -917,9 +912,7 @@ Account maken
 </button>
 
 </div>
-
 </div>
-
 
 <!-- REGISTER -->
 
@@ -939,7 +932,9 @@ onclick="closeModal('registerModal')">
 
 <div class="form-group">
 
-<label>Gebruikersnaam</label>
+<label>
+Gebruikersnaam
+</label>
 
 <input
 id="registerUsername"
@@ -948,10 +943,11 @@ required>
 
 </div>
 
-
 <div class="form-group">
 
-<label>E-mailadres</label>
+<label>
+E-mailadres
+</label>
 
 <input
 id="registerEmail"
@@ -960,10 +956,11 @@ required>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Wachtwoord</label>
+<label>
+Wachtwoord
+</label>
 
 <input
 id="registerPassword"
@@ -972,7 +969,6 @@ minlength="6"
 required>
 
 </div>
-
 
 <button
 class="submit-button"
@@ -994,9 +990,7 @@ Terug naar inloggen
 </button>
 
 </div>
-
 </div>
-
 
 <!-- ADMIN CODE -->
 
@@ -1021,7 +1015,9 @@ tot het beheerpaneel.
 
 <div class="form-group">
 
-<label>Beheerdercode</label>
+<label>
+Beheerdercode
+</label>
 
 <input
 id="adminCode"
@@ -1045,9 +1041,7 @@ class="message">
 </form>
 
 </div>
-
 </div>
-
 
 <!-- SERVER -->
 
@@ -1063,7 +1057,9 @@ onclick="closeModal('serverModal')">
 
 <h2>Minecraft Server</h2>
 
-<p>Server IP:</p>
+<p>
+Server IP:
+</p>
 
 <div class="server-ip">
 gp-node-01.future-node.com:35003
@@ -1077,9 +1073,7 @@ IP kopiëren
 </button>
 
 </div>
-
 </div>
-
 
 <!-- APPLICATION -->
 
@@ -1104,7 +1098,9 @@ Je solliciteert voor:
 
 <div class="form-group">
 
-<label>Minecraft naam</label>
+<label>
+Minecraft naam
+</label>
 
 <input
 id="minecraftName"
@@ -1117,10 +1113,11 @@ required>
 id="function"
 type="hidden">
 
-
 <div class="form-group">
 
-<label>Leeftijd</label>
+<label>
+Leeftijd
+</label>
 
 <input
 id="age"
@@ -1131,42 +1128,41 @@ required>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Ervaring</label>
+<label>
+Ervaring
+</label>
 
 <textarea
 id="experience"
-required>
-</textarea>
+required></textarea>
 
 </div>
 
-
 <div class="form-group">
 
-<label>Motivatie</label>
+<label>
+Motivatie
+</label>
 
 <textarea
 id="motivation"
-required>
-</textarea>
+required></textarea>
 
 </div>
-
 
 <div class="form-group">
 
-<label>Beschikbaarheid</label>
+<label>
+Beschikbaarheid
+</label>
 
 <textarea
 id="availability"
-required>
-</textarea>
+required></textarea>
 
 </div>
-
 
 <button
 class="submit-button"
@@ -1182,9 +1178,7 @@ class="message">
 </form>
 
 </div>
-
 </div>
-
 
 <script>
 
@@ -1253,21 +1247,23 @@ return;
 
 document.getElementById("home").style.display = "none";
 document.getElementById("vacancies").style.display = "none";
+document.getElementById("admin").style.display = "none";
 
 document.getElementById("account").style.display = "block";
 
-document.getElementById("admin").style.display = "none";
-
-loadMyApplications();
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
 
 }
 
 
 /* =========================
-   BEHEERDER NAVIGATION
+   BEHEERDER
 ========================= */
 
-function showAdmin() {
+async function showAdmin() {
 
 if (!currentUser) {
 
@@ -1278,9 +1274,10 @@ return;
 }
 
 /*
- * If the user is not already a verified administrator,
- * always show the administrator code login.
+ * Alleen een profiel met is_admin = true
+ * mag de beheerpagina openen.
  */
+
 if (
 !currentProfile ||
 currentProfile.is_admin !== true
@@ -1288,32 +1285,32 @@ currentProfile.is_admin !== true
 
 document.getElementById("adminCode").value = "";
 
-document.getElementById("adminLoginMessage").className = "message";
+document.getElementById("adminLoginMessage").className =
+"message";
 
-document.getElementById("adminLoginMessage").textContent = "";
+document.getElementById("adminLoginMessage").textContent =
+"";
 
-document.getElementById("adminLoginModal").style.display = "flex";
+document.getElementById("adminLoginModal").style.display =
+"flex";
 
 return;
 
 }
 
 /*
- * Only users whose Supabase profile says is_admin=true
- * can reach this page.
+ * Admin pagina openen
  */
+
 document.getElementById("home").style.display = "none";
-
 document.getElementById("vacancies").style.display = "none";
-
 document.getElementById("account").style.display = "none";
-
 document.getElementById("admin").style.display = "block";
 
 showAdminTab("adminApplicationsTab");
 
-loadAdminApplications();
-loadAdminUsers();
+await loadAdminApplications();
+await loadAdminUsers();
 
 window.scrollTo({
 top: 0,
@@ -1325,17 +1322,31 @@ behavior: "smooth"
 
 function showAdminTab(id) {
 
+if (
+!currentProfile ||
+currentProfile.is_admin !== true
+) {
+
+return;
+
+}
+
 document
 .querySelectorAll(".admin-tab")
-.forEach(tab => {
+.forEach(function(tab) {
 
 tab.classList.remove("active");
 
 });
 
-document
-.getElementById(id)
-.classList.add("active");
+const tab =
+document.getElementById(id);
+
+if (tab) {
+
+tab.classList.add("active");
+
+}
 
 }
 
@@ -1348,7 +1359,8 @@ function openLogin() {
 
 closeModal("registerModal");
 
-document.getElementById("loginModal").style.display = "flex";
+document.getElementById("loginModal").style.display =
+"flex";
 
 }
 
@@ -1357,14 +1369,16 @@ function openRegister() {
 
 closeModal("loginModal");
 
-document.getElementById("registerModal").style.display = "flex";
+document.getElementById("registerModal").style.display =
+"flex";
 
 }
 
 
 function openServerModal() {
 
-document.getElementById("serverModal").style.display = "flex";
+document.getElementById("serverModal").style.display =
+"flex";
 
 }
 
@@ -1460,17 +1474,32 @@ return;
 
 }
 
-message(
-"adminLoginMessage",
-"Beheerderstoegang geactiveerd!",
-"success"
-);
-
 document
 .getElementById("adminCode")
 .value = "";
 
 await loadUser();
+
+if (
+!currentProfile ||
+currentProfile.is_admin !== true
+) {
+
+message(
+"adminLoginMessage",
+"Beheerderstoegang kon niet worden geactiveerd.",
+"error"
+);
+
+return;
+
+}
+
+message(
+"adminLoginMessage",
+"Beheerderstoegang geactiveerd!",
+"success"
+);
 
 setTimeout(function() {
 
@@ -1671,14 +1700,6 @@ result.data.user;
 
 await loadProfile();
 
-await loadMyApplications();
-
-/*
- * IMPORTANT:
- * The Beheerder button is visible to every
- * logged-in user. Clicking it asks for the
- * administrator code if they are not an admin.
- */
 document
 .getElementById("adminButton")
 .style.display = "block";
@@ -1750,12 +1771,6 @@ document
 .getElementById("accountButton")
 .style.display = "block";
 
-/*
- * Beheerder button is intentionally visible
- * for every logged-in user.
- * The actual admin access is protected by
- * the administrator code + Supabase.
- */
 document
 .getElementById("adminButton")
 .style.display = "block";
@@ -1784,6 +1799,8 @@ document
 document
 .getElementById("logoutButton")
 .style.display = "none";
+
+document.getElementById("admin").style.display = "none";
 
 }
 
@@ -1838,8 +1855,14 @@ document
 "message";
 
 document
+.getElementById("applicationMessage")
+.textContent =
+"";
+
+document
 .getElementById("applicationModal")
-.style.display = "flex";
+.style.display =
+"flex";
 
 }
 
@@ -1938,138 +1961,24 @@ document
 .getElementById("applicationForm")
 .reset();
 
-await loadMyApplications();
-
-setTimeout(
-function() {
+setTimeout(function() {
 
 closeModal("applicationModal");
 
-},
-800
-);
+}, 800);
 
 });
-
-
-/* =========================
-   MY APPLICATIONS
-========================= */
-
-async function loadMyApplications() {
-
-const container =
-document
-.getElementById("myApplications");
-
-if (!currentUser) {
-
-container.textContent =
-"Log in om je sollicitaties te bekijken.";
-
-return;
-
-}
-
-/*
- * NORMAL USERS:
- * Only their own applications are loaded here.
- *
- * Even if an administrator opens Mijn account,
- * the administrator's own applications are shown
- * here. All applications are shown on the separate
- * Beheerder page.
- */
-const result =
-await supabaseClient
-.from("applications")
-.select("*")
-.eq(
-"user_id",
-currentUser.id
-)
-.order(
-"created_at",
-{
-ascending: false
-}
-);
-
-if (result.error) {
-
-container.textContent =
-"Kan sollicitaties niet laden.";
-
-console.error(result.error);
-
-return;
-
-}
-
-if (
-!result.data ||
-result.data.length === 0
-) {
-
-container.textContent =
-"Je hebt nog geen sollicitaties.";
-
-return;
-
-}
-
-container.innerHTML = "";
-
-result.data.forEach(
-function(application) {
-
-const div =
-document.createElement("div");
-
-div.className =
-"application";
-
-div.innerHTML = `
-
-<div class="status">
-${escapeHTML(application.status)}
-</div>
-
-<strong>
-${escapeHTML(application.minecraft_name)}
-</strong>
-
-<p>
-Vacature:
-${escapeHTML(application.function)}
-</p>
-
-<p>
-Leeftijd:
-${escapeHTML(String(application.age))}
-</p>
-
-`;
-
-container.appendChild(div);
-
-});
-
-}
 
 
 /* =========================
    ADMIN APPLICATIONS
+   Alleen beheerders
 ========================= */
 
 async function loadAdminApplications() {
 
-/*
- * Double protection:
- * Only a profile with is_admin=true can
- * request all applications.
- */
 if (
+!currentUser ||
 !currentProfile ||
 currentProfile.is_admin !== true
 ) {
@@ -2081,6 +1990,9 @@ return;
 const container =
 document
 .getElementById("adminApplications");
+
+container.textContent =
+"Sollicitaties laden...";
 
 const result =
 await supabaseClient
@@ -2195,11 +2107,13 @@ container.appendChild(div);
 
 /* =========================
    ADMIN USERS
+   Alleen beheerders
 ========================= */
 
 async function loadAdminUsers() {
 
 if (
+!currentUser ||
 !currentProfile ||
 currentProfile.is_admin !== true
 ) {
@@ -2266,7 +2180,6 @@ ${escapeHTML(user.email || "")}
 
 container.appendChild(div);
 
-
 const option =
 document.createElement("option");
 
@@ -2298,9 +2211,16 @@ async function(event) {
 event.preventDefault();
 
 if (
+!currentUser ||
 !currentProfile ||
 currentProfile.is_admin !== true
 ) {
+
+message(
+"adminApplicationMessage",
+"Geen beheerderstoegang.",
+"error"
+);
 
 return;
 
@@ -2311,11 +2231,23 @@ document
 .getElementById("adminUserId")
 .value;
 
+if (!userId) {
+
+message(
+"adminApplicationMessage",
+"Kies eerst een gebruiker.",
+"error"
+);
+
+return;
+
+}
+
 const userResult =
 await supabaseClient
 .from("profiles")
 .select("id,email")
-.eq("id",userId)
+.eq("id", userId)
 .single();
 
 if (userResult.error) {
@@ -2419,6 +2351,7 @@ status
 ) {
 
 if (
+!currentUser ||
 !currentProfile ||
 currentProfile.is_admin !== true
 ) {
@@ -2433,7 +2366,7 @@ await supabaseClient
 .update({
 status: status
 })
-.eq("id",id);
+.eq("id", id);
 
 if (result.error) {
 
@@ -2458,13 +2391,11 @@ navigator.clipboard
 .writeText(
 "gp-node-01.future-node.com:35003"
 )
-.then(
-function() {
+.then(function() {
 
 alert("Server IP gekopieerd!");
 
-}
-);
+});
 
 }
 
@@ -2481,6 +2412,12 @@ type
 
 const element =
 document.getElementById(id);
+
+if (!element) {
+
+return;
+
+}
 
 element.textContent =
 text;
@@ -2524,7 +2461,8 @@ if (
 event.target === modal
 ) {
 
-modal.style.display = "none";
+modal.style.display =
+"none";
 
 }
 
