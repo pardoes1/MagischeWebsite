@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -11,7 +12,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -19,8 +23,6 @@
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html {
@@ -28,199 +30,279 @@ html {
 }
 
 body {
-    font-family: "Poppins", sans-serif;
-    background:
-        radial-gradient(circle at top, #32165c 0%, #160b2c 45%, #080510 100%);
-    color: white;
+    margin: 0;
     min-height: 100vh;
+
+    font-family: Poppins, sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #35145f 0%,
+            #190b30 45%,
+            #080510 100%
+        );
 }
 
-button,
-input,
-textarea,
-select {
-    font-family: inherit;
-}
 
-button {
-    cursor: pointer;
-}
+/* =========================
+   HEADER
+========================= */
 
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
+
+    background: rgba(8,5,16,.92);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.1);
+
     backdrop-filter: blur(15px);
-    background: rgba(10, 5, 25, 0.88);
-    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .nav {
-    max-width: 1250px;
+    width: min(1200px, calc(100% - 30px));
+
     margin: auto;
-    padding: 15px 25px;
+
+    min-height: 75px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 20px;
 }
 
-.logo-area {
+.logo {
     display: flex;
+
     align-items: center;
-    gap: 13px;
+
+    gap: 12px;
 }
 
-.logo-area img {
-    width: 55px;
-    height: 55px;
+.logo img {
+    width: 52px;
+    height: 52px;
+
     object-fit: contain;
 }
 
-.logo-text {
+.logo span {
     font-family: Righteous, sans-serif;
-    font-size: 22px;
+
     color: #f6c95f;
+
+    font-size: 22px;
 }
 
-nav {
+.nav-buttons {
     display: flex;
-    gap: 10px;
+
+    gap: 8px;
+
     flex-wrap: wrap;
+
     justify-content: center;
 }
 
-nav button,
-.nav-link {
+.nav-buttons button {
     border: 0;
-    background: transparent;
-    color: white;
-    padding: 10px 14px;
+
+    padding: 10px 15px;
+
     border-radius: 10px;
+
+    color: white;
+
+    background: transparent;
+
+    cursor: pointer;
+
     transition: .2s;
-    font-size: 14px;
 }
 
-nav button:hover,
-.nav-link:hover {
-    background: rgba(255,255,255,.1);
-    color: #ffd86a;
+.nav-buttons button:hover {
+    color: #f6c95f;
+
+    background:
+        rgba(255,255,255,.08);
 }
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: min(1000px, calc(100% - 30px));
+
+    margin: auto;
+}
+
+
+/* =========================
+   HOME
+========================= */
 
 .hero {
-    min-height: 600px;
+    min-height: 500px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     text-align: center;
-    padding: 80px 20px;
 }
 
 .hero-content {
-    max-width: 850px;
+    width: 100%;
 }
 
-.hero-logo {
+.hero img {
     width: 180px;
-    max-width: 70%;
-    margin-bottom: 25px;
-    filter: drop-shadow(0 10px 25px rgba(0,0,0,.5));
-}
 
-h1,
-h2,
-h3 {
-    font-family: Righteous, sans-serif;
+    max-width: 60%;
+
+    margin-bottom: 20px;
 }
 
 .hero h1 {
-    font-size: clamp(42px, 7vw, 82px);
+    margin: 0;
+
+    font-family: Righteous, sans-serif;
+
+    font-size:
+        clamp(40px, 8vw, 75px);
+
     color: #f6c95f;
-    text-shadow: 0 5px 25px rgba(0,0,0,.5);
 }
 
 .hero p {
-    margin-top: 15px;
+    margin-top: 12px;
+
+    color: #ddd5e8;
+
     font-size: 18px;
-    color: #e9e1f5;
 }
 
 .gold-button {
-    margin-top: 30px;
+    margin-top: 25px;
+
     padding: 14px 25px;
+
     border: 0;
+
     border-radius: 12px;
-    background: linear-gradient(135deg, #f6c95f, #c99226);
-    color: #211205;
+
     font-weight: 700;
-    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+
+    color: #211205;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6c95f,
+            #c99226
+        );
+
+    cursor: pointer;
+
     transition: .2s;
 }
 
 .gold-button:hover {
     transform: translateY(-2px);
-    filter: brightness(1.08);
 }
 
-section {
-    max-width: 1150px;
-    margin: auto;
-    padding: 70px 20px;
+
+/* =========================
+   ACCOUNT
+========================= */
+
+#account {
+    display: none;
+
+    padding-bottom: 70px;
 }
 
-.section-title {
+.title {
     text-align: center;
-    font-size: 38px;
+
+    margin-bottom: 30px;
+
+    font-family: Righteous, sans-serif;
+
     color: #f6c95f;
-    margin-bottom: 35px;
+
+    font-size: 38px;
 }
 
-.cards {
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     gap: 20px;
 }
 
-.card {
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 18px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-}
-
-.card h3 {
-    color: #f6c95f;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #ddd5e8;
-    line-height: 1.6;
-}
-
-.account-section {
-    display: none;
-}
-
-.account-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
 .panel {
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 20px;
     padding: 25px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,255,255,.1);
 }
 
-.panel h3 {
+.panel h2 {
+    margin-top: 0;
+
+    font-family: Righteous, sans-serif;
+
     color: #f6c95f;
-    margin-bottom: 20px;
-    font-size: 25px;
 }
+
+.info {
+    padding: 13px;
+
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(0,0,0,.22);
+}
+
+.info-label {
+    color: #9e92ae;
+
+    font-size: 12px;
+}
+
+.info-value {
+    margin-top: 3px;
+
+    word-break: break-word;
+}
+
+
+/* =========================
+   FORMS
+========================= */
 
 .form-group {
     margin-bottom: 15px;
@@ -228,284 +310,465 @@ section {
 
 .form-group label {
     display: block;
-    margin-bottom: 7px;
+
+    margin-bottom: 6px;
+
     color: #ddd5e8;
+
     font-size: 14px;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+input,
+textarea,
+select {
     width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,.15);
-    background: rgba(0,0,0,.25);
-    color: white;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
     outline: none;
+
+    color: white;
+
+    background:
+        rgba(0,0,0,.3);
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
+select option {
+    color: black;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
     border-color: #f6c95f;
 }
 
-.form-group textarea {
-    min-height: 120px;
+textarea {
+    min-height: 110px;
+
     resize: vertical;
 }
 
-.form-button {
+.submit-button {
     width: 100%;
-    padding: 13px;
-    border: 0;
-    border-radius: 10px;
-    background: #f6c95f;
-    color: #1b0d25;
-    font-weight: 700;
-}
 
-.form-button:hover {
-    filter: brightness(1.08);
+    padding: 13px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+
+    color: #211205;
+
+    background: #f6c95f;
+
+    cursor: pointer;
 }
 
 .secondary-button {
     width: 100%;
-    padding: 12px;
+
     margin-top: 10px;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 10px;
-    background: rgba(255,255,255,.06);
-    color: white;
-}
 
-.secondary-button:hover {
-    background: rgba(255,255,255,.12);
-}
-
-.user-info {
-    display: grid;
-    gap: 10px;
-}
-
-.info-row {
-    background: rgba(0,0,0,.2);
     padding: 12px;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
     border-radius: 10px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.06);
+
+    cursor: pointer;
 }
 
-.info-label {
-    font-size: 12px;
-    color: #a99bb9;
-}
 
-.info-value {
-    margin-top: 3px;
-    word-break: break-word;
-}
+/* =========================
+   APPLICATIONS
+========================= */
 
 .application {
-    margin-top: 15px;
     padding: 15px;
+
+    margin-bottom: 12px;
+
     border-radius: 12px;
-    background: rgba(0,0,0,.2);
-    border: 1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(0,0,0,.22);
+
+    border:
+        1px solid rgba(255,255,255,.08);
 }
 
 .status {
     display: inline-block;
-    padding: 6px 10px;
+
+    margin-bottom: 8px;
+
+    padding: 5px 10px;
+
     border-radius: 20px;
-    background: rgba(246,201,95,.15);
+
     color: #f6c95f;
+
+    background:
+        rgba(246,201,95,.12);
+
     font-size: 12px;
-    margin-bottom: 10px;
 }
 
-.admin-panel {
+.admin {
     display: none;
+
+    margin-top: 20px;
 }
 
 .admin-application {
-    background: rgba(0,0,0,.2);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 15px;
+    padding: 18px;
+
+    margin-bottom: 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,.22);
+
+    border:
+        1px solid rgba(255,255,255,.08);
 }
 
-.admin-application h4 {
+.admin-application h3 {
     color: #f6c95f;
-    margin-bottom: 10px;
 }
 
-.admin-actions {
+.admin-buttons {
     display: flex;
+
     gap: 10px;
-    flex-wrap: wrap;
+
     margin-top: 15px;
 }
 
-.approve {
-    background: #2fa36b;
-    color: white;
+.accept {
+    padding: 9px 14px;
+
     border: 0;
+
     border-radius: 8px;
-    padding: 9px 15px;
+
+    color: white;
+
+    background: #2e9d68;
+
+    cursor: pointer;
 }
 
 .reject {
-    background: #b43c4a;
-    color: white;
+    padding: 9px 14px;
+
     border: 0;
+
     border-radius: 8px;
-    padding: 9px 15px;
-}
 
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 5000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,.75);
-    padding: 20px;
-}
-
-.modal-box {
-    width: 100%;
-    max-width: 480px;
-    background:
-        linear-gradient(145deg, #24113e, #11091f);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 20px 70px rgba(0,0,0,.5);
-}
-
-.modal-box h2 {
-    color: #f6c95f;
-    margin-bottom: 20px;
-}
-
-.close {
-    float: right;
-    background: none;
-    border: 0;
     color: white;
-    font-size: 25px;
+
+    background: #b43d4c;
+
+    cursor: pointer;
 }
 
-.server-ip {
-    text-align: center;
-    background: rgba(0,0,0,.3);
-    padding: 18px;
-    border-radius: 12px;
-    font-family: monospace;
-    font-size: 20px;
-    color: #f6c95f;
-}
+
+/* =========================
+   MESSAGES
+========================= */
 
 .message {
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 10px;
     display: none;
+
+    margin-top: 12px;
+
+    padding: 11px;
+
+    border-radius: 9px;
+
     font-size: 14px;
 }
 
 .message.error {
     display: block;
-    background: rgba(180,60,74,.15);
-    border: 1px solid rgba(180,60,74,.3);
-    color: #ff9da8;
+
+    color: #ffabb4;
+
+    background:
+        rgba(180,60,74,.15);
+
+    border:
+        1px solid rgba(180,60,74,.3);
 }
 
 .message.success {
     display: block;
-    background: rgba(47,163,107,.15);
-    border: 1px solid rgba(47,163,107,.3);
+
     color: #8cf0bb;
+
+    background:
+        rgba(47,163,107,.15);
+
+    border:
+        1px solid rgba(47,163,107,.3);
 }
 
-.hidden {
-    display: none !important;
+
+/* =========================
+   SUPABASE ERROR
+========================= */
+
+#connectionError {
+    display: none;
+
+    width: min(900px, calc(100% - 30px));
+
+    margin: 20px auto;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    color: #ffb0b8;
+
+    background:
+        rgba(180,60,74,.15);
+
+    border:
+        1px solid rgba(180,60,74,.3);
 }
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,.75);
+}
+
+.modal-box {
+    width: min(450px, 100%);
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #281242,
+            #10081c
+        );
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.5);
+}
+
+.modal-box h2 {
+    margin-top: 0;
+
+    font-family: Righteous, sans-serif;
+
+    color: #f6c95f;
+}
+
+.close {
+    float: right;
+
+    border: 0;
+
+    color: white;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.server-ip {
+    padding: 15px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-family: monospace;
+
+    color: #f6c95f;
+
+    background:
+        rgba(0,0,0,.3);
+
+    word-break: break-all;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
-    border-top: 1px solid rgba(255,255,255,.08);
-    padding: 30px 20px;
+    padding: 30px;
+
     text-align: center;
-    color: #aaa0b3;
+
+    color: #91869e;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
 }
 
-@media(max-width: 800px) {
-    .account-grid {
-        grid-template-columns: 1fr;
-    }
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 750px) {
 
     .nav {
         flex-direction: column;
+
+        padding: 15px;
     }
 
-    nav {
-        width: 100%;
+    .grid {
+        grid-template-columns: 1fr;
     }
+
+    .hero {
+        min-height: 420px;
+    }
+
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="nav">
 
-    <div class="logo-area">
-        <img src="./logo.png" alt="Magische Heuvel">
-        <div class="logo-text">Magische Heuvel</div>
+    <div class="logo">
+
+        <img
+            src="./logo.png"
+            alt="Magische Heuvel"
+        >
+
+        <span>
+            Magische Heuvel
+        </span>
+
     </div>
 
-    <nav>
-        <button onclick="scrollToSection('home')">Home</button>
-        <button onclick="scrollToSection('attracties')">Attracties</button>
-        <button onclick="scrollToSection('account')">Account</button>
-        <button onclick="openServerModal()">Server</button>
-        <button id="loginNavButton" onclick="openLoginModal()">Inloggen</button>
-        <button id="logoutNavButton" class="hidden" onclick="logout()">Uitloggen</button>
-    </nav>
+
+    <div class="nav-buttons">
+
+        <button
+            onclick="goHome()"
+        >
+            Home
+        </button>
+
+        <button
+            onclick="openServerModal()"
+        >
+            Server
+        </button>
+
+        <button
+            id="loginButton"
+            onclick="openLogin()"
+        >
+            Inloggen
+        </button>
+
+        <button
+            id="logoutButton"
+            onclick="logout()"
+            style="display:none;"
+        >
+            Uitloggen
+        </button>
+
+    </div>
 
 </div>
 
 </header>
 
 
+<div id="connectionError"></div>
+
+
 <main>
 
-<section class="hero" id="home">
+
+<section
+    id="home"
+    class="hero"
+>
 
     <div class="hero-content">
 
         <img
-            class="hero-logo"
             src="./logo.png"
-            alt="Magische Heuvel logo"
+            alt="Magische Heuvel"
         >
 
-        <h1>Magische Heuvel</h1>
+        <h1>
+            Magische Heuvel
+        </h1>
 
         <p>
-            Het magische Minecraft Themapark
+            Minecraft Themapark
         </p>
 
         <button
             class="gold-button"
             onclick="openServerModal()"
         >
-            🎮 Speel mee
+            🎮 Minecraft Server
         </button>
 
     </div>
@@ -513,82 +776,72 @@ footer {
 </section>
 
 
-<section id="attracties">
+<section id="account">
 
-    <h2 class="section-title">Onze attracties</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>🏔️ Big Thunder Mountain</h3>
-            <p>
-                Een spannende achtbaan vol bochten, bergen en
-                verrassingen.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>🌌 Space Mountain</h3>
-            <p>
-                Reis door de duisternis en ontdek de ruimte.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>💀 Danse Macabre</h3>
-            <p>
-                Een mysterieuze ervaring in het donker.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>🌊 Aquanura</h3>
-            <p>
-                Een spectaculaire watershow met muziek,
-                licht en effecten.
-            </p>
-        </div>
-
-    </div>
-
-</section>
+    <h2 class="title">
+        Mijn account
+    </h2>
 
 
-<section id="account" class="account-section">
+    <div class="grid">
 
-    <h2 class="section-title">Mijn account</h2>
 
-    <div class="account-grid">
+        <!-- PROFILE -->
 
         <div class="panel">
 
-            <h3>Profiel</h3>
+            <h2>
+                Profiel
+            </h2>
 
-            <div class="user-info">
 
-                <div class="info-row">
-                    <div class="info-label">Gebruikersnaam</div>
-                    <div id="profileUsername" class="info-value">-</div>
+            <div class="info">
+
+                <div class="info-label">
+                    Gebruikersnaam
                 </div>
 
-                <div class="info-row">
-                    <div class="info-label">E-mailadres</div>
-                    <div id="profileEmail" class="info-value">-</div>
-                </div>
-
-                <div class="info-row">
-                    <div class="info-label">Account ID</div>
-                    <div id="profileId" class="info-value">-</div>
-                </div>
-
-                <div class="info-row">
-                    <div class="info-label">Status</div>
-                    <div id="profileStatus" class="info-value">
-                        Bezoeker
-                    </div>
+                <div
+                    id="profileUsername"
+                    class="info-value"
+                >
+                    -
                 </div>
 
             </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    E-mailadres
+                </div>
+
+                <div
+                    id="profileEmail"
+                    class="info-value"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="info-label">
+                    Status
+                </div>
+
+                <div
+                    id="profileStatus"
+                    class="info-value"
+                >
+                    Bezoeker
+                </div>
+
+            </div>
+
 
             <button
                 class="secondary-button"
@@ -600,25 +853,43 @@ footer {
         </div>
 
 
+        <!-- APPLICATION -->
+
         <div class="panel">
 
-            <h3>Solliciteren</h3>
+            <h2>
+                Sollicitatie
+            </h2>
+
 
             <form id="applicationForm">
 
+
                 <div class="form-group">
-                    <label>Minecraft naam</label>
+
+                    <label>
+                        Minecraft naam
+                    </label>
+
                     <input
                         id="minecraftName"
                         type="text"
                         required
                     >
+
                 </div>
 
-                <div class="form-group">
-                    <label>Functie</label>
 
-                    <select id="function" required>
+                <div class="form-group">
+
+                    <label>
+                        Functie
+                    </label>
+
+                    <select
+                        id="function"
+                        required
+                    >
 
                         <option value="">
                             Kies een functie
@@ -648,8 +919,13 @@ footer {
 
                 </div>
 
+
                 <div class="form-group">
-                    <label>Leeftijd</label>
+
+                    <label>
+                        Leeftijd
+                    </label>
+
                     <input
                         id="age"
                         type="number"
@@ -657,40 +933,65 @@ footer {
                         max="100"
                         required
                     >
+
                 </div>
 
+
                 <div class="form-group">
-                    <label>Ervaring</label>
+
+                    <label>
+                        Ervaring
+                    </label>
+
                     <textarea
                         id="experience"
                         required
                     ></textarea>
+
                 </div>
 
+
                 <div class="form-group">
-                    <label>Motivatie</label>
+
+                    <label>
+                        Motivatie
+                    </label>
+
                     <textarea
                         id="motivation"
                         required
                     ></textarea>
+
                 </div>
 
+
                 <div class="form-group">
-                    <label>Beschikbaarheid</label>
+
+                    <label>
+                        Beschikbaarheid
+                    </label>
+
                     <textarea
                         id="availability"
                         required
                     ></textarea>
+
                 </div>
 
+
                 <button
-                    class="form-button"
+                    class="submit-button"
                     type="submit"
                 >
                     Sollicitatie versturen
                 </button>
 
-                <div id="applicationMessage" class="message"></div>
+
+                <div
+                    id="applicationMessage"
+                    class="message"
+                ></div>
+
 
             </form>
 
@@ -699,24 +1000,34 @@ footer {
     </div>
 
 
-    <div class="panel" style="margin-top:25px;">
+    <!-- MY APPLICATIONS -->
 
-        <h3>Mijn sollicitaties</h3>
+    <div
+        class="panel"
+        style="margin-top:20px;"
+    >
+
+        <h2>
+            Mijn sollicitaties
+        </h2>
 
         <div id="myApplications">
-            Sollicitaties laden...
+            Nog geen gegevens.
         </div>
 
     </div>
 
 
+    <!-- ADMIN -->
+
     <div
         id="adminPanel"
-        class="panel admin-panel"
-        style="margin-top:25px;"
+        class="panel admin"
     >
 
-        <h3>👑 Admin - Sollicitaties</h3>
+        <h2>
+            👑 Administratie
+        </h2>
 
         <div id="adminApplications">
             Sollicitaties laden...
@@ -724,195 +1035,259 @@ footer {
 
     </div>
 
+
 </section>
+
 
 </main>
 
 
 <footer>
 
-    © 2026 Magische Heuvel - Minecraft Themapark
+    © 2026 Magische Heuvel
 
 </footer>
 
 
-<!-- LOGIN MODAL -->
+<!-- =========================
+     LOGIN MODAL
+========================= -->
 
-<div id="loginModal" class="modal">
+<div
+    id="loginModal"
+    class="modal"
+>
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button class="close" onclick="closeModal('loginModal')">
-            ×
-        </button>
+    <button
+        class="close"
+        onclick="closeModal('loginModal')"
+    >
+        ×
+    </button>
 
-        <h2>Inloggen</h2>
 
-        <form id="loginForm">
+    <h2>
+        Inloggen
+    </h2>
 
-            <div class="form-group">
 
-                <label>E-mailadres</label>
+    <form id="loginForm">
 
-                <input
-                    id="loginEmail"
-                    type="email"
-                    required
-                    autocomplete="email"
-                >
 
-            </div>
+        <div class="form-group">
 
-            <div class="form-group">
+            <label>
+                E-mailadres
+            </label>
 
-                <label>Wachtwoord</label>
-
-                <input
-                    id="loginPassword"
-                    type="password"
-                    required
-                    autocomplete="current-password"
-                >
-
-            </div>
-
-            <button
-                class="form-button"
-                type="submit"
+            <input
+                id="loginEmail"
+                type="email"
+                autocomplete="email"
+                required
             >
-                Inloggen
-            </button>
 
-            <div id="loginMessage" class="message"></div>
-
-        </form>
-
-        <button
-            class="secondary-button"
-            onclick="showRegister()"
-        >
-            Nog geen account? Registreren
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- REGISTER MODAL -->
-
-<div id="registerModal" class="modal">
-
-    <div class="modal-box">
-
-        <button class="close" onclick="closeModal('registerModal')">
-            ×
-        </button>
-
-        <h2>Account maken</h2>
-
-        <form id="registerForm">
-
-            <div class="form-group">
-
-                <label>Gebruikersnaam</label>
-
-                <input
-                    id="registerUsername"
-                    type="text"
-                    required
-                    minlength="3"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label>E-mailadres</label>
-
-                <input
-                    id="registerEmail"
-                    type="email"
-                    required
-                    autocomplete="email"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Wachtwoord</label>
-
-                <input
-                    id="registerPassword"
-                    type="password"
-                    required
-                    minlength="6"
-                    autocomplete="new-password"
-                >
-
-            </div>
-
-            <button
-                class="form-button"
-                type="submit"
-            >
-                Account maken
-            </button>
-
-            <div id="registerMessage" class="message"></div>
-
-        </form>
-
-        <button
-            class="secondary-button"
-            onclick="showLogin()"
-        >
-            Ik heb al een account
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- SERVER MODAL -->
-
-<div id="serverModal" class="modal">
-
-    <div class="modal-box">
-
-        <button class="close" onclick="closeModal('serverModal')">
-            ×
-        </button>
-
-        <h2>🎮 Minecraft Server</h2>
-
-        <p style="text-align:center;margin-bottom:15px;">
-            Join Magische Heuvel in Minecraft!
-        </p>
-
-        <div class="server-ip">
-            gp-node-01.future-node.com:35003
         </div>
 
+
+        <div class="form-group">
+
+            <label>
+                Wachtwoord
+            </label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                autocomplete="current-password"
+                required
+            >
+
+        </div>
+
+
         <button
-            class="gold-button"
-            style="width:100%;"
-            onclick="copyServerIP()"
+            class="submit-button"
+            type="submit"
         >
-            IP kopiëren
+            Inloggen
         </button>
+
 
         <div
-            id="copyMessage"
-            class="message success"
-            style="text-align:center;"
-        >
-            Server IP gekopieerd!
+            id="loginMessage"
+            class="message"
+        ></div>
+
+
+    </form>
+
+
+    <button
+        class="secondary-button"
+        onclick="openRegister()"
+    >
+        Account maken
+    </button>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     REGISTER MODAL
+========================= -->
+
+<div
+    id="registerModal"
+    class="modal"
+>
+
+<div class="modal-box">
+
+    <button
+        class="close"
+        onclick="closeModal('registerModal')"
+    >
+        ×
+    </button>
+
+
+    <h2>
+        Account maken
+    </h2>
+
+
+    <form id="registerForm">
+
+
+        <div class="form-group">
+
+            <label>
+                Gebruikersnaam
+            </label>
+
+            <input
+                id="registerUsername"
+                type="text"
+                minlength="3"
+                required
+            >
+
         </div>
 
+
+        <div class="form-group">
+
+            <label>
+                E-mailadres
+            </label>
+
+            <input
+                id="registerEmail"
+                type="email"
+                autocomplete="email"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Wachtwoord
+            </label>
+
+            <input
+                id="registerPassword"
+                type="password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+            >
+
+        </div>
+
+
+        <button
+            class="submit-button"
+            type="submit"
+        >
+            Registreren
+        </button>
+
+
+        <div
+            id="registerMessage"
+            class="message"
+        ></div>
+
+
+    </form>
+
+
+    <button
+        class="secondary-button"
+        onclick="openLogin()"
+    >
+        Terug naar inloggen
+    </button>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     SERVER MODAL
+========================= -->
+
+<div
+    id="serverModal"
+    class="modal"
+>
+
+<div class="modal-box">
+
+    <button
+        class="close"
+        onclick="closeModal('serverModal')"
+    >
+        ×
+    </button>
+
+
+    <h2>
+        Minecraft Server
+    </h2>
+
+
+    <p>
+        Server IP:
+    </p>
+
+
+    <div class="server-ip">
+        gp-node-01.future-node.com:35003
     </div>
+
+
+    <button
+        class="gold-button"
+        style="width:100%;"
+        onclick="copyIP()"
+    >
+        IP kopiëren
+    </button>
+
+
+</div>
 
 </div>
 
@@ -920,125 +1295,171 @@ footer {
 <script>
 
 /* =========================================================
-   SUPABASE CONFIGURATION
-   ========================================================= */
+   SUPABASE CONFIG
+========================================================= */
 
 const SUPABASE_URL =
     "https://zmhldveqqogxysoldhrf.supabase.co";
 
-/*
-   PLAATS HIER JE SB_PUBLISHABLE KEY
-*/
 const SUPABASE_KEY =
-    "YOUR_SB_PUBLISHABLE_KEY";
-
-
-const {
-    createClient
-} = window.supabase;
-
-
-const supabaseClient = createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+    "sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
 
 
 /* =========================================================
-   GLOBAL STATE
-   ========================================================= */
+   CREATE CLIENT
+========================================================= */
+
+let supabaseClient = null;
 
 let currentUser = null;
+
 let currentProfile = null;
 
 
-/* =========================================================
-   PAGE NAVIGATION
-   ========================================================= */
+try {
 
-function scrollToSection(id) {
+    if (
+        !window.supabase ||
+        !window.supabase.createClient
+    ) {
 
-    const element = document.getElementById(id);
+        throw new Error(
+            "Supabase JavaScript library kon niet worden geladen."
+        );
 
-    if (element) {
-        element.scrollIntoView({
-            behavior: "smooth"
-        });
     }
+
+
+    supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+} catch (error) {
+
+    showConnectionError(
+        error.message
+    );
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showConnectionError(message) {
+
+    const box =
+        document.getElementById(
+            "connectionError"
+        );
+
+    if (!box) return;
+
+    box.style.display =
+        "block";
+
+    box.innerHTML =
+        "<strong>Website fout:</strong><br>" +
+        escapeHTML(message);
+
 }
 
 
 /* =========================================================
    MODALS
-   ========================================================= */
+========================================================= */
 
-function openModal(id) {
+function openLogin() {
 
-    document.getElementById(id).style.display = "flex";
+    closeModal("registerModal");
+
+    document
+        .getElementById("loginModal")
+        .style.display =
+        "flex";
+
+}
+
+
+function openRegister() {
+
+    closeModal("loginModal");
+
+    document
+        .getElementById("registerModal")
+        .style.display =
+        "flex";
 
 }
 
-function closeModal(id) {
-
-    document.getElementById(id).style.display = "none";
-
-}
-
-function openLoginModal() {
-
-    openModal("loginModal");
-
-}
 
 function openServerModal() {
 
-    openModal("serverModal");
+    document
+        .getElementById("serverModal")
+        .style.display =
+        "flex";
 
 }
 
-function showRegister() {
 
-    closeModal("loginModal");
-    openModal("registerModal");
+function closeModal(id) {
 
-}
+    const element =
+        document.getElementById(id);
 
-function showLogin() {
+    if (element) {
 
-    closeModal("registerModal");
-    openModal("loginModal");
+        element.style.display =
+            "none";
+
+    }
 
 }
 
 
 /* =========================================================
-   SERVER IP
-   ========================================================= */
+   HOME
+========================================================= */
 
-async function copyServerIP() {
+function goHome() {
+
+    document
+        .getElementById("home")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================================================
+   COPY SERVER IP
+========================================================= */
+
+async function copyIP() {
 
     const ip =
         "gp-node-01.future-node.com:35003";
 
     try {
 
-        await navigator.clipboard.writeText(ip);
-
-        const message =
-            document.getElementById("copyMessage");
-
-        message.style.display = "block";
-
-        setTimeout(() => {
-
-            message.style.display = "none";
-
-        }, 2500);
-
-    } catch (error) {
+        await navigator.clipboard.writeText(
+            ip
+        );
 
         alert(
-            "Kopiëren is niet gelukt. Server IP: " + ip
+            "Server IP gekopieerd!"
+        );
+
+    } catch {
+
+        alert(
+            "Server IP: " + ip
         );
 
     }
@@ -1047,25 +1468,31 @@ async function copyServerIP() {
 
 
 /* =========================================================
-   MESSAGE HELPERS
-   ========================================================= */
+   MESSAGES
+========================================================= */
 
-function showMessage(elementId, text, type) {
+function message(
+    id,
+    text,
+    type
+) {
 
     const element =
-        document.getElementById(elementId);
+        document.getElementById(id);
 
-    element.textContent = text;
+    element.textContent =
+        text;
 
     element.className =
         "message " + type;
 
 }
 
-function clearMessage(elementId) {
+
+function clearMessage(id) {
 
     const element =
-        document.getElementById(elementId);
+        document.getElementById(id);
 
     element.textContent = "";
 
@@ -1077,285 +1504,310 @@ function clearMessage(elementId) {
 
 /* =========================================================
    REGISTER
-   ========================================================= */
+========================================================= */
 
 document
-.getElementById("registerForm")
-.addEventListener("submit", async function(event) {
+    .getElementById("registerForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    event.preventDefault();
-
-    clearMessage("registerMessage");
-
-    const username =
-        document
-        .getElementById("registerUsername")
-        .value
-        .trim();
-
-    const email =
-        document
-        .getElementById("registerEmail")
-        .value
-        .trim();
-
-    const password =
-        document
-        .getElementById("registerPassword")
-        .value;
+            event.preventDefault();
 
 
-    if (username.length < 3) {
+            if (!supabaseClient) {
 
-        showMessage(
-            "registerMessage",
-            "Je gebruikersnaam moet minimaal 3 tekens hebben.",
-            "error"
-        );
+                message(
+                    "registerMessage",
+                    "Supabase is niet geladen.",
+                    "error"
+                );
 
-        return;
-
-    }
-
-
-    if (password.length < 6) {
-
-        showMessage(
-            "registerMessage",
-            "Je wachtwoord moet minimaal 6 tekens hebben.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signUp({
-
-            email: email,
-
-            password: password,
-
-            options: {
-
-                data: {
-                    username: username
-                }
+                return;
 
             }
 
-        });
+
+            clearMessage(
+                "registerMessage"
+            );
 
 
-    if (error) {
-
-        console.error(error);
-
-        showMessage(
-            "registerMessage",
-            "Registreren mislukt: " + error.message,
-            "error"
-        );
-
-        return;
-
-    }
+            const username =
+                document
+                    .getElementById(
+                        "registerUsername"
+                    )
+                    .value
+                    .trim();
 
 
-    showMessage(
-        "registerMessage",
-        "Account aangemaakt! Controleer eventueel je e-mail om je account te bevestigen.",
-        "success"
+            const email =
+                document
+                    .getElementById(
+                        "registerEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "registerPassword"
+                    )
+                    .value;
+
+
+            const result =
+                await supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+
+                        data: {
+
+                            username:
+                                username
+
+                        },
+
+                        emailRedirectTo:
+                            window.location.origin +
+                            window.location.pathname
+
+                    }
+
+                });
+
+
+            if (result.error) {
+
+                console.error(
+                    result.error
+                );
+
+                message(
+                    "registerMessage",
+                    result.error.message,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (result.data.session) {
+
+                message(
+                    "registerMessage",
+                    "Account aangemaakt!",
+                    "success"
+                );
+
+
+                closeModal(
+                    "registerModal"
+                );
+
+
+                await loadUser();
+
+            } else {
+
+                message(
+                    "registerMessage",
+                    "Account aangemaakt. Controleer je e-mail om je account te bevestigen.",
+                    "success"
+                );
+
+            }
+
+        }
     );
-
-
-    document
-    .getElementById("registerForm")
-    .reset();
-
-
-    /*
-       Als e-mailbevestiging uitstaat, is de gebruiker
-       direct ingelogd.
-    */
-
-    if (data.session) {
-
-        closeModal("registerModal");
-
-        await initializeUser();
-
-    }
-
-});
 
 
 /* =========================================================
    LOGIN
-   ========================================================= */
+========================================================= */
 
 document
-.getElementById("loginForm")
-.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    clearMessage("loginMessage");
-
-
-    const email =
-        document
-        .getElementById("loginEmail")
-        .value
-        .trim();
-
-    const password =
-        document
-        .getElementById("loginPassword")
-        .value;
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: password
-
-        });
-
-
-    if (error) {
-
-        console.error(error);
-
-        showMessage(
-            "loginMessage",
-            "Inloggen mislukt: " + error.message,
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    currentUser = data.user;
-
-    closeModal("loginModal");
-
-    document
     .getElementById("loginForm")
-    .reset();
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    await initializeUser();
+            event.preventDefault();
 
-    scrollToSection("account");
 
-});
+            if (!supabaseClient) {
+
+                message(
+                    "loginMessage",
+                    "Supabase is niet geladen.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            clearMessage(
+                "loginMessage"
+            );
+
+
+            const email =
+                document
+                    .getElementById(
+                        "loginEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value;
+
+
+            const result =
+                await supabaseClient.auth
+                    .signInWithPassword({
+
+                        email:
+                            email,
+
+                        password:
+                            password
+
+                    });
+
+
+            if (result.error) {
+
+                console.error(
+                    result.error
+                );
+
+                message(
+                    "loginMessage",
+                    result.error.message,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            currentUser =
+                result.data.user;
+
+
+            closeModal(
+                "loginModal"
+            );
+
+
+            document
+                .getElementById(
+                    "loginForm"
+                )
+                .reset();
+
+
+            await loadUser();
+
+
+            document
+                .getElementById(
+                    "account"
+                )
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+    );
 
 
 /* =========================================================
-   LOGOUT
-   ========================================================= */
+   AUTH STATE
+========================================================= */
 
-async function logout() {
+if (supabaseClient) {
 
-    try {
+    supabaseClient.auth
+        .onAuthStateChange(
+            async (
+                event,
+                session
+            ) => {
 
-        if (currentUser) {
+                if (
+                    session &&
+                    session.user
+                ) {
 
-            await supabaseClient
-                .from("active_sessions")
-                .delete()
-                .eq("user_id", currentUser.id);
+                    currentUser =
+                        session.user;
 
-        }
+                    await loadUser();
 
-    } catch (error) {
+                } else {
 
-        console.error(error);
+                    currentUser =
+                        null;
 
-    }
+                    currentProfile =
+                        null;
 
+                    showLoggedOut();
 
-    await supabaseClient.auth.signOut();
+                }
 
-    currentUser = null;
-    currentProfile = null;
-
-    updateLoggedOutUI();
+            }
+        );
 
 }
 
 
 /* =========================================================
-   AUTH STATE
-   ========================================================= */
+   LOAD USER
+========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
-    async (event, session) => {
+async function loadUser() {
 
-        if (session && session.user) {
+    if (!supabaseClient) return;
 
-            currentUser = session.user;
 
-            /*
-             * Kleine timeout voorkomt problemen waarbij
-             * Supabase nog bezig is met de auth state.
-             */
+    const result =
+        await supabaseClient.auth.getUser();
 
-            setTimeout(async () => {
 
-                await initializeUser();
+    if (
+        result.error ||
+        !result.data.user
+    ) {
 
-            }, 0);
+        showLoggedOut();
 
-        } else {
-
-            currentUser = null;
-            currentProfile = null;
-
-            updateLoggedOutUI();
-
-        }
+        return;
 
     }
-);
 
 
-/* =========================================================
-   INITIALIZE USER
-   ========================================================= */
-
-async function initializeUser() {
-
-    if (!currentUser) {
-
-        const {
-            data
-        } =
-            await supabaseClient.auth.getUser();
-
-        if (!data.user) {
-
-            updateLoggedOutUI();
-
-            return;
-
-        }
-
-        currentUser = data.user;
-
-    }
+    currentUser =
+        result.data.user;
 
 
     await loadProfile();
@@ -1364,7 +1816,7 @@ async function initializeUser() {
 
     await loadMyApplications();
 
-    updateLoggedInUI();
+    showLoggedIn();
 
 
     if (
@@ -1373,16 +1825,22 @@ async function initializeUser() {
     ) {
 
         document
-        .getElementById("adminPanel")
-        .style.display = "block";
+            .getElementById(
+                "adminPanel"
+            )
+            .style.display =
+            "block";
 
         await loadAdminApplications();
 
     } else {
 
         document
-        .getElementById("adminPanel")
-        .style.display = "none";
+            .getElementById(
+                "adminPanel"
+            )
+            .style.display =
+            "none";
 
     }
 
@@ -1390,30 +1848,33 @@ async function initializeUser() {
 
 
 /* =========================================================
-   LOAD PROFILE
-   ========================================================= */
+   PROFILE
+========================================================= */
 
 async function loadProfile() {
 
-    if (!currentUser) return;
+    if (
+        !currentUser ||
+        !supabaseClient
+    ) return;
 
 
-    const {
-        data,
-        error
-    } =
+    const result =
         await supabaseClient
-        .from("profiles")
-        .select("*")
-        .eq("id", currentUser.id)
-        .maybeSingle();
+            .from("profiles")
+            .select("*")
+            .eq(
+                "id",
+                currentUser.id
+            )
+            .maybeSingle();
 
 
-    if (error) {
+    if (result.error) {
 
         console.error(
             "Profile error:",
-            error
+            result.error
         );
 
         return;
@@ -1421,69 +1882,74 @@ async function loadProfile() {
     }
 
 
-    currentProfile = data;
+    currentProfile =
+        result.data;
 
 
     document
-    .getElementById("profileUsername")
-    .textContent =
-        data?.username ||
-        currentUser.user_metadata?.username ||
-        "Onbekend";
+        .getElementById(
+            "profileUsername"
+        )
+        .textContent =
+            currentProfile?.username ||
+            currentUser.user_metadata?.username ||
+            "Onbekend";
 
 
     document
-    .getElementById("profileEmail")
-    .textContent =
-        data?.email ||
-        currentUser.email ||
-        "Onbekend";
+        .getElementById(
+            "profileEmail"
+        )
+        .textContent =
+            currentProfile?.email ||
+            currentUser.email ||
+            "Onbekend";
 
 
     document
-    .getElementById("profileId")
-    .textContent =
-        currentUser.id;
-
-
-    document
-    .getElementById("profileStatus")
-    .textContent =
-        data?.is_admin
-        ? "👑 Administrator"
-        : "Bezoeker";
+        .getElementById(
+            "profileStatus"
+        )
+        .textContent =
+            currentProfile?.is_admin === true
+                ? "👑 Administrator"
+                : "Bezoeker";
 
 }
 
 
 /* =========================================================
    ACTIVE SESSION
-   ========================================================= */
+========================================================= */
 
 async function updateActiveSession() {
 
-    if (!currentUser) return;
+    if (
+        !currentUser ||
+        !supabaseClient
+    ) return;
 
 
-    const {
-        error
-    } =
+    const result =
         await supabaseClient
-        .from("active_sessions")
-        .upsert({
+            .from("active_sessions")
+            .upsert({
 
-            user_id: currentUser.id,
+                user_id:
+                    currentUser.id,
 
-            last_seen: new Date().toISOString()
+                last_seen:
+                    new Date()
+                        .toISOString()
 
-        });
+            });
 
 
-    if (error) {
+    if (result.error) {
 
         console.error(
-            "Active session error:",
-            error
+            "Session error:",
+            result.error
         );
 
     }
@@ -1492,140 +1958,271 @@ async function updateActiveSession() {
 
 
 /* =========================================================
-   APPLICATION SUBMIT
-   ========================================================= */
+   LOGOUT
+========================================================= */
 
-document
-.getElementById("applicationForm")
-.addEventListener("submit", async function(event) {
+async function logout() {
 
-    event.preventDefault();
-
-    clearMessage("applicationMessage");
+    if (!supabaseClient) return;
 
 
-    if (!currentUser) {
+    if (currentUser) {
 
-        showMessage(
-            "applicationMessage",
-            "Je moet eerst ingelogd zijn.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const minecraftName =
-        document
-        .getElementById("minecraftName")
-        .value
-        .trim();
-
-    const functionName =
-        document
-        .getElementById("function")
-        .value;
-
-    const age =
-        Number(
-            document
-            .getElementById("age")
-            .value
-        );
-
-    const experience =
-        document
-        .getElementById("experience")
-        .value
-        .trim();
-
-    const motivation =
-        document
-        .getElementById("motivation")
-        .value
-        .trim();
-
-    const availability =
-        document
-        .getElementById("availability")
-        .value
-        .trim();
-
-
-    const {
-        error
-    } =
         await supabaseClient
-        .from("applications")
-        .insert({
-
-            user_id: currentUser.id,
-
-            email:
-                currentUser.email,
-
-            minecraft_name:
-                minecraftName,
-
-            function:
-                functionName,
-
-            age:
-                age,
-
-            experience:
-                experience,
-
-            motivation:
-                motivation,
-
-            availability:
-                availability,
-
-            status:
-                "In behandeling"
-
-        });
-
-
-    if (error) {
-
-        console.error(error);
-
-        showMessage(
-            "applicationMessage",
-            "Sollicitatie versturen mislukt: " +
-            error.message,
-            "error"
-        );
-
-        return;
+            .from("active_sessions")
+            .delete()
+            .eq(
+                "user_id",
+                currentUser.id
+            );
 
     }
 
 
-    showMessage(
-        "applicationMessage",
-        "Je sollicitatie is succesvol verstuurd!",
-        "success"
-    );
+    await supabaseClient.auth.signOut();
 
 
-    document
-    .getElementById("applicationForm")
-    .reset();
+    currentUser =
+        null;
+
+    currentProfile =
+        null;
 
 
-    await loadMyApplications();
+    showLoggedOut();
 
-});
+}
 
 
 /* =========================================================
-   LOAD MY APPLICATIONS
-   ========================================================= */
+   LOGGED IN
+========================================================= */
+
+function showLoggedIn() {
+
+    document
+        .getElementById(
+            "loginButton"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "logoutButton"
+        )
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "account"
+        )
+        .style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   LOGGED OUT
+========================================================= */
+
+function showLoggedOut() {
+
+    document
+        .getElementById(
+            "loginButton"
+        )
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "logoutButton"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "account"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "adminPanel"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   APPLICATION SUBMIT
+========================================================= */
+
+document
+    .getElementById(
+        "applicationForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            if (!currentUser) {
+
+                message(
+                    "applicationMessage",
+                    "Je moet eerst inloggen.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const minecraftName =
+                document
+                    .getElementById(
+                        "minecraftName"
+                    )
+                    .value
+                    .trim();
+
+
+            const functionName =
+                document
+                    .getElementById(
+                        "function"
+                    )
+                    .value;
+
+
+            const age =
+                Number(
+                    document
+                        .getElementById(
+                            "age"
+                        )
+                        .value
+                );
+
+
+            const experience =
+                document
+                    .getElementById(
+                        "experience"
+                    )
+                    .value
+                    .trim();
+
+
+            const motivation =
+                document
+                    .getElementById(
+                        "motivation"
+                    )
+                    .value
+                    .trim();
+
+
+            const availability =
+                document
+                    .getElementById(
+                        "availability"
+                    )
+                    .value
+                    .trim();
+
+
+            const result =
+                await supabaseClient
+                    .from("applications")
+                    .insert({
+
+                        user_id:
+                            currentUser.id,
+
+                        email:
+                            currentUser.email,
+
+                        minecraft_name:
+                            minecraftName,
+
+                        function:
+                            functionName,
+
+                        age:
+                            age,
+
+                        experience:
+                            experience,
+
+                        motivation:
+                            motivation,
+
+                        availability:
+                            availability,
+
+                        status:
+                            "In behandeling"
+
+                    });
+
+
+            if (result.error) {
+
+                console.error(
+                    result.error
+                );
+
+                message(
+                    "applicationMessage",
+                    result.error.message,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            message(
+                "applicationMessage",
+                "Je sollicitatie is verstuurd!",
+                "success"
+            );
+
+
+            document
+                .getElementById(
+                    "applicationForm"
+                )
+                .reset();
+
+
+            await loadMyApplications();
+
+        }
+    );
+
+
+/* =========================================================
+   MY APPLICATIONS
+========================================================= */
 
 async function loadMyApplications() {
 
@@ -1645,38 +2242,44 @@ async function loadMyApplications() {
     }
 
 
-    const {
-        data,
-        error
-    } =
+    const result =
         await supabaseClient
-        .from("applications")
-        .select("*")
-        .eq("user_id", currentUser.id)
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
-        );
+            .from("applications")
+            .select("*")
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:
+                        false
+                }
+            );
 
 
-    if (error) {
-
-        console.error(error);
+    if (result.error) {
 
         container.textContent =
-            "Sollicitaties konden niet worden geladen.";
+            "Kan sollicitaties niet laden.";
+
+        console.error(
+            result.error
+        );
 
         return;
 
     }
 
 
-    if (!data || data.length === 0) {
+    if (
+        !result.data ||
+        result.data.length === 0
+    ) {
 
         container.textContent =
-            "Je hebt nog geen sollicitaties verstuurd.";
+            "Je hebt nog geen sollicitaties.";
 
         return;
 
@@ -1686,63 +2289,63 @@ async function loadMyApplications() {
     container.innerHTML = "";
 
 
-    data.forEach(application => {
+    result.data.forEach(
+        application => {
 
-        const element =
-            document.createElement("div");
+            const div =
+                document.createElement(
+                    "div"
+                );
 
-        element.className =
-            "application";
+
+            div.className =
+                "application";
 
 
-        const date =
-            new Date(
-                application.created_at
-            ).toLocaleString(
-                "nl-NL"
+            div.innerHTML = `
+
+                <div class="status">
+                    ${escapeHTML(application.status)}
+                </div>
+
+                <strong>
+                    ${escapeHTML(application.minecraft_name)}
+                </strong>
+
+                <p>
+                    Functie:
+                    ${escapeHTML(application.function)}
+                </p>
+
+                <p>
+                    Leeftijd:
+                    ${escapeHTML(String(application.age))}
+                </p>
+
+            `;
+
+
+            container.appendChild(
+                div
             );
 
-
-        element.innerHTML = `
-
-            <div class="status">
-                ${escapeHTML(application.status)}
-            </div>
-
-            <strong>
-                ${escapeHTML(application.minecraft_name)}
-            </strong>
-
-            <p>
-                Functie:
-                ${escapeHTML(application.function)}
-            </p>
-
-            <p>
-                Leeftijd:
-                ${escapeHTML(String(application.age))}
-            </p>
-
-            <p>
-                Verstuurd:
-                ${escapeHTML(date)}
-            </p>
-
-        `;
-
-
-        container.appendChild(element);
-
-    });
+        }
+    );
 
 }
 
 
 /* =========================================================
    ADMIN APPLICATIONS
-   ========================================================= */
+========================================================= */
 
 async function loadAdminApplications() {
+
+    if (
+        !currentProfile ||
+        currentProfile.is_admin !== true
+    ) return;
+
 
     const container =
         document.getElementById(
@@ -1750,47 +2353,40 @@ async function loadAdminApplications() {
         );
 
 
-    if (
-        !currentProfile ||
-        currentProfile.is_admin !== true
-    ) {
-
-        return;
-
-    }
-
-
-    const {
-        data,
-        error
-    } =
+    const result =
         await supabaseClient
-        .from("applications")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
+            .from("applications")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending:
+                        false
+                }
+            );
+
+
+    if (result.error) {
+
+        container.textContent =
+            "Kan sollicitaties niet laden.";
+
+        console.error(
+            result.error
         );
 
-
-    if (error) {
-
-        console.error(error);
-
-        container.textContent =
-            "Sollicitaties konden niet worden geladen.";
-
         return;
 
     }
 
 
-    if (!data || data.length === 0) {
+    if (
+        !result.data ||
+        result.data.length === 0
+    ) {
 
         container.textContent =
-            "Er zijn geen sollicitaties.";
+            "Geen sollicitaties.";
 
         return;
 
@@ -1800,109 +2396,103 @@ async function loadAdminApplications() {
     container.innerHTML = "";
 
 
-    data.forEach(application => {
+    result.data.forEach(
+        application => {
 
-        const element =
-            document.createElement("div");
+            const div =
+                document.createElement(
+                    "div"
+                );
 
-        element.className =
-            "admin-application";
+
+            div.className =
+                "admin-application";
 
 
-        const date =
-            new Date(
-                application.created_at
-            ).toLocaleString(
-                "nl-NL"
+            div.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(application.minecraft_name)}
+                </h3>
+
+                <p>
+                    <strong>E-mail:</strong>
+                    ${escapeHTML(application.email)}
+                </p>
+
+                <p>
+                    <strong>Functie:</strong>
+                    ${escapeHTML(application.function)}
+                </p>
+
+                <p>
+                    <strong>Leeftijd:</strong>
+                    ${escapeHTML(String(application.age))}
+                </p>
+
+                <p>
+                    <strong>Ervaring:</strong><br>
+                    ${escapeHTML(application.experience)}
+                </p>
+
+                <p>
+                    <strong>Motivatie:</strong><br>
+                    ${escapeHTML(application.motivation)}
+                </p>
+
+                <p>
+                    <strong>Beschikbaarheid:</strong><br>
+                    ${escapeHTML(application.availability)}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    ${escapeHTML(application.status)}
+                </p>
+
+                <div class="admin-buttons">
+
+                    <button
+                        class="accept"
+                        onclick="changeStatus(
+                            '${application.id}',
+                            'Aangenomen'
+                        )"
+                    >
+                        Aannemen
+                    </button>
+
+                    <button
+                        class="reject"
+                        onclick="changeStatus(
+                            '${application.id}',
+                            'Afgewezen'
+                        )"
+                    >
+                        Afwijzen
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                div
             );
 
-
-        element.innerHTML = `
-
-            <h4>
-                ${escapeHTML(application.minecraft_name)}
-            </h4>
-
-            <p>
-                <strong>E-mail:</strong>
-                ${escapeHTML(application.email)}
-            </p>
-
-            <p>
-                <strong>Functie:</strong>
-                ${escapeHTML(application.function)}
-            </p>
-
-            <p>
-                <strong>Leeftijd:</strong>
-                ${escapeHTML(String(application.age))}
-            </p>
-
-            <p>
-                <strong>Ervaring:</strong><br>
-                ${escapeHTML(application.experience)}
-            </p>
-
-            <p>
-                <strong>Motivatie:</strong><br>
-                ${escapeHTML(application.motivation)}
-            </p>
-
-            <p>
-                <strong>Beschikbaarheid:</strong><br>
-                ${escapeHTML(application.availability)}
-            </p>
-
-            <p>
-                <strong>Status:</strong>
-                ${escapeHTML(application.status)}
-            </p>
-
-            <p>
-                <strong>Datum:</strong>
-                ${escapeHTML(date)}
-            </p>
-
-            <div class="admin-actions">
-
-                <button
-                    class="approve"
-                    onclick="updateApplicationStatus(
-                        '${application.id}',
-                        'Aangenomen'
-                    )"
-                >
-                    ✓ Aannemen
-                </button>
-
-                <button
-                    class="reject"
-                    onclick="updateApplicationStatus(
-                        '${application.id}',
-                        'Afgewezen'
-                    )"
-                >
-                    ✕ Afwijzen
-                </button>
-
-            </div>
-
-        `;
-
-
-        container.appendChild(element);
-
-    });
+        }
+    );
 
 }
 
 
 /* =========================================================
-   UPDATE APPLICATION STATUS
-   ========================================================= */
+   CHANGE STATUS
+========================================================= */
 
-async function updateApplicationStatus(
-    applicationId,
+async function changeStatus(
+    id,
     status
 ) {
 
@@ -1912,7 +2502,7 @@ async function updateApplicationStatus(
     ) {
 
         alert(
-            "Je hebt geen administratorrechten."
+            "Je bent geen administrator."
         );
 
         return;
@@ -1920,30 +2510,26 @@ async function updateApplicationStatus(
     }
 
 
-    const {
-        error
-    } =
+    const result =
         await supabaseClient
-        .from("applications")
-        .update({
+            .from("applications")
+            .update({
 
-            status: status
+                status:
+                    status
 
-        })
-        .eq(
-            "id",
-            applicationId
-        );
+            })
+            .eq(
+                "id",
+                id
+            );
 
 
-    if (error) {
+    if (result.error) {
 
         alert(
-            "Status wijzigen mislukt: " +
-            error.message
+            result.error.message
         );
-
-        console.error(error);
 
         return;
 
@@ -1952,144 +2538,116 @@ async function updateApplicationStatus(
 
     await loadAdminApplications();
 
-}
-
-
-/* =========================================================
-   LOGGED-IN UI
-   ========================================================= */
-
-function updateLoggedInUI() {
-
-    document
-    .getElementById("loginNavButton")
-    .classList
-    .add("hidden");
-
-
-    document
-    .getElementById("logoutNavButton")
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById("account")
-    .style
-    .display = "block";
+    await loadMyApplications();
 
 }
 
 
 /* =========================================================
-   LOGGED-OUT UI
-   ========================================================= */
-
-function updateLoggedOutUI() {
-
-    document
-    .getElementById("loginNavButton")
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById("logoutNavButton")
-    .classList
-    .add("hidden");
-
-
-    document
-    .getElementById("account")
-    .style
-    .display = "none";
-
-
-    document
-    .getElementById("adminPanel")
-    .style
-    .display = "none";
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+   ESCAPE
+========================================================= */
 
 function escapeHTML(value) {
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
 /* =========================================================
-   CLOSE MODALS WHEN CLICKING OUTSIDE
-   ========================================================= */
+   CLOSE MODALS BY CLICKING OUTSIDE
+========================================================= */
 
 document
-.querySelectorAll(".modal")
-.forEach(modal => {
+    .querySelectorAll(".modal")
+    .forEach(
+        modal => {
 
-    modal.addEventListener(
-        "click",
-        function(event) {
+            modal.addEventListener(
+                "click",
+                event => {
 
-            if (
-                event.target === modal
-            ) {
+                    if (
+                        event.target === modal
+                    ) {
 
-                modal.style.display =
-                    "none";
+                        modal.style.display =
+                            "none";
 
-            }
+                    }
+
+                }
+            );
 
         }
     );
 
-});
-
 
 /* =========================================================
-   INITIAL PAGE LOAD
-   ========================================================= */
+   START
+========================================================= */
 
-async function startWebsite() {
+async function start() {
 
-    updateLoggedOutUI();
+    showLoggedOut();
 
 
-    const {
-        data
-    } =
-        await supabaseClient.auth.getSession();
+    if (!supabaseClient) {
+
+        return;
+
+    }
+
+
+    const result =
+        await supabaseClient.auth
+            .getSession();
 
 
     if (
-        data &&
-        data.session &&
-        data.session.user
+        result.data &&
+        result.data.session
     ) {
 
         currentUser =
-            data.session.user;
+            result.data.session.user;
 
-        await initializeUser();
+        await loadUser();
 
     }
 
 }
 
 
-startWebsite();
+start();
 
 </script>
 
 </body>
 </html>
+```
