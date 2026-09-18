@@ -442,6 +442,7 @@ footer {
 }
 
 @media(max-width:750px) {
+
     .nav {
         flex-direction: column;
         padding: 15px;
@@ -455,6 +456,7 @@ footer {
     .hero {
         min-height: 420px;
     }
+
 }
 </style>
 </head>
@@ -462,22 +464,36 @@ footer {
 <body>
 
 <header>
+
 <div class="nav">
 
 <div class="logo">
+
 <img src="./logo.png" alt="Magische Heuvel">
-<span>Magische Heuvel</span>
+
+<span>
+Magische Heuvel
+</span>
+
 </div>
 
 <div class="nav-buttons">
 
-<button onclick="goHome()">Home</button>
+<button onclick="goHome()">
+Home
+</button>
 
-<button onclick="showVacancies()">Vacatures</button>
+<button onclick="showVacancies()">
+Vacatures
+</button>
 
-<button onclick="openServerModal()">Server</button>
+<button onclick="openServerModal()">
+Server
+</button>
 
-<button id="loginButton" onclick="openLogin()">
+<button
+id="loginButton"
+onclick="openLogin()">
 Inloggen
 </button>
 
@@ -503,38 +519,63 @@ Uitloggen
 </button>
 
 </div>
+
 </div>
+
 </header>
 
 <div id="connectionError"></div>
 
 <main>
 
-<section id="home" class="hero">
+<!-- HOME -->
+
+<section
+id="home"
+class="hero">
+
 <div class="hero-content">
 
-<img src="./logo.png" alt="Magische Heuvel">
+<img
+src="./logo.png"
+alt="Magische Heuvel">
 
-<h1>Magische Heuvel</h1>
+<h1>
+Magische Heuvel
+</h1>
 
-<p>Minecraft Themapark</p>
+<p>
+Minecraft Themapark
+</p>
 
-<button class="gold-button" onclick="openServerModal()">
+<button
+class="gold-button"
+onclick="openServerModal()">
 🎮 Minecraft Server
 </button>
 
 </div>
+
 </section>
 
-<section id="vacancies" class="page-section">
 
-<h2 class="title">Vacatures</h2>
+<!-- VACATURES -->
+
+<section
+id="vacancies"
+class="page-section">
+
+<h2 class="title">
+Vacatures
+</h2>
 
 <div class="vacancy-grid">
 
 <div class="vacancy">
 
-<h2>🔨 Bouwer</h2>
+<h2>
+🔨 Bouwer
+</h2>
 
 <p>
 Help mee met het bouwen van Magische Heuvel
@@ -549,9 +590,12 @@ Solliciteren
 
 </div>
 
+
 <div class="vacancy">
 
-<h2>⚙️ Techniek</h2>
+<h2>
+⚙️ Techniek
+</h2>
 
 <p>
 Werk mee aan technische systemen,
@@ -566,9 +610,12 @@ Solliciteren
 
 </div>
 
+
 <div class="vacancy">
 
-<h2>🎨 Modelaar</h2>
+<h2>
+🎨 Modelaar
+</h2>
 
 <p>
 Maak modellen en creatieve onderdelen
@@ -584,20 +631,25 @@ Solliciteren
 </div>
 
 </div>
+
 </section>
 
-<!-- ACCOUNT
-     Alleen profielinformatie.
-     GEEN "Mijn sollicitaties".
--->
 
-<section id="account" class="page-section">
+<!-- ACCOUNT -->
 
-<h2 class="title">Mijn account</h2>
+<section
+id="account"
+class="page-section">
+
+<h2 class="title">
+Mijn account
+</h2>
 
 <div class="panel">
 
-<h2>Profiel</h2>
+<h2>
+Profiel
+</h2>
 
 <div class="info">
 
@@ -613,6 +665,7 @@ class="info-value">
 
 </div>
 
+
 <div class="info">
 
 <div class="info-label">
@@ -626,6 +679,7 @@ class="info-value">
 </div>
 
 </div>
+
 
 <div class="info">
 
@@ -641,6 +695,7 @@ Bezoeker
 
 </div>
 
+
 <button
 class="secondary-button"
 onclick="logout()">
@@ -651,29 +706,38 @@ Uitloggen
 
 </section>
 
+
 <!-- BEHEERDER -->
 
-<section id="admin" class="page-section">
+<section
+id="admin"
+class="page-section">
 
-<h2 class="title">Beheerder</h2>
+<h2 class="title">
+Beheerder
+</h2>
 
 <div class="panel">
 
 <div class="admin-nav">
 
-<button onclick="showAdminTab('adminApplicationsTab')">
+<button
+onclick="showAdminTab('adminApplicationsTab')">
 Sollicitaties
 </button>
 
-<button onclick="showAdminTab('adminUsersTab')">
+<button
+onclick="showAdminTab('adminUsersTab')">
 Gebruikers
 </button>
 
-<button onclick="showAdminTab('adminAddTab')">
+<button
+onclick="showAdminTab('adminAddTab')">
 Sollicitatie toevoegen
 </button>
 
 </div>
+
 
 <!-- ALLE SOLLICITATIES -->
 
@@ -681,7 +745,9 @@ Sollicitatie toevoegen
 id="adminApplicationsTab"
 class="admin-tab active">
 
-<h2>Alle sollicitaties</h2>
+<h2>
+Alle sollicitaties
+</h2>
 
 <div id="adminApplications">
 Sollicitaties laden...
@@ -689,13 +755,16 @@ Sollicitaties laden...
 
 </div>
 
-<!-- ALLE GEBRUIKERS -->
+
+<!-- GEBRUIKERS -->
 
 <div
 id="adminUsersTab"
 class="admin-tab">
 
-<h2>Alle gebruikers</h2>
+<h2>
+Alle gebruikers
+</h2>
 
 <div id="adminUsers">
 Gebruikers laden...
@@ -703,15 +772,19 @@ Gebruikers laden...
 
 </div>
 
+
 <!-- SOLLICITATIE TOEVOEGEN -->
 
 <div
 id="adminAddTab"
 class="admin-tab">
 
-<h2>Sollicitatie toevoegen</h2>
+<h2>
+Sollicitatie toevoegen
+</h2>
 
-<form id="adminApplicationForm">
+<form
+id="adminApplicationForm">
 
 <div class="form-group">
 
@@ -731,6 +804,7 @@ Gebruiker kiezen
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -743,6 +817,7 @@ type="text"
 required>
 
 </div>
+
 
 <div class="form-group">
 
@@ -774,6 +849,7 @@ Modelaar
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -789,6 +865,7 @@ required>
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -800,6 +877,7 @@ id="adminExperience"
 required></textarea>
 
 </div>
+
 
 <div class="form-group">
 
@@ -813,6 +891,7 @@ required></textarea>
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -824,6 +903,7 @@ id="adminAvailability"
 required></textarea>
 
 </div>
+
 
 <button
 class="submit-button"
@@ -846,13 +926,17 @@ class="message">
 
 </main>
 
+
 <footer>
 © 2026 Magische Heuvel
 </footer>
 
-<!-- LOGIN -->
 
-<div id="loginModal" class="modal">
+<!-- LOGIN MODAL -->
+
+<div
+id="loginModal"
+class="modal">
 
 <div class="modal-box">
 
@@ -862,9 +946,12 @@ onclick="closeModal('loginModal')">
 ×
 </button>
 
-<h2>Inloggen</h2>
+<h2>
+Inloggen
+</h2>
 
-<form id="loginForm">
+<form
+id="loginForm">
 
 <div class="form-group">
 
@@ -879,6 +966,7 @@ required>
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -891,6 +979,7 @@ type="password"
 required>
 
 </div>
+
 
 <button
 class="submit-button"
@@ -905,6 +994,7 @@ class="message">
 
 </form>
 
+
 <button
 class="secondary-button"
 onclick="openRegister()">
@@ -912,11 +1002,15 @@ Account maken
 </button>
 
 </div>
+
 </div>
 
-<!-- REGISTER -->
 
-<div id="registerModal" class="modal">
+<!-- REGISTER MODAL -->
+
+<div
+id="registerModal"
+class="modal">
 
 <div class="modal-box">
 
@@ -926,9 +1020,12 @@ onclick="closeModal('registerModal')">
 ×
 </button>
 
-<h2>Account maken</h2>
+<h2>
+Account maken
+</h2>
 
-<form id="registerForm">
+<form
+id="registerForm">
 
 <div class="form-group">
 
@@ -943,6 +1040,7 @@ required>
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -955,6 +1053,7 @@ type="email"
 required>
 
 </div>
+
 
 <div class="form-group">
 
@@ -970,6 +1069,7 @@ required>
 
 </div>
 
+
 <button
 class="submit-button"
 type="submit">
@@ -983,6 +1083,7 @@ class="message">
 
 </form>
 
+
 <button
 class="secondary-button"
 onclick="openLogin()">
@@ -990,11 +1091,15 @@ Terug naar inloggen
 </button>
 
 </div>
+
 </div>
 
-<!-- ADMIN CODE -->
 
-<div id="adminLoginModal" class="modal">
+<!-- ADMIN LOGIN -->
+
+<div
+id="adminLoginModal"
+class="modal">
 
 <div class="modal-box">
 
@@ -1004,14 +1109,17 @@ onclick="closeModal('adminLoginModal')">
 ×
 </button>
 
-<h2>Beheerder toegang</h2>
+<h2>
+Beheerder toegang
+</h2>
 
 <p>
 Voer de beheerdercode in om toegang te krijgen
 tot het beheerpaneel.
 </p>
 
-<form id="adminLoginForm">
+<form
+id="adminLoginForm">
 
 <div class="form-group">
 
@@ -1027,6 +1135,7 @@ required>
 
 </div>
 
+
 <button
 class="submit-button"
 type="submit">
@@ -1041,11 +1150,15 @@ class="message">
 </form>
 
 </div>
+
 </div>
+
 
 <!-- SERVER -->
 
-<div id="serverModal" class="modal">
+<div
+id="serverModal"
+class="modal">
 
 <div class="modal-box">
 
@@ -1055,7 +1168,9 @@ onclick="closeModal('serverModal')">
 ×
 </button>
 
-<h2>Minecraft Server</h2>
+<h2>
+Minecraft Server
+</h2>
 
 <p>
 Server IP:
@@ -1073,11 +1188,15 @@ IP kopiëren
 </button>
 
 </div>
+
 </div>
+
 
 <!-- APPLICATION -->
 
-<div id="applicationModal" class="modal">
+<div
+id="applicationModal"
+class="modal">
 
 <div class="modal-box">
 
@@ -1087,14 +1206,17 @@ onclick="closeModal('applicationModal')">
 ×
 </button>
 
-<h2>Solliciteren</h2>
+<h2>
+Solliciteren
+</h2>
 
 <p>
 Je solliciteert voor:
 <strong id="selectedFunction"></strong>
 </p>
 
-<form id="applicationForm">
+<form
+id="applicationForm">
 
 <div class="form-group">
 
@@ -1109,9 +1231,11 @@ required>
 
 </div>
 
+
 <input
 id="function"
 type="hidden">
+
 
 <div class="form-group">
 
@@ -1128,6 +1252,7 @@ required>
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -1139,6 +1264,7 @@ id="experience"
 required></textarea>
 
 </div>
+
 
 <div class="form-group">
 
@@ -1152,6 +1278,7 @@ required></textarea>
 
 </div>
 
+
 <div class="form-group">
 
 <label>
@@ -1163,6 +1290,7 @@ id="availability"
 required></textarea>
 
 </div>
+
 
 <button
 class="submit-button"
@@ -1178,9 +1306,15 @@ class="message">
 </form>
 
 </div>
+
 </div>
 
+
 <script>
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://zmhldveqqogxysoldhrf.supabase.co";
@@ -1204,11 +1338,17 @@ let currentProfile = null;
 
 function goHome() {
 
-document.getElementById("home").style.display = "flex";
+document.getElementById("home").style.display =
+"flex";
 
-document.getElementById("vacancies").style.display = "none";
-document.getElementById("account").style.display = "none";
-document.getElementById("admin").style.display = "none";
+document.getElementById("vacancies").style.display =
+"none";
+
+document.getElementById("account").style.display =
+"none";
+
+document.getElementById("admin").style.display =
+"none";
 
 window.scrollTo({
 top: 0,
@@ -1220,12 +1360,17 @@ behavior: "smooth"
 
 function showVacancies() {
 
-document.getElementById("home").style.display = "none";
+document.getElementById("home").style.display =
+"none";
 
-document.getElementById("vacancies").style.display = "block";
+document.getElementById("vacancies").style.display =
+"block";
 
-document.getElementById("account").style.display = "none";
-document.getElementById("admin").style.display = "none";
+document.getElementById("account").style.display =
+"none";
+
+document.getElementById("admin").style.display =
+"none";
 
 window.scrollTo({
 top: 0,
@@ -1245,11 +1390,17 @@ return;
 
 }
 
-document.getElementById("home").style.display = "none";
-document.getElementById("vacancies").style.display = "none";
-document.getElementById("admin").style.display = "none";
+document.getElementById("home").style.display =
+"none";
 
-document.getElementById("account").style.display = "block";
+document.getElementById("vacancies").style.display =
+"none";
+
+document.getElementById("admin").style.display =
+"none";
+
+document.getElementById("account").style.display =
+"block";
 
 window.scrollTo({
 top: 0,
@@ -1260,10 +1411,10 @@ behavior: "smooth"
 
 
 /* =========================
-   BEHEERDER
+   ADMIN PAGE
 ========================= */
 
-async function showAdmin() {
+function showAdmin() {
 
 if (!currentUser) {
 
@@ -1272,11 +1423,6 @@ openLogin();
 return;
 
 }
-
-/*
- * Alleen een profiel met is_admin = true
- * mag de beheerpagina openen.
- */
 
 if (
 !currentProfile ||
@@ -1298,19 +1444,39 @@ return;
 
 }
 
-/*
- * Admin pagina openen
- */
+openAdminPage();
 
-document.getElementById("home").style.display = "none";
-document.getElementById("vacancies").style.display = "none";
-document.getElementById("account").style.display = "none";
-document.getElementById("admin").style.display = "block";
+}
+
+
+function openAdminPage() {
+
+if (
+!currentUser ||
+!currentProfile ||
+currentProfile.is_admin !== true
+) {
+
+return;
+
+}
+
+document.getElementById("home").style.display =
+"none";
+
+document.getElementById("vacancies").style.display =
+"none";
+
+document.getElementById("account").style.display =
+"none";
+
+document.getElementById("admin").style.display =
+"block";
 
 showAdminTab("adminApplicationsTab");
 
-await loadAdminApplications();
-await loadAdminUsers();
+loadAdminApplications();
+loadAdminUsers();
 
 window.scrollTo({
 top: 0,
@@ -1390,7 +1556,8 @@ document.getElementById(id);
 
 if (element) {
 
-element.style.display = "none";
+element.style.display =
+"none";
 
 }
 
@@ -1448,13 +1615,21 @@ code: code
 }
 );
 
+console.log(
+"ADMIN RPC RESULT:",
+result
+);
+
 if (result.error) {
 
-console.error(result.error);
+console.error(
+"ADMIN RPC ERROR:",
+result.error
+);
 
 message(
 "adminLoginMessage",
-"Er ging iets mis met de beheerdercontrole.",
+result.error.message,
 "error"
 );
 
@@ -1474,26 +1649,25 @@ return;
 
 }
 
+
+/*
+ * De RPC heeft de code geaccepteerd.
+ *
+ * We zetten de lokale status direct op admin,
+ * zodat de beheerpagina meteen geopend kan worden.
+ */
+
+if (!currentProfile) {
+
+currentProfile = {};
+
+}
+
+currentProfile.is_admin = true;
+
 document
 .getElementById("adminCode")
 .value = "";
-
-await loadUser();
-
-if (
-!currentProfile ||
-currentProfile.is_admin !== true
-) {
-
-message(
-"adminLoginMessage",
-"Beheerderstoegang kon niet worden geactiveerd.",
-"error"
-);
-
-return;
-
-}
 
 message(
 "adminLoginMessage",
@@ -1505,7 +1679,7 @@ setTimeout(function() {
 
 closeModal("adminLoginModal");
 
-showAdmin();
+openAdminPage();
 
 }, 500);
 
@@ -1664,6 +1838,7 @@ loadUser,
 } else {
 
 currentUser = null;
+
 currentProfile = null;
 
 showLoggedOut();
@@ -1700,10 +1875,6 @@ result.data.user;
 
 await loadProfile();
 
-document
-.getElementById("adminButton")
-.style.display = "block";
-
 showLoggedIn();
 
 }
@@ -1724,7 +1895,10 @@ await supabaseClient
 
 if (result.error) {
 
-console.error(result.error);
+console.error(
+"PROFILE ERROR:",
+result.error
+);
 
 return;
 
@@ -1765,19 +1939,23 @@ function showLoggedIn() {
 
 document
 .getElementById("loginButton")
-.style.display = "none";
+.style.display =
+"none";
 
 document
 .getElementById("accountButton")
-.style.display = "block";
+.style.display =
+"block";
 
 document
 .getElementById("adminButton")
-.style.display = "block";
+.style.display =
+"block";
 
 document
 .getElementById("logoutButton")
-.style.display = "block";
+.style.display =
+"block";
 
 }
 
@@ -1786,21 +1964,28 @@ function showLoggedOut() {
 
 document
 .getElementById("loginButton")
-.style.display = "block";
+.style.display =
+"block";
 
 document
 .getElementById("accountButton")
-.style.display = "none";
+.style.display =
+"none";
 
 document
 .getElementById("adminButton")
-.style.display = "none";
+.style.display =
+"none";
 
 document
 .getElementById("logoutButton")
-.style.display = "none";
+.style.display =
+"none";
 
-document.getElementById("admin").style.display = "none";
+document
+.getElementById("admin")
+.style.display =
+"none";
 
 }
 
@@ -1816,6 +2001,7 @@ await supabaseClient
 .signOut();
 
 currentUser = null;
+
 currentProfile = null;
 
 showLoggedOut();
@@ -1826,7 +2012,7 @@ goHome();
 
 
 /* =========================
-   VACATURE SOLLICITEREN
+   APPLICATION OPEN
 ========================= */
 
 function openApplication(functionName) {
@@ -1868,7 +2054,7 @@ document
 
 
 /* =========================
-   APPLICATION
+   APPLICATION SUBMIT
 ========================= */
 
 document
@@ -1939,7 +2125,10 @@ status:
 
 if (result.error) {
 
-console.error(result.error);
+console.error(
+"APPLICATION ERROR:",
+result.error
+);
 
 message(
 "applicationMessage",
@@ -1972,7 +2161,6 @@ closeModal("applicationModal");
 
 /* =========================
    ADMIN APPLICATIONS
-   Alleen beheerders
 ========================= */
 
 async function loadAdminApplications() {
@@ -2010,7 +2198,10 @@ if (result.error) {
 container.textContent =
 "Kan sollicitaties niet laden.";
 
-console.error(result.error);
+console.error(
+"ADMIN APPLICATION ERROR:",
+result.error
+);
 
 return;
 
@@ -2107,7 +2298,6 @@ container.appendChild(div);
 
 /* =========================
    ADMIN USERS
-   Alleen beheerders
 ========================= */
 
 async function loadAdminUsers() {
@@ -2146,7 +2336,10 @@ if (result.error) {
 container.textContent =
 "Kan gebruikers niet laden.";
 
-console.error(result.error);
+console.error(
+"ADMIN USERS ERROR:",
+result.error
+);
 
 return;
 
@@ -2179,6 +2372,7 @@ ${escapeHTML(user.email || "")}
 `;
 
 container.appendChild(div);
+
 
 const option =
 document.createElement("option");
@@ -2382,7 +2576,7 @@ await loadAdminApplications();
 
 
 /* =========================
-   SERVER
+   SERVER IP
 ========================= */
 
 function copyIP() {
@@ -2393,7 +2587,9 @@ navigator.clipboard
 )
 .then(function() {
 
-alert("Server IP gekopieerd!");
+alert(
+"Server IP gekopieerd!"
+);
 
 });
 
@@ -2435,11 +2631,26 @@ element.className =
 function escapeHTML(value) {
 
 return String(value)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+.replaceAll(
+"&",
+"&amp;"
+)
+.replaceAll(
+"<",
+"&lt;"
+)
+.replaceAll(
+">",
+"&gt;"
+)
+.replaceAll(
+'"',
+"&quot;"
+)
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
@@ -2466,8 +2677,7 @@ modal.style.display =
 
 }
 
-}
-);
+});
 
 });
 
