@@ -32,7 +32,7 @@ header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:rgba(17,5,32,.94);
+    background:rgba(17,5,32,.96);
     backdrop-filter:blur(12px);
     border-bottom:1px solid rgba(255,215,0,.2);
 }
@@ -76,7 +76,7 @@ nav{
 nav button{
     border:0;
     background:transparent;
-    color:#fff;
+    color:white;
     padding:10px 13px;
     border-radius:10px;
     cursor:pointer;
@@ -150,6 +150,7 @@ nav button.active{
 
 .btn:hover{
     transform:translateY(-2px);
+    filter:brightness(1.08);
 }
 
 .btn-primary{
@@ -219,10 +220,11 @@ p{
 
 label{
     font-weight:600;
-    color:#eee;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
     width:100%;
     border:1px solid rgba(255,215,0,.2);
     background:#160923;
@@ -233,7 +235,9 @@ input,select,textarea{
     outline:none;
 }
 
-input:focus,select:focus,textarea:focus{
+input:focus,
+select:focus,
+textarea:focus{
     border-color:#ffd700;
 }
 
@@ -257,7 +261,7 @@ select option{
 .vacancy-card{
     display:flex;
     flex-direction:column;
-    min-height:260px;
+    min-height:270px;
 }
 
 .vacancy-card p{
@@ -361,7 +365,7 @@ select option{
     position:fixed;
     inset:0;
     z-index:5000;
-    background:rgba(0,0,0,.75);
+    background:rgba(0,0,0,.78);
     align-items:center;
     justify-content:center;
     padding:20px;
@@ -372,7 +376,9 @@ select option{
 }
 
 .modal-box{
-    width:min(520px,100%);
+    width:min(560px,100%);
+    max-height:90vh;
+    overflow-y:auto;
     background:#211033;
     border:1px solid rgba(255,215,0,.3);
     border-radius:18px;
@@ -391,8 +397,8 @@ select option{
 .close{
     background:transparent;
     border:0;
-    color:#fff;
-    font-size:28px;
+    color:white;
+    font-size:30px;
     cursor:pointer;
 }
 
@@ -445,6 +451,13 @@ select option{
     word-break:break-all;
 }
 
+footer{
+    text-align:center;
+    padding:30px 20px;
+    color:#888;
+    border-top:1px solid rgba(255,215,0,.1);
+}
+
 @media(max-width:850px){
     .vacancy-grid{
         grid-template-columns:1fr;
@@ -480,27 +493,44 @@ select option{
 <body>
 
 <header>
-    <div class="navbar">
+<div class="navbar">
 
 ```
-    <div class="logo-area" onclick="showSection('home')">
-        <img src="./logo.png" alt="Magische Heuvel">
-        <span>Magische Heuvel</span>
-    </div>
+<div class="logo-area" onclick="showSection('home')">
+    <img src="./logo.png" alt="Magische Heuvel">
+    <span>Magische Heuvel</span>
+</div>
 
-    <nav>
-        <button id="navHome" onclick="showSection('home')">Home</button>
-        <button id="navServer" onclick="openModal('serverModal')">Server</button>
-        <button id="navVacatures" onclick="showSection('vacatures')">Vacatures</button>
-        <button id="navAccount" onclick="showSection('account')" style="display:none;">Mijn account</button>
-        <button id="navAdmin" onclick="showSection('admin')" style="display:none;">👑 Beheerder</button>
-        <button id="navLogin" onclick="openModal('loginModal')">Inloggen</button>
-        <button id="navLogout" onclick="logout()" style="display:none;">Uitloggen</button>
-    </nav>
+<nav>
+    <button id="navHome" onclick="showSection('home')">Home</button>
+
+    <button id="navServer" onclick="openModal('serverModal')">
+        Server
+    </button>
+
+    <button id="navVacatures" onclick="showSection('vacatures')">
+        Vacatures
+    </button>
+
+    <button id="navAccount" onclick="showSection('account')" style="display:none;">
+        Mijn account
+    </button>
+
+    <button id="navAdmin" onclick="showSection('admin')" style="display:none;">
+        👑 Beheerder
+    </button>
+
+    <button id="navLogin" onclick="openModal('loginModal')">
+        Inloggen
+    </button>
+
+    <button id="navLogout" onclick="logout()" style="display:none;">
+        Uitloggen
+    </button>
+</nav>
+```
 
 </div>
-```
-
 </header>
 
 <main>
@@ -508,327 +538,472 @@ select option{
 <!-- HOME -->
 
 <section id="home" class="page-section active">
-    <div class="container hero">
+<div class="container hero">
 
 ```
-    <img src="./logo.png" alt="Magische Heuvel logo">
+<img src="./logo.png" alt="Magische Heuvel logo">
 
-    <h1>Magische Heuvel</h1>
+<h1>Magische Heuvel</h1>
 
-    <p>
-        Welkom bij Magische Heuvel — ons eigen Minecraft-themapark.
-        Ontdek het park, speel mee en help ons team bouwen aan nieuwe projecten.
-    </p>
+<p>
+    Welkom bij Magische Heuvel — ons eigen Minecraft-themapark.
+    Speel mee, ontdek de server en help ons team mee met het bouwen
+    van het park.
+</p>
 
-    <div style="margin-top:25px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <button class="btn btn-primary" onclick="openModal('serverModal')">
-            🎮 Speel mee
-        </button>
+<div style="margin-top:25px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
 
-        <button class="btn btn-secondary" onclick="showSection('vacatures')">
-            📋 Bekijk vacatures
-        </button>
-    </div>
+    <button class="btn btn-primary" onclick="openModal('serverModal')">
+        🎮 Speel mee
+    </button>
+
+    <button class="btn btn-secondary" onclick="showSection('vacatures')">
+        📋 Bekijk vacatures
+    </button>
 
 </div>
 ```
 
+</div>
 </section>
 
 <!-- VACATURES -->
 
 <section id="vacatures" class="page-section">
-    <div class="container">
+<div class="container">
 
 ```
-    <div class="card">
-        <h2>📋 Vacatures</h2>
-        <p class="muted">
-            Wil jij helpen met Magische Heuvel? Bekijk hieronder de functies
-            waarvoor je kunt solliciteren.
+<div class="card">
+    <h2>📋 Vacatures</h2>
+
+    <p class="muted">
+        Wil jij deel uitmaken van het team van Magische Heuvel?
+        Bekijk hieronder onze beschikbare functies.
+    </p>
+</div>
+
+<div class="vacancy-grid">
+
+    <div class="card vacancy-card">
+        <div class="vacancy-icon">🏗️</div>
+
+        <h3>Bouwer</h3>
+
+        <p>
+            Bouw mee aan gebouwen, gebieden, decoratie en andere
+            onderdelen van het Minecraft-themapark.
         </p>
+
+        <button class="btn btn-primary"
+                onclick="openApplication('Bouwer')">
+            Solliciteren
+        </button>
     </div>
 
-    <div class="vacancy-grid">
+    <div class="card vacancy-card">
+        <div class="vacancy-icon">⚙️</div>
 
-        <div class="card vacancy-card">
-            <div class="vacancy-icon">🏗️</div>
-            <h3>Bouwer</h3>
+        <h3>Techniek</h3>
 
-            <p>
-                Bouw mee aan het Minecraft-themapark.
-                Denk mee over gebouwen, gebieden, decoratie en nieuwe projecten.
-            </p>
+        <p>
+            Werk met plugins, commands, redstone en technische
+            systemen binnen het park.
+        </p>
 
-            <button class="btn btn-primary" onclick="openApplication('Bouwer')">
-                Solliciteren
-            </button>
-        </div>
+        <button class="btn btn-primary"
+                onclick="openApplication('Techniek')">
+            Solliciteren
+        </button>
+    </div>
 
-        <div class="card vacancy-card">
-            <div class="vacancy-icon">⚙️</div>
-            <h3>Techniek</h3>
+    <div class="card vacancy-card">
+        <div class="vacancy-icon">🎨</div>
 
-            <p>
-                Werk aan technische systemen, plugins, redstone,
-                commands en andere technische onderdelen van het park.
-            </p>
+        <h3>Modelaar</h3>
 
-            <button class="btn btn-primary" onclick="openApplication('Techniek')">
-                Solliciteren
-            </button>
-        </div>
+        <p>
+            Maak custom modellen en assets voor het Minecraft-park
+            en help de omgeving verder vorm te geven.
+        </p>
 
-        <div class="card vacancy-card">
-            <div class="vacancy-icon">🎨</div>
-            <h3>Modelaar</h3>
-
-            <p>
-                Maak modellen en assets voor het park.
-                Help mee met custom modellen, decoratie en andere creatieve onderdelen.
-            </p>
-
-            <button class="btn btn-primary" onclick="openApplication('Modelaar')">
-                Solliciteren
-            </button>
-        </div>
-
+        <button class="btn btn-primary"
+                onclick="openApplication('Modelaar')">
+            Solliciteren
+        </button>
     </div>
 
 </div>
 ```
 
+</div>
 </section>
 
 <!-- ACCOUNT -->
 
 <section id="account" class="page-section">
-    <div class="container">
+<div class="container">
 
 ```
-    <div class="card">
-        <h2>👤 Mijn account</h2>
+<div class="card">
 
-        <div id="profileInfo">
-            <p>Profiel laden...</p>
-        </div>
+    <h2>👤 Mijn account</h2>
+
+    <div id="profileInfo">
+        <div class="empty">Profiel laden...</div>
     </div>
 
-    <div class="card">
-        <h2>📋 Mijn sollicitaties</h2>
+</div>
 
-        <p class="muted" style="margin-bottom:15px;">
-            Hier zie je alleen de sollicitaties die bij jouw account horen.
-        </p>
+<div class="card">
 
-        <div id="myApplications">
-            <div class="empty">Sollicitaties laden...</div>
-        </div>
+    <h2>📋 Mijn sollicitaties</h2>
+
+    <p class="muted" style="margin-bottom:15px;">
+        Hier zie je alleen sollicitaties die aan jouw account gekoppeld zijn.
+    </p>
+
+    <div id="myApplications">
+        <div class="empty">Sollicitaties laden...</div>
     </div>
 
 </div>
 ```
 
+</div>
 </section>
 
 <!-- ADMIN -->
 
 <section id="admin" class="page-section">
-    <div class="container">
+<div class="container">
 
 ```
+<div class="card">
+
+    <h2>👑 Beheerder</h2>
+
+    <p class="muted">
+        Dit gedeelte is alleen toegankelijk voor beheerders.
+    </p>
+
+</div>
+
+<div class="admin-tabs">
+
+    <button class="admin-tab active"
+            id="adminTabApplications"
+            onclick="showAdminTab('adminApplications')">
+        📋 Sollicitaties
+    </button>
+
+    <button class="admin-tab"
+            id="adminTabUsers"
+            onclick="showAdminTab('adminUsers')">
+        👥 Gebruikers
+    </button>
+
+    <button class="admin-tab"
+            id="adminTabAdd"
+            onclick="showAdminTab('adminAddApplication')">
+        ➕ Sollicitatie toevoegen
+    </button>
+
+</div>
+
+<!-- ADMIN SOLLICITATIES -->
+<div id="adminApplications" class="admin-content active">
+
     <div class="card">
-        <h2>👑 Beheerder</h2>
 
-        <p class="muted">
-            Dit gedeelte is alleen toegankelijk voor beheerders.
+        <h2>📋 Alle sollicitaties</h2>
+
+        <div id="adminApplicationsList">
+            <div class="empty">Laden...</div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ADMIN GEBRUIKERS -->
+<div id="adminUsers" class="admin-content">
+
+    <div class="card">
+
+        <h2>👥 Gebruikers</h2>
+
+        <div id="adminUsersList">
+            <div class="empty">Laden...</div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ADMIN SOLLICITATIE TOEVOEGEN -->
+<div id="adminAddApplication" class="admin-content">
+
+    <div class="card">
+
+        <h2>➕ Sollicitatie toevoegen</h2>
+
+        <p class="muted" style="margin-bottom:20px;">
+            Voeg als beheerder een sollicitatie toe namens een gebruiker.
+            De sollicitatie komt daarna bij die gebruiker onder
+            <strong>Mijn sollicitaties</strong>.
         </p>
-    </div>
 
-    <div class="admin-tabs">
-        <button class="admin-tab active" id="adminTabApplications"
-                onclick="showAdminTab('adminApplications')">
-            📋 Sollicitaties
-        </button>
+        <div id="adminAddNotice" class="notice"></div>
 
-        <button class="admin-tab" id="adminTabUsers"
-                onclick="showAdminTab('adminUsers')">
-            👥 Gebruikers
-        </button>
+        <form id="adminApplicationForm">
 
-        <button class="admin-tab" id="adminTabAdd"
-                onclick="showAdminTab('adminAddApplication')">
-            ➕ Sollicitatie toevoegen
-        </button>
-    </div>
+            <div class="form-grid">
 
-    <!-- ADMIN APPLICATIONS -->
-    <div id="adminApplications" class="admin-content active">
+                <div class="form-group full">
 
-        <div class="card">
-            <h2>📋 Alle sollicitaties</h2>
+                    <label for="adminApplicationUser">
+                        Gebruiker
+                    </label>
 
-            <div id="adminApplicationsList">
-                <div class="empty">Sollicitaties laden...</div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ADMIN USERS -->
-    <div id="adminUsers" class="admin-content">
-
-        <div class="card">
-            <h2>👥 Gebruikers</h2>
-
-            <div id="adminUsersList">
-                <div class="empty">Gebruikers laden...</div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ADMIN ADD APPLICATION -->
-    <div id="adminAddApplication" class="admin-content">
-
-        <div class="card">
-
-            <h2>➕ Sollicitatie toevoegen</h2>
-
-            <p class="muted" style="margin-bottom:20px;">
-                Als beheerder kun je hier een sollicitatie namens een andere gebruiker
-                toevoegen. Deze sollicitatie verschijnt daarna bij die gebruiker onder
-                <strong>Mijn sollicitaties</strong>.
-            </p>
-
-            <div id="adminAddNotice" class="notice"></div>
-
-            <form id="adminApplicationForm">
-
-                <div class="form-grid">
-
-                    <div class="form-group full">
-                        <label for="adminApplicationUser">
-                            Gebruiker
-                        </label>
-
-                        <select id="adminApplicationUser" required>
-                            <option value="">Gebruiker laden...</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="adminApplicationFunction">
-                            Functie
-                        </label>
-
-                        <select id="adminApplicationFunction" required>
-                            <option value="Bouwer">Bouwer</option>
-                            <option value="Techniek">Techniek</option>
-                            <option value="Modelaar">Modelaar</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="adminApplicationMinecraft">
-                            Minecraft naam
-                        </label>
-
-                        <input
-                            id="adminApplicationMinecraft"
-                            type="text"
-                            required
-                            placeholder="Minecraft naam">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="adminApplicationAge">
-                            Leeftijd
-                        </label>
-
-                        <input
-                            id="adminApplicationAge"
-                            type="number"
-                            min="1"
-                            max="100"
-                            required
-                            placeholder="Leeftijd">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="adminApplicationAvailability">
-                            Beschikbaarheid
-                        </label>
-
-                        <input
-                            id="adminApplicationAvailability"
-                            type="text"
-                            required
-                            placeholder="Bijvoorbeeld: avonden en weekenden">
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="adminApplicationExperience">
-                            Ervaring
-                        </label>
-
-                        <textarea
-                            id="adminApplicationExperience"
-                            required
-                            placeholder="Vertel over de ervaring van de sollicitant..."></textarea>
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="adminApplicationMotivation">
-                            Motivatie
-                        </label>
-
-                        <textarea
-                            id="adminApplicationMotivation"
-                            required
-                            placeholder="Waarom wil deze persoon bij Magische Heuvel werken?"></textarea>
-                    </div>
+                    <select id="adminApplicationUser" required>
+                        <option value="">
+                            Selecteer een gebruiker
+                        </option>
+                    </select>
 
                 </div>
 
-                <button class="btn btn-primary" type="submit" style="margin-top:15px;">
-                    Sollicitatie toevoegen
-                </button>
+                <div class="form-group">
 
-            </form>
+                    <label for="adminApplicationFunction">
+                        Functie
+                    </label>
 
-        </div>
+                    <select id="adminApplicationFunction" required>
+                        <option value="Bouwer">Bouwer</option>
+                        <option value="Techniek">Techniek</option>
+                        <option value="Modelaar">Modelaar</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminApplicationMinecraft">
+                        Minecraft naam
+                    </label>
+
+                    <input
+                        id="adminApplicationMinecraft"
+                        type="text"
+                        required
+                        placeholder="Minecraft naam">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminApplicationAge">
+                        Leeftijd
+                    </label>
+
+                    <input
+                        id="adminApplicationAge"
+                        type="number"
+                        min="1"
+                        max="100"
+                        required
+                        placeholder="Leeftijd">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminApplicationAvailability">
+                        Beschikbaarheid
+                    </label>
+
+                    <input
+                        id="adminApplicationAvailability"
+                        type="text"
+                        required
+                        placeholder="Bijvoorbeeld: avonden en weekenden">
+
+                </div>
+
+                <div class="form-group full">
+
+                    <label for="adminApplicationExperience">
+                        Ervaring
+                    </label>
+
+                    <textarea
+                        id="adminApplicationExperience"
+                        required
+                        placeholder="Ervaring van de sollicitant..."></textarea>
+
+                </div>
+
+                <div class="form-group full">
+
+                    <label for="adminApplicationMotivation">
+                        Motivatie
+                    </label>
+
+                    <textarea
+                        id="adminApplicationMotivation"
+                        required
+                        placeholder="Motivatie van de sollicitant..."></textarea>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary"
+                    type="submit"
+                    style="margin-top:15px;">
+                Sollicitatie toevoegen
+            </button>
+
+        </form>
 
     </div>
 
 </div>
 ```
 
+</div>
 </section>
 
 </main>
 
+<footer>
+    © Magische Heuvel - Minecraft Themapark
+</footer>
+
 <!-- SERVER MODAL -->
 
 <div id="serverModal" class="modal">
-    <div class="modal-box">
+
+<div class="modal-box">
 
 ```
-    <div class="modal-header">
-        <h2>🎮 Minecraft Server</h2>
-        <button class="close" onclick="closeModal('serverModal')">×</button>
+<div class="modal-header">
+
+    <h2>🎮 Minecraft Server</h2>
+
+    <button class="close"
+            onclick="closeModal('serverModal')">
+        ×
+    </button>
+
+</div>
+
+<p>
+    Kom gezellig spelen op de Magische Heuvel Minecraft-server!
+</p>
+
+<div class="server-ip">
+    gp-node-01.future-node.com:35003
+</div>
+
+<button class="btn btn-primary"
+        onclick="copyServerIP()">
+    📋 Kopieer server IP
+</button>
+```
+
+</div>
+
+</div>
+
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="modal">
+
+<div class="modal-box">
+
+```
+<div class="modal-header">
+
+    <h2 id="authTitle">Inloggen</h2>
+
+    <button class="close"
+            onclick="closeModal('loginModal')">
+        ×
+    </button>
+
+</div>
+
+<div id="authNotice" class="notice"></div>
+
+<form id="authForm">
+
+    <div class="form-group" style="margin-bottom:15px;">
+
+        <label for="authEmail">
+            E-mail
+        </label>
+
+        <input
+            id="authEmail"
+            type="email"
+            required
+            placeholder="jouw@email.nl">
+
     </div>
 
-    <p>
-        Kom gezellig spelen op de Magische Heuvel Minecraft-server!
-    </p>
+    <div class="form-group" style="margin-bottom:15px;">
 
-    <div class="server-ip">
-        gp-node-01.future-node.com:35003
+        <label for="authPassword">
+            Wachtwoord
+        </label>
+
+        <input
+            id="authPassword"
+            type="password"
+            required
+            minlength="6"
+            placeholder="Wachtwoord">
+
     </div>
 
-    <button class="btn btn-primary" onclick="copyServerIP()">
-        📋 Kopieer server IP
+    <div id="usernameGroup"
+         class="form-group"
+         style="margin-bottom:15px;display:none;">
+
+        <label for="authUsername">
+            Gebruikersnaam
+        </label>
+
+        <input
+            id="authUsername"
+            type="text"
+            placeholder="Gebruikersnaam">
+
+    </div>
+
+    <button id="authSubmit"
+            class="btn btn-primary"
+            type="submit">
+        Inloggen
+    </button>
+
+</form>
+
+<div class="modal-actions">
+
+    <button id="switchRegister"
+            class="btn btn-secondary"
+            onclick="switchAuthMode('register')">
+        Account maken
+    </button>
+
+    <button id="switchLogin"
+            class="btn btn-secondary"
+            onclick="switchAuthMode('login')"
+            style="display:none;">
+        Terug naar inloggen
     </button>
 
 </div>
@@ -836,231 +1011,275 @@ select option{
 
 </div>
 
-<!-- LOGIN MODAL -->
-
-<div id="loginModal" class="modal">
-    <div class="modal-box">
-
-```
-    <div class="modal-header">
-        <h2 id="authTitle">Inloggen</h2>
-        <button class="close" onclick="closeModal('loginModal')">×</button>
-    </div>
-
-    <div id="authNotice" class="notice"></div>
-
-    <form id="authForm">
-
-        <div class="form-group" style="margin-bottom:15px;">
-            <label for="authEmail">E-mail</label>
-            <input
-                id="authEmail"
-                type="email"
-                required
-                placeholder="jouw@email.nl">
-        </div>
-
-        <div class="form-group" style="margin-bottom:15px;">
-            <label for="authPassword">Wachtwoord</label>
-            <input
-                id="authPassword"
-                type="password"
-                required
-                minlength="6"
-                placeholder="Wachtwoord">
-        </div>
-
-        <div id="usernameGroup" class="form-group" style="margin-bottom:15px;display:none;">
-            <label for="authUsername">Gebruikersnaam</label>
-            <input
-                id="authUsername"
-                type="text"
-                placeholder="Gebruikersnaam">
-        </div>
-
-        <button id="authSubmit" class="btn btn-primary" type="submit">
-            Inloggen
-        </button>
-
-    </form>
-
-    <div class="modal-actions">
-
-        <button
-            id="switchRegister"
-            class="btn btn-secondary"
-            onclick="switchAuthMode('register')">
-            Account maken
-        </button>
-
-        <button
-            id="switchLogin"
-            class="btn btn-secondary"
-            onclick="switchAuthMode('login')"
-            style="display:none;">
-            Terug naar inloggen
-        </button>
-
-    </div>
-
-</div>
-```
-
 </div>
 
 <!-- APPLICATION MODAL -->
 
 <div id="applicationModal" class="modal">
-    <div class="modal-box">
+
+<div class="modal-box">
 
 ```
-    <div class="modal-header">
-        <h2>📋 Solliciteren</h2>
-        <button class="close" onclick="closeModal('applicationModal')">×</button>
-    </div>
+<div class="modal-header">
 
-    <div id="applicationNotice" class="notice"></div>
+    <h2>📋 Solliciteren</h2>
 
-    <form id="applicationForm">
-
-        <input id="applicationFunction" type="hidden">
-
-        <div class="card" style="padding:15px;margin-bottom:15px;">
-            <strong>Functie:</strong>
-            <span id="selectedFunction"></span>
-        </div>
-
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label for="applicationMinecraftName">
-                    Minecraft naam
-                </label>
-
-                <input
-                    id="applicationMinecraftName"
-                    type="text"
-                    required
-                    placeholder="Jouw Minecraft naam">
-            </div>
-
-            <div class="form-group">
-                <label for="applicationAge">
-                    Leeftijd
-                </label>
-
-                <input
-                    id="applicationAge"
-                    type="number"
-                    min="1"
-                    max="100"
-                    required
-                    placeholder="Jouw leeftijd">
-            </div>
-
-            <div class="form-group full">
-                <label for="applicationExperience">
-                    Ervaring
-                </label>
-
-                <textarea
-                    id="applicationExperience"
-                    required
-                    placeholder="Vertel over je ervaring..."></textarea>
-            </div>
-
-            <div class="form-group full">
-                <label for="applicationMotivation">
-                    Motivatie
-                </label>
-
-                <textarea
-                    id="applicationMotivation"
-                    required
-                    placeholder="Waarom wil je bij Magische Heuvel werken?"></textarea>
-            </div>
-
-            <div class="form-group full">
-                <label for="applicationAvailability">
-                    Beschikbaarheid
-                </label>
-
-                <input
-                    id="applicationAvailability"
-                    type="text"
-                    required
-                    placeholder="Wanneer ben je beschikbaar?">
-            </div>
-
-        </div>
-
-        <button class="btn btn-primary" type="submit" style="margin-top:15px;">
-            Sollicitatie versturen
-        </button>
-
-    </form>
+    <button class="close"
+            onclick="closeModal('applicationModal')">
+        ×
+    </button>
 
 </div>
+
+<div id="applicationNotice" class="notice"></div>
+
+<form id="applicationForm">
+
+    <input id="applicationFunction" type="hidden">
+
+    <div class="card"
+         style="padding:15px;margin-bottom:15px;">
+
+        <strong>Functie:</strong>
+        <span id="selectedFunction"></span>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label for="applicationMinecraftName">
+                Minecraft naam
+            </label>
+
+            <input
+                id="applicationMinecraftName"
+                type="text"
+                required
+                placeholder="Jouw Minecraft naam">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="applicationAge">
+                Leeftijd
+            </label>
+
+            <input
+                id="applicationAge"
+                type="number"
+                min="1"
+                max="100"
+                required
+                placeholder="Jouw leeftijd">
+
+        </div>
+
+        <div class="form-group full">
+
+            <label for="applicationExperience">
+                Ervaring
+            </label>
+
+            <textarea
+                id="applicationExperience"
+                required
+                placeholder="Vertel over je ervaring..."></textarea>
+
+        </div>
+
+        <div class="form-group full">
+
+            <label for="applicationMotivation">
+                Motivatie
+            </label>
+
+            <textarea
+                id="applicationMotivation"
+                required
+                placeholder="Waarom wil je bij Magische Heuvel werken?"></textarea>
+
+        </div>
+
+        <div class="form-group full">
+
+            <label for="applicationAvailability">
+                Beschikbaarheid
+            </label>
+
+            <input
+                id="applicationAvailability"
+                type="text"
+                required
+                placeholder="Wanneer ben je beschikbaar?">
+
+        </div>
+
+    </div>
+
+    <button class="btn btn-primary"
+            type="submit"
+            style="margin-top:15px;">
+        Sollicitatie versturen
+    </button>
+
+</form>
 ```
+
+</div>
 
 </div>
 
 <script>
-const SUPABASE_URL = "https://zmhldveqqogxysoldhrf.supabase.co";
-const SUPABASE_KEY = "sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const SUPABASE_URL =
+    "https://zmhldveqqogxysoldhrf.supabase.co";
 
+const SUPABASE_KEY =
+    "sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
+
+let supabaseClient = null;
 let currentUser = null;
 let currentProfile = null;
 let authMode = "login";
 
-/* =========================
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    initializeWebsite();
+
+});
+
+
+async function initializeWebsite(){
+
+    try{
+
+        if(!window.supabase){
+
+            console.error("Supabase library is not loaded.");
+
+            showNotice(
+                "authNotice",
+                "De website kan de login niet laden. Vernieuw de pagina.",
+                "error"
+            );
+
+            return;
+        }
+
+        supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+        setupAuthForm();
+        setupApplicationForm();
+        setupAdminApplicationForm();
+        setupAuthListener();
+
+        await checkCurrentSession();
+
+        document
+            .getElementById("navHome")
+            .classList.add("active");
+
+    }catch(error){
+
+        console.error(
+            "Website initialization error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
 function showSection(sectionId){
 
     if(sectionId === "account" && !currentUser){
+
         openModal("loginModal");
+
         return;
     }
 
     if(sectionId === "admin"){
-        if(!currentUser || !currentProfile || currentProfile.is_admin !== true){
+
+        if(
+            !currentUser ||
+            !currentProfile ||
+            currentProfile.is_admin !== true
+        ){
+
             showNotice(
                 "authNotice",
                 "Je hebt geen toegang tot het beheerdersgedeelte.",
                 "error"
             );
+
             openModal("loginModal");
+
             return;
         }
     }
 
-    document.querySelectorAll(".page-section").forEach(section=>{
-        section.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page-section")
+        .forEach(function(section){
 
-    const section = document.getElementById(sectionId);
+            section.classList.remove("active");
+
+        });
+
+    const section =
+        document.getElementById(sectionId);
 
     if(section){
         section.classList.add("active");
     }
 
-    document.querySelectorAll("nav button").forEach(button=>{
-        button.classList.remove("active");
-    });
+    document
+        .querySelectorAll("nav button")
+        .forEach(function(button){
 
-    const navButton = document.getElementById(
-        "nav" + sectionId.charAt(0).toUpperCase() + sectionId.slice(1)
-    );
+            button.classList.remove("active");
 
-    if(navButton){
-        navButton.classList.add("active");
+        });
+
+    const navMap = {
+
+        home:"navHome",
+        vacatures:"navVacatures",
+        account:"navAccount",
+        admin:"navAdmin"
+
+    };
+
+    if(navMap[sectionId]){
+
+        const button =
+            document.getElementById(navMap[sectionId]);
+
+        if(button){
+            button.classList.add("active");
+        }
+
     }
 
     window.scrollTo({
@@ -1073,400 +1292,411 @@ function showSection(sectionId){
     }
 
     if(sectionId === "admin"){
+
         loadAdminApplications();
         loadAdminUsers();
+
     }
+
 }
 
-/* =========================
+
+/* =====================================================
    MODALS
-========================= */
+===================================================== */
 
 function openModal(id){
-    document.getElementById(id).classList.add("show");
+
+    const modal =
+        document.getElementById(id);
+
+    if(modal){
+        modal.classList.add("show");
+    }
+
 }
+
 
 function closeModal(id){
-    document.getElementById(id).classList.remove("show");
+
+    const modal =
+        document.getElementById(id);
+
+    if(modal){
+        modal.classList.remove("show");
+    }
+
 }
 
-document.querySelectorAll(".modal").forEach(modal=>{
-    modal.addEventListener("click",event=>{
-        if(event.target === modal){
-            modal.classList.remove("show");
-        }
-    });
+
+document.addEventListener("click",function(event){
+
+    if(event.target.classList.contains("modal")){
+
+        event.target.classList.remove("show");
+
+    }
+
 });
 
-/* =========================
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "Escape"){
+
+        document
+            .querySelectorAll(".modal.show")
+            .forEach(function(modal){
+
+                modal.classList.remove("show");
+
+            });
+
+    }
+
+});
+
+
+/* =====================================================
    AUTH MODE
-========================= */
+===================================================== */
 
 function switchAuthMode(mode){
 
     authMode = mode;
 
-    const title = document.getElementById("authTitle");
-    const submit = document.getElementById("authSubmit");
-    const usernameGroup = document.getElementById("usernameGroup");
-    const switchRegister = document.getElementById("switchRegister");
-    const switchLogin = document.getElementById("switchLogin");
+    const title =
+        document.getElementById("authTitle");
+
+    const submit =
+        document.getElementById("authSubmit");
+
+    const usernameGroup =
+        document.getElementById("usernameGroup");
+
+    const registerButton =
+        document.getElementById("switchRegister");
+
+    const loginButton =
+        document.getElementById("switchLogin");
 
     clearNotice("authNotice");
 
     if(mode === "register"){
 
         title.textContent = "Account maken";
+
         submit.textContent = "Registreren";
 
         usernameGroup.style.display = "flex";
 
-        switchRegister.style.display = "none";
-        switchLogin.style.display = "inline-block";
+        registerButton.style.display = "none";
+
+        loginButton.style.display = "inline-block";
 
     }else{
 
         title.textContent = "Inloggen";
+
         submit.textContent = "Inloggen";
 
         usernameGroup.style.display = "none";
 
-        switchRegister.style.display = "inline-block";
-        switchLogin.style.display = "none";
+        registerButton.style.display = "inline-block";
+
+        loginButton.style.display = "none";
+
     }
+
 }
 
-/* =========================
+
+/* =====================================================
    AUTH FORM
-========================= */
+===================================================== */
 
-document.getElementById("authForm").addEventListener("submit",async event=>{
+function setupAuthForm(){
 
-    event.preventDefault();
+    const form =
+        document.getElementById("authForm");
 
-    const email = document.getElementById("authEmail").value.trim();
-    const password = document.getElementById("authPassword").value;
-    const username = document.getElementById("authUsername").value.trim();
-
-    clearNotice("authNotice");
-
-    try{
-
-        if(authMode === "register"){
-
-            if(!username){
-                showNotice(
-                    "authNotice",
-                    "Vul een gebruikersnaam in.",
-                    "error"
-                );
-                return;
-            }
-
-            const {data,error} = await supabaseClient.auth.signUp({
-                email,
-                password,
-                options:{
-                    data:{
-                        username:username
-                    },
-                    emailRedirectTo:
-                        window.location.origin + window.location.pathname
-                }
-            });
-
-            if(error) throw error;
-
-            showNotice(
-                "authNotice",
-                "Account aangemaakt! Controleer je e-mail om je account te bevestigen.",
-                "success"
-            );
-
-        }else{
-
-            const {data,error} =
-                await supabaseClient.auth.signInWithPassword({
-                    email,
-                    password
-                });
-
-            if(error) throw error;
-
-            closeModal("loginModal");
-
-            await loadUser();
-
-            showSection("account");
-        }
-
-    }catch(error){
-
-        showNotice(
-            "authNotice",
-            error.message || "Er ging iets mis.",
-            "error"
-        );
-    }
-});
-
-/* =========================
-   LOAD USER
-========================= */
-
-async function loadUser(){
-
-    const {data,error} =
-        await supabaseClient.auth.getUser();
-
-    if(error || !data.user){
-
-        currentUser = null;
-        currentProfile = null;
-
-        showLoggedOut();
+    if(!form){
         return;
     }
 
-    currentUser = data.user;
-
-    const {data:profile,error:profileError} =
-        await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id",currentUser.id)
-            .single();
-
-    if(profileError){
-        console.error(profileError);
-        currentProfile = null;
-    }else{
-        currentProfile = profile;
-    }
-
-    showLoggedIn();
-
-    await updateActiveSession();
-}
-
-/* =========================
-   UI LOGIN STATE
-========================= */
-
-function showLoggedIn(){
-
-    document.getElementById("navLogin").style.display = "none";
-    document.getElementById("navLogout").style.display = "inline-block";
-    document.getElementById("navAccount").style.display = "inline-block";
-
-    const adminButton = document.getElementById("navAdmin");
-
-    if(currentProfile && currentProfile.is_admin === true){
-        adminButton.style.display = "inline-block";
-    }else{
-        adminButton.style.display = "none";
-    }
-
-    const profileInfo = document.getElementById("profileInfo");
-
-    if(currentProfile){
-
-        profileInfo.innerHTML = `
-            <p><strong>Gebruikersnaam:</strong> ${escapeHTML(currentProfile.username || "Onbekend")}</p>
-            <p><strong>E-mail:</strong> ${escapeHTML(currentProfile.email || currentUser.email || "Onbekend")}</p>
-            ${
-                currentProfile.is_admin === true
-                ? '<p style="margin-top:8px;color:#ffd700;"><strong>👑 Beheerder</strong></p>'
-                : ''
-            }
-        `;
-
-    }else{
-
-        profileInfo.innerHTML = `
-            <p><strong>E-mail:</strong> ${escapeHTML(currentUser.email || "")}</p>
-        `;
-    }
-}
-
-function showLoggedOut(){
-
-    document.getElementById("navLogin").style.display = "inline-block";
-    document.getElementById("navLogout").style.display = "none";
-    document.getElementById("navAccount").style.display = "none";
-    document.getElementById("navAdmin").style.display = "none";
-
-    document.getElementById("profileInfo").innerHTML = `
-        <p>Je bent niet ingelogd.</p>
-    `;
-
-    document.getElementById("myApplications").innerHTML = `
-        <div class="empty">
-            Log in om je sollicitaties te bekijken.
-        </div>
-    `;
-}
-
-/* =========================
-   LOGOUT
-========================= */
-
-async function logout(){
-
-    try{
-        await supabaseClient.auth.signOut();
-    }catch(error){
-        console.error(error);
-    }
-
-    currentUser = null;
-    currentProfile = null;
-
-    showLoggedOut();
-    showSection("home");
-}
-
-/* =========================
-   APPLICATION MODAL
-========================= */
-
-function openApplication(functionName){
-
-    if(!currentUser){
-
-        showNotice(
-            "authNotice",
-            "Je moet eerst ingelogd zijn om te solliciteren.",
-            "error"
-        );
-
-        openModal("loginModal");
-        return;
-    }
-
-    document.getElementById("applicationFunction").value = functionName;
-    document.getElementById("selectedFunction").textContent = functionName;
-
-    clearNotice("applicationNotice");
-
-    openModal("applicationModal");
-}
-
-/* =========================
-   SUBMIT APPLICATION
-========================= */
-
-document.getElementById("applicationForm").addEventListener(
-    "submit",
-    async event=>{
+    form.addEventListener("submit",async function(event){
 
         event.preventDefault();
 
-        if(!currentUser){
+        if(!supabaseClient){
+
             showNotice(
-                "applicationNotice",
-                "Je bent niet ingelogd.",
+                "authNotice",
+                "De login is nog niet geladen.",
                 "error"
             );
+
             return;
         }
 
-        const functionName =
-            document.getElementById("applicationFunction").value;
+        const email =
+            document
+                .getElementById("authEmail")
+                .value
+                .trim();
 
-        const minecraftName =
-            document.getElementById("applicationMinecraftName").value.trim();
+        const password =
+            document
+                .getElementById("authPassword")
+                .value;
 
-        const age =
-            Number(document.getElementById("applicationAge").value);
+        const username =
+            document
+                .getElementById("authUsername")
+                .value
+                .trim();
 
-        const experience =
-            document.getElementById("applicationExperience").value.trim();
-
-        const motivation =
-            document.getElementById("applicationMotivation").value.trim();
-
-        const availability =
-            document.getElementById("applicationAvailability").value.trim();
+        clearNotice("authNotice");
 
         try{
 
-            const {error} =
-                await supabaseClient
-                    .from("applications")
-                    .insert({
-                        user_id:currentUser.id,
-                        email:currentUser.email,
-                        minecraft_name:minecraftName,
-                        function:functionName,
-                        age:age,
-                        experience:experience,
-                        motivation:motivation,
-                        availability:availability,
-                        status:"In behandeling"
+            if(authMode === "register"){
+
+                if(!username){
+
+                    showNotice(
+                        "authNotice",
+                        "Vul een gebruikersnaam in.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+                const result =
+                    await supabaseClient.auth.signUp({
+
+                        email:email,
+
+                        password:password,
+
+                        options:{
+                            data:{
+                                username:username
+                            },
+
+                            emailRedirectTo:
+                                window.location.origin +
+                                window.location.pathname
+                        }
+
                     });
 
-            if(error) throw error;
+                if(result.error){
+                    throw result.error;
+                }
 
-            showNotice(
-                "applicationNotice",
-                "Je sollicitatie is succesvol verstuurd!",
-                "success"
-            );
+                showNotice(
+                    "authNotice",
+                    "Account aangemaakt! Controleer je e-mail om je account te bevestigen.",
+                    "success"
+                );
 
-            document.getElementById("applicationForm").reset();
+            }else{
 
-            setTimeout(()=>{
-                closeModal("applicationModal");
-                loadMyApplications();
-            },1200);
+                const result =
+                    await supabaseClient.auth.signInWithPassword({
+
+                        email:email,
+
+                        password:password
+
+                    });
+
+                if(result.error){
+                    throw result.error;
+                }
+
+                closeModal("loginModal");
+
+                await loadUser();
+
+                showSection("account");
+
+            }
 
         }catch(error){
 
             console.error(error);
 
             showNotice(
-                "applicationNotice",
-                error.message || "De sollicitatie kon niet worden verstuurd.",
+                "authNotice",
+                error.message ||
+                "Er ging iets mis.",
                 "error"
             );
+
         }
-    }
-);
 
-/* =========================
-   MY APPLICATIONS
-========================= */
+    });
 
-async function loadMyApplications(){
+}
 
-    const container =
-        document.getElementById("myApplications");
 
-    if(!currentUser){
+/* =====================================================
+   SESSION
+===================================================== */
 
-        container.innerHTML = `
-            <div class="empty">
-                Log in om je sollicitaties te bekijken.
-            </div>
-        `;
+async function checkCurrentSession(){
 
+    if(!supabaseClient){
         return;
     }
 
-    container.innerHTML = `
-        <div class="empty">Laden...</div>
-    `;
+    try{
+
+        const result =
+            await supabaseClient.auth.getSession();
+
+        if(
+            result.data &&
+            result.data.session &&
+            result.data.session.user
+        ){
+
+            currentUser =
+                result.data.session.user;
+
+            await loadUser();
+
+        }else{
+
+            showLoggedOut();
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        showLoggedOut();
+
+    }
+
+}
+
+
+function setupAuthListener(){
+
+    if(!supabaseClient){
+        return;
+    }
+
+    supabaseClient.auth.onAuthStateChange(
+        function(event,session){
+
+            if(session && session.user){
+
+                currentUser =
+                    session.user;
+
+                setTimeout(function(){
+
+                    loadUser();
+
+                },0);
+
+            }else{
+
+                currentUser = null;
+                currentProfile = null;
+
+                showLoggedOut();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOAD USER
+===================================================== */
+
+async function loadUser(){
+
+    if(!supabaseClient){
+        return;
+    }
 
     try{
 
-        /*
-         * BELANGRIJK:
-         * Deze query vraagt alleen sollicitaties van de huidige gebruiker.
-         *
-         * Supabase RLS moet dit daarnaast ook afdwingen.
-         */
+        const result =
+            await supabaseClient.auth.getUser();
 
-        const {data,error} =
+        if(
+            result.error ||
+            !result.data ||
+            !result.data.user
+        ){
+
+            currentUser = null;
+            currentProfile = null;
+
+            showLoggedOut();
+
+            return;
+        }
+
+        currentUser =
+            result.data.user;
+
+        const profileResult =
             await supabaseClient
-                .from("application
+                .from("profiles")
+                .select("*")
+                .eq("id",currentUser.id)
+                .single();
+
+        if(profileResult.error){
+
+            console.error(
+                "Profile error:",
+                profileResult.error
+            );
+
+            currentProfile = null;
+
+        }else{
+
+            currentProfile =
+                profileResult.data;
+
+        }
+
+        showLoggedIn();
+
+        updateActiveSession();
+
+    }catch(error){
+
+        console.error(
+            "loadUser error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGIN UI
+===================================================== */
+
+function showLoggedIn(){
+
+    document
+        .getElementById("navLogi
