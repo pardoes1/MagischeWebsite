@@ -14,6 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -153,12 +154,6 @@ main {
     font-family: Righteous, sans-serif;
     color: #f6c95f;
     font-size: 38px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
 }
 
 .panel {
@@ -332,11 +327,13 @@ textarea {
 
 .accept,
 .reject {
-    padding: 9px 14px;
+    flex: 1;
+    padding: 10px 14px;
     border: 0;
     border-radius: 8px;
     color: white;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .accept {
@@ -345,6 +342,14 @@ textarea {
 
 .reject {
     background: #b43d4c;
+}
+
+.accept:hover {
+    background: #38b878;
+}
+
+.reject:hover {
+    background: #d14b5c;
 }
 
 .user-card {
@@ -374,17 +379,6 @@ textarea {
     color: #8cf0bb;
     background: rgba(47,163,107,.15);
     border: 1px solid rgba(47,163,107,.3);
-}
-
-#connectionError {
-    display: none;
-    width: min(900px, calc(100% - 30px));
-    margin: 20px auto;
-    padding: 15px;
-    border-radius: 12px;
-    color: #ffb0b8;
-    background: rgba(180,60,74,.15);
-    border: 1px solid rgba(180,60,74,.3);
 }
 
 .modal {
@@ -448,7 +442,6 @@ footer {
         padding: 15px;
     }
 
-    .grid,
     .vacancy-grid {
         grid-template-columns: 1fr;
     }
@@ -457,7 +450,11 @@ footer {
         min-height: 420px;
     }
 
+    .admin-buttons {
+        flex-direction: column;
+    }
 }
+
 </style>
 </head>
 
@@ -469,7 +466,9 @@ footer {
 
 <div class="logo">
 
-<img src="./logo.png" alt="Magische Heuvel">
+<img
+src="./logo.png"
+alt="Magische Heuvel">
 
 <span>
 Magische Heuvel
@@ -524,7 +523,6 @@ Uitloggen
 
 </header>
 
-<div id="connectionError"></div>
 
 <main>
 
@@ -739,7 +737,7 @@ Sollicitatie toevoegen
 </div>
 
 
-<!-- ALLE SOLLICITATIES -->
+<!-- SOLLICITATIES -->
 
 <div
 id="adminApplicationsTab"
@@ -773,7 +771,7 @@ Gebruikers laden...
 </div>
 
 
-<!-- SOLLICITATIE TOEVOEGEN -->
+<!-- TOEVOEGEN -->
 
 <div
 id="adminAddTab"
@@ -932,7 +930,7 @@ class="message">
 </footer>
 
 
-<!-- LOGIN MODAL -->
+<!-- LOGIN -->
 
 <div
 id="loginModal"
@@ -1006,7 +1004,7 @@ Account maken
 </div>
 
 
-<!-- REGISTER MODAL -->
+<!-- REGISTER -->
 
 <div
 id="registerModal"
@@ -1095,7 +1093,7 @@ Terug naar inloggen
 </div>
 
 
-<!-- ADMIN LOGIN -->
+<!-- ADMIN CODE -->
 
 <div
 id="adminLoginModal"
@@ -1338,44 +1336,26 @@ let currentProfile = null;
 
 function goHome() {
 
-document.getElementById("home").style.display =
-"flex";
+document.getElementById("home").style.display = "flex";
 
-document.getElementById("vacancies").style.display =
-"none";
+document.getElementById("vacancies").style.display = "none";
 
-document.getElementById("account").style.display =
-"none";
+document.getElementById("account").style.display = "none";
 
-document.getElementById("admin").style.display =
-"none";
-
-window.scrollTo({
-top: 0,
-behavior: "smooth"
-});
+document.getElementById("admin").style.display = "none";
 
 }
 
 
 function showVacancies() {
 
-document.getElementById("home").style.display =
-"none";
+document.getElementById("home").style.display = "none";
 
-document.getElementById("vacancies").style.display =
-"block";
+document.getElementById("vacancies").style.display = "block";
 
-document.getElementById("account").style.display =
-"none";
+document.getElementById("account").style.display = "none";
 
-document.getElementById("admin").style.display =
-"none";
-
-window.scrollTo({
-top: 0,
-behavior: "smooth"
-});
+document.getElementById("admin").style.display = "none";
 
 }
 
@@ -1390,28 +1370,19 @@ return;
 
 }
 
-document.getElementById("home").style.display =
-"none";
+document.getElementById("home").style.display = "none";
 
-document.getElementById("vacancies").style.display =
-"none";
+document.getElementById("vacancies").style.display = "none";
 
-document.getElementById("admin").style.display =
-"none";
+document.getElementById("account").style.display = "block";
 
-document.getElementById("account").style.display =
-"block";
-
-window.scrollTo({
-top: 0,
-behavior: "smooth"
-});
+document.getElementById("admin").style.display = "none";
 
 }
 
 
 /* =========================
-   ADMIN PAGE
+   ADMIN
 ========================= */
 
 function showAdmin() {
@@ -1461,30 +1432,26 @@ return;
 
 }
 
-document.getElementById("home").style.display =
-"none";
+document.getElementById("home").style.display = "none";
 
-document.getElementById("vacancies").style.display =
-"none";
+document.getElementById("vacancies").style.display = "none";
 
-document.getElementById("account").style.display =
-"none";
+document.getElementById("account").style.display = "none";
 
-document.getElementById("admin").style.display =
-"block";
+document.getElementById("admin").style.display = "block";
 
 showAdminTab("adminApplicationsTab");
 
 loadAdminApplications();
-loadAdminUsers();
 
-window.scrollTo({
-top: 0,
-behavior: "smooth"
-});
+loadAdminUsers();
 
 }
 
+
+/* =========================
+   ADMIN TABS
+========================= */
 
 function showAdminTab(id) {
 
@@ -1525,8 +1492,7 @@ function openLogin() {
 
 closeModal("registerModal");
 
-document.getElementById("loginModal").style.display =
-"flex";
+document.getElementById("loginModal").style.display = "flex";
 
 }
 
@@ -1535,16 +1501,14 @@ function openRegister() {
 
 closeModal("loginModal");
 
-document.getElementById("registerModal").style.display =
-"flex";
+document.getElementById("registerModal").style.display = "flex";
 
 }
 
 
 function openServerModal() {
 
-document.getElementById("serverModal").style.display =
-"flex";
+document.getElementById("serverModal").style.display = "flex";
 
 }
 
@@ -1556,8 +1520,7 @@ document.getElementById(id);
 
 if (element) {
 
-element.style.display =
-"none";
+element.style.display = "none";
 
 }
 
@@ -1651,23 +1614,23 @@ return;
 
 
 /*
- * De RPC heeft de code geaccepteerd.
+ * Beheerder succesvol geactiveerd.
  *
- * We zetten de lokale status direct op admin,
- * zodat de beheerpagina meteen geopend kan worden.
+ * De echte status staat in Supabase.
+ * We bewaren daarnaast lokaal dat deze browser
+ * al door de admin-code is geactiveerd.
  */
 
-if (!currentProfile) {
+localStorage.setItem(
+"mh_admin_session",
+"true"
+);
 
-currentProfile = {};
-
-}
+currentProfile = currentProfile || {};
 
 currentProfile.is_admin = true;
 
-document
-.getElementById("adminCode")
-.value = "";
+document.getElementById("adminCode").value = "";
 
 message(
 "adminLoginMessage",
@@ -1841,6 +1804,10 @@ currentUser = null;
 
 currentProfile = null;
 
+localStorage.removeItem(
+"mh_admin_session"
+);
+
 showLoggedOut();
 
 }
@@ -1928,6 +1895,30 @@ currentProfile?.is_admin === true
 ? "👑 Beheerder"
 : "Bezoeker";
 
+
+/*
+ * If Supabase says this user is an admin,
+ * keep the admin session active in this browser.
+ */
+
+if (
+currentProfile &&
+currentProfile.is_admin === true
+) {
+
+localStorage.setItem(
+"mh_admin_session",
+"true"
+);
+
+} else {
+
+localStorage.removeItem(
+"mh_admin_session"
+);
+
+}
+
 }
 
 
@@ -1939,23 +1930,19 @@ function showLoggedIn() {
 
 document
 .getElementById("loginButton")
-.style.display =
-"none";
+.style.display = "none";
 
 document
 .getElementById("accountButton")
-.style.display =
-"block";
+.style.display = "block";
 
 document
 .getElementById("adminButton")
-.style.display =
-"block";
+.style.display = "block";
 
 document
 .getElementById("logoutButton")
-.style.display =
-"block";
+.style.display = "block";
 
 }
 
@@ -1964,28 +1951,23 @@ function showLoggedOut() {
 
 document
 .getElementById("loginButton")
-.style.display =
-"block";
+.style.display = "block";
 
 document
 .getElementById("accountButton")
-.style.display =
-"none";
+.style.display = "none";
 
 document
 .getElementById("adminButton")
-.style.display =
-"none";
+.style.display = "none";
 
 document
 .getElementById("logoutButton")
-.style.display =
-"none";
+.style.display = "none";
 
 document
 .getElementById("admin")
-.style.display =
-"none";
+.style.display = "none";
 
 }
 
@@ -2004,6 +1986,10 @@ currentUser = null;
 
 currentProfile = null;
 
+localStorage.removeItem(
+"mh_admin_session"
+);
+
 showLoggedOut();
 
 goHome();
@@ -2012,7 +1998,7 @@ goHome();
 
 
 /* =========================
-   APPLICATION OPEN
+   APPLICATION
 ========================= */
 
 function openApplication(functionName) {
@@ -2052,10 +2038,6 @@ document
 
 }
 
-
-/* =========================
-   APPLICATION SUBMIT
-========================= */
 
 document
 .getElementById("applicationForm")
@@ -2125,10 +2107,7 @@ status:
 
 if (result.error) {
 
-console.error(
-"APPLICATION ERROR:",
-result.error
-);
+console.error(result.error);
 
 message(
 "applicationMessage",
@@ -2195,8 +2174,12 @@ ascending: false
 
 if (result.error) {
 
-container.textContent =
-"Kan sollicitaties niet laden.";
+container.innerHTML = `
+<div class="message error" style="display:block;">
+Kan sollicitaties niet laden:<br>
+${escapeHTML(result.error.message)}
+</div>
+`;
 
 console.error(
 "ADMIN APPLICATION ERROR:",
@@ -2268,20 +2251,24 @@ ${escapeHTML(application.availability)}
 
 <p>
 <strong>Status:</strong>
+<span>
 ${escapeHTML(application.status)}
+</span>
 </p>
 
 <div class="admin-buttons">
 
 <button
 class="accept"
-onclick="changeStatus('${application.id}','Aangenomen')">
+data-id="${escapeHTML(String(application.id))}"
+data-status="Aangenomen">
 Aannemen
 </button>
 
 <button
 class="reject"
-onclick="changeStatus('${application.id}','Afgewezen')">
+data-id="${escapeHTML(String(application.id))}"
+data-status="Afgewezen">
 Afwijzen
 </button>
 
@@ -2292,6 +2279,107 @@ Afwijzen
 container.appendChild(div);
 
 });
+
+
+/*
+ * Event listeners worden hier toegevoegd.
+ * Hierdoor gebruiken we geen inline onclick
+ * met database-ID's.
+ */
+
+container
+.querySelectorAll(".accept, .reject")
+.forEach(function(button) {
+
+button.addEventListener(
+"click",
+async function() {
+
+const id =
+button.dataset.id;
+
+const status =
+button.dataset.status;
+
+await changeStatus(
+id,
+status
+);
+
+});
+
+});
+
+}
+
+
+/* =========================
+   CHANGE APPLICATION STATUS
+========================= */
+
+async function changeStatus(
+id,
+status
+) {
+
+if (
+!currentUser ||
+!currentProfile ||
+currentProfile.is_admin !== true
+) {
+
+alert(
+"Je hebt geen beheerderstoegang."
+);
+
+return;
+
+}
+
+const buttons =
+document
+.querySelectorAll(
+`.accept[data-id="${CSS.escape(String(id))}"],
+.reject[data-id="${CSS.escape(String(id))}"]`
+);
+
+buttons.forEach(function(button) {
+
+button.disabled = true;
+
+});
+
+const result =
+await supabaseClient
+.from("applications")
+.update({
+status: status
+})
+.eq("id", id);
+
+if (result.error) {
+
+console.error(
+"STATUS UPDATE ERROR:",
+result.error
+);
+
+alert(
+"De status kon niet worden aangepast:\n\n" +
+result.error.message
+);
+
+buttons.forEach(function(button) {
+
+button.disabled = false;
+
+});
+
+return;
+
+}
+
+await loadAdminApplications();
 
 }
 
@@ -2336,10 +2424,7 @@ if (result.error) {
 container.textContent =
 "Kan gebruikers niet laden.";
 
-console.error(
-"ADMIN USERS ERROR:",
-result.error
-);
+console.error(result.error);
 
 return;
 
@@ -2536,47 +2621,7 @@ await loadAdminApplications();
 
 
 /* =========================
-   CHANGE STATUS
-========================= */
-
-async function changeStatus(
-id,
-status
-) {
-
-if (
-!currentUser ||
-!currentProfile ||
-currentProfile.is_admin !== true
-) {
-
-return;
-
-}
-
-const result =
-await supabaseClient
-.from("applications")
-.update({
-status: status
-})
-.eq("id", id);
-
-if (result.error) {
-
-alert(result.error.message);
-
-return;
-
-}
-
-await loadAdminApplications();
-
-}
-
-
-/* =========================
-   SERVER IP
+   SERVER
 ========================= */
 
 function copyIP() {
@@ -2631,38 +2676,22 @@ element.className =
 function escapeHTML(value) {
 
 return String(value)
-.replaceAll(
-"&",
-"&amp;"
-)
-.replaceAll(
-"<",
-"&lt;"
-)
-.replaceAll(
-">",
-"&gt;"
-)
-.replaceAll(
-'"',
-"&quot;"
-)
-.replaceAll(
-"'",
-"&#039;"
-);
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
 /* =========================
-   MODAL OUTSIDE CLICK
+   MODAL CLICK
 ========================= */
 
 document
 .querySelectorAll(".modal")
-.forEach(
-function(modal) {
+.forEach(function(modal) {
 
 modal.addEventListener(
 "click",
@@ -2672,8 +2701,7 @@ if (
 event.target === modal
 ) {
 
-modal.style.display =
-"none";
+modal.style.display = "none";
 
 }
 
@@ -2704,6 +2732,24 @@ currentUser =
 result.data.session.user;
 
 await loadUser();
+
+
+/*
+ * If Supabase confirms this account
+ * is an admin, keep the admin session.
+ */
+
+if (
+currentProfile &&
+currentProfile.is_admin === true &&
+localStorage.getItem("mh_admin_session") === "true"
+) {
+
+console.log(
+"Beheerderstoegang hersteld."
+);
+
+}
 
 }
 
