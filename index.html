@@ -16,9 +16,7 @@
 <style>
 *{box-sizing:border-box}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
     margin:0;
@@ -182,6 +180,11 @@ textarea{
     color:#ddd;
 }
 
+.banned{
+    background:#8b2020;
+    color:#fff;
+}
+
 .modal{
     display:none;
     position:fixed;
@@ -254,6 +257,10 @@ textarea{
     background:#26734d!important;
 }
 
+.warning{
+    background:#9b6b20!important;
+}
+
 footer{
     text-align:center;
     padding:35px;
@@ -267,54 +274,54 @@ footer{
 <header>
 <div class="nav">
 
-    <img src="./logo.png" class="logo">
+<img src="./logo.png" class="logo">
 
-    <div class="brand">
-        Magische Heuvel
-    </div>
+<div class="brand">
+Magische Heuvel
+</div>
 
-    <button type="button" onclick="showPage('home')">
-        Home
-    </button>
+<button type="button" onclick="showPage('home')">
+Home
+</button>
 
-    <button type="button" onclick="showPage('vacatures')">
-        Vacatures
-    </button>
+<button type="button" onclick="showPage('vacatures')">
+Vacatures
+</button>
 
-    <button type="button" onclick="showPage('community')">
-        Community
-    </button>
+<button type="button" onclick="showPage('community')">
+Community
+</button>
 
-    <button
-        type="button"
-        onclick="showPage('account')"
-        id="accountNav"
-        style="display:none">
-        Mijn account
-    </button>
+<button
+type="button"
+onclick="showPage('account')"
+id="accountNav"
+style="display:none">
+Mijn account
+</button>
 
-    <button
-        type="button"
-        onclick="openAdmin()"
-        id="adminNav"
-        style="display:none">
-        Beheerder
-    </button>
+<button
+type="button"
+onclick="openAdmin()"
+id="adminNav"
+style="display:none">
+Beheerder
+</button>
 
-    <button
-        type="button"
-        onclick="openLogin()"
-        id="loginNav">
-        Inloggen
-    </button>
+<button
+type="button"
+onclick="openLogin()"
+id="loginNav">
+Inloggen
+</button>
 
-    <button
-        type="button"
-        onclick="logout()"
-        id="logoutNav"
-        style="display:none">
-        Uitloggen
-    </button>
+<button
+type="button"
+onclick="logout()"
+id="logoutNav"
+style="display:none">
+Uitloggen
+</button>
 
 </div>
 </header>
@@ -323,428 +330,422 @@ footer{
 
 <section id="home" class="page active">
 
-    <div class="hero">
+<div class="hero">
 
-        <img src="./logo.png" alt="Magische Heuvel">
+<img src="./logo.png" alt="Magische Heuvel">
 
-        <h1>
-            Magische Heuvel
-        </h1>
+<h1>
+Magische Heuvel
+</h1>
 
-        <p>
-            Minecraft Themapark
-        </p>
+<p>
+Minecraft Themapark
+</p>
 
-        <p>
-            Beleef een magische wereld vol attracties, shows en avonturen.
-        </p>
+<p>
+Beleef een magische wereld vol attracties, shows en avonturen.
+</p>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="openServer()">
-            🎮 Speel mee
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="openServer()">
+🎮 Speel mee
+</button>
 
-    </div>
+</div>
 
 </section>
 
 <section id="vacatures" class="page">
 
-    <h2>
-        Vacatures
-    </h2>
+<h2>
+Vacatures
+</h2>
 
-    <p>
-        Wil jij onderdeel worden van het team van Magische Heuvel?
-    </p>
+<p>
+Wil jij onderdeel worden van het team van Magische Heuvel?
+</p>
 
-    <div class="grid">
+<div class="grid">
 
-        <div class="card">
+<div class="card">
 
-            <h3>
-                Bouwer
-            </h3>
+<h3>Bouwer</h3>
 
-            <p>
-                Bouw mee aan gebouwen, attracties en decoratie.
-            </p>
+<p>
+Bouw mee aan gebouwen, attracties en decoratie.
+</p>
 
-            <button
-                type="button"
-                class="gold-btn"
-                onclick="openApplication('Bouwer')">
-                Solliciteren
-            </button>
+<button
+type="button"
+class="gold-btn"
+onclick="openApplication('Bouwer')">
+Solliciteren
+</button>
 
-        </div>
+</div>
 
-        <div class="card">
+<div class="card">
 
-            <h3>
-                Techniek
-            </h3>
+<h3>Techniek</h3>
 
-            <p>
-                Help met plugins, redstone, systemen en attracties.
-            </p>
+<p>
+Help met plugins, redstone, systemen en attracties.
+</p>
 
-            <button
-                type="button"
-                class="gold-btn"
-                onclick="openApplication('Techniek')">
-                Solliciteren
-            </button>
+<button
+type="button"
+class="gold-btn"
+onclick="openApplication('Techniek')">
+Solliciteren
+</button>
 
-        </div>
+</div>
 
-        <div class="card">
+<div class="card">
 
-            <h3>
-                Modelaar
-            </h3>
+<h3>Modelaar</h3>
 
-            <p>
-                Maak modellen en unieke assets voor het park.
-            </p>
+<p>
+Maak modellen en unieke assets voor het park.
+</p>
 
-            <button
-                type="button"
-                class="gold-btn"
-                onclick="openApplication('Modelaar')">
-                Solliciteren
-            </button>
+<button
+type="button"
+class="gold-btn"
+onclick="openApplication('Modelaar')">
+Solliciteren
+</button>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </section>
 
 <section id="account" class="page">
 
-    <h2>
-        Mijn account
-    </h2>
+<h2>
+Mijn account
+</h2>
 
-    <div class="card">
+<div class="card">
 
-        <h3 id="accountUsername">
-            Gebruiker
-        </h3>
+<h3 id="accountUsername">
+Gebruiker
+</h3>
 
-        <p>
-            Email:
-            <span id="accountEmail">-</span>
-        </p>
+<p>
+Email:
+<span id="accountEmail">-</span>
+</p>
 
-        <p>
-            Status:
-            <span
-                class="status"
-                id="accountStatus">
-                Bezoeker
-            </span>
-        </p>
+<p>
+Status:
+<span
+class="status"
+id="accountStatus">
+Bezoeker
+</span>
+</p>
 
-        <p>
-            Beheerder:
-            <span id="accountAdmin">
-                Nee
-            </span>
-        </p>
+<p>
+Beheerder:
+<span id="accountAdmin">
+Nee
+</span>
+</p>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="logout()">
-            Uitloggen
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="logout()">
+Uitloggen
+</button>
 
-    </div>
+</div>
 
 </section>
 
 <section id="community" class="page">
 
-    <h2>
-        Community
-    </h2>
+<h2>
+Community
+</h2>
 
-    <p>
-        Bekijk alle leden van Magische Heuvel.
-    </p>
+<p>
+Bekijk alle leden van Magische Heuvel.
+</p>
 
-    <div class="card">
+<div class="card">
 
-        <h3>
-            👥 Leden
-        </h3>
+<h3>
+👥 Leden
+</h3>
 
-        <p id="onlineCount">
-            Laden...
-        </p>
+<p id="onlineCount">
+Laden...
+</p>
 
-        <div id="communityUsers">
-            Laden...
-        </div>
+<div id="communityUsers">
+Laden...
+</div>
 
-    </div>
+</div>
 
 </section>
 
 <section id="admin" class="page">
 
-    <h2>
-        Beheerder
-    </h2>
+<h2>
+Beheerder
+</h2>
 
-    <div class="card">
+<div class="card">
 
-        <h3>
-            Sollicitaties
-        </h3>
+<h3>
+Sollicitaties
+</h3>
 
-        <div id="adminApplications">
-            Laden...
-        </div>
+<div id="adminApplications">
+Laden...
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <h3>
-            Alle gebruikers
-        </h3>
+<h3>
+Alle gebruikers
+</h3>
 
-        <p class="small">
-            Hier kun je ingelogde gebruikers bekijken en gebruikers aan Team toevoegen.
-        </p>
+<p class="small">
+Hier kun je gebruikers beheren, Team maken en gebruikers bannen.
+</p>
 
-        <div id="adminUsers">
-            Laden...
-        </div>
+<div id="adminUsers">
+Laden...
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <h3>
-            Sollicitatie toevoegen
-        </h3>
+<h3>
+Sollicitatie toevoegen
+</h3>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="openAdminApplication()">
-            Sollicitatie toevoegen
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="openAdminApplication()">
+Sollicitatie toevoegen
+</button>
 
-    </div>
+</div>
 
 </section>
 
 </main>
 
 <footer>
-    © Magische Heuvel - Minecraft Themapark
+© Magische Heuvel - Minecraft Themapark
 </footer>
 
-<!-- SERVER MODAL -->
+<!-- SERVER -->
 
 <div class="modal" id="serverModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button
-            type="button"
-            class="close"
-            onclick="closeModal('serverModal')">
-            ×
-        </button>
+<button
+type="button"
+class="close"
+onclick="closeModal('serverModal')">
+×
+</button>
 
-        <h2>
-            Server
-        </h2>
+<h2>
+Server
+</h2>
 
-        <p>
-            Ons Minecraft serveradres:
-        </p>
+<p>
+Ons Minecraft serveradres:
+</p>
 
-        <div class="notice">
-            <strong>
-                gp-node-01.future-node.com:35003
-            </strong>
-        </div>
+<div class="notice">
+<strong>
+gp-node-01.future-node.com:35003
+</strong>
+</div>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="copyServer()">
-            IP kopiëren
-        </button>
-
-    </div>
+<button
+type="button"
+class="gold-btn"
+onclick="copyServer()">
+IP kopiëren
+</button>
 
 </div>
 
-<!-- LOGIN MODAL -->
+</div>
+
+<!-- LOGIN -->
 
 <div class="modal" id="loginModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button
-            type="button"
-            class="close"
-            onclick="closeModal('loginModal')">
-            ×
-        </button>
+<button
+type="button"
+class="close"
+onclick="closeModal('loginModal')">
+×
+</button>
 
-        <h2>
-            Inloggen
-        </h2>
+<h2>
+Inloggen
+</h2>
 
-        <input
-            id="loginEmail"
-            type="email"
-            placeholder="Email">
+<input
+id="loginEmail"
+type="email"
+placeholder="Email">
 
-        <input
-            id="loginPassword"
-            type="password"
-            placeholder="Wachtwoord">
+<input
+id="loginPassword"
+type="password"
+placeholder="Wachtwoord">
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="login()">
-            Inloggen
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="login()">
+Inloggen
+</button>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="showRegister()">
-            Account maken
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="showRegister()">
+Account maken
+</button>
 
-        <div
-            id="loginMessage"
-            class="notice">
-        </div>
-
-    </div>
+<div
+id="loginMessage"
+class="notice">
+</div>
 
 </div>
 
-<!-- REGISTER MODAL -->
+</div>
+
+<!-- REGISTER -->
 
 <div class="modal" id="registerModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button
-            type="button"
-            class="close"
-            onclick="closeModal('registerModal')">
-            ×
-        </button>
+<button
+type="button"
+class="close"
+onclick="closeModal('registerModal')">
+×
+</button>
 
-        <h2>
-            Account maken
-        </h2>
+<h2>
+Account maken
+</h2>
 
-        <input
-            id="registerUsername"
-            placeholder="Minecraft gebruikersnaam">
+<input
+id="registerUsername"
+placeholder="Minecraft gebruikersnaam">
 
-        <input
-            id="registerEmail"
-            type="email"
-            placeholder="Email">
+<input
+id="registerEmail"
+type="email"
+placeholder="Email">
 
-        <input
-            id="registerPassword"
-            type="password"
-            placeholder="Wachtwoord">
+<input
+id="registerPassword"
+type="password"
+placeholder="Wachtwoord">
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="register()">
-            Registreren
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="register()">
+Registreren
+</button>
 
-        <div
-            id="registerMessage"
-            class="notice">
-        </div>
-
-    </div>
+<div
+id="registerMessage"
+class="notice">
+</div>
 
 </div>
 
-<!-- APPLICATION MODAL -->
+</div>
+
+<!-- APPLICATION -->
 
 <div class="modal" id="applicationModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button
-            type="button"
-            class="close"
-            onclick="closeModal('applicationModal')">
-            ×
-        </button>
+<button
+type="button"
+class="close"
+onclick="closeModal('applicationModal')">
+×
+</button>
 
-        <h2>
-            Solliciteren
-        </h2>
+<h2>
+Solliciteren
+</h2>
 
-        <input
-            id="applicationFunction"
-            readonly>
+<input
+id="applicationFunction"
+readonly>
 
-        <input
-            id="applicationMinecraft"
-            placeholder="Minecraft naam">
+<input
+id="applicationMinecraft"
+placeholder="Minecraft naam">
 
-        <input
-            id="applicationAge"
-            type="number"
-            placeholder="Leeftijd">
+<input
+id="applicationAge"
+type="number"
+placeholder="Leeftijd">
 
-        <textarea
-            id="applicationExperience"
-            placeholder="Vertel iets over je ervaring">
-        </textarea>
+<textarea
+id="applicationExperience"
+placeholder="Vertel iets over je ervaring">
+</textarea>
 
-        <textarea
-            id="applicationMotivation"
-            placeholder="Waarom wil je deze functie?">
-        </textarea>
+<textarea
+id="applicationMotivation"
+placeholder="Waarom wil je deze functie?">
+</textarea>
 
-        <textarea
-            id="applicationAvailability"
-            placeholder="Wanneer ben je beschikbaar?">
-        </textarea>
+<textarea
+id="applicationAvailability"
+placeholder="Wanneer ben je beschikbaar?">
+</textarea>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="submitApplication()">
-            Sollicitatie versturen
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="submitApplication()">
+Sollicitatie versturen
+</button>
 
-        <div
-            id="applicationMessage"
-            class="notice">
-        </div>
+<div
+id="applicationMessage"
+class="notice">
+</div>
 
-    </div>
+</div>
 
 </div>
 
@@ -752,41 +753,41 @@ footer{
 
 <div class="modal" id="adminCodeModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button
-            type="button"
-            class="close"
-            onclick="closeModal('adminCodeModal')">
-            ×
-        </button>
+<button
+type="button"
+class="close"
+onclick="closeModal('adminCodeModal')">
+×
+</button>
 
-        <h2>
-            Beheerder
-        </h2>
+<h2>
+Beheerder
+</h2>
 
-        <p>
-            Voer de beheerderscode in.
-        </p>
+<p>
+Voer de beheerderscode in.
+</p>
 
-        <input
-            id="adminCode"
-            type="password"
-            placeholder="Beheerderscode">
+<input
+id="adminCode"
+type="password"
+placeholder="Beheerderscode">
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="adminCodeLogin()">
-            Doorgaan
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="adminCodeLogin()">
+Doorgaan
+</button>
 
-        <div
-            id="adminCodeMessage"
-            class="notice">
-        </div>
+<div
+id="adminCodeMessage"
+class="notice">
+</div>
 
-    </div>
+</div>
 
 </div>
 
@@ -794,2010 +795,2116 @@ footer{
 
 <div class="modal" id="adminApplicationModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button
-            type="button"
-            class="close"
-            onclick="closeModal('adminApplicationModal')">
-            ×
-        </button>
+<button
+type="button"
+class="close"
+onclick="closeModal('adminApplicationModal')">
+×
+</button>
 
-        <h2>
-            Sollicitatie toevoegen
-        </h2>
+<h2>
+Sollicitatie toevoegen
+</h2>
 
-        <input
-            id="adminAppUserId"
-            placeholder="User ID">
+<input
+id="adminAppUserId"
+placeholder="User ID">
 
-        <input
-            id="adminAppEmail"
-            type="email"
-            placeholder="Email">
+<input
+id="adminAppEmail"
+type="email"
+placeholder="Email">
 
-        <input
-            id="adminAppMinecraft"
-            placeholder="Minecraft naam">
+<input
+id="adminAppMinecraft"
+placeholder="Minecraft naam">
 
-        <select id="adminAppFunction">
-            <option>Bouwer</option>
-            <option>Techniek</option>
-            <option>Modelaar</option>
-        </select>
+<select id="adminAppFunction">
+<option>Bouwer</option>
+<option>Techniek</option>
+<option>Modelaar</option>
+</select>
 
-        <input
-            id="adminAppAge"
-            type="number"
-            placeholder="Leeftijd">
+<input
+id="adminAppAge"
+type="number"
+placeholder="Leeftijd">
 
-        <textarea
-            id="adminAppExperience"
-            placeholder="Ervaring">
-        </textarea>
+<textarea
+id="adminAppExperience"
+placeholder="Ervaring">
+</textarea>
 
-        <textarea
-            id="adminAppMotivation"
-            placeholder="Motivatie">
-        </textarea>
+<textarea
+id="adminAppMotivation"
+placeholder="Motivatie">
+</textarea>
 
-        <textarea
-            id="adminAppAvailability"
-            placeholder="Beschikbaarheid">
-        </textarea>
+<textarea
+id="adminAppAvailability"
+placeholder="Beschikbaarheid">
+</textarea>
 
-        <button
-            type="button"
-            class="gold-btn"
-            onclick="adminAddApplication()">
-            Toevoegen
-        </button>
+<button
+type="button"
+class="gold-btn"
+onclick="adminAddApplication()">
+Toevoegen
+</button>
 
-        <div
-            id="adminApplicationMessage"
-            class="notice">
-        </div>
+<div
+id="adminApplicationMessage"
+class="notice">
+</div>
 
-    </div>
+</div>
 
 </div>
 
 <script>
 
 const SUPABASE_URL =
-    "https://zmhldveqqogxysoldhrf.supabase.co";
+"https://zmhldveqqogxysoldhrf.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
+"sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
-let currentUser = null;
-let currentSession = null;
-let currentProfile = null;
+let currentUser=null;
+let currentSession=null;
+let currentProfile=null;
 
-let communityTimer = null;
-let activeSessionTimer = null;
+let communityTimer=null;
+let activeSessionTimer=null;
 
 
-/* =========================================================
-   COMMON BROWSER SHORTCUT BLOCKING
-   ========================================================= */
+/* DEVTOOLS SHORTCUTS */
 
 (function(){
 
-    function block(event){
+function block(event){
 
-        const key =
-            String(event.key || "").toLowerCase();
+const key=
+String(event.key||"").toLowerCase();
 
-        if(event.key === "F12"){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.key==="F12"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            event.ctrlKey &&
-            event.shiftKey &&
-            key === "i"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.ctrlKey&&event.shiftKey&&key==="i"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            event.ctrlKey &&
-            event.shiftKey &&
-            key === "j"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.ctrlKey&&event.shiftKey&&key==="j"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            event.ctrlKey &&
-            event.shiftKey &&
-            key === "c"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.ctrlKey&&event.shiftKey&&key==="c"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            event.metaKey &&
-            event.altKey &&
-            key === "i"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.metaKey&&event.altKey&&key==="i"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            event.metaKey &&
-            event.altKey &&
-            key === "j"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.metaKey&&event.altKey&&key==="j"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            event.metaKey &&
-            event.altKey &&
-            key === "c"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if(event.metaKey&&event.altKey&&key==="c"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            (event.ctrlKey || event.metaKey) &&
-            key === "u"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if((event.ctrlKey||event.metaKey)&&key==="u"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-        if(
-            (event.ctrlKey || event.metaKey) &&
-            key === "s"
-        ){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        }
+if((event.ctrlKey||event.metaKey)&&key==="s"){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+}
 
-    }
+}
 
-    document.addEventListener(
-        "keydown",
-        block,
-        true
-    );
+document.addEventListener(
+"keydown",
+block,
+true
+);
 
-    window.addEventListener(
-        "keydown",
-        block,
-        true
-    );
+window.addEventListener(
+"keydown",
+block,
+true
+);
 
-    document.addEventListener(
-        "contextmenu",
-        function(event){
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            return false;
-        },
-        true
-    );
+document.addEventListener(
+"contextmenu",
+function(event){
+event.preventDefault();
+event.stopImmediatePropagation();
+return false;
+},
+true
+);
 
 })();
 
 
-/* =========================================================
-   PAGE NAVIGATION
-   ========================================================= */
+/* PAGE */
 
 function showPage(page){
 
-    document
-        .querySelectorAll(".page")
-        .forEach(function(p){
-            p.classList.remove("active");
-        });
+document
+.querySelectorAll(".page")
+.forEach(function(p){
+p.classList.remove("active");
+});
 
-    const element =
-        document.getElementById(page);
+const element=
+document.getElementById(page);
 
-    if(element){
-        element.classList.add("active");
-    }
+if(element){
+element.classList.add("active");
+}
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
-    if(page === "community"){
+if(page==="community"){
 
-        loadCommunityUsers();
+loadCommunityUsers();
+startCommunityRefresh();
 
-        startCommunityRefresh();
+}else{
 
-    }else{
+stopCommunityRefresh();
 
-        stopCommunityRefresh();
+}
 
-    }
-
-    if(page === "admin"){
-
-        loadAdminPage();
-
-    }
+if(page==="admin"){
+loadAdminPage();
+}
 
 }
 
 
-/* =========================================================
-   SERVER
-   ========================================================= */
+/* SERVER */
 
 function openServer(){
 
-    document
-        .getElementById("serverModal")
-        .classList.add("show");
+document
+.getElementById("serverModal")
+.classList.add("show");
 
 }
-
 
 function copyServer(){
 
-    navigator.clipboard.writeText(
-        "gp-node-01.future-node.com:35003"
-    );
+navigator.clipboard.writeText(
+"gp-node-01.future-node.com:35003"
+);
 
-    alert(
-        "Server IP gekopieerd!"
-    );
+alert(
+"Server IP gekopieerd!"
+);
 
 }
 
 
-/* =========================================================
-   MODALS
-   ========================================================= */
+/* MODALS */
 
 function openLogin(){
 
-    document
-        .getElementById("loginModal")
-        .classList.add("show");
+document
+.getElementById("loginModal")
+.classList.add("show");
 
 }
-
 
 function showRegister(){
 
-    closeModal("loginModal");
+closeModal("loginModal");
 
-    document
-        .getElementById("registerModal")
-        .classList.add("show");
+document
+.getElementById("registerModal")
+.classList.add("show");
 
 }
-
 
 function closeModal(id){
 
-    const modal =
-        document.getElementById(id);
+const modal=
+document.getElementById(id);
 
-    if(modal){
-
-        modal.classList.remove("show");
-
-    }
+if(modal){
+modal.classList.remove("show");
+}
 
 }
 
 
-/* =========================================================
-   LOGIN
-   ========================================================= */
+/* LOGIN */
 
 async function login(){
 
-    const email =
-        document
-            .getElementById("loginEmail")
-            .value
-            .trim();
+const email=
+document
+.getElementById("loginEmail")
+.value
+.trim();
 
-    const password =
-        document
-            .getElementById("loginPassword")
-            .value;
+const password=
+document
+.getElementById("loginPassword")
+.value;
 
-    const message =
-        document.getElementById("loginMessage");
+const message=
+document.getElementById("loginMessage");
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
+const {
+data,
+error
+}=
+await supabaseClient.auth.signInWithPassword({
+email,
+password
+});
 
-    if(error){
+if(error){
 
-        message.textContent =
-            error.message;
+message.textContent=
+error.message;
 
-        return;
+return;
 
-    }
+}
 
-    closeModal("loginModal");
+closeModal("loginModal");
 
-    await syncAuthState(
-        data.session
-    );
-
-    showPage("account");
+await syncAuthState(
+data.session
+);
 
 }
 
 
-/* =========================================================
-   REGISTER
-   ========================================================= */
+/* REGISTER */
 
 async function register(){
 
-    const username =
-        document
-            .getElementById("registerUsername")
-            .value
-            .trim();
+const username=
+document
+.getElementById("registerUsername")
+.value
+.trim();
 
-    const email =
-        document
-            .getElementById("registerEmail")
-            .value
-            .trim();
+const email=
+document
+.getElementById("registerEmail")
+.value
+.trim();
 
-    const password =
-        document
-            .getElementById("registerPassword")
-            .value;
+const password=
+document
+.getElementById("registerPassword")
+.value;
 
-    const message =
-        document.getElementById("registerMessage");
+const message=
+document.getElementById("registerMessage");
 
-    if(!username || !email || !password){
+if(!username||!email||!password){
 
-        message.textContent =
-            "Vul alles in.";
+message.textContent=
+"Vul alles in.";
 
-        return;
+return;
 
-    }
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signUp({
+const {
+data,
+error
+}=
+await supabaseClient.auth.signUp({
 
-            email,
+email,
 
-            password,
+password,
 
-            options:{
-                data:{
-                    username
-                }
-            }
+options:{
+data:{
+username
+}
+}
 
-        });
+});
 
-    if(error){
+if(error){
 
-        message.textContent =
-            error.message;
+message.textContent=
+error.message;
 
-        return;
+return;
 
-    }
+}
 
-    message.textContent =
-        data.session
-            ? "Account aangemaakt!"
-            : "Account aangemaakt. Controleer je email als emailbevestiging aanstaat.";
+message.textContent=
+data.session
+?"Account aangemaakt!"
+:"Account aangemaakt. Controleer je email als emailbevestiging aanstaat.";
 
-    if(data.session){
+if(data.session){
 
-        closeModal("registerModal");
+closeModal("registerModal");
 
-        await syncAuthState(
-            data.session
-        );
+await syncAuthState(
+data.session
+);
 
-    }
+}
 
 }
 
 
-/* =========================================================
-   LOGOUT
-   ========================================================= */
+/* LOGOUT */
 
 async function logout(){
 
-    await removeActiveSession();
+await removeActiveSession();
 
-    stopActiveSessionHeartbeat();
+stopActiveSessionHeartbeat();
 
-    await supabaseClient.auth.signOut();
+await supabaseClient.auth.signOut();
 
-    currentUser = null;
-    currentSession = null;
-    currentProfile = null;
+currentUser=null;
+currentSession=null;
+currentProfile=null;
 
-    updateNavigation();
+updateNavigation();
 
-    showPage("home");
+showPage("home");
 
 }
 
 
-/* =========================================================
-   PROFILE
-   ========================================================= */
+/* PROFILE */
 
 async function loadProfile(){
 
-    if(!currentUser){
-        return;
-    }
+if(!currentUser){
+return;
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select(
-                "username,email,status,is_admin"
-            )
-            .eq(
-                "id",
-                currentUser.id
-            )
-            .maybeSingle();
+const {
+data,
+error
+}=
+await supabaseClient
+.from("profiles")
+.select(
+"username,email,status,is_admin"
+)
+.eq(
+"id",
+currentUser.id
+)
+.maybeSingle();
 
-    if(error){
+if(error){
 
-        console.error(
-            "Profile error:",
-            error
-        );
+console.error(
+"Profile error:",
+error
+);
 
-        return;
+return;
 
-    }
+}
 
-    currentProfile = data;
+currentProfile=data;
 
-    document
-        .getElementById("accountUsername")
-        .textContent =
-            data?.username ||
-            currentUser.user_metadata?.username ||
-            currentUser.email?.split("@")[0] ||
-            "Gebruiker";
 
-    document
-        .getElementById("accountEmail")
-        .textContent =
-            data?.email ||
-            currentUser.email ||
-            "-";
+/* CHECK BAN */
 
-    document
-        .getElementById("accountStatus")
-        .textContent =
-            data?.status ||
-            "Bezoeker";
+if(data?.status==="Gebanned"){
 
-    document
-        .getElementById("accountAdmin")
-        .textContent =
-            data?.is_admin
-                ? "Ja"
-                : "Nee";
+await removeActiveSession();
 
-    updateNavigation();
+await supabaseClient.auth.signOut();
+
+currentUser=null;
+currentSession=null;
+currentProfile=null;
+
+updateNavigation();
+
+showPage("home");
+
+setTimeout(function(){
+
+alert(
+"Dit account is gebanned en heeft geen toegang tot de website."
+);
+
+},100);
+
+return;
 
 }
 
 
-/* =========================================================
-   ADMIN CHECK
-   ========================================================= */
+document
+.getElementById("accountUsername")
+.textContent=
+data?.username||
+currentUser.user_metadata?.username||
+currentUser.email?.split("@")[0]||
+"Gebruiker";
+
+document
+.getElementById("accountEmail")
+.textContent=
+data?.email||
+currentUser.email||
+"-";
+
+document
+.getElementById("accountStatus")
+.textContent=
+data?.status||
+"Bezoeker";
+
+document
+.getElementById("accountAdmin")
+.textContent=
+data?.is_admin
+?"Ja"
+:"Nee";
+
+updateNavigation();
+
+}
+
+
+/* ADMIN CHECK */
 
 async function checkAdminStatus(){
 
-    if(!currentUser){
-        return false;
-    }
+if(!currentUser){
+return false;
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.rpc(
-            "is_admin"
-        );
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"is_admin"
+);
 
-    if(error){
+if(error){
 
-        console.error(
-            "Admin check:",
-            error
-        );
+console.error(
+"Admin check:",
+error
+);
 
-        return false;
+return false;
 
-    }
+}
 
-    return data === true;
+return data===true;
 
 }
 
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+/* NAV */
 
 function updateNavigation(){
 
-    const loggedIn =
-        !!currentUser;
+const loggedIn=!!currentUser;
 
-    document
-        .getElementById("loginNav")
-        .style.display =
-            loggedIn
-                ? "none"
-                : "block";
+document
+.getElementById("loginNav")
+.style.display=
+loggedIn
+?"none"
+:"block";
 
-    document
-        .getElementById("logoutNav")
-        .style.display =
-            loggedIn
-                ? "block"
-                : "none";
+document
+.getElementById("logoutNav")
+.style.display=
+loggedIn
+?"block"
+:"none";
 
-    document
-        .getElementById("accountNav")
-        .style.display =
-            loggedIn
-                ? "block"
-                : "none";
+document
+.getElementById("accountNav")
+.style.display=
+loggedIn
+?"block"
+:"none";
 
-    document
-        .getElementById("adminNav")
-        .style.display =
-            loggedIn
-                ? "block"
-                : "none";
+document
+.getElementById("adminNav")
+.style.display=
+loggedIn
+?"block"
+:"none";
 
 }
 
 
-/* =========================================================
-   ADMIN OPEN
-   ========================================================= */
+/* ADMIN */
 
 async function openAdmin(){
 
-    if(!currentUser){
+if(!currentUser){
 
-        openLogin();
+openLogin();
 
-        return;
-
-    }
-
-    const isAdmin =
-        await checkAdminStatus();
-
-    if(isAdmin){
-
-        showPage("admin");
-
-        return;
-
-    }
-
-    document
-        .getElementById("adminCode")
-        .value = "";
-
-    document
-        .getElementById("adminCodeMessage")
-        .textContent = "";
-
-    document
-        .getElementById("adminCodeModal")
-        .classList
-        .add("show");
+return;
 
 }
 
+const isAdmin=
+await checkAdminStatus();
 
-/* =========================================================
-   ADMIN CODE
-   ========================================================= */
+if(isAdmin){
+
+showPage("admin");
+
+return;
+
+}
+
+document
+.getElementById("adminCode")
+.value="";
+
+document
+.getElementById("adminCodeMessage")
+.textContent="";
+
+document
+.getElementById("adminCodeModal")
+.classList
+.add("show");
+
+}
+
 
 async function adminCodeLogin(){
 
-    const code =
-        document
-            .getElementById("adminCode")
-            .value
-            .trim();
+const code=
+document
+.getElementById("adminCode")
+.value
+.trim();
 
-    const message =
-        document
-            .getElementById("adminCodeMessage");
+const message=
+document.getElementById(
+"adminCodeMessage"
+);
 
-    if(!code){
+if(!code){
 
-        message.textContent =
-            "Vul de code in.";
+message.textContent=
+"Vul de code in.";
 
-        return;
+return;
 
-    }
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.rpc(
-            "admin_code_login",
-            {
-                code
-            }
-        );
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"admin_code_login",
+{
+code
+}
+);
 
-    if(error){
+if(error){
 
-        console.error(error);
+console.error(error);
 
-        message.textContent =
-            "Er ging iets mis.";
+message.textContent=
+"Er ging iets mis.";
 
-        return;
+return;
 
-    }
+}
 
-    if(data !== true){
+if(data!==true){
 
-        message.textContent =
-            "Onjuiste beheerderscode.";
+message.textContent=
+"Onjuiste beheerderscode.";
 
-        return;
+return;
 
-    }
+}
 
-    currentProfile = {
-        ...(currentProfile || {}),
-        is_admin:true
-    };
+currentProfile={
+...(currentProfile||{}),
+is_admin:true
+};
 
-    closeModal(
-        "adminCodeModal"
-    );
+closeModal(
+"adminCodeModal"
+);
 
-    updateNavigation();
+updateNavigation();
 
-    showPage("admin");
+showPage("admin");
 
 }
 
 
-/* =========================================================
-   APPLICATION
-   ========================================================= */
+/* APPLICATION */
 
 function openApplication(functionName){
 
-    if(!currentUser){
+if(!currentUser){
 
-        openLogin();
+openLogin();
 
-        return;
+return;
 
-    }
+}
 
-    document
-        .getElementById("applicationFunction")
-        .value =
-            functionName;
+document
+.getElementById("applicationFunction")
+.value=functionName;
 
-    document
-        .getElementById("applicationMinecraft")
-        .value =
-            currentProfile?.username ||
-            currentUser.user_metadata?.username ||
-            "";
+document
+.getElementById("applicationMinecraft")
+.value=
+currentProfile?.username||
+currentUser.user_metadata?.username||
+"";
 
-    document
-        .getElementById("applicationMessage")
-        .textContent = "";
+document
+.getElementById("applicationMessage")
+.textContent="";
 
-    document
-        .getElementById("applicationModal")
-        .classList
-        .add("show");
+document
+.getElementById("applicationModal")
+.classList
+.add("show");
 
 }
 
 
 async function submitApplication(){
 
-    if(!currentUser){
-        return;
-    }
+if(!currentUser){
+return;
+}
 
-    const message =
-        document.getElementById(
-            "applicationMessage"
-        );
+const message=
+document.getElementById(
+"applicationMessage"
+);
 
-    const application = {
+const application={
 
-        user_id:
-            currentUser.id,
+user_id:currentUser.id,
 
-        email:
-            currentUser.email,
+email:currentUser.email,
 
-        minecraft_name:
-            document
-                .getElementById(
-                    "applicationMinecraft"
-                )
-                .value
-                .trim(),
+minecraft_name:
+document
+.getElementById(
+"applicationMinecraft"
+)
+.value
+.trim(),
 
-        function:
-            document
-                .getElementById(
-                    "applicationFunction"
-                )
-                .value,
+function:
+document
+.getElementById(
+"applicationFunction"
+)
+.value,
 
-        age:
-            Number(
-                document
-                    .getElementById(
-                        "applicationAge"
-                    )
-                    .value
-            ),
+age:Number(
+document
+.getElementById(
+"applicationAge"
+)
+.value
+),
 
-        experience:
-            document
-                .getElementById(
-                    "applicationExperience"
-                )
-                .value
-                .trim(),
+experience:
+document
+.getElementById(
+"applicationExperience"
+)
+.value
+.trim(),
 
-        motivation:
-            document
-                .getElementById(
-                    "applicationMotivation"
-                )
-                .value
-                .trim(),
+motivation:
+document
+.getElementById(
+"applicationMotivation"
+)
+.value
+.trim(),
 
-        availability:
-            document
-                .getElementById(
-                    "applicationAvailability"
-                )
-                .value
-                .trim(),
+availability:
+document
+.getElementById(
+"applicationAvailability"
+)
+.value
+.trim(),
 
-        status:
-            "In behandeling"
+status:"In behandeling"
 
-    };
+};
 
-    if(
-        !application.minecraft_name ||
-        !application.age ||
-        !application.experience ||
-        !application.motivation ||
-        !application.availability
-    ){
+if(
+!application.minecraft_name||
+!application.age||
+!application.experience||
+!application.motivation||
+!application.availability
+){
 
-        message.textContent =
-            "Vul alle velden in.";
+message.textContent=
+"Vul alle velden in.";
 
-        return;
+return;
 
-    }
+}
 
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("applications")
-            .insert(
-                application
-            );
+const {error}=
+await supabaseClient
+.from("applications")
+.insert(application);
 
-    if(error){
+if(error){
 
-        console.error(error);
+console.error(error);
 
-        message.textContent =
-            "Sollicitatie kon niet worden verstuurd.";
+message.textContent=
+"Sollicitatie kon niet worden verstuurd.";
 
-        return;
+return;
 
-    }
+}
 
-    message.textContent =
-        "Je sollicitatie is verstuurd!";
+message.textContent=
+"Je sollicitatie is verstuurd!";
 
-    setTimeout(
-        function(){
+setTimeout(function(){
 
-            closeModal(
-                "applicationModal"
-            );
+closeModal(
+"applicationModal"
+);
 
-        },
-        1200
-    );
+},1200);
 
 }
 
 
-/* =========================================================
-   ADMIN PAGE
-   ========================================================= */
+/* ADMIN PAGE */
 
 async function loadAdminPage(){
 
-    if(!currentUser){
-        return;
-    }
+if(!currentUser){
+return;
+}
 
-    const isAdmin =
-        await checkAdminStatus();
+const isAdmin=
+await checkAdminStatus();
 
-    if(!isAdmin){
+if(!isAdmin){
 
-        showPage("home");
+showPage("home");
 
-        return;
+return;
 
-    }
+}
 
-    await loadAdminApplications();
+await loadAdminApplications();
 
-    await loadAdminUsers();
+await loadAdminUsers();
 
 }
 
 
-/* =========================================================
-   ADMIN APPLICATIONS
-   ========================================================= */
+/* ADMIN APPLICATIONS */
 
 async function loadAdminApplications(){
 
-    const container =
-        document.getElementById(
-            "adminApplications"
-        );
+const container=
+document.getElementById(
+"adminApplications"
+);
 
-    container.innerHTML =
-        "Laden...";
+container.innerHTML=
+"Laden...";
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("applications")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
+const {
+data,
+error
+}=
+await supabaseClient
+.from("applications")
+.select("*")
+.order(
+"created_at",
+{
+ascending:false
+}
+);
 
-    if(error){
+if(error){
 
-        console.error(error);
+console.error(error);
 
-        container.innerHTML =
-            "Sollicitaties konden niet worden geladen.";
+container.innerHTML=
+"Sollicitaties konden niet worden geladen.";
 
-        return;
+return;
 
-    }
+}
 
-    if(!data?.length){
+if(!data?.length){
 
-        container.innerHTML =
-            "<p>Geen sollicitaties.</p>";
+container.innerHTML=
+"<p>Geen sollicitaties.</p>";
 
-        return;
+return;
 
-    }
+}
 
-    container.innerHTML =
-        data.map(function(app){
+container.innerHTML=
+data.map(function(app){
 
-            return `
+return `
 
-                <div class="card">
+<div class="card">
 
-                    <h3>
-                        ${escapeHtml(
-                            app.minecraft_name
-                        )}
-                    </h3>
+<h3>
+${escapeHtml(
+app.minecraft_name
+)}
+</h3>
 
-                    <p>
-                        <strong>Functie:</strong>
-                        ${escapeHtml(
-                            app.function
-                        )}
-                    </p>
+<p>
+<strong>Functie:</strong>
+${escapeHtml(
+app.function
+)}
+</p>
 
-                    <p>
-                        <strong>Email:</strong>
-                        ${escapeHtml(
-                            app.email
-                        )}
-                    </p>
+<p>
+<strong>Email:</strong>
+${escapeHtml(
+app.email
+)}
+</p>
 
-                    <p>
-                        <strong>Leeftijd:</strong>
-                        ${escapeHtml(
-                            String(app.age)
-                        )}
-                    </p>
+<p>
+<strong>Leeftijd:</strong>
+${escapeHtml(
+String(app.age)
+)}
+</p>
 
-                    <p>
-                        <strong>Ervaring:</strong>
-                        ${escapeHtml(
-                            app.experience
-                        )}
-                    </p>
+<p>
+<strong>Ervaring:</strong>
+${escapeHtml(
+app.experience
+)}
+</p>
 
-                    <p>
-                        <strong>Motivatie:</strong>
-                        ${escapeHtml(
-                            app.motivation
-                        )}
-                    </p>
+<p>
+<strong>Motivatie:</strong>
+${escapeHtml(
+app.motivation
+)}
+</p>
 
-                    <p>
-                        <strong>Beschikbaarheid:</strong>
-                        ${escapeHtml(
-                            app.availability
-                        )}
-                    </p>
+<p>
+<strong>Beschikbaarheid:</strong>
+${escapeHtml(
+app.availability
+)}
+</p>
 
-                    <p>
-                        Status:
-                        <span class="status">
-                            ${escapeHtml(
-                                app.status
-                            )}
-                        </span>
-                    </p>
+<p>
+Status:
+<span class="status">
+${escapeHtml(
+app.status
+)}
+</span>
+</p>
 
-                    ${
-                        app.status === "In behandeling"
+${
+app.status==="In behandeling"
 
-                        ? `
+?`
 
-                            <button
-                                type="button"
-                                class="gold-btn success"
-                                onclick="changeApplicationStatus(
-                                    ${app.id},
-                                    'Aangenomen'
-                                )">
-                                Aannemen
-                            </button>
+<button
+type="button"
+class="gold-btn success"
+onclick="changeApplicationStatus(
+${app.id},
+'Aangenomen'
+)">
+Aannemen
+</button>
 
-                            <button
-                                type="button"
-                                class="gold-btn danger"
-                                onclick="changeApplicationStatus(
-                                    ${app.id},
-                                    'Afgewezen'
-                                )">
-                                Afwijzen
-                            </button>
+<button
+type="button"
+class="gold-btn danger"
+onclick="changeApplicationStatus(
+${app.id},
+'Afgewezen'
+)">
+Afwijzen
+</button>
 
-                        `
+`
 
-                        : ""
+:""
+}
 
-                    }
+</div>
 
-                </div>
+`;
 
-            `;
-
-        }).join("");
+}).join("");
 
 }
 
 
-/* =========================================================
-   CHANGE APPLICATION STATUS
-   ========================================================= */
+/* APPLICATION STATUS */
 
 async function changeApplicationStatus(
-    id,
-    status
+id,
+status
 ){
 
-    const isAdmin =
-        await checkAdminStatus();
+const isAdmin=
+await checkAdminStatus();
 
-    if(!isAdmin){
+if(!isAdmin){
 
-        alert(
-            "Je bent geen beheerder."
-        );
+alert(
+"Je bent geen beheerder."
+);
 
-        return;
+return;
 
-    }
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("applications")
-            .update({
-                status
-            })
-            .eq(
-                "id",
-                id
-            )
-            .select()
-            .single();
+const {
+data,
+error
+}=
+await supabaseClient
+.from("applications")
+.update({
+status
+})
+.eq(
+"id",
+id
+)
+.select()
+.single();
 
-    if(error){
+if(error){
 
-        console.error(error);
+console.error(error);
 
-        alert(
-            "Status kon niet worden aangepast."
-        );
+alert(
+"Status kon niet worden aangepast."
+);
 
-        return;
+return;
 
-    }
+}
 
-    if(
-        data &&
-        (
-            status === "Aangenomen" ||
-            status === "Afgewezen"
-        )
-    ){
+if(
+data &&
+(
+status==="Aangenomen"||
+status==="Afgewezen"
+)
+){
 
-        try{
+try{
 
-            const {
-                data:sessionData
-            } =
-                await supabaseClient
-                    .auth
-                    .getSession();
+const {
+data:sessionData
+}=
+await supabaseClient
+.auth
+.getSession();
 
-            if(
-                sessionData?.session?.access_token
-            ){
+if(
+sessionData?.session?.access_token
+){
 
-                await fetch(
-                    SUPABASE_URL +
-                    "/functions/v1/send-application-email",
-                    {
-                        method:"POST",
+await fetch(
+SUPABASE_URL+
+"/functions/v1/send-application-email",
+{
+method:"POST",
+headers:{
+"Content-Type":
+"application/json",
 
-                        headers:{
-                            "Content-Type":
-                                "application/json",
+"Authorization":
+"Bearer "+
+sessionData
+.session
+.access_token
+},
+body:
+JSON.stringify({
+application:data
+})
+}
+);
 
-                            "Authorization":
-                                "Bearer " +
-                                sessionData
-                                    .session
-                                    .access_token
-                        },
+}
 
-                        body:
-                            JSON.stringify({
-                                application:data
-                            })
-                    }
-                );
+}catch(emailError){
 
-            }
+console.error(
+"Email error:",
+emailError
+);
 
-        }catch(emailError){
+}
 
-            console.error(
-                "Email error:",
-                emailError
-            );
+}
 
-        }
+await loadAdminApplications();
 
-    }
-
-    await loadAdminApplications();
-
-    await loadAdminUsers();
+await loadAdminUsers();
 
 }
 
 
-/* =========================================================
-   ADMIN USERS
-   ========================================================= */
+/* ADMIN USERS */
 
 async function loadAdminUsers(){
 
-    const container =
-        document.getElementById(
-            "adminUsers"
-        );
+const container=
+document.getElementById(
+"adminUsers"
+);
 
-    container.innerHTML =
-        "Laden...";
+container.innerHTML=
+"Laden...";
 
-    const isAdmin =
-        await checkAdminStatus();
+const isAdmin=
+await checkAdminStatus();
 
-    if(!isAdmin){
+if(!isAdmin){
 
-        container.innerHTML =
-            "<p>Geen toegang.</p>";
+container.innerHTML=
+"<p>Geen toegang.</p>";
 
-        return;
+return;
 
-    }
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select(
-                "id,username,email,status,is_admin"
-            )
-            .order(
-                "username"
-            );
+const {
+data,
+error
+}=
+await supabaseClient
+.from("profiles")
+.select(
+"id,username,email,status,is_admin"
+)
+.order(
+"username"
+);
 
-    if(error){
+if(error){
 
-        console.error(error);
+console.error(error);
 
-        container.innerHTML =
-            "Gebruikers konden niet worden geladen.";
+container.innerHTML=
+"Gebruikers konden niet worden geladen.";
 
-        return;
+return;
 
-    }
+}
 
-    if(!data?.length){
+if(!data?.length){
 
-        container.innerHTML =
-            "<p>Geen gebruikers gevonden.</p>";
+container.innerHTML=
+"<p>Geen gebruikers gevonden.</p>";
 
-        return;
+return;
 
-    }
+}
 
-    container.innerHTML =
-        data.map(function(user){
+container.innerHTML=
+data.map(function(user){
 
-            const username =
-                user.username ||
-                "Onbekende gebruiker";
+const username=
+user.username||
+"Onbekende gebruiker";
 
-            const status =
-                user.status ||
-                "Bezoeker";
+const status=
+user.status||
+"Bezoeker";
 
-            return `
+const isBanned=
+status==="Gebanned";
 
-                <div class="card">
+return `
 
-                    <h3>
-                        ${escapeHtml(
-                            username
-                        )}
-                    </h3>
+<div class="card">
 
-                    <p>
-                        <strong>Email:</strong>
-                        ${escapeHtml(
-                            user.email || ""
-                        )}
-                    </p>
+<h3>
+${escapeHtml(username)}
+</h3>
 
-                    <p>
-                        Status:
-                        <span class="status">
-                            ${escapeHtml(
-                                status
-                            )}
-                        </span>
-                    </p>
+<p>
+<strong>Email:</strong>
+${escapeHtml(
+user.email||""
+)}
+</p>
 
-                    <p>
-                        Beheerder:
-                        ${
-                            user.is_admin
-                                ? "Ja"
-                                : "Nee"
-                        }
-                    </p>
+<p>
+Status:
+<span class="status ${
+isBanned
+?"banned"
+:""
+}">
+${escapeHtml(status)}
+</span>
+</p>
 
-                    ${
-                        status !== "Team"
+<p>
+Beheerder:
+${
+user.is_admin
+?"Ja"
+:"Nee"
+}
+</p>
 
-                        ? `
+${
+!isBanned && status!=="Team"
 
-                            <button
-                                type="button"
-                                class="gold-btn success"
-                                onclick="makeTeam(
-                                    '${escapeHtml(
-                                        user.id
-                                    )}'
-                                )">
-                                👥 Maak Team
-                            </button>
+?`
 
-                        `
+<button
+type="button"
+class="gold-btn success"
+onclick="makeTeam(
+'${escapeHtml(user.id)}'
+)">
+👥 Maak Team
+</button>
 
-                        : `
+`
 
-                            <span class="status">
-                                ✓ Teamlid
-                            </span>
+:""
+}
 
-                        `
-                    }
+${
+!isBanned && status==="Team"
 
-                    <p class="small">
-                        User ID:
-                        ${escapeHtml(
-                            user.id
-                        )}
-                    </p>
+?`
 
-                </div>
+<span class="status">
+✓ Teamlid
+</span>
 
-            `;
+`
 
-        }).join("");
+:""
+}
+
+<br><br>
+
+${
+!isBanned
+
+?`
+
+<button
+type="button"
+class="gold-btn danger"
+onclick="banUser(
+'${escapeHtml(user.id)}',
+'${escapeHtml(username)}'
+)">
+🔨 Ban
+</button>
+
+`
+
+:`
+
+<button
+type="button"
+class="gold-btn success"
+onclick="unbanUser(
+'${escapeHtml(user.id)}',
+'${escapeHtml(username)}'
+)">
+🔓 Unban
+</button>
+
+`
+}
+
+<p class="small">
+User ID:
+${escapeHtml(user.id)}
+</p>
+
+</div>
+
+`;
+
+}).join("");
 
 }
 
 
-/* =========================================================
-   MAKE TEAM
-   ========================================================= */
+/* MAKE TEAM */
 
 async function makeTeam(userId){
 
-    const isAdmin =
-        await checkAdminStatus();
+const isAdmin=
+await checkAdminStatus();
 
-    if(!isAdmin){
+if(!isAdmin){
 
-        alert(
-            "Je bent geen beheerder."
-        );
+alert(
+"Je bent geen beheerder."
+);
 
-        return;
+return;
 
-    }
+}
 
-    const confirmed =
-        confirm(
-            "Weet je zeker dat je deze gebruiker aan Team wilt toevoegen?"
-        );
+const confirmed=
+confirm(
+"Weet je zeker dat je deze gebruiker aan Team wilt toevoegen?"
+);
 
-    if(!confirmed){
-        return;
-    }
+if(!confirmed){
+return;
+}
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.rpc(
-            "admin_make_team",
-            {
-                target_user_id:userId
-            }
-        );
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"admin_make_team",
+{
+target_user_id:userId
+}
+);
 
-    if(error){
+if(error){
 
-        console.error(
-            "Make team error:",
-            error
-        );
+console.error(
+"Make team error:",
+error
+);
 
-        alert(
-            "De gebruiker kon niet tot Team worden gemaakt."
-        );
+alert(
+"De gebruiker kon niet tot Team worden gemaakt."
+);
 
-        return;
+return;
 
-    }
+}
 
-    if(data !== true){
+if(data!==true){
 
-        alert(
-            "De gebruiker kon niet tot Team worden gemaakt."
-        );
+alert(
+"De gebruiker kon niet tot Team worden gemaakt."
+);
 
-        return;
+return;
 
-    }
+}
 
-    alert(
-        "De gebruiker is toegevoegd aan Team!"
-    );
-
-    await loadAdminUsers();
+await loadAdminUsers();
 
 }
 
 
-/* =========================================================
-   ADMIN ADD APPLICATION
-   ========================================================= */
+/* BAN */
+
+async function banUser(
+userId,
+username
+){
+
+const isAdmin=
+await checkAdminStatus();
+
+if(!isAdmin){
+
+alert(
+"Je bent geen beheerder."
+);
+
+return;
+
+}
+
+const confirmed=
+confirm(
+"Weet je zeker dat je "+username+" wilt bannen?"
+);
+
+if(!confirmed){
+return;
+}
+
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"admin_set_banned",
+{
+target_user_id:userId,
+banned:true
+}
+);
+
+if(error){
+
+console.error(
+"Ban error:",
+error
+);
+
+alert(
+"De gebruiker kon niet worden gebanned."
+);
+
+return;
+
+}
+
+if(data!==true){
+
+alert(
+"De gebruiker kon niet worden gebanned."
+);
+
+return;
+
+}
+
+alert(
+username+" is gebanned."
+);
+
+await loadAdminUsers();
+
+}
+
+
+/* UNBAN */
+
+async function unbanUser(
+userId,
+username
+){
+
+const isAdmin=
+await checkAdminStatus();
+
+if(!isAdmin){
+
+alert(
+"Je bent geen beheerder."
+);
+
+return;
+
+}
+
+const confirmed=
+confirm(
+"Weet je zeker dat je "+username+" wilt unbannen?"
+);
+
+if(!confirmed){
+return;
+}
+
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"admin_set_banned",
+{
+target_user_id:userId,
+banned:false
+}
+);
+
+if(error){
+
+console.error(
+"Unban error:",
+error
+);
+
+alert(
+"De gebruiker kon niet worden ungebanned."
+);
+
+return;
+
+}
+
+if(data!==true){
+
+alert(
+"De gebruiker kon niet worden ungebanned."
+);
+
+return;
+
+}
+
+alert(
+username+" is weer toegestaan."
+);
+
+await loadAdminUsers();
+
+}
+
+
+/* ADMIN APPLICATION */
 
 function openAdminApplication(){
 
-    document
-        .getElementById(
-            "adminApplicationModal"
-        )
-        .classList
-        .add("show");
+document
+.getElementById(
+"adminApplicationModal"
+)
+.classList
+.add("show");
 
 }
 
 
 async function adminAddApplication(){
 
-    const isAdmin =
-        await checkAdminStatus();
+const isAdmin=
+await checkAdminStatus();
 
-    if(!isAdmin){
-        return;
-    }
+if(!isAdmin){
+return;
+}
 
-    const message =
-        document.getElementById(
-            "adminApplicationMessage"
-        );
+const message=
+document.getElementById(
+"adminApplicationMessage"
+);
 
-    const application = {
+const application={
 
-        user_id:
-            document
-                .getElementById(
-                    "adminAppUserId"
-                )
-                .value
-                .trim(),
+user_id:
+document
+.getElementById(
+"adminAppUserId"
+)
+.value
+.trim(),
 
-        email:
-            document
-                .getElementById(
-                    "adminAppEmail"
-                )
-                .value
-                .trim(),
+email:
+document
+.getElementById(
+"adminAppEmail"
+)
+.value
+.trim(),
 
-        minecraft_name:
-            document
-                .getElementById(
-                    "adminAppMinecraft"
-                )
-                .value
-                .trim(),
+minecraft_name:
+document
+.getElementById(
+"adminAppMinecraft"
+)
+.value
+.trim(),
 
-        function:
-            document
-                .getElementById(
-                    "adminAppFunction"
-                )
-                .value,
+function:
+document
+.getElementById(
+"adminAppFunction"
+)
+.value,
 
-        age:
-            Number(
-                document
-                    .getElementById(
-                        "adminAppAge"
-                    )
-                    .value
-            ),
+age:Number(
+document
+.getElementById(
+"adminAppAge"
+)
+.value
+),
 
-        experience:
-            document
-                .getElementById(
-                    "adminAppExperience"
-                )
-                .value
-                .trim(),
+experience:
+document
+.getElementById(
+"adminAppExperience"
+)
+.value
+.trim(),
 
-        motivation:
-            document
-                .getElementById(
-                    "adminAppMotivation"
-                )
-                .value
-                .trim(),
+motivation:
+document
+.getElementById(
+"adminAppMotivation"
+)
+.value
+.trim(),
 
-        availability:
-            document
-                .getElementById(
-                    "adminAppAvailability"
-                )
-                .value
-                .trim(),
+availability:
+document
+.getElementById(
+"adminAppAvailability"
+)
+.value
+.trim(),
 
-        status:
-            "In behandeling"
+status:"In behandeling"
 
-    };
+};
 
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("applications")
-            .insert(
-                application
-            );
+const {error}=
+await supabaseClient
+.from("applications")
+.insert(
+application
+);
 
-    if(error){
+if(error){
 
-        console.error(error);
+console.error(error);
 
-        message.textContent =
-            "Sollicitatie kon niet worden toegevoegd.";
+message.textContent=
+"Sollicitatie kon niet worden toegevoegd.";
 
-        return;
+return;
 
-    }
+}
 
-    message.textContent =
-        "Sollicitatie toegevoegd!";
+message.textContent=
+"Sollicitatie toegevoegd!";
 
-    await loadAdminApplications();
+await loadAdminApplications();
 
-    setTimeout(
-        function(){
+setTimeout(function(){
 
-            closeModal(
-                "adminApplicationModal"
-            );
+closeModal(
+"adminApplicationModal"
+);
 
-        },
-        1000
-    );
+},1000);
 
 }
 
 
-/* =========================================================
-   ACTIVE SESSION
-   ========================================================= */
+/* ACTIVE SESSION */
 
 async function updateActiveSession(){
 
-    if(!currentUser){
-        return;
-    }
+if(!currentUser){
+return;
+}
 
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("active_sessions")
-            .upsert(
-                {
-                    user_id:
-                        currentUser.id,
+const {error}=
+await supabaseClient
+.from("active_sessions")
+.upsert(
+{
+user_id:
+currentUser.id,
 
-                    last_seen:
-                        new Date()
-                            .toISOString()
-                },
-                {
-                    onConflict:
-                        "user_id"
-                }
-            );
+last_seen:
+new Date()
+.toISOString()
+},
+{
+onConflict:
+"user_id"
+}
+);
 
-    if(error){
+if(error){
 
-        console.error(
-            "Active session error:",
-            error
-        );
+console.error(
+"Active session error:",
+error
+);
 
-    }
+}
 
 }
 
 
 async function removeActiveSession(){
 
-    if(!currentUser){
-        return;
-    }
+if(!currentUser){
+return;
+}
 
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("active_sessions")
-            .delete()
-            .eq(
-                "user_id",
-                currentUser.id
-            );
+const {error}=
+await supabaseClient
+.from("active_sessions")
+.delete()
+.eq(
+"user_id",
+currentUser.id
+);
 
-    if(error){
+if(error){
 
-        console.error(
-            "Remove session error:",
-            error
-        );
+console.error(
+"Remove session error:",
+error
+);
 
-    }
+}
 
 }
 
 
-/* =========================================================
-   ACTIVE SESSION HEARTBEAT
-   ========================================================= */
+/* HEARTBEAT */
 
 function startActiveSessionHeartbeat(){
 
-    stopActiveSessionHeartbeat();
+stopActiveSessionHeartbeat();
 
-    if(!currentUser){
-        return;
-    }
+if(!currentUser){
+return;
+}
 
-    updateActiveSession();
+updateActiveSession();
 
-    activeSessionTimer =
-        setInterval(
-            function(){
+activeSessionTimer=
+setInterval(
+function(){
 
-                updateActiveSession();
+updateActiveSession();
 
-            },
-            30000
-        );
+},
+30000
+);
 
 }
 
 
 function stopActiveSessionHeartbeat(){
 
-    if(activeSessionTimer){
+if(activeSessionTimer){
 
-        clearInterval(
-            activeSessionTimer
-        );
+clearInterval(
+activeSessionTimer
+);
 
-        activeSessionTimer = null;
+activeSessionTimer=null;
 
-    }
+}
 
 }
 
 
-/* =========================================================
-   COMMUNITY
-   ========================================================= */
+/* COMMUNITY */
 
 async function loadCommunityUsers(){
 
-    const container =
-        document.getElementById(
-            "communityUsers"
-        );
+const container=
+document.getElementById(
+"communityUsers"
+);
 
-    const count =
-        document.getElementById(
-            "onlineCount"
-        );
+const count=
+document.getElementById(
+"onlineCount"
+);
 
-    if(!container || !count){
-        return;
-    }
+if(!container||!count){
+return;
+}
 
-    if(!currentUser){
+if(!currentUser){
 
-        count.textContent =
-            "Log in om de community te bekijken.";
+count.textContent=
+"Log in om de community te bekijken.";
 
-        container.innerHTML = "";
+container.innerHTML="";
 
-        return;
+return;
 
-    }
+}
 
-    container.innerHTML =
-        "Laden...";
+container.innerHTML=
+"Laden...";
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.rpc(
-            "get_community_users"
-        );
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"get_community_users"
+);
 
-    if(error){
+if(error){
 
-        console.error(
-            "Community error:",
-            error
-        );
+console.error(
+"Community error:",
+error
+);
 
-        count.textContent =
-            "Community kon niet worden geladen.";
+count.textContent=
+"Community kon niet worden geladen.";
 
-        container.innerHTML =
-            "<p>Er ging iets mis bij het laden van de community.</p>";
+container.innerHTML=
+"<p>Er ging iets mis bij het laden van de community.</p>";
 
-        return;
+return;
 
-    }
+}
 
-    const users =
-        data || [];
+const users=
+data||[];
 
-    const onlineUsers =
-        users.filter(function(user){
-            return user.online === true;
-        });
+const onlineUsers=
+users.filter(function(user){
+return user.online===true;
+});
 
-    const offlineUsers =
-        users.filter(function(user){
-            return user.online !== true;
-        });
+const offlineUsers=
+users.filter(function(user){
+return user.online!==true;
+});
 
-    count.textContent =
-        onlineUsers.length +
-        (
-            onlineUsers.length === 1
-                ? " persoon online"
-                : " personen online"
-        ) +
-        " • " +
-        users.length +
-        (
-            users.length === 1
-                ? " lid totaal"
-                : " leden totaal"
-        );
+count.textContent=
+onlineUsers.length+
+(
+onlineUsers.length===1
+?" persoon online"
+:" personen online"
+)+
+" • "+
+users.length+
+(
+users.length===1
+?" lid totaal"
+:" leden totaal"
+);
 
-    if(users.length === 0){
+if(users.length===0){
 
-        container.innerHTML =
-            "<p>Er zijn nog geen leden.</p>";
+container.innerHTML=
+"<p>Er zijn nog geen leden.</p>";
 
-        return;
+return;
 
-    }
+}
 
-    let html = "";
+let html="";
 
-    if(onlineUsers.length > 0){
+if(onlineUsers.length>0){
 
-        html += `
-            <h3>
-                🟢 Online
-            </h3>
-        `;
+html+=`
+<h3>
+🟢 Online
+</h3>
+`;
 
-        html += onlineUsers
-            .map(
-                createCommunityUserCard
-            )
-            .join("");
+html+=onlineUsers
+.map(
+createCommunityUserCard
+)
+.join("");
 
-    }
+}
 
-    if(offlineUsers.length > 0){
+if(offlineUsers.length>0){
 
-        html += `
-            <h3 style="margin-top:30px;">
-                ⚫ Offline
-            </h3>
-        `;
+html+=`
+<h3 style="margin-top:30px;">
+⚫ Offline
+</h3>
+`;
 
-        html += offlineUsers
-            .map(
-                createCommunityUserCard
-            )
-            .join("");
+html+=offlineUsers
+.map(
+createCommunityUserCard
+)
+.join("");
 
-    }
+}
 
-    container.innerHTML =
-        html;
+container.innerHTML=
+html;
 
 }
 
 
 function createCommunityUserCard(user){
 
-    const username =
-        user.username ||
-        "Onbekende gebruiker";
+const username=
+user.username||
+"Onbekende gebruiker";
 
-    const status =
-        user.status ||
-        "Bezoeker";
+const status=
+user.status||
+"Bezoeker";
 
-    const online =
-        user.online === true;
+const online=
+user.online===true;
 
-    return `
+const banned=
+status==="Gebanned";
 
-        <div class="card person">
+return `
 
-            <div class="avatar">
-                ${escapeHtml(
-                    username
-                        .charAt(0)
-                        .toUpperCase()
-                )}
-            </div>
+<div class="card person">
 
-            <div>
+<div class="avatar">
+${escapeHtml(
+username
+.charAt(0)
+.toUpperCase()
+)}
+</div>
 
-                <strong>
-                    ${escapeHtml(
-                        username
-                    )}
-                </strong>
+<div>
 
-                <br>
+<strong>
+${escapeHtml(username)}
+</strong>
 
-                <span
-                    class="status ${
-                        online
-                            ? "online"
-                            : "offline"
-                    }">
+<br>
 
-                    ${
-                        online
-                            ? "🟢 Online"
-                            : "⚫ Offline"
-                    }
+<span
+class="status ${
+online
+?"online"
+:"offline"
+}">
 
-                </span>
+${
+online
+?"🟢 Online"
+:"⚫ Offline"
+}
 
-                <span class="status">
-                    ${escapeHtml(
-                        status
-                    )}
-                </span>
+</span>
 
-            </div>
+<span
+class="status ${
+banned
+?"banned"
+:""
+}">
+${escapeHtml(status)}
+</span>
 
-        </div>
+</div>
 
-    `;
+</div>
+
+`;
 
 }
 
 
 function startCommunityRefresh(){
 
-    stopCommunityRefresh();
+stopCommunityRefresh();
 
-    loadCommunityUsers();
+loadCommunityUsers();
 
-    communityTimer =
-        setInterval(
-            function(){
+communityTimer=
+setInterval(
+function(){
 
-                loadCommunityUsers();
+loadCommunityUsers();
 
-            },
-            15000
-        );
+},
+15000
+);
 
 }
 
 
 function stopCommunityRefresh(){
 
-    if(communityTimer){
+if(communityTimer){
 
-        clearInterval(
-            communityTimer
-        );
+clearInterval(
+communityTimer
+);
 
-        communityTimer = null;
+communityTimer=null;
 
-    }
+}
 
 }
 
 
-/* =========================================================
-   AUTH STATE
-   ========================================================= */
+/* AUTH */
 
 async function syncAuthState(session){
 
-    currentSession =
-        session;
+currentSession=session;
 
-    currentUser =
-        session?.user ||
-        null;
+currentUser=
+session?.user||
+null;
 
-    if(currentUser){
+if(currentUser){
 
-        await loadProfile();
+await loadProfile();
 
-        await updateActiveSession();
+if(!currentUser){
+return;
+}
 
-        startActiveSessionHeartbeat();
+await updateActiveSession();
 
-    }else{
+startActiveSessionHeartbeat();
 
-        stopActiveSessionHeartbeat();
+}else{
 
-    }
+stopActiveSessionHeartbeat();
 
-    updateNavigation();
+}
+
+updateNavigation();
 
 }
 
 
 supabaseClient.auth.onAuthStateChange(
-    function(event,session){
+function(event,session){
 
-        setTimeout(
-            function(){
+setTimeout(
+function(){
 
-                syncAuthState(
-                    session
-                );
+syncAuthState(
+session
+);
 
-            },
-            0
-        );
+},
+0
+);
 
-    }
+}
 );
 
 
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+/* ESCAPE */
 
 function escapeHtml(value){
 
-    return String(
-        value ?? ""
-    )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
+return String(
+value??""
+)
+.replaceAll(
+"&",
+"&amp;"
+)
+.replaceAll(
+"<",
+"&lt;"
+)
+.replaceAll(
+">",
+"&gt;"
+)
+.replaceAll(
+'"',
+"&quot;"
+)
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
 
-/* =========================================================
-   STARTUP
-   ========================================================= */
+/* START */
 
 (async function(){
 
-    const {
-        data
-    } =
-        await supabaseClient
-            .auth
-            .getSession();
+const {
+data
+}=
+await supabaseClient
+.auth
+.getSession();
 
-    if(data.session){
+if(data.session){
 
-        await syncAuthState(
-            data.session
-        );
+await syncAuthState(
+data.session
+);
 
-    }else{
+}else{
 
-        updateNavigation();
+updateNavigation();
 
-    }
+}
 
 })();
 
