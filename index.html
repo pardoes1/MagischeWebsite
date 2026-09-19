@@ -261,35 +261,6 @@ textarea{
     background:#9b6b20!important;
 }
 
-.link-code{
-    font-family:monospace;
-    font-size:30px;
-    letter-spacing:4px;
-    text-align:center;
-    color:#ffd85a;
-    background:#12071d;
-    border:2px dashed #9d4edd;
-    padding:20px;
-    border-radius:15px;
-    margin:15px 0;
-    word-break:break-all;
-}
-
-.link-command{
-    font-family:monospace;
-    font-size:18px;
-    background:#12071d;
-    padding:15px;
-    border-radius:10px;
-    text-align:center;
-    border:1px solid rgba(255,216,90,.2);
-}
-
-.link-success{
-    border:1px solid rgba(80,220,130,.4);
-    background:rgba(38,115,77,.2);
-}
-
 /* ACHIEVEMENTS */
 
 .achievement-card{
@@ -531,117 +502,6 @@ Beheerder:
 Nee
 </span>
 </p>
-
-</div>
-
-
-<!-- MINECRAFT LINKING -->
-
-<div class="card">
-
-<h3>
-🎮 Minecraft koppelen
-</h3>
-
-<div id="minecraftUnlinked">
-
-<p>
-Koppel je Minecraft-account aan je Magische Heuvel-account.
-</p>
-
-<p class="small">
-Klik op de knop hieronder om een tijdelijke koppelcode te krijgen.
-</p>
-
-<button
-type="button"
-class="gold-btn"
-onclick="generateMinecraftLinkCode()">
-🔗 Minecraft koppelen
-</button>
-
-<div
-id="minecraftLinkArea"
-style="display:none">
-
-<div
-id="minecraftLinkMessage"
-class="notice">
-</div>
-
-<div
-id="minecraftCode"
-class="link-code">
--
-</div>
-
-<div class="link-command">
-/link <span id="minecraftCommandCode">CODE</span>
-</div>
-
-<p class="small">
-Ga nu naar Minecraft en voer het bovenstaande commando uit.
-</p>
-
-<p
-id="minecraftExpiry"
-class="small">
-Code is 10 minuten geldig.
-</p>
-
-<button
-type="button"
-class="gold-btn"
-onclick="copyMinecraftCommand()">
-📋 Commando kopiëren
-</button>
-
-</div>
-
-</div>
-
-
-<div
-id="minecraftLinked"
-style="display:none">
-
-<div class="notice link-success">
-
-<h3>
-✅ Minecraft gekoppeld
-</h3>
-
-<p>
-Je Minecraft-account is succesvol gekoppeld.
-</p>
-
-</div>
-
-<p>
-<strong>Minecraft naam:</strong>
-<br>
-<span id="linkedMinecraftUsername">-</span>
-</p>
-
-<p>
-<strong>Minecraft UUID:</strong>
-<br>
-<span
-id="linkedMinecraftUUID"
-class="small">
--
-</span>
-</p>
-
-<p>
-<strong>Gekoppeld op:</strong>
-<br>
-<span id="linkedMinecraftDate">
--
-</span>
-</p>
-
-</div>
 
 </div>
 
@@ -1103,9 +963,6 @@ let currentProfile=null;
 let communityTimer=null;
 let activeSessionTimer=null;
 
-let minecraftLinkTimer=null;
-let minecraftLinkExpiresAt=null;
-
 
 /* DEVTOOLS SHORTCUTS */
 
@@ -1235,11 +1092,7 @@ loadAdminPage();
 }
 
 if(page==="account"){
-
-loadMinecraftLinkStatus();
-
 loadAchievements();
-
 }
 
 }
@@ -1427,8 +1280,6 @@ data.session
 
 async function logout(){
 
-stopMinecraftLinkPolling();
-
 await removeActiveSession();
 
 stopActiveSessionHeartbeat();
@@ -1461,7 +1312,7 @@ error
 await supabaseClient
 .from("profiles")
 .select(
-"username,email,status,is_admin,minecraft_uuid,minecraft_name,minecraft_linked_at"
+"username,email,status,is_admin"
 )
 .eq(
 "id",
@@ -1540,508 +1391,7 @@ data?.is_admin
 ?"Ja"
 :"Nee";
 
-updateMinecraftLinkUI(data);
-
 updateNavigation();
-
-}
-
-
-/* =====================================================
-   MINECRAFT LINKING
-   ===================================================== */
-
-function generateMinecraftCode(){
-
-const chars=
-"ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-let code="";
-
-if(window.crypto && window.crypto.getRandomValues){
-
-const values=
-new Uint32Array(12);
-
-window.crypto.getRandomValues(values);
-
-for(let i=0;i<12;i++){
-
-code+=
-chars[
-values[i] % chars.length
-];
-
-}
-
-}else{
-
-for(let i=0;i<12;i++){
-
-code+=
-chars.charAt(
-Math.floor(
-Math.random()*chars.length
-)
-);
-
-}
-
-}
-
-return code;
-
-}
-
-
-async function generateMinecraftLinkCode(){
-
-if(!currentUser){
-
-openLogin();
-
-return;
-
-}
-
-
-/* Check if already linked */
-
-const {
-data:profile,
-error:profileError
-}=
-await supabaseClient
-.from("profiles")
-.select(
-"minecraft_uuid,minecraft_name,minecraft_linked_at"
-)
-.eq(
-"id",
-currentUser.id
-)
-.maybeSingle();
-
-if(profileError){
-
-console.error(
-profileError
-);
-
-alert(
-"Je profiel kon niet worden geladen."
-);
-
-return;
-
-}
-
-if(profile?.minecraft_uuid){
-
-updateMinecraftLinkUI(profile);
-
-return;
-
-}
-
-
-/* Invalidate previous unused codes */
-
-await supabaseClient
-.from("minecraft_link_codes")
-.delete()
-.eq(
-"user_id",
-currentUser.id
-)
-.is(
-"used_at",
-null
-);
-
-
-/* Generate code */
-
-const code=
-generateMinecraftCode();
-
-const expiresAt=
-new Date(
-Date.now()+10*60*1000
-)
-.toISOString();
-
-
-const {
-data,
-error
-}=
-await supabaseClient
-.from("minecraft_link_codes")
-.insert({
-
-user_id:
-currentUser.id,
-
-code:
-code,
-
-expires_at:
-expiresAt
-
-})
-.select()
-.single();
-
-
-if(error){
-
-console.error(
-"Link code error:",
-error
-);
-
-document
-.getElementById(
-"minecraftLinkMessage"
-)
-.textContent=
-"De koppelcode kon niet worden aangemaakt.";
-
-document
-.getElementById(
-"minecraftLinkArea"
-)
-.style.display=
-"block";
-
-return;
-
-}
-
-
-/* Show code */
-
-document
-.getElementById(
-"minecraftLinkArea"
-)
-.style.display=
-"block";
-
-document
-.getElementById(
-"minecraftCode"
-)
-.textContent=
-data.code;
-
-document
-.getElementById(
-"minecraftCommandCode"
-)
-.textContent=
-data.code;
-
-document
-.getElementById(
-"minecraftLinkMessage"
-)
-.textContent=
-"Voer dit commando in op de Minecraft-server:";
-
-minecraftLinkExpiresAt=
-new Date(
-data.expires_at
-);
-
-updateMinecraftExpiry();
-
-startMinecraftLinkPolling();
-
-}
-
-
-function updateMinecraftExpiry(){
-
-if(!minecraftLinkExpiresAt){
-return;
-}
-
-const element=
-document.getElementById(
-"minecraftExpiry"
-);
-
-if(!element){
-return;
-}
-
-const remaining=
-minecraftLinkExpiresAt.getTime()-
-Date.now();
-
-if(remaining<=0){
-
-element.textContent=
-"Deze code is verlopen. Maak een nieuwe code aan.";
-
-stopMinecraftLinkPolling();
-
-return;
-
-}
-
-const seconds=
-Math.ceil(
-remaining/1000
-);
-
-const minutes=
-Math.floor(
-seconds/60
-);
-
-const secs=
-seconds%60;
-
-element.textContent=
-"Code geldig voor "+
-minutes+
-":"+
-String(secs).padStart(2,"0")+
-".";
-
-setTimeout(
-updateMinecraftExpiry,
-1000
-);
-
-}
-
-
-function startMinecraftLinkPolling(){
-
-stopMinecraftLinkPolling();
-
-minecraftLinkTimer=
-setInterval(
-checkMinecraftLink,
-3000
-);
-
-checkMinecraftLink();
-
-}
-
-
-function stopMinecraftLinkPolling(){
-
-if(minecraftLinkTimer){
-
-clearInterval(
-minecraftLinkTimer
-);
-
-minecraftLinkTimer=null;
-
-}
-
-}
-
-
-async function checkMinecraftLink(){
-
-if(!currentUser){
-return;
-}
-
-const {
-data,
-error
-}=
-await supabaseClient
-.from("profiles")
-.select(
-"minecraft_uuid,minecraft_name,minecraft_linked_at"
-)
-.eq(
-"id",
-currentUser.id
-)
-.maybeSingle();
-
-if(error){
-
-console.error(
-"Minecraft link check:",
-error
-);
-
-return;
-
-}
-
-if(data?.minecraft_uuid){
-
-currentProfile={
-...(currentProfile||{}),
-...data
-};
-
-stopMinecraftLinkPolling();
-
-updateMinecraftLinkUI(
-currentProfile
-);
-
-await loadAchievements();
-
-}
-
-}
-
-
-async function loadMinecraftLinkStatus(){
-
-if(!currentUser){
-return;
-}
-
-const {
-data,
-error
-}=
-await supabaseClient
-.from("profiles")
-.select(
-"minecraft_uuid,minecraft_name,minecraft_linked_at"
-)
-.eq(
-"id",
-currentUser.id
-)
-.maybeSingle();
-
-if(error){
-
-console.error(
-"Minecraft status error:",
-error
-);
-
-return;
-
-}
-
-currentProfile={
-...(currentProfile||{}),
-...data
-};
-
-updateMinecraftLinkUI(
-currentProfile
-);
-
-}
-
-
-function updateMinecraftLinkUI(profile){
-
-const unlinked=
-document.getElementById(
-"minecraftUnlinked"
-);
-
-const linked=
-document.getElementById(
-"minecraftLinked"
-);
-
-if(!unlinked||!linked){
-return;
-}
-
-if(profile?.minecraft_uuid){
-
-unlinked.style.display="none";
-linked.style.display="block";
-
-document
-.getElementById(
-"linkedMinecraftUsername"
-)
-.textContent=
-profile.minecraft_name||
-"Onbekend";
-
-document
-.getElementById(
-"linkedMinecraftUUID"
-)
-.textContent=
-profile.minecraft_uuid||
-"-";
-
-document
-.getElementById(
-"linkedMinecraftDate"
-)
-.textContent=
-profile.minecraft_linked_at
-?
-new Date(
-profile.minecraft_linked_at
-).toLocaleString(
-"nl-NL"
-)
-:
-"-";
-
-}else{
-
-unlinked.style.display="block";
-linked.style.display="none";
-
-}
-
-}
-
-
-async function copyMinecraftCommand(){
-
-const code=
-document
-.getElementById(
-"minecraftCommandCode"
-)
-.textContent;
-
-if(!code||code==="CODE"){
-return;
-}
-
-const command=
-"/link "+
-code;
-
-try{
-
-await navigator.clipboard.writeText(
-command
-);
-
-alert(
-"Het Minecraft-commando is gekopieerd!"
-);
-
-}catch(error){
-
-alert(
-command
-);
-
-}
 
 }
 
@@ -2375,7 +1725,6 @@ document
 document
 .getElementById("applicationMinecraft")
 .value=
-currentProfile?.minecraft_name||
 currentProfile?.username||
 currentUser.user_metadata?.username||
 "";
@@ -2822,7 +2171,7 @@ error
 await supabaseClient
 .from("profiles")
 .select(
-"id,username,email,status,is_admin,minecraft_uuid,minecraft_name,minecraft_linked_at"
+"id,username,email,status,is_admin"
 )
 .order(
 "username"
@@ -2894,17 +2243,6 @@ ${
 user.is_admin
 ?"Ja"
 :"Nee"
-}
-</p>
-
-<p>
-<strong>Minecraft:</strong>
-${
-user.minecraft_name
-?
-"🎮 "+escapeHtml(user.minecraft_name)
-:
-"Niet gekoppeld"
 }
 </p>
 
@@ -3704,7 +3042,6 @@ startActiveSessionHeartbeat();
 }else{
 
 stopActiveSessionHeartbeat();
-stopMinecraftLinkPolling();
 
 }
 
