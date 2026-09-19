@@ -290,6 +290,52 @@ textarea{
     background:rgba(38,115,77,.2);
 }
 
+/* ACHIEVEMENTS */
+
+.achievement-card{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px;
+    margin:12px 0;
+    border-radius:15px;
+    background:linear-gradient(
+        135deg,
+        rgba(111,45,189,.35),
+        rgba(255,216,90,.08)
+    );
+    border:1px solid rgba(255,216,90,.25);
+}
+
+.achievement-icon{
+    width:58px;
+    height:58px;
+    min-width:58px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    background:linear-gradient(135deg,#6f2dbd,#ffd85a);
+}
+
+.achievement-name{
+    font-size:18px;
+    font-weight:700;
+    color:#ffd85a;
+}
+
+.achievement-date{
+    opacity:.7;
+    font-size:13px;
+    margin-top:3px;
+}
+
+.no-achievements{
+    opacity:.75;
+    padding:10px 0;
+}
+
 footer{
     text-align:center;
     padding:35px;
@@ -594,6 +640,29 @@ class="small">
 -
 </span>
 </p>
+
+</div>
+
+</div>
+
+
+<!-- ACHIEVEMENTS -->
+
+<div class="card">
+
+<h3>
+🏆 Achievements
+</h3>
+
+<p>
+Verdien speciale achievements door bijzondere dingen te doen in Magische Heuvel.
+</p>
+
+<div id="achievementsList">
+
+<div class="notice">
+Achievements worden geladen...
+</div>
 
 </div>
 
@@ -1166,7 +1235,11 @@ loadAdminPage();
 }
 
 if(page==="account"){
+
 loadMinecraftLinkStatus();
+
+loadAchievements();
+
 }
 
 }
@@ -1388,7 +1461,7 @@ error
 await supabaseClient
 .from("profiles")
 .select(
-"username,email,status,is_admin,minecraft_uuid,minecraft_username,minecraft_linked_at"
+"username,email,status,is_admin,minecraft_uuid,minecraft_name,minecraft_linked_at"
 )
 .eq(
 "id",
@@ -1485,6 +1558,24 @@ const chars=
 
 let code="";
 
+if(window.crypto && window.crypto.getRandomValues){
+
+const values=
+new Uint32Array(12);
+
+window.crypto.getRandomValues(values);
+
+for(let i=0;i<12;i++){
+
+code+=
+chars[
+values[i] % chars.length
+];
+
+}
+
+}else{
+
 for(let i=0;i<12;i++){
 
 code+=
@@ -1493,6 +1584,8 @@ Math.floor(
 Math.random()*chars.length
 )
 );
+
+}
 
 }
 
@@ -1521,7 +1614,7 @@ error:profileError
 await supabaseClient
 .from("profiles")
 .select(
-"minecraft_uuid,minecraft_username,minecraft_linked_at"
+"minecraft_uuid,minecraft_name,minecraft_linked_at"
 )
 .eq(
 "id",
@@ -1555,17 +1648,15 @@ return;
 /* Invalidate previous unused codes */
 
 await supabaseClient
-.from("linking_codes")
-.update({
-used:true
-})
+.from("minecraft_link_codes")
+.delete()
 .eq(
 "user_id",
 currentUser.id
 )
-.eq(
-"used",
-false
+.is(
+"used_at",
+null
 );
 
 
@@ -1586,7 +1677,7 @@ data,
 error
 }=
 await supabaseClient
-.from("linking_codes")
+.from("minecraft_link_codes")
 .insert({
 
 user_id:
@@ -1596,9 +1687,7 @@ code:
 code,
 
 expires_at:
-expiresAt,
-
-used:false
+expiresAt
 
 })
 .select()
@@ -1774,7 +1863,7 @@ error
 await supabaseClient
 .from("profiles")
 .select(
-"minecraft_uuid,minecraft_username,minecraft_linked_at"
+"minecraft_uuid,minecraft_name,minecraft_linked_at"
 )
 .eq(
 "id",
@@ -1806,7 +1895,53 @@ updateMinecraftLinkUI(
 currentProfile
 );
 
+await loadAchievements();
+
 }
+
+}
+
+
+async function loadMinecraftLinkStatus(){
+
+if(!currentUser){
+return;
+}
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("profiles")
+.select(
+"minecraft_uuid,minecraft_name,minecraft_linked_at"
+)
+.eq(
+"id",
+currentUser.id
+)
+.maybeSingle();
+
+if(error){
+
+console.error(
+"Minecraft status error:",
+error
+);
+
+return;
+
+}
+
+currentProfile={
+...(currentProfile||{}),
+...data
+};
+
+updateMinecraftLinkUI(
+currentProfile
+);
 
 }
 
@@ -1837,7 +1972,7 @@ document
 "linkedMinecraftUsername"
 )
 .textContent=
-profile.minecraft_username||
+profile.minecraft_name||
 "Onbekend";
 
 document
@@ -1907,6 +2042,139 @@ command
 );
 
 }
+
+}
+
+
+/* =====================================================
+   ACHIEVEMENTS
+   ===================================================== */
+
+async function loadAchievements(){
+
+const container=
+document.getElementById(
+"achievementsList"
+);
+
+if(!container){
+return;
+}
+
+if(!currentUser){
+
+container.innerHTML=`
+<div class="notice">
+Log in om je achievements te bekijken.
+</div>
+`;
+
+return;
+
+}
+
+container.innerHTML=`
+<div class="notice">
+Achievements laden...
+</div>
+`;
+
+
+const {
+data,
+error
+}=
+await supabaseClient
+.from("achievements")
+.select(
+"achievement_key,achievement_name,unlocked_at"
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"unlocked_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+console.error(
+"Achievements error:",
+error
+);
+
+container.innerHTML=`
+<div class="notice">
+Je achievements konden niet worden geladen.
+</div>
+`;
+
+return;
+
+}
+
+
+if(!data||data.length===0){
+
+container.innerHTML=`
+<div class="no-achievements">
+Je hebt nog geen achievements vrijgespeeld.
+<br>
+Ga het park in om je eerste achievement te verdienen!
+</div>
+`;
+
+return;
+
+}
+
+
+container.innerHTML=
+data.map(function(achievement){
+
+const date=
+achievement.unlocked_at
+?
+new Date(
+achievement.unlocked_at
+).toLocaleString(
+"nl-NL"
+)
+:
+"-";
+
+return `
+
+<div class="achievement-card">
+
+<div class="achievement-icon">
+🏆
+</div>
+
+<div>
+
+<div class="achievement-name">
+${escapeHtml(
+achievement.achievement_name
+)}
+</div>
+
+<div class="achievement-date">
+Vrijgespeeld op ${escapeHtml(date)}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
 
 }
 
@@ -2107,7 +2375,7 @@ document
 document
 .getElementById("applicationMinecraft")
 .value=
-currentProfile?.minecraft_username||
+currentProfile?.minecraft_name||
 currentProfile?.username||
 currentUser.user_metadata?.username||
 "";
@@ -2554,7 +2822,7 @@ error
 await supabaseClient
 .from("profiles")
 .select(
-"id,username,email,status,is_admin,minecraft_uuid,minecraft_username,minecraft_linked_at"
+"id,username,email,status,is_admin,minecraft_uuid,minecraft_name,minecraft_linked_at"
 )
 .order(
 "username"
@@ -2632,9 +2900,9 @@ user.is_admin
 <p>
 <strong>Minecraft:</strong>
 ${
-user.minecraft_username
+user.minecraft_name
 ?
-"🎮 "+escapeHtml(user.minecraft_username)
+"🎮 "+escapeHtml(user.minecraft_name)
 :
 "Niet gekoppeld"
 }
@@ -3444,6 +3712,8 @@ updateNavigation();
 
 }
 
+
+/* AUTH STATE */
 
 supabaseClient.auth.onAuthStateChange(
 function(event,session){
