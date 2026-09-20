@@ -605,6 +605,42 @@ Laden...
 <div class="card">
 
 <h3>
+📧 Mail naar ingelogde gebruikers
+</h3>
+
+<p class="small">
+Stuur een bericht naar gebruikers die momenteel actief zijn op de website.
+</p>
+
+<label for="adminMailSubject">Onderwerp</label>
+<input
+id="adminMailSubject"
+type="text"
+placeholder="Onderwerp van de mail">
+
+<label for="adminMailMessage">Bericht</label>
+<textarea
+id="adminMailMessage"
+placeholder="Schrijf hier je bericht..."></textarea>
+
+<button
+type="button"
+class="gold-btn"
+onclick="sendAdminMailToOnlineUsers()">
+📧 Verstuur naar ingelogde gebruikers
+</button>
+
+<div
+id="adminMailMessageStatus"
+class="notice">
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
 Sollicitatie toevoegen
 </h3>
 
@@ -2671,6 +2707,243 @@ closeModal(
 );
 
 },1000);
+
+}
+
+
+/* ADMIN MAIL */
+
+async function sendAdminMailToOnlineUsers(){
+
+const isAdmin=
+await checkAdminStatus();
+
+if(!isAdmin){
+
+alert(
+"Je bent geen beheerder."
+);
+
+return;
+
+}
+
+const subject=
+document
+.getElementById("adminMailSubject")
+.value
+.trim();
+
+const message=
+document
+.getElementById("adminMailMessage")
+.value
+.trim();
+
+const statusBox=
+document.getElementById(
+"adminMailMessageStatus"
+);
+
+if(!subject||!message){
+
+statusBox.textContent=
+"Vul een onderwerp en bericht in.";
+
+return;
+
+}
+
+const confirmed=
+confirm(
+"Wil je deze mail versturen naar alle gebruikers die momenteel online zijn?"
+);
+
+if(!confirmed){
+return;
+}
+
+statusBox.textContent=
+"Online gebruikers ophalen...";
+
+try{
+
+const onlineSince=
+new Date(
+Date.now()-60000
+).toISOString();
+
+const {
+data:sessions,
+error:sessionsError
+}=
+await supabaseClient
+.from("active_sessions")
+.select("user_id,last_seen")
+.gte("last_seen",onlineSince);
+
+if(sessionsError){
+
+console.error(
+"Online users error:",
+sessionsError
+);
+
+statusBox.textContent=
+"De online gebruikers konden niet worden opgehaald.";
+
+return;
+
+}
+
+const userIds=
+(sessions||[])
+.map(function(session){
+return session.user_id;
+})
+.filter(Boolean);
+
+if(userIds.length===0){
+
+statusBox.textContent=
+"Er zijn momenteel geen ingelogde gebruikers online.";
+
+return;
+
+}
+
+const {
+data:users,
+error:usersError
+}=
+await supabaseClient
+.from("profiles")
+.select("id,email,username")
+.in("id",userIds);
+
+if(usersError){
+
+console.error(
+"Profile email error:",
+usersError
+);
+
+statusBox.textContent=
+"De emailadressen konden niet worden opgehaald.";
+
+return;
+
+}
+
+const recipients=
+(users||[])
+.map(function(user){
+return {
+email:user.email,
+username:user.username||"Gebruiker"
+};
+})
+.filter(function(user){
+return !!user.email;
+});
+
+if(recipients.length===0){
+
+statusBox.textContent=
+"Er zijn geen emailadressen gevonden voor de online gebruikers.";
+
+return;
+
+}
+
+statusBox.textContent=
+"Mail wordt verstuurd naar "+
+recipients.length+
+" gebruiker"+
+(recipients.length===1?"":"s")+"...";
+
+const {
+data:sessionData
+}=
+await supabaseClient.auth.getSession();
+
+const accessToken=
+sessionData?.session?.access_token;
+
+if(!accessToken){
+
+statusBox.textContent=
+"Je sessie is verlopen. Log opnieuw in.";
+
+return;
+
+}
+
+const response=
+await fetch(
+SUPABASE_URL+
+"/functions/v1/send-admin-email",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":
+"Bearer "+accessToken
+},
+body:JSON.stringify({
+subject:subject,
+message:message,
+recipients:recipients
+})
+}
+);
+
+let result=null;
+
+try{
+result=await response.json();
+}catch(e){}
+
+if(!response.ok){
+
+console.error(
+"Admin email error:",
+result
+);
+
+statusBox.textContent=
+result?.error||
+"De mail kon niet worden verstuurd.";
+
+return;
+
+}
+
+statusBox.textContent=
+"✅ Mail verstuurd naar "+
+recipients.length+
+" ingelogde gebruiker"+
+(recipients.length===1?"":"s")+".";
+
+document
+.getElementById("adminMailSubject")
+.value="";
+
+document
+.getElementById("adminMailMessage")
+.value="";
+
+}catch(error){
+
+console.error(
+"Admin mail error:",
+error
+);
+
+statusBox.textContent=
+"Er ging iets mis bij het versturen van de mail.";
+
+}
 
 }
 
