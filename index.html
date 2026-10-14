@@ -248,6 +248,42 @@ textarea{
     font-size:13px;
     word-break:break-all;
 }
+.ticket-card{
+    border:1px solid rgba(255,216,90,.28);
+    border-radius:14px;
+    padding:18px;
+    margin:14px 0;
+    background:rgba(23,9,35,.65);
+}
+.ticket-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin:8px 0 14px;
+}
+.ticket-message{
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+    background:rgba(0,0,0,.18);
+    border-radius:10px;
+    padding:13px;
+}
+.ticket-reply{
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+    background:rgba(38,115,77,.18);
+    border:1px solid rgba(120,230,160,.25);
+    border-radius:10px;
+    padding:13px;
+    margin-top:12px;
+}
+.ticket-admin-controls{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    margin-top:12px;
+}
 
 .danger{
     background:#9b2c2c!important;
@@ -336,6 +372,10 @@ Vacatures
 
 <button type="button" onclick="showPage('community')">
 Community
+</button>
+
+<button type="button" onclick="showPage('contact')">
+Contact
 </button>
 
 <button
@@ -528,6 +568,13 @@ Achievements worden geladen...
 
 </div>
 
+<div class="card">
+<h3>🎫 Mijn tickets</h3>
+<p>Bekijk je vragen en de antwoorden van het Magische Heuvel-team.</p>
+<div id="myTickets">
+    <div class="notice">Je tickets worden geladen...</div>
+</div>
+</div>
 
 <button
 type="button"
@@ -568,6 +615,41 @@ Laden...
 </section>
 
 
+<section id="contact" class="page">
+<h2>Contact</h2>
+<p>Heb je een vraag, probleem of idee? Maak hieronder een ticket aan. Je kunt het antwoord later terugvinden bij <strong>Mijn account → Mijn tickets</strong>.</p>
+
+<div class="card">
+<h3>🎫 Nieuw ticket</h3>
+<p id="contactLoginNotice" class="notice">Je moet ingelogd zijn om een ticket te versturen. Je kunt het formulier alvast invullen.</p>
+
+<label for="contactSubject">Waar gaat je ticket over?</label>
+<select id="contactSubject" required>
+    <option value="Vraag">Vraag</option>
+    <option value="Probleem">Probleem</option>
+    <option value="Bug melden">Bug melden</option>
+    <option value="Suggestie">Suggestie</option>
+    <option value="Anders">Anders</option>
+</select>
+
+<label for="contactMinecraft">Minecraft gebruikersnaam *</label>
+<input id="contactMinecraft" maxlength="32" placeholder="Je Minecraft naam" required>
+
+<label for="contactEmail">Emailadres *</label>
+<input id="contactEmail" type="email" maxlength="254" placeholder="naam@example.com" required>
+
+<label for="contactDiscord">Discord gebruikersnaam (optioneel)</label>
+<input id="contactDiscord" maxlength="100" placeholder="Bijvoorbeeld: gebruikersnaam">
+
+<label for="contactMessage">Je vraag of bericht *</label>
+<textarea id="contactMessage" maxlength="10000" placeholder="Leg hier uit waarmee we je kunnen helpen..." required></textarea>
+
+<button type="button" class="gold-btn" onclick="submitTicket()">Ticket versturen</button>
+<div id="contactMessageStatus" class="notice" role="status" aria-live="polite"></div>
+</div>
+</section>
+
+
 <section id="admin" class="page">
 
 <h2>
@@ -584,6 +666,14 @@ Sollicitaties
 Laden...
 </div>
 
+</div>
+
+<div class="card">
+<h3>🎫 Supporttickets</h3>
+<p>Bekijk vragen van bezoekers, schrijf een antwoord en pas de ticketstatus aan. Het antwoord wordt zichtbaar bij de gebruiker onder Mijn account.</p>
+<div id="adminTickets">
+    <div class="notice">Tickets laden...</div>
+</div>
 </div>
 
 <div class="card">
@@ -1133,6 +1223,11 @@ loadAdminPage();
 
 if(page==="account"){
 loadAchievements();
+loadMyTickets();
+}
+
+if(page==="contact"){
+prefillContactForm();
 }
 
 }
@@ -1915,8 +2010,237 @@ return;
 
 await loadAdminApplications();
 
+await loadAdminTickets();
+
 await loadAdminUsers();
 
+}
+
+
+/* SUPPORT TICKETS */
+
+function prefillContactForm(){
+    const minecraftInput=document.getElementById("contactMinecraft");
+    const emailInput=document.getElementById("contactEmail");
+    const notice=document.getElementById("contactLoginNotice");
+
+    if(currentUser){
+        if(minecraftInput && !minecraftInput.value){
+            minecraftInput.value=currentProfile?.username || currentUser.user_metadata?.username || "";
+        }
+        if(emailInput && !emailInput.value){
+            emailInput.value=currentProfile?.email || currentUser.email || "";
+        }
+        if(notice){
+            notice.textContent="Je bent ingelogd. Je ticket wordt aan je account gekoppeld.";
+        }
+    }else if(notice){
+        notice.textContent="Je moet ingelogd zijn om een ticket te versturen. Log in en kom daarna terug naar Contact.";
+    }
+}
+
+async function submitTicket(){
+    const status=document.getElementById("contactMessageStatus");
+    const subject=document.getElementById("contactSubject").value.trim();
+    const minecraft=document.getElementById("contactMinecraft").value.trim();
+    const email=document.getElementById("contactEmail").value.trim();
+    const discord=document.getElementById("contactDiscord").value.trim();
+    const message=document.getElementById("contactMessage").value.trim();
+
+    status.textContent="";
+
+    if(!currentUser){
+        status.textContent="Log eerst in om een ticket aan je account te koppelen.";
+        openLogin();
+        return;
+    }
+
+    if(!subject || !minecraft || !email || !message){
+        status.textContent="Vul alle verplichte velden in.";
+        return;
+    }
+
+    if(minecraft.length>32 || email.length>254 || discord.length>100 || message.length>10000){
+        status.textContent="Een of meer velden zijn te lang.";
+        return;
+    }
+
+    status.textContent="Je ticket wordt verstuurd...";
+
+    const ticket={
+        user_id:currentUser.id,
+        minecraft_username:minecraft,
+        email:email,
+        discord_username:discord || null,
+        subject:subject,
+        message:message,
+        status:"Open"
+    };
+
+    const {error}=await supabaseClient.from("tickets").insert(ticket);
+
+    if(error){
+        console.error("Ticket insert error:",error);
+        status.textContent="Je ticket kon niet worden verstuurd. Controleer of de tickets-tabel en de Supabase RLS-policies zijn ingesteld.";
+        return;
+    }
+
+    status.textContent="✓ Je ticket is verstuurd! Je kunt het antwoord later bij Mijn account bekijken.";
+    document.getElementById("contactMessage").value="";
+    document.getElementById("contactDiscord").value="";
+    await loadMyTickets();
+}
+
+async function loadMyTickets(){
+    const container=document.getElementById("myTickets");
+    if(!container) return;
+
+    if(!currentUser){
+        container.innerHTML='<div class="notice">Log in om je tickets en antwoorden te bekijken.</div>';
+        return;
+    }
+
+    container.innerHTML='<div class="notice">Tickets laden...</div>';
+
+    const {data,error}=await supabaseClient
+        .from("tickets")
+        .select("id,subject,message,admin_reply,status,created_at,updated_at")
+        .eq("user_id",currentUser.id)
+        .order("created_at",{ascending:false});
+
+    if(error){
+        console.error("My tickets error:",error);
+        container.innerHTML='<div class="notice">Je tickets konden niet worden geladen. Controleer de Supabase-tabel en RLS-policies.</div>';
+        return;
+    }
+
+    if(!data || data.length===0){
+        container.innerHTML='<p class="small">Je hebt nog geen tickets aangemaakt.</p>';
+        return;
+    }
+
+    container.innerHTML=data.map(function(ticket){
+        const date=ticket.created_at ? new Date(ticket.created_at).toLocaleString("nl-NL") : "-";
+        const reply=ticket.admin_reply
+            ? '<div class="ticket-reply"><strong>Antwoord van Magische Heuvel</strong><p>'+escapeHtml(ticket.admin_reply)+'</p></div>'
+            : '<p class="small">Er is nog geen antwoord. We laten het hier zien zodra het team reageert.</p>';
+
+        return `
+            <div class="ticket-card">
+                <h3>${escapeHtml(ticket.subject)}</h3>
+                <div class="ticket-meta">
+                    <span class="status">${escapeHtml(ticket.status)}</span>
+                    <span class="small">Ticket #${escapeHtml(String(ticket.id))} · ${escapeHtml(date)}</span>
+                </div>
+                <div class="ticket-message">${escapeHtml(ticket.message)}</div>
+                ${reply}
+            </div>
+        `;
+    }).join("");
+}
+
+async function loadAdminTickets(){
+    const container=document.getElementById("adminTickets");
+    if(!container) return;
+
+    const isAdmin=await checkAdminStatus();
+    if(!isAdmin){
+        container.innerHTML='<div class="notice">Geen toegang.</div>';
+        return;
+    }
+
+    container.innerHTML='<div class="notice">Tickets laden...</div>';
+
+    const {data,error}=await supabaseClient
+        .from("tickets")
+        .select("id,user_id,minecraft_username,email,discord_username,subject,message,admin_reply,status,created_at")
+        .order("created_at",{ascending:false});
+
+    if(error){
+        console.error("Admin tickets error:",error);
+        container.innerHTML='<div class="notice">Tickets konden niet worden geladen. Controleer de tickets-tabel en de Supabase RLS-policies.</div>';
+        return;
+    }
+
+    if(!data || data.length===0){
+        container.innerHTML="<p>Er zijn nog geen supporttickets.</p>";
+        return;
+    }
+
+    container.innerHTML=data.map(function(ticket){
+        const date=ticket.created_at ? new Date(ticket.created_at).toLocaleString("nl-NL") : "-";
+        const discord=ticket.discord_username
+            ? `<p><strong>Discord:</strong> ${escapeHtml(ticket.discord_username)}</p>`
+            : "";
+        const replyValue=escapeHtml(ticket.admin_reply || "");
+        const safeId=Number(ticket.id);
+
+        return `
+            <div class="ticket-card">
+                <h3>#${escapeHtml(String(ticket.id))} — ${escapeHtml(ticket.subject)}</h3>
+                <div class="ticket-meta">
+                    <span class="status">${escapeHtml(ticket.status)}</span>
+                    <span class="small">${escapeHtml(date)}</span>
+                </div>
+                <p><strong>Minecraft:</strong> ${escapeHtml(ticket.minecraft_username)}</p>
+                <p><strong>Email:</strong> ${escapeHtml(ticket.email)}</p>
+                ${discord}
+                <p><strong>User ID:</strong> <span class="small">${escapeHtml(ticket.user_id)}</span></p>
+                <div class="ticket-message">${escapeHtml(ticket.message)}</div>
+                <div class="ticket-admin-controls">
+                    <label for="ticketReply-${safeId}">Antwoord</label>
+                    <textarea id="ticketReply-${safeId}" maxlength="10000" placeholder="Typ je antwoord...">${replyValue}</textarea>
+                    <label for="ticketStatus-${safeId}">Status</label>
+                    <select id="ticketStatus-${safeId}">
+                        <option value="Open" ${ticket.status==="Open"?"selected":""}>Open</option>
+                        <option value="Beantwoord" ${ticket.status==="Beantwoord"?"selected":""}>Beantwoord</option>
+                        <option value="Gesloten" ${ticket.status==="Gesloten"?"selected":""}>Gesloten</option>
+                    </select>
+                    <button type="button" class="gold-btn" onclick="saveTicketReply(${safeId})">Antwoord/status opslaan</button>
+                    <div id="ticketAdminStatus-${safeId}" class="notice" role="status" aria-live="polite"></div>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+async function saveTicketReply(ticketId){
+    const isAdmin=await checkAdminStatus();
+    if(!isAdmin){
+        alert("Je bent geen beheerder.");
+        return;
+    }
+
+    const replyInput=document.getElementById("ticketReply-"+ticketId);
+    const statusInput=document.getElementById("ticketStatus-"+ticketId);
+    const message=document.getElementById("ticketAdminStatus-"+ticketId);
+    if(!replyInput || !statusInput || !message) return;
+
+    const reply=replyInput.value.trim();
+    const status=statusInput.value;
+
+    if(reply.length>10000){
+        message.textContent="Het antwoord is te lang.";
+        return;
+    }
+
+    message.textContent="Opslaan...";
+    const {error}=await supabaseClient
+        .from("tickets")
+        .update({
+            admin_reply:reply || null,
+            status:status
+        })
+        .eq("id",ticketId);
+
+    if(error){
+        console.error("Save ticket reply error:",error);
+        message.textContent="Antwoord kon niet worden opgeslagen. Controleer de Supabase update-policy.";
+        return;
+    }
+
+    message.textContent="✓ Ticket bijgewerkt.";
+    await loadAdminTickets();
 }
 
 
