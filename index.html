@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -32,7 +31,8 @@ h2{font-size:38px}
 .card{background:rgba(35,10,60,.8);border:1px solid rgba(255,216,90,.2);border-radius:18px;padding:24px;margin:15px 0;box-shadow:0 10px 35px rgba(0,0,0,.25)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
 input,textarea,select{width:100%;padding:12px;margin:7px 0 14px;border-radius:10px;border:1px solid #7542a5;background:#170923;color:white;font-family:Poppins}
-input[type=checkbox]{width:auto}
+input[type=checkbox]{width:auto;margin:0 8px 0 0}
+.check{display:flex;align-items:center;margin:4px 0 14px;cursor:pointer}
 textarea{min-height:120px;resize:vertical}
 .status{display:inline-block;padding:5px 10px;border-radius:20px;background:#53247a;color:#ffd85a;font-weight:600}
 .online,.success{background:#26734d!important;color:#d7ffe8}
@@ -58,6 +58,7 @@ textarea{min-height:120px;resize:vertical}
 .achievement-date{opacity:.7;font-size:13px;margin-top:3px}
 footer{text-align:center;padding:35px;opacity:.65}
 .event-countdown{font-size:1.05rem;font-weight:700;color:#ffd85a}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 </style>
 </head>
 <body>
@@ -145,7 +146,8 @@ footer{text-align:center;padding:35px;opacity:.65}
 <input id="eventName" maxlength="150" placeholder="Bijvoorbeeld: Halloweenavond">
 <label for="eventDate">Datum en tijd</label>
 <input id="eventDate" type="datetime-local">
-<label><input id="eventCountdown" type="checkbox"> Countdown tonen op de homepagina</label>
+<label class="check"><input id="eventCountdown" type="checkbox"> Countdown tonen op de homepagina</label>
+<label class="check"><input id="eventPublished" type="checkbox" checked> Meteen publiceren (zichtbaar voor bezoekers)</label>
 <button class="gold-btn" onclick="createEvent()">Evenement aanmaken</button>
 <div id="eventAdminStatus" class="notice" role="status" aria-live="polite"></div>
 <h3>Bestaande evenementen</h3>
@@ -182,7 +184,7 @@ const SUPABASE_KEY="sb_publishable_58DyCkf5Npp-nEukSnifUA_n63KczbO";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 let currentUser=null,currentSession=null,currentProfile=null;
-let communityTimer=null,activeSessionTimer=null,eventCountdownTimer=null;
+let communityTimer=null,activeSessionTimer=null,eventCountdownTimer=null,eventsRefreshTimer=null;
 
 function escapeHtml(value){
  return String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
@@ -309,17 +311,35 @@ async function submitApplication(){
 }
 
 /* EVENEMENTEN */
+function supabaseErrorText(error){
+ if(!error)return "";
+ if(error.code==="42P01")return "De tabel 'events' bestaat nog niet in Supabase. Voer eerst de SQL uit.";
+ if(error.code==="42501")return "Geen rechten (RLS). Controleer de policies en of je account beheerder is.";
+ return error.message+(error.code?" (code: "+error.code+")":"");
+}
+
+function formatEventDate(value){
+ const d=new Date(value);
+ return Number.isNaN(d.getTime())?"Onbekende datum":d.toLocaleString("nl-NL",{dateStyle:"long",timeStyle:"short"});
+}
+
 async function loadEvents(){
  const container=document.getElementById("eventsList");
  if(!container)return;
  const {data,error}=await supabaseClient.from("events").select("id,name,event_date,show_countdown").eq("published",true).order("event_date",{ascending:true});
- if(error){console.error("Events error:",error);container.textContent="Evenementen konden niet worden geladen. Controleer de Supabase-instellingen.";return}
+ if(error){
+  console.error("Events error:",error);
+  container.innerHTML='<div class="notice">Evenementen konden niet worden geladen: '+escapeHtml(supabaseErrorText(error))+'</div>';
+  if(eventCountdownTimer)clearInterval(eventCountdownTimer);
+  return;
+ }
  const events=(data||[]).filter(event=>new Date(event.event_date).getTime()>=Date.now());
- if(!events.length){container.innerHTML="<p>Er zijn momenteel geen aankomende evenementen.</p>";if(eventCountdownTimer)clearInterval(eventCountdownTimer);return}
- container.innerHTML=events.map(event=>{
-  const date=new Date(event.event_date);
-  return `<article class="ticket-card"><h3>${escapeHtml(event.name)}</h3><p>${escapeHtml(date.toLocaleString("nl-NL",{dateStyle:"long",timeStyle:"short"}))}</p>${event.show_countdown?`<p class="event-countdown" id="countdown-${Number(event.id)}">Countdown laden...</p>`:""}</article>`;
- }).join("");
+ if(!events.length){
+  container.innerHTML="<p>Er zijn momenteel geen aankomende evenementen.</p>";
+  if(eventCountdownTimer)clearInterval(eventCountdownTimer);
+  return;
+ }
+ container.innerHTML=events.map(event=>`<article class="ticket-card"><h3>${escapeHtml(event.name)}</h3><p>${escapeHtml(formatEventDate(event.event_date))}</p>${event.show_countdown?`<p class="event-countdown" id="countdown-${Number(event.id)}">Countdown laden...</p>`:""}</article>`).join("");
  updateEventCountdowns(events);
 }
 
@@ -345,62 +365,47 @@ function updateEventCountdowns(events){
  update();eventCountdownTimer=setInterval(update,1000);
 }
 
-/* AANGEPASTE FUNCTIE: EVENEMENT AANMAKEN */
+/* Home-evenementen elke 60 seconden verversen, zodat nieuwe evenementen vanzelf verschijnen */
+function startEventsRefresh(){
+ if(eventsRefreshTimer)clearInterval(eventsRefreshTimer);
+ eventsRefreshTimer=setInterval(()=>{
+  if(document.getElementById("home")?.classList.contains("active")&&!document.hidden)loadEvents();
+ },60000);
+}
+
+function setMinEventDate(){
+ const input=document.getElementById("eventDate");
+ if(!input)return;
+ const d=new Date(Date.now()-new Date().getTimezoneOffset()*60000);
+ input.min=d.toISOString().slice(0,16);
+}
+
 async function createEvent(){
  const status=document.getElementById("eventAdminStatus");
-
  try{
-  if(!currentUser){
-   status.textContent="Log eerst in.";
-   return;
-  }
-
+  if(!currentUser){status.textContent="Log eerst in.";return}
   status.textContent="Beheerdersrechten controleren...";
-  const isAdmin=await checkAdminStatus();
-
-  if(!isAdmin){
-   status.textContent="Geen beheerderstoegang. Controleer je Supabase-beheerdersrechten.";
-   return;
-  }
+  if(!(await checkAdminStatus())){status.textContent="Geen beheerderstoegang. Controleer je Supabase-beheerdersrechten.";return}
 
   const name=document.getElementById("eventName").value.trim();
   const dateValue=document.getElementById("eventDate").value;
   const showCountdown=document.getElementById("eventCountdown").checked;
+  const published=document.getElementById("eventPublished").checked;
 
-  if(!name||name.length>150||!dateValue){
-   status.textContent="Vul een geldige naam, datum en tijd in.";
-   return;
-  }
-
+  if(!name||name.length>150||!dateValue){status.textContent="Vul een geldige naam, datum en tijd in.";return}
   const eventDate=new Date(dateValue);
-  if(Number.isNaN(eventDate.getTime())||eventDate.getTime()<=Date.now()){
-   status.textContent="Kies een geldige datum en tijd in de toekomst.";
-   return;
-  }
+  if(Number.isNaN(eventDate.getTime())||eventDate.getTime()<=Date.now()){status.textContent="Kies een geldige datum en tijd in de toekomst.";return}
 
   status.textContent="Evenement opslaan...";
-
-  const {error}=await supabaseClient.from("events").insert({
-   name:name,
-   event_date:eventDate.toISOString(),
-   show_countdown:showCountdown,
-   published:true
-  });
-
-  if(error){
-   console.error("Evenement opslaan mislukt:",error);
-   status.textContent="Supabase-fout: "+error.message+(error.code?" (code: "+error.code+")":"");
-   return;
-  }
+  const {error}=await supabaseClient.from("events").insert({name,event_date:eventDate.toISOString(),show_countdown:showCountdown,published});
+  if(error){console.error("Evenement opslaan mislukt:",error);status.textContent="Supabase-fout: "+supabaseErrorText(error);return}
 
   document.getElementById("eventName").value="";
   document.getElementById("eventDate").value="";
   document.getElementById("eventCountdown").checked=false;
-
-  status.textContent="Evenement succesvol aangemaakt!";
-  await loadEvents();
-  await loadAdminEvents();
-
+  document.getElementById("eventPublished").checked=true;
+  status.textContent=published?"✓ Evenement aangemaakt en gepubliceerd!":"✓ Evenement aangemaakt (nog niet zichtbaar voor bezoekers).";
+  await loadEvents();await loadAdminEvents();
  }catch(error){
   console.error("Fout bij evenement aanmaken:",error);
   status.textContent="Er ging iets mis: "+(error.message||String(error));
@@ -412,16 +417,29 @@ async function loadAdminEvents(){
  if(!container)return;
  if(!currentUser||!(await checkAdminStatus())){container.textContent="Geen toegang.";return}
  const {data,error}=await supabaseClient.from("events").select("id,name,event_date,show_countdown,published").order("event_date",{ascending:true});
- if(error){console.error("Admin events error:",error);container.textContent="Evenementen konden niet worden geladen: "+error.message;return}
+ if(error){console.error("Admin events error:",error);container.innerHTML='<div class="notice">Evenementen konden niet worden geladen: '+escapeHtml(supabaseErrorText(error))+'</div>';return}
  if(!data?.length){container.innerHTML="<p>Er zijn nog geen evenementen.</p>";return}
- container.innerHTML=data.map(event=>`<div class="ticket-card"><h3>${escapeHtml(event.name)}</h3><p>${escapeHtml(new Date(event.event_date).toLocaleString("nl-NL"))}</p><p>Countdown: ${event.show_countdown?"Ja":"Nee"} · Gepubliceerd: ${event.published?"Ja":"Nee"}</p><button class="gold-btn danger" onclick="deleteEvent(${Number(event.id)})">Evenement verwijderen</button></div>`).join("");
+ container.innerHTML=data.map(event=>{
+  const id=Number(event.id);
+  const past=new Date(event.event_date).getTime()<Date.now();
+  return `<div class="ticket-card"><h3>${escapeHtml(event.name)}</h3><p>${escapeHtml(formatEventDate(event.event_date))}</p><div class="ticket-meta"><span class="status ${event.published?"success":"offline"}">${event.published?"Gepubliceerd":"Verborgen"}</span><span class="status">Countdown: ${event.show_countdown?"Ja":"Nee"}</span>${past?'<span class="status warning">Verlopen</span>':""}</div><div class="btn-row"><button class="gold-btn" onclick="toggleEventPublished(${id},${event.published?"false":"true"})">${event.published?"Verbergen":"Publiceren"}</button><button class="gold-btn danger" onclick="deleteEvent(${id})">Verwijderen</button></div></div>`;
+ }).join("");
+}
+
+async function toggleEventPublished(id,published){
+ if(!currentUser||!(await checkAdminStatus())){alert("Geen toegang.");return}
+ const {data,error}=await supabaseClient.from("events").update({published}).eq("id",id).select("id");
+ if(error){console.error("Update event error:",error);alert("Aanpassen mislukt: "+supabaseErrorText(error));return}
+ if(!data?.length){alert("Er is niets aangepast. Controleer de update-policy voor admins op de events-tabel.");return}
+ await loadEvents();await loadAdminEvents();
 }
 
 async function deleteEvent(id){
  if(!currentUser||!(await checkAdminStatus())){alert("Geen toegang.");return}
  if(!confirm("Weet je zeker dat je dit evenement wilt verwijderen?"))return;
- const {error}=await supabaseClient.from("events").delete().eq("id",id);
- if(error){console.error("Delete event error:",error);alert("Het evenement kon niet worden verwijderd: "+error.message);return}
+ const {data,error}=await supabaseClient.from("events").delete().eq("id",id).select("id");
+ if(error){console.error("Delete event error:",error);alert("Het evenement kon niet worden verwijderd: "+supabaseErrorText(error));return}
+ if(!data?.length){alert("Er is niets verwijderd. Controleer de delete-policy voor admins op de events-tabel.");return}
  await loadEvents();await loadAdminEvents();
 }
 
@@ -606,15 +624,18 @@ async function syncAuthState(session){
 supabaseClient.auth.onAuthStateChange((event,session)=>{setTimeout(()=>syncAuthState(session),0)});
 
 (async function(){
+ setMinEventDate();
  const {data}=await supabaseClient.auth.getSession();
  if(data.session)await syncAuthState(data.session);else updateNavigation();
  await loadEvents();
+ startEventsRefresh();
 })();
 
 /* BEHEERDERSCHERM LADEN */
 async function loadAdminPage(){
  if(!currentUser)return;
  if(!(await checkAdminStatus())){showPage("home");return}
+ setMinEventDate();
  await Promise.all([loadAdminApplications(),loadAdminTickets(),loadAdminUsers(),loadAdminEvents()]);
 }
 </script>
