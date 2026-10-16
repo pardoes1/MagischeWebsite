@@ -148,7 +148,7 @@ footer{text-align:center;padding:35px;opacity:.65}
 <input id="eventDate" type="datetime-local">
 <label class="check"><input id="eventCountdown" type="checkbox"> Countdown tonen op de homepagina</label>
 <label class="check"><input id="eventPublished" type="checkbox" checked> Meteen publiceren (zichtbaar voor bezoekers)</label>
-<button class="gold-btn" onclick="createEvent()">Evenement aanmaken</button>
+<button class="gold-btn" onclick="createAdminEvent()">Evenement aanmaken</button>
 <div id="eventAdminStatus" class="notice" role="status" aria-live="polite"></div>
 <h3>Bestaande evenementen</h3>
 <div id="adminEventsList"><div class="notice">Evenementen laden...</div></div>
@@ -388,7 +388,7 @@ function setMinEventDate(){
  input.min=d.toISOString().slice(0,16);
 }
 
-async function createEvent(){
+async function createAdminEvent(){
  const status=document.getElementById("eventAdminStatus");
  status.textContent="Bezig...";
  try{
