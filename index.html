@@ -139,7 +139,6 @@ footer{text-align:center;padding:35px;opacity:.65}
 
 <section id="admin" class="page">
 <h2>Beheerder</h2>
-
 <div class="card">
 <h3>🎉 Evenement aanmaken</h3>
 <label for="eventName">Naam van het evenement</label>
@@ -152,7 +151,6 @@ footer{text-align:center;padding:35px;opacity:.65}
 <h3>Bestaande evenementen</h3>
 <div id="adminEventsList"><div class="notice">Evenementen laden...</div></div>
 </div>
-
 <div class="card"><h3>Sollicitaties</h3><div id="adminApplications">Laden...</div></div>
 <div class="card"><h3>🎫 Supporttickets</h3><p>Bekijk vragen van bezoekers, schrijf een antwoord en pas de ticketstatus aan.</p><div id="adminTickets"><div class="notice">Tickets laden...</div></div></div>
 <div class="card"><h3>Alle gebruikers</h3><p class="small">Hier kun je gebruikers beheren, Team maken en gebruikers bannen.</p><div id="adminUsers">Laden...</div></div>
@@ -172,15 +170,10 @@ footer{text-align:center;padding:35px;opacity:.65}
 <footer>© Magische Heuvel - Minecraft Themapark</footer>
 
 <div class="modal" id="serverModal"><div class="modal-box"><button class="close" onclick="closeModal('serverModal')">×</button><h2>Server</h2><p>Ons Minecraft serveradres:</p><div class="notice"><strong>gp-node-01.future-node.com:35003</strong></div><button class="gold-btn" onclick="copyServer()">IP kopiëren</button></div></div>
-
 <div class="modal" id="loginModal"><div class="modal-box"><button class="close" onclick="closeModal('loginModal')">×</button><h2>Inloggen</h2><input id="loginEmail" type="email" placeholder="Email"><input id="loginPassword" type="password" placeholder="Wachtwoord"><button class="gold-btn" onclick="login()">Inloggen</button> <button class="gold-btn" onclick="showRegister()">Account maken</button><div id="loginMessage" class="notice"></div></div></div>
-
 <div class="modal" id="registerModal"><div class="modal-box"><button class="close" onclick="closeModal('registerModal')">×</button><h2>Account maken</h2><input id="registerUsername" placeholder="Minecraft gebruikersnaam"><input id="registerEmail" type="email" placeholder="Email"><input id="registerPassword" type="password" placeholder="Wachtwoord"><button class="gold-btn" onclick="register()">Registreren</button><div id="registerMessage" class="notice"></div></div></div>
-
 <div class="modal" id="applicationModal"><div class="modal-box"><button class="close" onclick="closeModal('applicationModal')">×</button><h2>Solliciteren</h2><input id="applicationFunction" readonly><input id="applicationMinecraft" placeholder="Minecraft naam"><input id="applicationAge" type="number" placeholder="Leeftijd"><textarea id="applicationExperience" placeholder="Vertel iets over je ervaring"></textarea><textarea id="applicationMotivation" placeholder="Waarom wil je deze functie?"></textarea><textarea id="applicationAvailability" placeholder="Wanneer ben je beschikbaar?"></textarea><button class="gold-btn" onclick="submitApplication()">Sollicitatie versturen</button><div id="applicationMessage" class="notice"></div></div></div>
-
 <div class="modal" id="adminCodeModal"><div class="modal-box"><button class="close" onclick="closeModal('adminCodeModal')">×</button><h2>Beheerder</h2><p>Voer de beheerderscode in.</p><input id="adminCode" type="password" placeholder="Beheerderscode"><button class="gold-btn" onclick="adminCodeLogin()">Doorgaan</button><div id="adminCodeMessage" class="notice"></div></div></div>
-
 <div class="modal" id="adminApplicationModal"><div class="modal-box"><button class="close" onclick="closeModal('adminApplicationModal')">×</button><h2>Sollicitatie toevoegen</h2><input id="adminAppUserId" placeholder="User ID"><input id="adminAppEmail" type="email" placeholder="Email"><input id="adminAppMinecraft" placeholder="Minecraft naam"><select id="adminAppFunction"><option>Bouwer</option><option>Techniek</option><option>Modelaar</option></select><input id="adminAppAge" type="number" placeholder="Leeftijd"><textarea id="adminAppExperience" placeholder="Ervaring"></textarea><textarea id="adminAppMotivation" placeholder="Motivatie"></textarea><textarea id="adminAppAvailability" placeholder="Beschikbaarheid"></textarea><button class="gold-btn" onclick="adminAddApplication()">Toevoegen</button><div id="adminApplicationMessage" class="notice"></div></div></div>
 
 <script>
@@ -315,12 +308,6 @@ async function submitApplication(){
  setTimeout(()=>closeModal("applicationModal"),1200);
 }
 
-async function loadAdminPage(){
- if(!currentUser)return;
- if(!(await checkAdminStatus())){showPage("home");return}
- await Promise.all([loadAdminApplications(),loadAdminTickets(),loadAdminUsers(),loadAdminEvents()]);
-}
-
 /* EVENEMENTEN */
 async function loadEvents(){
  const container=document.getElementById("eventsList");
@@ -358,24 +345,66 @@ function updateEventCountdowns(events){
  update();eventCountdownTimer=setInterval(update,1000);
 }
 
+/* AANGEPASTE FUNCTIE: EVENEMENT AANMAKEN */
 async function createEvent(){
  const status=document.getElementById("eventAdminStatus");
- if(!currentUser||!(await checkAdminStatus())){status.textContent="Geen toegang: alleen geautoriseerde beheerders mogen evenementen maken.";return}
- const name=document.getElementById("eventName").value.trim();
- const dateValue=document.getElementById("eventDate").value;
- const showCountdown=document.getElementById("eventCountdown").checked;
- if(!name||name.length>150||!dateValue){status.textContent="Vul een geldige naam, datum en tijd in.";return}
- const eventDate=new Date(dateValue);
- if(Number.isNaN(eventDate.getTime())){status.textContent="De datum is ongeldig.";return}
- if(eventDate.getTime()<=Date.now()){status.textContent="Kies een datum en tijd in de toekomst.";return}
- status.textContent="Evenement opslaan...";
- const {error}=await supabaseClient.from("events").insert({name,event_date:eventDate.toISOString(),show_countdown:showCountdown,published:true});
- if(error){console.error("Create event error:",error);status.textContent="Opslaan mislukt. Controleer de events-tabel en de RLS-policies.";return}
- document.getElementById("eventName").value="";
- document.getElementById("eventDate").value="";
- document.getElementById("eventCountdown").checked=false;
- status.textContent="✓ Evenement aangemaakt!";
- await loadEvents();await loadAdminEvents();
+
+ try{
+  if(!currentUser){
+   status.textContent="Log eerst in.";
+   return;
+  }
+
+  status.textContent="Beheerdersrechten controleren...";
+  const isAdmin=await checkAdminStatus();
+
+  if(!isAdmin){
+   status.textContent="Geen beheerderstoegang. Controleer je Supabase-beheerdersrechten.";
+   return;
+  }
+
+  const name=document.getElementById("eventName").value.trim();
+  const dateValue=document.getElementById("eventDate").value;
+  const showCountdown=document.getElementById("eventCountdown").checked;
+
+  if(!name||name.length>150||!dateValue){
+   status.textContent="Vul een geldige naam, datum en tijd in.";
+   return;
+  }
+
+  const eventDate=new Date(dateValue);
+  if(Number.isNaN(eventDate.getTime())||eventDate.getTime()<=Date.now()){
+   status.textContent="Kies een geldige datum en tijd in de toekomst.";
+   return;
+  }
+
+  status.textContent="Evenement opslaan...";
+
+  const {error}=await supabaseClient.from("events").insert({
+   name:name,
+   event_date:eventDate.toISOString(),
+   show_countdown:showCountdown,
+   published:true
+  });
+
+  if(error){
+   console.error("Evenement opslaan mislukt:",error);
+   status.textContent="Supabase-fout: "+error.message+(error.code?" (code: "+error.code+")":"");
+   return;
+  }
+
+  document.getElementById("eventName").value="";
+  document.getElementById("eventDate").value="";
+  document.getElementById("eventCountdown").checked=false;
+
+  status.textContent="Evenement succesvol aangemaakt!";
+  await loadEvents();
+  await loadAdminEvents();
+
+ }catch(error){
+  console.error("Fout bij evenement aanmaken:",error);
+  status.textContent="Er ging iets mis: "+(error.message||String(error));
+ }
 }
 
 async function loadAdminEvents(){
@@ -383,7 +412,7 @@ async function loadAdminEvents(){
  if(!container)return;
  if(!currentUser||!(await checkAdminStatus())){container.textContent="Geen toegang.";return}
  const {data,error}=await supabaseClient.from("events").select("id,name,event_date,show_countdown,published").order("event_date",{ascending:true});
- if(error){console.error("Admin events error:",error);container.textContent="Evenementen konden niet worden geladen.";return}
+ if(error){console.error("Admin events error:",error);container.textContent="Evenementen konden niet worden geladen: "+error.message;return}
  if(!data?.length){container.innerHTML="<p>Er zijn nog geen evenementen.</p>";return}
  container.innerHTML=data.map(event=>`<div class="ticket-card"><h3>${escapeHtml(event.name)}</h3><p>${escapeHtml(new Date(event.event_date).toLocaleString("nl-NL"))}</p><p>Countdown: ${event.show_countdown?"Ja":"Nee"} · Gepubliceerd: ${event.published?"Ja":"Nee"}</p><button class="gold-btn danger" onclick="deleteEvent(${Number(event.id)})">Evenement verwijderen</button></div>`).join("");
 }
@@ -392,7 +421,7 @@ async function deleteEvent(id){
  if(!currentUser||!(await checkAdminStatus())){alert("Geen toegang.");return}
  if(!confirm("Weet je zeker dat je dit evenement wilt verwijderen?"))return;
  const {error}=await supabaseClient.from("events").delete().eq("id",id);
- if(error){console.error("Delete event error:",error);alert("Het evenement kon niet worden verwijderd.");return}
+ if(error){console.error("Delete event error:",error);alert("Het evenement kon niet worden verwijderd: "+error.message);return}
  await loadEvents();await loadAdminEvents();
 }
 
@@ -581,6 +610,13 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{setTimeout(()=>syncAuthS
  if(data.session)await syncAuthState(data.session);else updateNavigation();
  await loadEvents();
 })();
+
+/* BEHEERDERSCHERM LADEN */
+async function loadAdminPage(){
+ if(!currentUser)return;
+ if(!(await checkAdminStatus())){showPage("home");return}
+ await Promise.all([loadAdminApplications(),loadAdminTickets(),loadAdminUsers(),loadAdminEvents()]);
+}
 </script>
 </body>
 </html>
