@@ -59,6 +59,7 @@ textarea{min-height:120px;resize:vertical}
 footer{text-align:center;padding:35px;opacity:.65}
 .event-countdown{font-size:1.05rem;font-weight:700;color:#ffd85a}
 .btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.refresh-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -155,7 +156,9 @@ footer{text-align:center;padding:35px;opacity:.65}
 </div>
 <div class="card"><h3>Sollicitaties</h3><div id="adminApplications">Laden...</div></div>
 <div class="card"><h3>🎫 Supporttickets</h3><p>Bekijk vragen van bezoekers, schrijf een antwoord en pas de ticketstatus aan.</p><div id="adminTickets"><div class="notice">Tickets laden...</div></div></div>
-<div class="card"><h3>Alle gebruikers</h3><p class="small">Hier kun je gebruikers beheren, Team maken en gebruikers bannen.</p><div id="adminUsers">Laden...</div></div>
+<div class="card"><h3>Alle gebruikers</h3><p class="small">Hier kun je gebruikers beheren, Team maken en gebruikers bannen. De lijst ververst automatisch elke 10 seconden.</p>
+<div class="refresh-row"><button class="gold-btn" onclick="loadAdminUsers()">🔄 Nu verversen</button><span class="small" id="adminUsersUpdated" style="word-break:normal"></span></div>
+<div id="adminUsers">Laden...</div></div>
 <div class="card">
 <h3>📧 Mail naar ingelogde gebruikers</h3>
 <p>Stuur een bericht naar gebruikers die momenteel online zijn.</p>
@@ -192,7 +195,8 @@ if(!window.supabase)showFatal("Supabase kon niet laden (adblocker, geen internet
 const supabaseClient=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 
 let currentUser=null,currentSession=null,currentProfile=null;
-let communityTimer=null,activeSessionTimer=null,eventCountdownTimer=null,eventsRefreshTimer=null;
+let communityTimer=null,activeSessionTimer=null,eventCountdownTimer=null,eventsRefreshTimer=null,adminRefreshTimer=null;
+let adminUsersLoading=false;
 
 function escapeHtml(value){
  return String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
@@ -204,7 +208,7 @@ function showPage(page){
  if(element)element.classList.add("active");
  window.scrollTo({top:0,behavior:"smooth"});
  if(page==="community"){loadCommunityUsers();startCommunityRefresh()}else stopCommunityRefresh();
- if(page==="admin")loadAdminPage();
+ if(page==="admin"){loadAdminPage();startAdminRefresh()}else stopAdminRefresh();
  if(page==="home")loadEvents();
  if(page==="account"){loadAchievements();loadMyTickets()}
  if(page==="contact")prefillContactForm();
@@ -246,7 +250,7 @@ async function loadProfile(){
  if(error){console.error("Profile error:",error);return}
  currentProfile=data;
  if(data?.status==="Gebanned"){
-  await removeActiveSession();await supabaseClient.auth.signOut();currentUser=null;currentSession=null;currentProfile=null;updateNavigation();showPage("home");
+  await removeActiveSession();stopActiveSessionHeartbeat();await supabaseClient.auth.signOut();currentUser=null;currentSession=null;currentProfile=null;updateNavigation();showPage("home");
   setTimeout(()=>alert("Dit account is gebanned en heeft geen toegang tot de website."),100);return;
  }
  document.getElementById("accountUsername").textContent=data?.username||currentUser.user_metadata?.username||currentUser.email?.split("@")[0]||"Gebruiker";
@@ -547,12 +551,51 @@ async function adminAddApplication(){
 /* GEBRUIKERSBEHEER */
 async function loadAdminUsers(){
  const container=document.getElementById("adminUsers");if(!container)return;
- if(!(await checkAdminStatus())){container.textContent="Geen toegang.";return}
- const {data,error}=await supabaseClient.from("profiles").select("id,username,email,status,is_admin").order("username");
- if(error){console.error(error);container.textContent="Gebruikers konden niet worden geladen.";return}
- if(!data?.length){container.innerHTML="<p>Geen gebruikers gevonden.</p>";return}
- container.innerHTML=data.map(u=>`<div class="card"><h3>${escapeHtml(u.username||"Onbekende gebruiker")}</h3><p><strong>Email:</strong> ${escapeHtml(u.email||"")}</p><p>Status: <span class="status">${escapeHtml(u.status||"Bezoeker")}</span></p><p>Beheerder: ${u.is_admin?"Ja":"Nee"}</p>${u.status!=="Team"&&u.status!=="Gebanned"?`<button class="gold-btn success" onclick="makeTeam('${escapeHtml(u.id)}')">👥 Maak Team</button>`:""}${u.status==="Gebanned"?`<button class="gold-btn success" onclick="unbanUser('${escapeHtml(u.id)}','${escapeHtml(u.username||"gebruiker")}')">Unban</button>`:`<button class="gold-btn danger" onclick="banUser('${escapeHtml(u.id)}','${escapeHtml(u.username||"gebruiker")}')">Ban</button>`}<p class="small">User ID: ${escapeHtml(u.id)}</p></div>`).join("");
+ if(adminUsersLoading)return;
+ adminUsersLoading=true;
+ try{
+  if(!(await checkAdminStatus())){container.textContent="Geen toegang.";return}
+  const [profilesResult,communityResult]=await Promise.all([
+   supabaseClient.from("profiles").select("id,username,email,status,is_admin").order("username"),
+   supabaseClient.rpc("get_community_users")
+  ]);
+  const {data,error}=profilesResult;
+  if(error){console.error(error);container.textContent="Gebruikers konden niet worden geladen.";return}
+  if(!data?.length){container.innerHTML="<p>Geen gebruikers gevonden.</p>";return}
+
+  /* Online-status ophalen via dezelfde functie als de community-pagina */
+  const onlineByName=new Map();
+  if(!communityResult.error&&Array.isArray(communityResult.data)){
+   for(const c of communityResult.data){
+    if(c.id)onlineByName.set("id:"+c.id,c.online===true);
+    if(c.user_id)onlineByName.set("id:"+c.user_id,c.online===true);
+    if(c.username)onlineByName.set("name:"+String(c.username).toLowerCase(),c.online===true);
+   }
+  }else if(communityResult.error){console.error("Online status error:",communityResult.error)}
+  const hasOnlineInfo=onlineByName.size>0;
+  const isOnline=u=>onlineByName.get("id:"+u.id)===true||onlineByName.get("name:"+String(u.username||"").toLowerCase())===true;
+
+  const users=data.slice().sort((a,b)=>(isOnline(b)-isOnline(a))||String(a.username||"").localeCompare(String(b.username||"")));
+  const onlineCount=users.filter(isOnline).length;
+
+  container.innerHTML=(hasOnlineInfo?`<p class="small" style="word-break:normal">🟢 ${onlineCount} online • ${users.length} gebruikers totaal</p>`:"")+users.map(u=>`<div class="card"><h3>${escapeHtml(u.username||"Onbekende gebruiker")}</h3><p><strong>Email:</strong> ${escapeHtml(u.email||"")}</p><p>Status: <span class="status">${escapeHtml(u.status||"Bezoeker")}</span>${hasOnlineInfo?` <span class="status ${isOnline(u)?"online":"offline"}">${isOnline(u)?"🟢 Online":"⚫ Offline"}</span>`:""}</p><p>Beheerder: ${u.is_admin?"Ja":"Nee"}</p>${u.status!=="Team"&&u.status!=="Gebanned"?`<button class="gold-btn success" onclick="makeTeam('${escapeHtml(u.id)}')">👥 Maak Team</button> `:""}${u.status==="Gebanned"?`<button class="gold-btn success" onclick="unbanUser('${escapeHtml(u.id)}','${escapeHtml(u.username||"gebruiker")}')">Unban</button>`:`<button class="gold-btn danger" onclick="banUser('${escapeHtml(u.id)}','${escapeHtml(u.username||"gebruiker")}')">Ban</button>`}<p class="small">User ID: ${escapeHtml(u.id)}</p></div>`).join("");
+
+  const stamp=document.getElementById("adminUsersUpdated");
+  if(stamp)stamp.textContent="Laatst ververst: "+new Date().toLocaleTimeString("nl-NL");
+ }finally{adminUsersLoading=false}
 }
+
+/* Beheerderspagina automatisch verversen (gebruikers + sollicitaties).
+   Tickets worden niet automatisch ververst, zodat een antwoord dat je typt niet verdwijnt. */
+function startAdminRefresh(){
+ stopAdminRefresh();
+ adminRefreshTimer=setInterval(()=>{
+  if(!document.getElementById("admin")?.classList.contains("active")||document.hidden||!currentUser)return;
+  loadAdminUsers();
+  loadAdminApplications();
+ },10000);
+}
+function stopAdminRefresh(){if(adminRefreshTimer){clearInterval(adminRefreshTimer);adminRefreshTimer=null}}
 
 async function makeTeam(id){
  if(!(await checkAdminStatus())){alert("Je bent geen beheerder.");return}
@@ -620,8 +663,23 @@ async function removeActiveSession(){
  const {error}=await supabaseClient.from("active_sessions").delete().eq("user_id",currentUser.id);
  if(error)console.error("Remove session error:",error);
 }
-function startActiveSessionHeartbeat(){stopActiveSessionHeartbeat();if(!currentUser)return;updateActiveSession();activeSessionTimer=setInterval(updateActiveSession,30000)}
+/* Elke 30 seconden: laat zien dat je online bent en controleer of je account niet gebanned is */
+async function heartbeat(){
+ if(!currentUser)return;
+ await updateActiveSession();
+ await loadProfile();
+}
+function startActiveSessionHeartbeat(){stopActiveSessionHeartbeat();if(!currentUser)return;updateActiveSession();activeSessionTimer=setInterval(heartbeat,30000)}
 function stopActiveSessionHeartbeat(){if(activeSessionTimer){clearInterval(activeSessionTimer);activeSessionTimer=null}}
+
+/* Achtergrondtabbladen vertragen timers; zodra je terugkomt meteen alles verversen */
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden||!currentUser)return;
+ heartbeat();
+ if(document.getElementById("community")?.classList.contains("active"))loadCommunityUsers();
+ if(document.getElementById("admin")?.classList.contains("active")){loadAdminUsers();loadAdminApplications()}
+ if(document.getElementById("home")?.classList.contains("active"))loadEvents();
+});
 
 async function syncAuthState(session){
  currentSession=session;currentUser=session?.user||null;
