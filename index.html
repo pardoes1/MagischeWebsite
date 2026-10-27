@@ -669,7 +669,9 @@ async function heartbeat(){
  await updateActiveSession();
  await loadProfile();
 }
-function startActiveSessionHeartbeat(){stopActiveSessionHeartbeat();if(!currentUser)return;updateActiveSession();activeSessionTimer=setInterval(heartbeat,30000)}
+function startActiveSessionHeartbeat(){stopActiveSessionHeartbeat();if(!currentUser)return;updateActiveSession();activeSessionTimer=setInterval(heartbeat,15000)}
+window.addEventListener("focus",()=>{if(currentUser)updateActiveSession()});
+window.addEventListener("online",()=>{if(currentUser)updateActiveSession()});
 function stopActiveSessionHeartbeat(){if(activeSessionTimer){clearInterval(activeSessionTimer);activeSessionTimer=null}}
 
 /* Achtergrondtabbladen vertragen timers; zodra je terugkomt meteen alles verversen */
